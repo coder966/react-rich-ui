@@ -1,11 +1,3 @@
-import React from 'react';
+import {RruForm, RruFormElement} from './form/react-rich-ui-form';
 
-const ReactRichUI = () => {
-  return (
-    <div>
-      <h1>react-rich-ui</h1>
-    </div>
-  );
-}
-
-export default ReactRichUI;
+export {RruForm, RruFormElement};
