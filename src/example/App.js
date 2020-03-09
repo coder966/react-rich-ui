@@ -38,7 +38,7 @@ const App = props => {
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
       <Row>
         <RruFormElement type='select' name='type' labelId='type' options={types} lang='en' />
-        <RruFormElement type='select' name='preference' labelId='option' options={options} lang='en' />
+        <RruFormElement type='multi-checkbox' name='preference' labelId='option' options={options} lang='en' />
       </Row>
       <Row>
         <RruFormElement type='text' name='email' labelId='email' lang='en' />
