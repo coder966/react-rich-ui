@@ -20,7 +20,11 @@
     ]
   },
   "dependencies": {
-    "react-hook-form": "3.29.4"
+    "moment-hijri": "^2.1.2",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-hook-form": "3.29.4",
+    "react-intl": "^4.1.1",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
