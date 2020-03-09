@@ -71,6 +71,7 @@ const App = props => {
       </Row>
       <Row>
         <RruFormElement type='date' name='field_4' labelId='birthDate' lang='en' />
+        <RruFormElement type='file' name='field_5' labelId='option' lang='en' />
       </Row>
       <Row>
         <RruFormElement type='text' name='email' labelId='email' lang='en' />

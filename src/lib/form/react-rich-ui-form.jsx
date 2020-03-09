@@ -31,7 +31,7 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
 
 /**
  * @author coder966
- * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date
+ * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, file
  */
 const RruFormElement = props => {
   const {
@@ -149,6 +149,21 @@ const RruFormElement = props => {
               <span className='input-group-text fa fa-calendar-alt'></span>
             </div>
             <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} />
+          </div>
+
+
+          : type === 'file' ?
+          <div className='input-group'>
+            <div className='input-group-prepend'>
+              <span className='input-group-text fas fa-file'></span>
+            </div>
+            <input type='file' {...sharedProps} />
+            <div className={'fileUpload' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
+            {(() => {
+              const e = document.getElementById(name);
+              return e && e.files[0] ? e.files[0].name : null;
+            })()}
+            </div>
           </div>
 
 
