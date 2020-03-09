@@ -1,0 +1,26 @@
+input[type=file] {
+    display: none;
+}
+
+.fileUpload {
+    cursor: pointer;
+    width: 254px;
+    height: 38px;
+    border: 1px solid #ced4da;
+}
+
+.fileUpload.is-invalid {
+    border: 1px solid crimson;
+}
+
+.grouped-multi-checkbox-group-header{
+    color: white;
+    background-color: #648aa5;
+    padding: 8px;
+    width: 100%;
+}
+
+.grouped-multi-checkbox-group-row{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
