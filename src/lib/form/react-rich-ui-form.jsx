@@ -30,13 +30,13 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
 
 /**
  * @author coder966
- * acceptable types: text (default), password
+ * acceptable types: text (default), password, textarea, select, radio, checkbox
  */
 const RruFormElement = props => {
   const {
     name, labelId, type, placeholder, disabled,
-    prepend, append,
-    spans
+    options, inline, longLabel, prepend, append,
+    spans, lang
   } = props;
 
   const formContext = useFormContext();
@@ -74,6 +74,34 @@ const RruFormElement = props => {
                 <span className='input-group-text'>{append}</span>
               </div>
             : null}
+          </div>
+
+
+          : type === 'textarea' ?
+          <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
+
+
+          : type === 'select' ?
+          <select className='custom-select' {...sharedProps}>
+            {options.map(o => <option key={o.id} value={o.id}>{o.label[lang]}</option>)}
+          </select>
+
+
+          : type === 'radio' ?
+          <div className={inline ? 'form-check-inline' : null}>
+            {options.map(o => (
+              <div className={'form-check' + disabled ? ' disabled' : null}> 
+                <input type='radio' {...sharedProps} value={o.id} id={o.id} />
+                <label className='form-check-label' htmlFor={o.id}>{o.label[lang]}</label>
+              </div>
+            ))}
+          </div>
+
+
+          : type === 'checkbox' ?
+          <div>  
+            <input {...sharedProps} type='checkbox' className={'form-check-input ' + (formContext.errors[name] ? 'is-invalid' : null)}/>
+            {longLabel && <label htmlFor={name}>{longLabel}</label>}
           </div>
 
           : null
