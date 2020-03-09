@@ -30,7 +30,7 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
 
 /**
  * @author coder966
- * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox
+ * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox
  */
 const RruFormElement = props => {
   const {
@@ -119,6 +119,27 @@ const RruFormElement = props => {
             </Row>
           </Container>
 
+
+          : type === 'grouped-multi-checkbox' ?
+          <Container>
+            {options.map(g => 
+              <>
+                <div className='grouped-multi-checkbox-group-header'>{g.label[lang]}</div>
+                <Row className='grouped-multi-checkbox-group-row'>
+                  {g.items.map(o => (
+                    <Col key={o.id} md='3'>
+                      <div className='custom-control custom-checkbox m-1'>
+                        <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
+                        <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            )}
+          </Container>
+
+
           : null
         }
         <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
@@ -127,4 +148,18 @@ const RruFormElement = props => {
   );
 };
 
-export {RruForm, RruFormElement};
+
+// TODO: fix this issue and remove these two helper methods
+const getInitialValueForMultiCheckbox = array => array.length > 0 ? array.map(item => item.id+'') : undefined;
+
+const getSubmitValueForMultiCheckbox = array => {
+  if(!array){
+    return [];
+  }else if(typeof array === 'string'){
+    return [array];
+  }else{
+    return array;
+  }
+};
+
+export {RruForm, RruFormElement, getInitialValueForMultiCheckbox, getSubmitValueForMultiCheckbox};

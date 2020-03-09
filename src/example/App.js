@@ -15,6 +15,31 @@ const App = props => {
     {id: 3, label: {ar: 'خيار 3', en: 'Option 3'}},
   ];
 
+  const groups = [
+    {
+      label: {
+        ar: 'Group 1',
+        en: 'Group 1'
+      },
+      items: [
+        {id: 1, label: {ar: 'خيار 1', en: 'Option 1'}},
+        {id: 2, label: {ar: 'خيار 2', en: 'Option 2'}},
+        {id: 3, label: {ar: 'خيار 3', en: 'Option 3'}},
+      ]
+    },
+    {
+      label: {
+        ar: 'Group 2',
+        en: 'Group 2'
+      },
+      items: [
+        {id: 4, label: {ar: 'خيار 4', en: 'Option 4'}},
+        {id: 5, label: {ar: 'خيار 5', en: 'Option 5'}},
+        {id: 6, label: {ar: 'خيار 6', en: 'Option 6'}},
+      ]
+    }
+  ]
+
   // ui components that others depend on
   const [type, setType] = useState('1');
 
@@ -38,7 +63,11 @@ const App = props => {
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
       <Row>
         <RruFormElement type='select' name='type' labelId='type' options={types} lang='en' />
-        <RruFormElement type='multi-checkbox' name='preference' labelId='option' options={options} lang='en' />
+        <RruFormElement type='multi-checkbox' name='field_1' labelId='option' options={options} lang='en' />
+      </Row>
+      <Row>
+        <RruFormElement type='multi-checkbox' name='field_2' labelId='option' options={types} lang='en' />
+        <RruFormElement type='grouped-multi-checkbox' name='field_3' labelId='option' options={groups} lang='en' />
       </Row>
       <Row>
         <RruFormElement type='text' name='email' labelId='email' lang='en' />

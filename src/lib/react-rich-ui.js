@@ -1,3 +1,3 @@
-import {RruForm, RruFormElement} from './form/react-rich-ui-form';
+import {RruForm, RruFormElement, getInitialValueForMultiCheckbox, getSubmitValueForMultiCheckbox} from './form/react-rich-ui-form';
 
-export {RruForm, RruFormElement};
+export {RruForm, RruFormElement, getInitialValueForMultiCheckbox, getSubmitValueForMultiCheckbox};
