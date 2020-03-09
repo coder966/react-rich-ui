@@ -70,6 +70,9 @@ const App = props => {
         <RruFormElement type='grouped-multi-checkbox' name='field_3' labelId='option' options={groups} lang='en' />
       </Row>
       <Row>
+        <RruFormElement type='date' name='field_4' labelId='birthDate' lang='en' />
+      </Row>
+      <Row>
         <RruFormElement type='text' name='email' labelId='email' lang='en' />
       </Row>
       <Row>
