@@ -1,0 +1,145 @@
+.rru-pageable-table-centered {
+    text-align: center !important;
+}
+.rru-pageable-table-pagination {
+	justify-content: center;
+	padding: 0;
+}
+
+.page-item:last-child .page-link{
+	border-radius: 0;
+}
+.page-item:first-child .page-link{
+	border-radius: 0;
+}
+
+.rru-pageable-table-loading-td {
+	padding: 0px !important;
+}
+
+.sortable{
+	cursor: pointer;
+}
+.sortable::before {
+	font-family: 'fontAwesome';
+	content: '\f0dc';
+	margin-inline-end: 5px;
+}
+.sortable.asc::before {
+	font-family: 'fontAwesome';
+	content: '\f0de ';
+	margin-inline-end: 5px;
+}
+.sortable.desc::before {
+	font-family: 'fontAwesome';
+	content: '\f0dd ';
+	margin-inline-end: 5px;
+}
+
+.progressBar {
+	position: relative;
+	height: 4px;
+	display: block;
+	width: 100%;
+	background-color: #13213541;
+	border-radius: 2px;
+	background-clip: padding-box;
+	overflow: hidden;
+}
+
+.progressBarBar .determinate {
+	position: absolute;
+	background-color: inherit;
+	top: 0;
+	bottom: 0;
+	background-color: #26a69a;
+	transition: width .3s linear;
+}
+
+.progressBar .indeterminate {
+	background-color: #2a7fc2;
+}
+
+.progressBar .indeterminate:before {
+	content: '';
+	position: absolute;
+	background-color: inherit;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	will-change: left, right;
+	animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.progressBar .indeterminate:after {
+	content: '';
+	position: absolute;
+	background-color: inherit;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	will-change: left, right;
+	animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+	animation-delay: 1.15s;
+}
+
+@-webkit-keyframes indeterminate {
+	0% {
+		left: -35%;
+		right: 100%;
+	}
+	60% {
+		left: 100%;
+		right: -90%;
+	}
+	100% {
+		left: 100%;
+		right: -90%;
+	}
+}
+
+@keyframes indeterminate {
+	0% {
+		left: -35%;
+		right: 100%;
+	}
+	60% {
+		left: 100%;
+		right: -90%;
+	}
+	100% {
+		left: 100%;
+		right: -90%;
+	}
+}
+
+@-webkit-keyframes indeterminate-short {
+	0% {
+		left: -200%;
+		right: 100%;
+	}
+	60% {
+		left: 107%;
+		right: -8%;
+	}
+	100% {
+		left: 107%;
+		right: -8%;
+	}
+}
+
+@keyframes indeterminate-short {
+	0% {
+		left: -200%;
+		right: 100%;
+	}
+	60% {
+		left: 107%;
+		right: -8%;
+	}
+	100% {
+		left: 107%;
+		right: -8%;
+	}
+}
+
