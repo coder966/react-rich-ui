@@ -62,19 +62,19 @@ const App = props => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
       <Row>
-        <RruFormElement type='select' name='type' labelId='type' options={types} lang='en' />
-        <RruFormElement type='multi-checkbox' name='field_1' labelId='option' options={options} lang='en' />
+        <RruFormElement type='select' name='type' label='type' options={types} lang='en' />
+        <RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' />
       </Row>
       <Row>
-        <RruFormElement type='multi-checkbox' name='field_2' labelId='option' options={types} lang='en' />
-        <RruFormElement type='grouped-multi-checkbox' name='field_3' labelId='option' options={groups} lang='en' />
+        <RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' />
+        <RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' />
       </Row>
       <Row>
-        <RruFormElement type='date' name='field_4' labelId='birthDate' lang='en' />
-        <RruFormElement type='file' name='field_5' labelId='option' lang='en' />
+        <RruFormElement type='date' name='field_4' label='birthDate' lang='en' />
+        <RruFormElement type='file' name='field_5' label='option' lang='en' />
       </Row>
       <Row>
-        <RruFormElement type='text' name='email' labelId='email' lang='en' />
+        <RruFormElement type='text' name='email' label='email' lang='en' />
       </Row>
       <Row>
         <button type='submit'>Submit</button>

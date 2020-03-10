@@ -1,7 +1,6 @@
 import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import moment from 'moment-hijri';
-import { FormattedMessage } from 'react-intl';
 import {Container, Row, Col} from 'react-bootstrap';
 
 
@@ -35,7 +34,7 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
  */
 const RruFormElement = props => {
   const {
-    name, labelId, type, placeholder, disabled,
+    name, label, type, placeholder, disabled,
     options, inline, longLabel, prepend, append, isHijri, isFuture, isPast,
     spans, lang
   } = props;
@@ -56,12 +55,12 @@ const RruFormElement = props => {
 
   return (
     <Col md={spans ? spans : 4} className={props.className ? props.className : 'form-group'}>
-      {labelId ?
+      {label ?
         <Row className={props.labelClassName ? props.labelClassName : 'mr-4 ml-4'}>
-          <label className='custom-label' htmlFor={name}><FormattedMessage id={labelId} /></label>
+          <label className='custom-label' htmlFor={name}>{label}</label>
         </Row>
       : null}
-      <Row className={props.inputClassName ? props.inputClassName : labelId ? 'mr-4 ml-4' : ''}>
+      <Row className={props.inputClassName ? props.inputClassName : label ? 'mr-4 ml-4' : ''}>
         {
 
           !type || type === 'text' || type === 'password' ?
