@@ -1,6 +1,6 @@
 {
   "name": "@coder966/react-rich-ui",
-  "version": "0.0.0-pre-alpha5",
+  "version": "0.0.0-pre-alpha7",
   "author": "Khalid H. Alharisi",
   "license": "Apache License Version 2.0",
   "homepage": "https://github.com/coder966/react-rich-ui",
@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "babel src/lib --out-dir dist",
+    "build": "babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepublish": "npm run build"

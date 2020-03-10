@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Row} from 'react-bootstrap'
 import * as yup from 'yup';
-import { RruForm, RruFormElement } from '../lib/react-rich-ui';
+import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
 
 const App = props => {
   const types = [
@@ -60,26 +60,37 @@ const App = props => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
-      <Row>
-        <RruFormElement type='select' name='type' label='type' options={types} lang='en' />
-        <RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' />
-      </Row>
-      <Row>
-        <RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' />
-        <RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' />
-      </Row>
-      <Row>
-        <RruFormElement type='date' name='field_4' label='birthDate' lang='en' />
-        <RruFormElement type='file' name='field_5' label='option' lang='en' />
-      </Row>
-      <Row>
-        <RruFormElement type='text' name='email' label='email' lang='en' />
-      </Row>
-      <Row>
-        <button type='submit'>Submit</button>
-      </Row>
-    </RruForm>
+    <>
+      <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
+        <Row>
+          <RruFormElement type='select' name='type' label='type' options={types} lang='en' />
+          <RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' />
+        </Row>
+        <Row>
+          <RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' />
+          <RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' />
+        </Row>
+        <Row>
+          <RruFormElement type='date' name='field_4' label='birthDate' lang='en' />
+          <RruFormElement type='file' name='field_5' label='option' lang='en' />
+        </Row>
+        <Row>
+          <RruFormElement type='text' name='email' label='email' lang='en' />
+        </Row>
+        <Row>
+          <button type='submit'>Submit</button>
+        </Row>
+      </RruForm>
+
+      <RruButton 
+        variant='danger'
+        onConfirm={console.log}
+        label='Delete'
+        validationSchema={yup.object().shape({reason: yup.string().required()})}
+        formElements={<RruFormElement type='text' name='reason' label='reason' spans='12' />}
+        confirmationTitle='Delete'
+        confirmationDesc='Are you sure you want to delete?' />
+    </>
   );
 };
 

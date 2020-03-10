@@ -2,7 +2,7 @@ import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import moment from 'moment-hijri';
 import {Container, Row, Col} from 'react-bootstrap';
-
+import './style.css';
 
 /**
  * @author coder966

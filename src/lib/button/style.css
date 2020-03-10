@@ -1,0 +1,26 @@
+.icon{
+    font-size: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.icon.view{
+    color: #a37bba;
+}
+
+.icon.edit{
+    color: #5fbdd6;
+}
+
+.icon.lock{
+    color: #c09027;
+}
+
+.icon.unlock{
+    color: #c09027;
+}
+
+.icon.delete{
+    color: #c77172;
+}
