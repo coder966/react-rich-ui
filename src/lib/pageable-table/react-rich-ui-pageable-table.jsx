@@ -7,7 +7,7 @@ import './style.css'
 /**
  * @author coder966
  */
-const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, disableSorting}) => {
+const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, disableSorting, userPrivileges}) => {
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState([]);
@@ -142,7 +142,7 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
               {actions &&
                 <td>
                   {actions.map((a, k) => {
-                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} privileges={a.privileges} onClick={() => a.action(row)} /> : null;
+                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} onClick={() => a.action(row)} /> : null;
                   })}
                 </td>
               }

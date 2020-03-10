@@ -14,8 +14,13 @@ const icons = {
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema}) => {
+const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, userPrivileges, allowedPrivileges}) => {
     const [show, setShow] = useState(false);
+
+    if(!userPrivileges || !userPrivileges.some(p => allowedPrivileges.includes(p))){
+        return null;
+    }
+
     if(onConfirm){
         const handleConfirm = data => {
             onConfirm(formElements ? data : undefined);
