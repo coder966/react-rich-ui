@@ -17,7 +17,7 @@ const icons = {
 const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, userPrivileges, allowedPrivileges}) => {
     const [show, setShow] = useState(false);
 
-    if(allowedPrivileges && (!userPrivileges || !userPrivileges.some(p => allowedPrivileges.includes(p)))){
+    if(allowedPrivileges && userPrivileges && !userPrivileges.some(p => allowedPrivileges.includes(p))){
         return null;
     }
 
@@ -44,9 +44,9 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
                     </RruForm>
                 </Modal>
                 {icon ?
-                    <span onClick={() => setShow(true)} className={'ml-1 '+icon} />
+                    <span onClick={() => setShow(true)} className={'ml-1 '+icons[icon]} />
                 : 
-                    <Button variant={variant} onClick={() => setShow(true)} className={'ml-1 '+icon}>{label}</Button>
+                    <Button variant={variant} onClick={() => setShow(true)} className={'ml-1 '+icons[icon]}>{label}</Button>
                 }
                 
             </>
@@ -55,7 +55,7 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
         return icon ?
             <span onClick={onClick} className={'ml-1 '+icons[icon]} />
         : 
-            <Button variant={variant} onClick={onClick} className={'ml-1 '+icon}>{label}</Button>
+            <Button variant={variant} onClick={onClick} className={'ml-1 '+icons[icon]}>{label}</Button>
     }
 
 }
