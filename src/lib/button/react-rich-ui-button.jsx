@@ -17,7 +17,7 @@ const icons = {
 const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, userPrivileges, allowedPrivileges}) => {
     const [show, setShow] = useState(false);
 
-    if(!userPrivileges || !userPrivileges.some(p => allowedPrivileges.includes(p))){
+    if(allowedPrivileges && (!userPrivileges || !userPrivileges.some(p => allowedPrivileges.includes(p)))){
         return null;
     }
 
