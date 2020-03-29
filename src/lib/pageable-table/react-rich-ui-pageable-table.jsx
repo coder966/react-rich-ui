@@ -142,7 +142,7 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
               {actions &&
                 <td>
                   {actions.map((a, k) => {
-                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} onClick={() => a.action(row)} /> : null;
+                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => a.onConfirm(row) : undefined} onClick={() => a.action(row)} /> : null;
                   })}
                 </td>
               }
