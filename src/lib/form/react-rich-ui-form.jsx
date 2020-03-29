@@ -35,14 +35,14 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
 const RruFormElement = props => {
   const {
     name, label, type, placeholder, disabled,
-    options, inline, longLabel, prepend, append, isHijri, isFuture, isPast,
+    options, inline, longLabel, prepend, append, isHijri, isFuture, isPast, maxlength,
     spans, lang
   } = props;
 
   const formContext = useFormContext();
 
   const sharedProps = {
-    id: name, name, placeholder, disabled,
+    id: name, name, placeholder, disabled, maxlength,
     ref: formContext.register
   }
 
