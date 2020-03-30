@@ -7,7 +7,7 @@ import './style.css'
 /**
  * @author coder966
  */
-const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, disableSorting, userPrivileges}) => {
+const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, maxPages, disableSorting, userPrivileges}) => {
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState([]);
@@ -53,9 +53,30 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
     }
   }
 
-  let pages = [];
-  for (let i=0; i<totalPages; i++){
-    pages.push(<Pagination.Item onClick={onPageChange} key={i} active={i === currentPage}>{i+1}</Pagination.Item>);
+  const getPageItem = index => {
+    if(index >= 0){
+      return <Pagination.Item onClick={onPageChange} key={index} active={index === currentPage}>{index+1}</Pagination.Item>
+    }else{
+      return <Pagination.Item active={false}>.</Pagination.Item>
+    }
+  }
+
+  const pages = [];
+  if(totalPages > 4){
+    const side = Math.floor((maxPages > 4 ? maxPages : 4)/2);
+    for (let i=0; i<side; i++){
+      pages.push(getPageItem(i));
+    }
+    for (let i=0; i<3; i++){
+      pages.push(getPageItem(-1)); // dot items
+    }
+    for (let i=totalPages-side; i<totalPages; i++){
+      pages.push(getPageItem(i));
+    }
+  }else{
+    for (let i=0; i<totalPages; i++){
+      pages.push(<Pagination.Item onClick={onPageChange} key={i} active={i === currentPage}>{i+1}</Pagination.Item>);
+    }
   }
 
   const getSerialNo = index => (currentPage*mPageSize)+(index+1);
