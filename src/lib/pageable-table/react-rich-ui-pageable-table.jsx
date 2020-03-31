@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Pagination, Table } from 'react-bootstrap'
+import ReactPaginate from 'react-paginate'
 import RruButton from '../button/react-rich-ui-button';
 import axios from 'axios';
 import './style.css'
@@ -7,7 +8,7 @@ import './style.css'
 /**
  * @author coder966
  */
-const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, maxPages, disableSorting, userPrivileges}) => {
+const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges, forcePage}) => {
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState([]);
@@ -45,39 +46,6 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
       setError(err);
     })
   }, [currentPage, search, sortBy, sortDir]);
-
-  const onPageChange = event => {
-    const i = parseInt(event.target.text);
-    if(!isNaN(i)){
-      setCurrentPage(i-1);
-    }
-  }
-
-  const getPageItem = index => {
-    if(index >= 0){
-      return <Pagination.Item onClick={onPageChange} key={index} active={index === currentPage}>{index+1}</Pagination.Item>
-    }else{
-      return <Pagination.Item active={false}>.</Pagination.Item>
-    }
-  }
-
-  const pages = [];
-  if(totalPages > 4){
-    const side = Math.floor((maxPages > 4 ? maxPages : 4)/2);
-    for (let i=0; i<side; i++){
-      pages.push(getPageItem(i));
-    }
-    for (let i=0; i<3; i++){
-      pages.push(getPageItem(-1)); // dot items
-    }
-    for (let i=totalPages-side; i<totalPages; i++){
-      pages.push(getPageItem(i));
-    }
-  }else{
-    for (let i=0; i<totalPages; i++){
-      pages.push(<Pagination.Item onClick={onPageChange} key={i} active={i === currentPage}>{i+1}</Pagination.Item>);
-    }
-  }
 
   const getSerialNo = index => (currentPage*mPageSize)+(index+1);
 
@@ -172,7 +140,23 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
 
         </tbody>
       </Table>
-      {totalPages > 1 && <Pagination className='rru-pageable-table-pagination'>{pages}</Pagination>}
+      <ReactPaginate
+        previousLabel={previousLabel}
+        nextLabel={nextLabel}
+        breakLabel={<a>...</a>}
+        breakClassName='break'
+        pageCount={totalPages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={event => setCurrentPage(event.selected)}
+        forcePage={forcePage}
+        containerClassName='pagination'
+        pageLinkClassName='pageLink'
+        previousClassName='previous'
+        nextClassName='next'
+        disabledClassName='disabled'
+        activeClassName='activePage'
+        />
     </>
   )
 }

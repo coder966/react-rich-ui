@@ -143,3 +143,72 @@
 	}
 }
 
+.pagination {
+    padding: 1px;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+.pageLink,
+.next,
+.previous,
+.pageItem {
+    display: block;
+    padding: 8px 14px;
+    margin: -1px;
+    line-height: 1.25;
+    color: #007942;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pageLink {
+    cursor: pointer;
+}
+
+.pageLink:hover {
+    color: #007942;
+    text-decoration: none;
+    background-color: #eceeef;
+    border-color: #ddd;
+}
+
+.break {
+    display: block;
+    padding: 8px 14px;
+    margin: -1px;
+    line-height: 1.25;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.next{
+    cursor: pointer;
+}
+
+.previous{
+    cursor: pointer;
+}
+
+.disabled, .disabled:hover, .disabled > a{
+    color: #555;
+    background-color: #fff;
+    cursor: default;
+}
+
+.activePage {
+    z-index: 2;
+    color: #fff;
+    background-color: #007942;
+    border-color: #007942;
+}
+
+.activePage > a, .activePage:hover > a {
+    cursor: default;
+    z-index: 2;
+    color: #fff;
+    background-color: #007942;
+    border-color: #007942;
+}
