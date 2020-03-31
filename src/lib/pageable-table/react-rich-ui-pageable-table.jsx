@@ -8,23 +8,31 @@ import './style.css'
 /**
  * @author coder966
  */
-const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges, forcePage}) => {
+const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges}) => {
+
+  const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
+  const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
+
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
 
   // flags
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // sort
-  const [sortBy, setSortBy] = useState(null);
-  const [sortDir, setSortDir] = useState('asc');
+  const [sortBy, setSortBy] = useState(getInitialState().sortBy);
+  const [sortDir, setSortDir] = useState(getInitialState().sortDir);
 
   // defaults
   const mPageSize = pageSize ? pageSize : 10;
   const mSort = sortBy ? (sortBy+','+(sortDir ? sortDir : '')) : '';
+
+  useEffect(() => {
+    persistState({currentPage, sortBy, sortDir});
+  }, [currentPage, sortBy, sortDir]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -149,7 +157,7 @@ const RruPageableTable = ({endpoint, columns, actions, actionsLabel, search, pag
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={event => setCurrentPage(event.selected)}
-        forcePage={forcePage}
+        forcePage={currentPage}
         containerClassName='pagination'
         pageLinkClassName='pageLink'
         previousClassName='previous'
