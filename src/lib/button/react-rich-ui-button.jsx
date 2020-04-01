@@ -14,7 +14,7 @@ const icons = {
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, userPrivileges, allowedPrivileges}) => {
+const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, watcher, userPrivileges, allowedPrivileges}) => {
     const [show, setShow] = useState(false);
 
     if(allowedPrivileges && userPrivileges && !userPrivileges.some(p => allowedPrivileges.includes(p))){
@@ -23,8 +23,12 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
 
     if(onConfirm){
         const handleConfirm = data => {
-            onConfirm(formElements ? data : undefined);
-            setShow(false);
+            const result = onConfirm((formElements ? data : undefined), setShow);
+            if(result !== undefined){
+                setShow(!result);
+            }else{
+                setShow(false);
+            }
         }
         return (
             <>
@@ -32,7 +36,7 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
                     <Modal.Header closeButton>
                         <Modal.Title>{confirmationTitle}</Modal.Title>
                     </Modal.Header>
-                    <RruForm onSubmit={handleConfirm} validationSchema={validationSchema}>
+                    <RruForm onSubmit={handleConfirm} validationSchema={validationSchema} watch={watcher}>
                         <Modal.Body>
                             {confirmationDesc}
                             {formElements}
