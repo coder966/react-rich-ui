@@ -142,12 +142,12 @@ const RruFormElement = props => {
           </Container>
 
 
-          : type === 'date' ?
+          : type === 'date' || type === 'datetime' ?
           <div className='input-group'>
             <div className='input-group-prepend'>
               <span className='input-group-text fa fa-calendar-alt'></span>
             </div>
-            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} />
+            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} time={type === 'datetime'} />
           </div>
 
 
@@ -204,14 +204,20 @@ class DatePicker extends React.Component {
     this.daysH = this.range(1, 30);
     this.daysG = this.range(1, 31);
     this.months = this.range(1, 12);
+    this.hours = this.range(0, 23);
+    this.minutes = this.range(0, 59);
   }
 
   componentDidUpdate = () => {
-    let {day, month, year} = this.state;
+    let {day, month, year, hour, minute} = this.state;
     if(this.props.onChange){
       if(day < 10){day = '0'+day}
       if(month < 10){month = '0'+month}
-      this.props.onChange(`${day}-${month}-${year}`);
+      if(this.props.time){
+        this.props.onChange(`${year}-${month}-${day} ${hour}:${minute}:00.00`);
+      }else{
+        this.props.onChange(`${day}-${month}-${year}`);
+      }
     }
   }
 
@@ -220,16 +226,24 @@ class DatePicker extends React.Component {
   getDays = () => this.props.isHijri ? this.daysH : this.daysG;
   getMonths = () => this.months;
   getYears = () => this.props.isHijri ? this.range(this.state.minYearH, this.state.maxYearH) : this.range(this.state.minYearG, this.state.maxYearG);
+  getHours = () => this.hours;
+  getMinutes = () => this.minutes;
 
-  handleDay = event => this.setState({day: event.target.value});
-  handleMonth = event => this.setState({month: event.target.value});
-  handleYear = event => this.setState({year: event.target.value});
+  handleField = event => this.setState({[event.target.name]: event.target.value});
 
   render = () => (
     <>
-      <select className='custom-select' value={this.state.day} disabled={this.props.disabled} onChange={this.handleDay}>{this.getDays().map(i => <option key={i}>{i}</option>)}</select>
-      <select className='custom-select' value={this.state.month} disabled={this.props.disabled} onChange={this.handleMonth}>{this.getMonths().map(i => <option key={i}>{i}</option>)}</select>
-      <select className='custom-select' value={this.state.year} disabled={this.props.disabled} onChange={this.handleYear}>{this.getYears().map(i => <option key={i}>{i}</option>)}</select>
+      <select name='day' className='custom-select' value={this.state.day} disabled={this.props.disabled} onChange={this.handleField}>{this.getDays().map(i => <option key={i}>{i}</option>)}</select>
+      <select name='month' className='custom-select' value={this.state.month} disabled={this.props.disabled} onChange={this.handleField}>{this.getMonths().map(i => <option key={i}>{i}</option>)}</select>
+      <select name='year' className='custom-select' value={this.state.year} disabled={this.props.disabled} onChange={this.handleField}>{this.getYears().map(i => <option key={i}>{i}</option>)}</select>
+
+      {this.props.time && 
+      <>
+        <span style={{paddingRight: this.props.rtl ? '20px' : undefined, paddingLeft: this.props.rtl ? undefined : '20px'}}></span>
+        <select name='hour' className='custom-select' value={this.state.hour} disabled={this.props.disabled} onChange={this.handleField}>{this.getHours().map(i => <option key={i}>{i}</option>)}</select>
+        :<select name='minute' className='custom-select' value={this.state.minute} disabled={this.props.disabled} onChange={this.handleField}>{this.getHours().map(i => <option key={i}>{i}</option>)}</select>
+      </>
+      }
     </>
   );
 }
