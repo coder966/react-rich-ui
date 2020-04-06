@@ -145,7 +145,7 @@ const RruFormElement = props => {
           : type === 'date' || type === 'time' ?
           <div className='input-group'>
             <div className='input-group-prepend'>
-              <span className='input-group-text fa fa-calendar-alt'></span>
+              <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
             </div>
             <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} />
           </div>
