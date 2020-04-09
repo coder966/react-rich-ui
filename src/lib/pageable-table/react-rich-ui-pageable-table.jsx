@@ -8,7 +8,7 @@ import './style.css'
 /**
  * @author coder966
  */
-const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges}) => {
+const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges, onResponse}) => {
 
   const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
   const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
@@ -48,6 +48,9 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
       setIsLoading(false);
       setTotalPages(res.data.totalPages);
       setData(res.data.content);
+      if(onResponse){
+        onResponse(res.data);
+      }
     })
     .catch(err => {
       setIsLoading(false);
