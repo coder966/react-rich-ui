@@ -147,7 +147,7 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
             </div>
-            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} />
+            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} reverseOrder={props.reverseOrder} />
           </div>
 
 
@@ -183,6 +183,7 @@ class DatePicker extends React.Component {
   constructor(props){
     super(props);
 
+    // TODO: user default value from initial state, support watcher
     const defaultPartsDate = props.defaultValue ? props.defaultValue.split('-') : undefined;
     const defaultPartsTime = props.defaultValue ? props.defaultValue.split(':') : undefined;
 
@@ -240,19 +241,36 @@ class DatePicker extends React.Component {
 
   handleField = event => this.setState({[event.target.name]: event.target.value});
 
+  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map(i => <option key={i}>{i}</option>)}</select>;
+
   render = () => (
     <>
       {this.props.type === 'date' ? 
-        <>
-          <select name='day' className='custom-select' value={this.state.day} disabled={this.props.disabled} onChange={this.handleField}>{this.getDays().map(i => <option key={i}>{i}</option>)}</select>
-          <select name='month' className='custom-select' value={this.state.month} disabled={this.props.disabled} onChange={this.handleField}>{this.getMonths().map(i => <option key={i}>{i}</option>)}</select>
-          <select name='year' className='custom-select' value={this.state.year} disabled={this.props.disabled} onChange={this.handleField}>{this.getYears().map(i => <option key={i}>{i}</option>)}</select>
-        </>
+        (this.props.reverseOrder ?
+          <>
+            {this.renderField('day', this.getDays)}
+            {this.renderField('month', this.getMonths)}
+            {this.renderField('year', this.getYears)}
+          </>
+          :
+          <>
+            {this.renderField('year', this.getYears)}
+            {this.renderField('month', this.getMonths)}
+            {this.renderField('day', this.getDays)}
+          </>
+        )
       :this.props.type === 'time' ? 
-      <>
-        <select name='hour' className='custom-select' value={this.state.hour} disabled={this.props.disabled} onChange={this.handleField}>{this.getHours().map(i => <option key={i}>{i}</option>)}</select>
-        <select name='minute' className='custom-select' value={this.state.minute} disabled={this.props.disabled} onChange={this.handleField}>{this.getMinutes().map(i => <option key={i}>{i}</option>)}</select>
-      </>
+      (this.props.reverseOrder ?
+        <>
+          {this.renderField('minute', this.getMinutes)}
+          {this.renderField('hour', this.getHours)}
+        </>
+        :
+        <>
+          {this.renderField('hour', this.getHours)}
+          {this.renderField('minute', this.getMinutes)}
+        </>
+      )
       :null
       }
     </>
