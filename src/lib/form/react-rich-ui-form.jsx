@@ -147,7 +147,7 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
             </div>
-            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} />
+            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} />
           </div>
 
 
@@ -183,14 +183,17 @@ class DatePicker extends React.Component {
   constructor(props){
     super(props);
 
-    const currentDayH = parseInt(moment().format('iD'));
-    const currentDayG = parseInt(moment().format('D'));
+    const defaultPartsDate = props.defaultValue ? props.defaultValue.split('-') : undefined;
+    const defaultPartsTime = props.defaultValue ? props.defaultValue.split(':') : undefined;
 
-    const currentMonthH = parseInt(moment().format('iM'));
-    const currentMonthG = parseInt(moment().format('M'));
+    const currentDayH = parseInt(defaultPartsDate ? defaultPartsDate[0] : moment().format('iD'));
+    const currentDayG = parseInt(defaultPartsDate ? defaultPartsDate[0] : moment().format('D'));
 
-    const currentYearH = parseInt(moment().format('iYYYY'));
-    const currentYearG = parseInt(moment().format('YYYY'));
+    const currentMonthH = parseInt(defaultPartsDate ? defaultPartsDate[1] : moment().format('iM'));
+    const currentMonthG = parseInt(defaultPartsDate ? defaultPartsDate[1] : moment().format('M'));
+
+    const currentYearH = parseInt(defaultPartsDate ? defaultPartsDate[2] : moment().format('iYYYY'));
+    const currentYearG = parseInt(defaultPartsDate ? defaultPartsDate[2] : moment().format('YYYY'));
 
     this.state = props.isHijri ? {day: currentDayH, month: currentMonthH, year: currentYearH} : {day: currentDayG, month: currentMonthG, year: currentYearG};
 
@@ -200,8 +203,8 @@ class DatePicker extends React.Component {
     this.state.maxYearH = this.props.isPast ? currentYearH : currentYearH+100;
     this.state.maxYearG = this.props.isPast ? currentYearG : currentYearG+100;
 
-    this.state.hour = 0;
-    this.state.minute = 0;
+    this.state.hour = defaultPartsTime ? parseInt(defaultPartsTime[0]) : 0;
+    this.state.minute = defaultPartsTime ? parseInt(defaultPartsTime[1]) : 0;
 
     // for performance
     this.daysH = this.range(1, 30);
@@ -216,6 +219,8 @@ class DatePicker extends React.Component {
     if(this.props.onChange){
       if(day < 10){day = '0'+day}
       if(month < 10){month = '0'+month}
+      if(hour < 10){hour = '0'+hour}
+      if(minute < 10){minute = '0'+minute}
 
       if(this.props.type === 'date'){
         this.props.onChange(`${day}-${month}-${year}`);
