@@ -48,10 +48,8 @@ const RruFormElement = props => {
 
   // for date only
   if(type === 'date' || type === 'time' || type === 'datetime'){
-    formContext.register({name})
+    formContext.register({name});
   }
-
-  const onDateChange = date => formContext.setValue(name, date);
 
   return (
     <Col md={spans ? spans : 4} className={props.className ? props.className : 'form-group'}>
@@ -147,7 +145,7 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
             </div>
-            <DatePicker disabled={disabled} onChange={onDateChange} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} reverseOrder={props.reverseOrder} />
+            <DatePicker disabled={disabled} onChange={value => formContext.setValue(name, value)} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} reverseOrder={props.reverseOrder} />
           </div>
 
 
@@ -183,7 +181,7 @@ class DatePicker extends React.Component {
   constructor(props){
     super(props);
 
-    // TODO: user default value from initial state, support watcher
+    // TODO: user default value from initial values
     const defaultPartsDate = props.defaultValue ? props.defaultValue.split('-') : undefined;
     const defaultPartsTime = props.defaultValue ? props.defaultValue.split(':') : undefined;
 
@@ -213,19 +211,20 @@ class DatePicker extends React.Component {
     this.months = this.range(1, 12);
     this.hours = this.range(0, 23);
     this.minutes = this.range(0, 59);
+
+    this.componentDidUpdate(props, null);
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     let {day, month, year, hour, minute} = this.state;
     if(this.props.onChange){
-      if(day < 10){day = '0'+day}
-      if(month < 10){month = '0'+month}
-      if(hour < 10){hour = '0'+hour}
-      if(minute < 10){minute = '0'+minute}
-
-      if(this.props.type === 'date'){
+      if(this.props.type === 'date' && (!prevState || prevState.day !== day || prevState.month !== month || prevState.year !== year)){
+        if(parseInt(day) < 10){day = '0'+day}
+        if(parseInt(month) < 10){month = '0'+month}
         this.props.onChange(`${day}-${month}-${year}`);
-      } else if(this.props.type === 'time'){
+      } else if(this.props.type === 'time' && (!prevState || prevState.minute !== minute || prevState.hour !== hour)){
+        if(parseInt(hour) < 10){hour = '0'+hour}
+        if(parseInt(minute) < 10){minute = '0'+minute}
         this.props.onChange(`${hour}:${minute}:00.00`);
       }
     }
