@@ -207,7 +207,10 @@ class DatePicker extends React.Component {
 
     // for performance
     this.daysH = this.range(1, 30);
-    this.daysG = this.range(1, 31);
+    this.daysG28 = this.range(1, 28);
+    this.daysG29 = this.range(1, 29);
+    this.daysG30 = this.range(1, 30);
+    this.daysG31 = this.range(1, 31);
     this.months = this.range(1, 12);
     this.hours = this.range(0, 23);
     this.minutes = this.range(0, 59);
@@ -232,13 +235,36 @@ class DatePicker extends React.Component {
 
   range = (s, e) => Array(e-s+1).fill(s).map((x, y) => x + y);
 
-  getDays = () => this.props.isHijri ? this.daysH : this.daysG;
+  getDays = () => {
+    if(this.props.isHijri){
+      return this.daysH;
+    }else{
+      const month = parseInt(this.state.month);
+      if(month === 2){
+        const year = parseInt(this.state.year);
+        const isLeapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+        return isLeapYear ? this.daysG29 : this.daysG28;
+      }else{
+        return [1,3,5,7,8,10,12].includes(month) ? this.daysG31 : this.daysG30;
+      }
+    }
+  };
+
   getMonths = () => this.months;
   getYears = () => this.props.isHijri ? this.range(this.state.minYearH, this.state.maxYearH) : this.range(this.state.minYearG, this.state.maxYearG);
   getHours = () => this.hours;
   getMinutes = () => this.minutes;
 
-  handleField = event => this.setState({[event.target.name]: event.target.value});
+  handleField = event => {
+    const name = event.target.name;
+    if(name === 'year'){
+      this.setState({year: event.target.value, month: '1', day: '1'});
+    }else if(name === 'month'){
+      this.setState({month: event.target.value, day: '1'});
+    }else{
+      this.setState({[name]: event.target.value});
+    }
+  };
 
   renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map(i => <option key={i}>{i}</option>)}</select>;
 
