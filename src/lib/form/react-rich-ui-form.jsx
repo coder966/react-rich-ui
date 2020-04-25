@@ -1,7 +1,7 @@
 import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import moment from 'moment-hijri';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import './style.css';
 
 /**
@@ -106,38 +106,32 @@ const RruFormElement = props => {
 
 
           : type === 'multi-checkbox' ?
-          <Container>
-            <Row>
-              {options.map(o => (
-                <Col key={o.id} md='3'>
-                  <div className='custom-control custom-checkbox m-1'>
-                    <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
-                    <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </Container>
+          options.map(o => (
+            <Col key={o.id} md='3'>
+              <div className='custom-control custom-checkbox m-1'>
+                <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
+                <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
+              </div>
+            </Col>
+          ))
 
 
           : type === 'grouped-multi-checkbox' ?
-          <Container>
-            {options.map(g => 
-              <>
-                <div className='grouped-multi-checkbox-group-header'>{g.label[lang]}</div>
-                <Row className='grouped-multi-checkbox-group-row'>
-                  {g.items.map(o => (
-                    <Col key={o.id} md='3'>
-                      <div className='custom-control custom-checkbox m-1'>
-                        <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
-                        <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
-              </>
-            )}
-          </Container>
+          options.map(g => 
+            <>
+              <div className='grouped-multi-checkbox-group-header'>{g.label[lang]}</div>
+              <Row className='grouped-multi-checkbox-group-row col-md-12'>
+                {g.items.map(o => (
+                  <Col key={o.id} md='3'>
+                    <div className='custom-control custom-checkbox m-1'>
+                      <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
+                      <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </>
+          )
 
 
           : type === 'date' || type === 'time' ?

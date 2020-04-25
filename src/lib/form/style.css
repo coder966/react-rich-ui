@@ -16,11 +16,11 @@ input[type=file] {
 .grouped-multi-checkbox-group-header{
     color: white;
     background-color: #648aa5;
-    padding: 8px;
+    padding: 10px;
     width: 100%;
 }
 
 .grouped-multi-checkbox-group-row{
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
