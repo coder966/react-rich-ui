@@ -1,6 +1,5 @@
 import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
-import moment from 'moment-hijri';
 import './style.css';
 
 /**
@@ -174,18 +173,21 @@ class DatePicker extends React.Component {
   constructor(props){
     super(props);
 
+    const todayH = new Intl.DateTimeFormat('en-US-u-ca-islamic', {day: 'numeric', month: 'numeric',year : 'numeric'}).format(Date.now()).replace(' AH', '').split('/');
+    const todayG = new Date();
+
     // TODO: user default value from initial values
     const defaultPartsDate = props.defaultValue ? props.defaultValue.split('-') : undefined;
     const defaultPartsTime = props.defaultValue ? props.defaultValue.split(':') : undefined;
 
-    const currentDayH = parseInt(defaultPartsDate ? defaultPartsDate[0] : moment().format('iD'));
-    const currentDayG = parseInt(defaultPartsDate ? defaultPartsDate[0] : moment().format('D'));
+    const currentDayH = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayH[1]);
+    const currentDayG = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayG.getDate());
 
-    const currentMonthH = parseInt(defaultPartsDate ? defaultPartsDate[1] : moment().format('iM'));
-    const currentMonthG = parseInt(defaultPartsDate ? defaultPartsDate[1] : moment().format('M'));
+    const currentMonthH = parseInt(defaultPartsDate ? defaultPartsDate[1] : todayH[0]);
+    const currentMonthG = parseInt(defaultPartsDate ? defaultPartsDate[1] : todayG.getMonth()+1);
 
-    const currentYearH = parseInt(defaultPartsDate ? defaultPartsDate[2] : moment().format('iYYYY'));
-    const currentYearG = parseInt(defaultPartsDate ? defaultPartsDate[2] : moment().format('YYYY'));
+    const currentYearH = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayH[2]);
+    const currentYearG = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayG.getFullYear());
 
     this.state = props.isHijri ? {day: currentDayH, month: currentMonthH, year: currentYearH} : {day: currentDayG, month: currentMonthG, year: currentYearG};
 
