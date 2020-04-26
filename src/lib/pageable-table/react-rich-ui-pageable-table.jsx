@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { Pagination, Table } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
 import RruButton from '../button/react-rich-ui-button';
 import axios from 'axios';
@@ -101,7 +100,7 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
 
   return (
     <>
-      <Table striped>
+      <table className='table table-striped'>
         <thead>
           <tr>
             {columns.map((col, index) => (col.display === undefined || col.display) &&
@@ -150,7 +149,7 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
           ))}
 
         </tbody>
-      </Table>
+      </table>
       <ReactPaginate
         previousLabel={previousLabel}
         nextLabel={nextLabel}
