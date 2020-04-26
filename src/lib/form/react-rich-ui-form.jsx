@@ -1,7 +1,6 @@
 import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import moment from 'moment-hijri';
-import {Row, Col} from 'react-bootstrap';
 import './style.css';
 
 /**
@@ -36,7 +35,7 @@ const RruFormElement = props => {
   const {
     name, label, type, placeholder, disabled,
     options, inline, longLabel, prepend, append, isHijri, isFuture, isPast, maxlength,
-    spans, lang
+    stretch, lang
   } = props;
 
   const formContext = useFormContext();
@@ -52,13 +51,13 @@ const RruFormElement = props => {
   }
 
   return (
-    <Col md={spans ? spans : 4} className={props.className ? props.className : 'form-group'}>
+    <div className={(props.className ? props.className : 'form-group')  + ((stretch || type === 'multi-checkbox' || type === 'grouped-multi-checkbox')? ' col-xl-12' : ' col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4')}>
       {label ?
-        <Row className={props.labelClassName ? props.labelClassName : 'mr-4 ml-4'}>
+        <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
           <label className='custom-label' htmlFor={name}>{label}</label>
-        </Row>
+        </div>
       : null}
-      <Row className={props.inputClassName ? props.inputClassName : label ? 'mr-4 ml-4' : ''}>
+      <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
         {
 
           !type || type === 'text' || type === 'password' ?
@@ -107,12 +106,12 @@ const RruFormElement = props => {
 
           : type === 'multi-checkbox' ?
           options.map(o => (
-            <Col key={o.id} md='3'>
+            <div key={o.id} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
               <div className='custom-control custom-checkbox m-1'>
                 <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
                 <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
               </div>
-            </Col>
+            </div>
           ))
 
 
@@ -120,16 +119,16 @@ const RruFormElement = props => {
           options.map(g => 
             <>
               <div className='grouped-multi-checkbox-group-header'>{g.label[lang]}</div>
-              <Row className='grouped-multi-checkbox-group-row col-md-12'>
+              <div className='grouped-multi-checkbox-group-row row col'>
                 {g.items.map(o => (
-                  <Col key={o.id} md='3'>
+                  <div key={o.id} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
                     <div className='custom-control custom-checkbox m-1'>
                       <input id={o.id} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
                       <label htmlFor={o.id} className='custom-control-label'>{o.label[lang]}</label>
                     </div>
-                  </Col>
+                  </div>
                 ))}
-              </Row>
+              </div>
             </>
           )
 
@@ -161,8 +160,8 @@ const RruFormElement = props => {
           : null
         }
         <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
-      </Row>
-    </Col>
+      </div>
+    </div>
   );
 };
 
