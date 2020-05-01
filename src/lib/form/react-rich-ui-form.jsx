@@ -207,7 +207,8 @@ class DatePicker extends React.Component {
     this.daysG30 = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
     this.daysG31 = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
     this.months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-    this.hours = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+    this.hours24 = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+    this.hours12 = ['12 AM','01 AM','02 AM','03 AM','04 AM','05 AM','06 AM','07 AM','08 AM','09 AM','10 AM','11 AM','12 PM','01 PM','02 PM','03 PM','04 PM','05 PM','06 PM','07 PM','08 PM','09 PM','10 PM','11 PM'];
     this.minutes = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59'];
 
     this.componentDidUpdate(props, null);
@@ -252,7 +253,7 @@ class DatePicker extends React.Component {
 
   getMonths = () => this.months;
   getYears = () => this.props.isHijri ? this.range(this.state.minYearH, this.state.maxYearH) : this.range(this.state.minYearG, this.state.maxYearG);
-  getHours = () => this.hours;
+  getHours = () => this.props.clock === 24 ? this.hours24 : this.hours12;
   getMinutes = () => this.minutes;
 
   handleField = event => {
@@ -266,7 +267,7 @@ class DatePicker extends React.Component {
     }
   };
 
-  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map(i => <option key={i}>{i}</option>)}</select>;
+  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' ? i : v}>{v}</option>)}</select>;
 
   render = () => (
     <>
