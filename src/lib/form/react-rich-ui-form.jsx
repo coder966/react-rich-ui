@@ -207,22 +207,27 @@ class DatePicker extends React.Component {
     this.daysG30 = this.range(1, 30);
     this.daysG31 = this.range(1, 31);
     this.months = this.range(1, 12);
-    this.hours = this.range(0, 23);
-    this.minutes = this.range(0, 59);
+    this.hours = this.range(0, 23).map(i => i < 10 ? '0'+i : i);
+    this.minutes = this.range(0, 59).map(i => i < 10 ? '0'+i : i);
 
     this.componentDidUpdate(props, null);
   }
 
   componentDidUpdate = (prevProps, prevState) => {
     let {day, month, year, hour, minute} = this.state;
+    day = parseInt(day);
+    month = parseInt(month);
+    year = parseInt(year);
+    hour = parseInt(hour);
+    minute = parseInt(minute);
     if(this.props.onChange){
       if(this.props.type === 'date' && (!prevState || prevState.day !== day || prevState.month !== month || prevState.year !== year)){
-        if(parseInt(day) < 10){day = '0'+day}
-        if(parseInt(month) < 10){month = '0'+month}
+        if(day < 10){day = '0'+day}
+        if(month < 10){month = '0'+month}
         this.props.onChange(`${day}-${month}-${year}`);
       } else if(this.props.type === 'time' && (!prevState || prevState.minute !== minute || prevState.hour !== hour)){
-        if(parseInt(hour) < 10){hour = '0'+hour}
-        if(parseInt(minute) < 10){minute = '0'+minute}
+        if(hour < 10){hour = '0'+hour}
+        if(minute < 10){minute = '0'+minute}
         this.props.onChange(`${hour}:${minute}:00.00`);
       }
     }
