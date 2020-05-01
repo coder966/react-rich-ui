@@ -9,6 +9,13 @@ const icons = {
     lock: 'fas fa-lock icon lock',
     unlock: 'fas fa-unlock icon unlock',
     delete: 'far fa-trash-alt icon delete',
+    add: 'fas fa-plus icon add',
+    remove: 'fas fa-minus icon remove',
+    check: 'fas fa-check icon check',
+    times: 'fas fa-times icon remove',
+    pdf: 'far fa-file-pdf icon pdf',
+    excel: 'far fa-file-excel icon excel',
+    download: 'fas fa-download icon download',
 }
 
 const getIcon = name => icons[name] ? icons[name] : name;
