@@ -11,6 +11,8 @@ const icons = {
     delete: 'far fa-trash-alt icon delete',
 }
 
+const getIcon = name => icons[name] ? icons[name] : name;
+
 /**
  * @author coder966
  */
@@ -48,18 +50,18 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
                     </RruForm>
                 </Modal>
                 {icon ?
-                    <span onClick={() => setShow(true)} className={'ml-1 '+icons[icon]} />
+                    <span onClick={() => setShow(true)} className={'ml-1 '+getIcon(icon)} />
                 : 
-                    <Button variant={variant} onClick={() => setShow(true)} className={'ml-1 '+icons[icon]}>{label}</Button>
+                    <Button variant={variant} onClick={() => setShow(true)} className={'ml-1 '+getIcon(icon)}>{label}</Button>
                 }
                 
             </>
         )
     }else{
         return icon ?
-            <span onClick={onClick} className={'ml-1 '+icons[icon]} />
+            <span onClick={onClick} className={'ml-1 '+getIcon(icon)} />
         : 
-            <Button variant={variant} onClick={onClick} className={'ml-1 '+icons[icon]}>{label}</Button>
+            <Button variant={variant} onClick={onClick} className={'ml-1 '+getIcon(icon)}>{label}</Button>
     }
 
 }
