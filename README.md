@@ -43,7 +43,7 @@ $ npm install --save @coder966/react-rich-ui
 
 | Prop | Description | Required |
 |-|-|-|
-| icon | Available icons: `view, edit, lock, unlock, delete` | Yes |
+| icon | Refer to `RruButton` section| Yes |
 | action | A function which takes the row object | Yes |
 | display | A function which takes the row object and<br>returns a `boolean` whether the action should be available for this row. | No |
 | privileges | An array of the required privilege for this actions. The `userPrivileges` provided in the table will be used. | No |
@@ -71,7 +71,7 @@ $ npm install --save @coder966/react-rich-ui
 |-|-|-|-|
 | label | The form element label | Yes | All |
 | name | Unique form element name | Yes | All |
-| type | Available icons: `text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file` | Yes | All |
+| type | Available types: `text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file` | Yes | All |
 | lang | The current language name. | If the type uses `options` | All |
 | prepend | Anything to render before the form element component | No | All |
 | append | Anything to render after the form element component | No | All |
@@ -87,6 +87,7 @@ $ npm install --save @coder966/react-rich-ui
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No | `date` |
 | isFuture | Display only future years | No | `date` |
 | isPast | Display only past years | No | `date` |
+| clock | Clock style either 12-hours or 24-hours | No | `time` |
 | defaultValue | default value for date or time | No | `date, time` |
 | reverseOrder | Reverse the render order of the date or time selectors | No | `date, time` |
 | inline | Set to `true` to display `radio` buttons in one line | No | `radio` |
@@ -100,7 +101,7 @@ $ npm install --save @coder966/react-rich-ui
 |-|-|-|
 | label | Button label | Yes |
 | variant | Bootstrap `button` variant | No |
-| icon | Available icons: `view, edit, lock, unlock, delete` | No |
+| icon | Can be class name for an icon (i.e. `font-awesome` icons) or one of the predefined icons `view, edit, lock, unlock, delete, add, remove, check, times, pdf, excel, download` | No |
 | userPrivileges | An array of the user's privileges. This is used to only show permitted buttons. | No |
 | allowedPrivileges | An array of the required privileges | No |
 | onClick | A function | Yes if no `onConfirm` |
