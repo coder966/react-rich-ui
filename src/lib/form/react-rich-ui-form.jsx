@@ -227,17 +227,17 @@ class DatePicker extends React.Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     let {day, month, year, hour, minute} = this.state;
-    day = parseInt(day);
-    month = parseInt(month);
-    year = parseInt(year);
-    hour = parseInt(hour);
-    minute = parseInt(minute);
     if(this.props.onChange){
       if(this.props.type === 'date' && (!prevState || prevState.day !== day || prevState.month !== month || prevState.year !== year)){
+        day = parseInt(day);
+        month = parseInt(month);
+        year = parseInt(year);    
         if(day < 10){day = '0'+day}
         if(month < 10){month = '0'+month}
         this.props.onChange(`${day}-${month}-${year}`);
       } else if(this.props.type === 'time' && (!prevState || prevState.minute !== minute || prevState.hour !== hour)){
+        hour = parseInt(hour);
+        minute = parseInt(minute);    
         if(hour < 10){hour = '0'+hour}
         if(minute < 10){minute = '0'+minute}
         this.props.onChange(`${hour}:${minute}:00.00`);
