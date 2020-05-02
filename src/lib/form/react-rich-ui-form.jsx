@@ -278,7 +278,7 @@ class DatePicker extends React.Component {
     }
   };
 
-  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' ? i : v}>{v}</option>)}</select>;
+  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' || name === 'minute' ? i : v}>{v}</option>)}</select>;
 
   render = () => (
     <>
