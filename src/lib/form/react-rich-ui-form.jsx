@@ -137,7 +137,16 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
             </div>
-            <DatePicker disabled={disabled} onChange={value => formContext.setValue(name, value)} isHijri={isHijri} isFuture={isFuture} isPast={isPast} type={type} defaultValue={props.defaultValue} reverseOrder={props.reverseOrder} />
+            <DatePicker
+              type={type}
+              onChange={value => formContext.setValue(name, value)}
+              isHijri={isHijri}
+              isFuture={isFuture}
+              isPast={isPast}
+              defaultValue={props.defaultValue}
+              reverseOrder={props.reverseOrder}
+              clock={props.clock}
+              disabled={disabled} />
           </div>
 
 
