@@ -28,20 +28,22 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
 
 /**
  * @author coder966
- * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, file
+ * acceptable types: text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file
  */
 const RruFormElement = props => {
   const {
-    name, label, type, placeholder, disabled,
-    options, inline, longLabel, prepend, append, isHijri, isFuture, isPast, maxlength,
-    stretch, lang
+    name, type, label, options, lang, disabled, prepend, append, stretch, 
   } = props;
 
   const formContext = useFormContext();
 
   const sharedProps = {
-    id: name, name, placeholder, disabled, maxlength,
-    ref: formContext.register
+    ref: formContext.register,
+    id: name,
+    name: name,
+    disabled: disabled,
+    placeholder: props.placeholder,
+    maxlength: props.maxlength,
   }
 
   // for date only
@@ -86,7 +88,7 @@ const RruFormElement = props => {
 
 
           : type === 'radio' ?
-          <div className={inline ? 'form-check-inline' : null}>
+          <div className={props.inline ? 'form-check-inline' : null}>
             {options.map(o => (
               <div className={'form-check' + disabled ? ' disabled' : null}> 
                 <input type='radio' {...sharedProps} value={o.id} id={o.id} />
@@ -99,7 +101,7 @@ const RruFormElement = props => {
           : type === 'checkbox' ?
           <div>  
             <input {...sharedProps} type='checkbox' className={'form-check-input ' + (formContext.errors[name] ? 'is-invalid' : null)}/>
-            {longLabel && <label htmlFor={name}>{longLabel}</label>}
+            {props.longLabel && <label htmlFor={name}>{props.longLabel}</label>}
           </div>
 
 
@@ -140,11 +142,11 @@ const RruFormElement = props => {
             <DatePicker
               type={type}
               onChange={value => formContext.setValue(name, value)}
-              isHijri={isHijri}
-              isFuture={isFuture}
-              isPast={isPast}
               defaultValue={props.defaultValue}
               reverseOrder={props.reverseOrder}
+              isHijri={props.isHijri}
+              isFuture={props.isFuture}
+              isPast={props.isPast}
               clock={props.clock}
               disabled={disabled} />
           </div>
