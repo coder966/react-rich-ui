@@ -148,6 +148,7 @@ const RruFormElement = props => {
               isFuture={props.isFuture}
               isPast={props.isPast}
               clock={props.clock}
+              maxYearLength={props.maxYearLength}
               disabled={disabled} />
           </div>
 
@@ -202,11 +203,13 @@ class DatePicker extends React.Component {
 
     this.state = props.isHijri ? {day: currentDayH, month: currentMonthH, year: currentYearH} : {day: currentDayG, month: currentMonthG, year: currentYearG};
 
-    this.state.minYearH = this.props.isFuture ? currentYearH : currentYearH-100;
-    this.state.minYearG = this.props.isFuture ? currentYearG : currentYearG-100;
+    const maxYearLength = this.props.maxYearLength || 100;
 
-    this.state.maxYearH = this.props.isPast ? currentYearH : currentYearH+100;
-    this.state.maxYearG = this.props.isPast ? currentYearG : currentYearG+100;
+    this.state.minYearH = this.props.isFuture ? currentYearH : currentYearH-maxYearLength;
+    this.state.minYearG = this.props.isFuture ? currentYearG : currentYearG-maxYearLength;
+
+    this.state.maxYearH = this.props.isPast ? currentYearH : currentYearH+maxYearLength;
+    this.state.maxYearG = this.props.isPast ? currentYearG : currentYearG+maxYearLength;
 
     this.state.hour = defaultPartsTime ? parseInt(defaultPartsTime[0]) : 0;
     this.state.minute = defaultPartsTime ? parseInt(defaultPartsTime[1]) : 0;
