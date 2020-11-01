@@ -1,6 +1,6 @@
 # React Rich UI
 
-A set of very advanced yet **too** simple React components featuring forms, pagable tables, confirmation buttons.
+A set of advanced React components with super friendly API featuring forms, pagable tables, confirmation buttons.
 
 ## Installation
 
@@ -104,7 +104,7 @@ $ npm install --save @coder966/react-rich-ui
 | userPrivileges | An array of the user's privileges. This is used to only show permitted buttons. | No |
 | allowedPrivileges | An array of the required privileges | No |
 | onClick | A function | Yes if no `onConfirm` |
-| onConfirm | If you want to have a confirmation dialog<br>just use this prop instead of `onClick`.<br> It is a function which takes the form data object (if `formElements` is used) | No |
+| onConfirm | If you want to have a confirmation dialog<br>just use this prop instead of `onClick`.<br> It is a function which receives the form data object (if `formElements` is used) and a function `setShow(bool)` to control dialogue visibility. You can return false to stop refuse the confirmation and keep the dialogue open | No |
 | confirmationTitle | Confirmation dialog title | No |
 | confirmationDesc | Confirmation dialog description | No |
 | confirmLabel | Confirmation dialog confirm button label | No |
