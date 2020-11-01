@@ -72,7 +72,6 @@ $ npm install --save @coder966/react-rich-ui
 | label | The form element label | Yes | All |
 | name | Unique form element name | Yes | All |
 | type | Available types: `text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file` | Yes | All |
-| lang | The current language name. | If the type uses `options` | All |
 | prepend | Anything to render before the form element component | No | All |
 | append | Anything to render after the form element component | No | All |
 | className | Column class name | No | All |

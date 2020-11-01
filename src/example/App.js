@@ -1,43 +1,43 @@
 import React, {useState} from 'react';
+import {IntlProvider, FormattedMessage} from 'react-intl';
 import {Container, Col, Row, Button} from 'react-bootstrap'
 import * as yup from 'yup';
 import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
+import arMessages from './i18n/ar';
+import enMessages from './i18n/en';
 
 const App = props => {
 
+  const [locale, setLocale] = useState('en');
+
   const accountTypes = [
-    {id: 'INDIVIDUAL', label: {ar: 'فرد', en: 'Individual'}},
-    {id: 'ORGANIZATION', label: {ar: 'منشأة', en: 'Organization'}},
+    {id: 'INDIVIDUAL', label: <FormattedMessage id='individual' />},
+    {id: 'ORGANIZATION', label: <FormattedMessage id='organization' />},
   ];
 
   const features = [
-    {id: 1, label: {ar: 'ميزة أ', en: 'Feature A'}},
-    {id: 2, label: {ar: 'ميزة ب', en: 'Feature B'}},
-    {id: 3, label: {ar: 'ميزة ج', en: 'Feature C'}},
-    {id: 4, label: {ar: 'ميزة د', en: 'Feature D'}},
+    {id: 1, label: <FormattedMessage id='featureA' />},
+    {id: 2, label: <FormattedMessage id='featureB' />},
+    {id: 3, label: <FormattedMessage id='featureC' />},
+    {id: 4, label: <FormattedMessage id='featureD' />},
   ];
 
   const groups = [
     {
-      label: {
-        ar: 'Group 1',
-        en: 'Group 1'
-      },
+      label: <FormattedMessage id='group1' />,
       items: [
-        {id: 1, label: {ar: 'خيار 1', en: 'Option 1'}},
-        {id: 2, label: {ar: 'خيار 2', en: 'Option 2'}},
-        {id: 3, label: {ar: 'خيار 3', en: 'Option 3'}},
+        {id: 1, label: <FormattedMessage id='option1' />},
+        {id: 2, label: <FormattedMessage id='option2' />},
+        {id: 3, label: <FormattedMessage id='option3' />},
       ]
     },
     {
-      label: {
-        ar: 'Group 2',
-        en: 'Group 2'
-      },
+      label: <FormattedMessage id='group2' />,
       items: [
-        {id: 4, label: {ar: 'خيار 4', en: 'Option 4'}},
-        {id: 5, label: {ar: 'خيار 5', en: 'Option 5'}},
-        {id: 6, label: {ar: 'خيار 6', en: 'Option 6'}},
+        {id: 4, label: <FormattedMessage id='option4' />},
+        {id: 5, label: <FormattedMessage id='option5' />},
+        {id: 6, label: <FormattedMessage id='option6' />},
+        {id: 7, label: <FormattedMessage id='option7' />},
       ]
     }
   ]
@@ -72,52 +72,57 @@ const App = props => {
   }
 
   return (
-    <Container>
+    <IntlProvider messages={locale === 'ar' ? arMessages : enMessages} locale={locale}>
+      <Container>
 
-      <h1>RruForm</h1>
-      <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['accountType']))}>
-        <Row>
-          <Col><RruFormElement type='text' name='name' label='Full Name' lang='en'/></Col>
-          <Col><RruFormElement type='text' name='Email' label='email' lang='en'/></Col>
-          <Col><RruFormElement type='select' name='accountType' label='Account Type' options={accountTypes} lang='en'/></Col>
-        </Row>
-        {accountType === 'ORGANIZATION' &&
+        <a onClick={e => setLocale(locale === 'ar' ? 'en' : 'ar')}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+
+        <h1>RruForm</h1>
+        <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['accountType']))}>
           <Row>
-            <Col><RruFormElement type='text' name='moi' label='MOI' lang='en'/></Col>
+            <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
+            <Col><RruFormElement type='text' name='Email' label={<FormattedMessage id='email' />} /></Col>
+            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='INDIVIDUAL' /></Col>
           </Row>
-        }
-        <Row>
-          <Col><RruFormElement type='multi-checkbox' name='features' label='Subscribe to Features' options={features} lang='en'/></Col>
-        </Row>
-        <Row>
-          <Col><RruFormElement type='grouped-multi-checkbox' name='groups' label='Groups' options={groups} lang='en'/></Col>
-        </Row>
-        <Row>
-          <Col md='4'><RruFormElement type='date' name='bookingDate' label='Booking Date' defaultValue='15-08-2020' maxYearLength='10' isPast lang='en'/></Col>
-          <Col md='4'><RruFormElement type='time' name='bookingTime' label='Booking Time' defaultValue="05:08" lang='en'/></Col>
-        </Row>
-        <Row>
-          <Col md='4'><RruFormElement type='file' name='attachment' label='Attachment' lang='en'/></Col>
-        </Row>
-        <Row>
-          <div style={{width: '100%'}}><Button type='submit' className='float-right'>Submit</Button></div>
-        </Row>
-      </RruForm>
+          {accountType === 'ORGANIZATION' &&
+            <Row>
+              <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} /></Col>
+            </Row>
+          }
+          <Row>
+            <Col><RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/></Col>
+          </Row>
+          <Row>
+            <Col><RruFormElement type='grouped-multi-checkbox' name='groups' label={<FormattedMessage id='groups' />} options={groups}/></Col>
+          </Row>
+          <Row>
+            <Col md='4'><RruFormElement type='date' name='bookingDate' label={<FormattedMessage id='bookingDate' />} defaultValue='15-08-2020' maxYearLength='10' isPast/></Col>
+            <Col md='4'><RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/></Col>
+          </Row>
+          <Row>
+            <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />}/></Col>
+          </Row>
+          <Row>
+            <div style={{width: '100%'}}><Button type='submit' className='float-right'><FormattedMessage id='submit' /></Button></div>
+          </Row>
+        </RruForm>
 
 
-      <hr></hr>
-      <h1>RruButton</h1>
-      <RruButton 
-        variant='danger'
-        onConfirm={onConfirm}
-        label='Delete'
-        validationSchema={yup.object().shape({reason: yup.string().required()})}
-        formElements={<RruFormElement type='text' name='reason' label='reason' spans='12' />}
-        confirmationTitle='Delete'
-        confirmationDesc='Are you sure you want to delete?'
-        confirmLabel='Confirm'
-        cancelLabel='Cancel' />
-    </Container>
+        <hr></hr>
+        <h1>RruButton</h1>
+        <RruButton 
+          variant='danger'
+          onConfirm={onConfirm}
+          label={<FormattedMessage id='delete' />}
+          validationSchema={yup.object().shape({reason: yup.string().required()})}
+          formElements={<RruFormElement type='text' name='reason' label={<FormattedMessage id='reason' />} />}
+          confirmationTitle={<FormattedMessage id='delete' />}
+          confirmationDesc={<FormattedMessage id='deleteConfirmation' />}
+          confirmLabel={<FormattedMessage id='confirm' />}
+          cancelLabel={<FormattedMessage id='cancel' />} />
+
+      </Container>
+    </IntlProvider>
   );
 };
 

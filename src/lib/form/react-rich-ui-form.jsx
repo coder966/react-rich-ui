@@ -1,5 +1,6 @@
 import React from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
+import Select from "react-select";
 import './style.css';
 
 /**
@@ -32,7 +33,7 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
  */
 const RruFormElement = props => {
   const {
-    name, type, label, options, lang, disabled, prepend, append, 
+    name, type, label, options, disabled, prepend, append, 
   } = props;
 
   const formContext = useFormContext();
@@ -47,7 +48,7 @@ const RruFormElement = props => {
   }
 
   // for date only
-  if(type === 'date' || type === 'time' || type === 'datetime'){
+  if(type === 'date' || type === 'time' || type === 'datetime' || type === 'select'){
     formContext.register({name});
   }
 
@@ -82,9 +83,19 @@ const RruFormElement = props => {
 
 
           : type === 'select' ?
-          <select className='custom-select' {...sharedProps}>
-            {options.map(o => <option key={o.id} value={o.id}>{o.label[lang]}</option>)}
-          </select>
+          <Select
+            name={name}
+            disabled={disabled}
+            defaultValue={options.find(o => o.id === props.defaultValue)}
+            onChange={option => formContext.setValue(name, option.value)}
+            options={options.map(o => ({value: o.id, label: o.label}))}
+            styles={{
+              container: (provided, state) => ({
+                ...provided,
+                width: '100%'
+              }),
+            }}
+          />
 
 
           : type === 'radio' ?
@@ -92,7 +103,7 @@ const RruFormElement = props => {
             {options.map(o => (
               <div className={'form-check' + disabled ? ' disabled' : null}> 
                 <input type='radio' {...sharedProps} value={o.id} id={o.id} />
-                <label className='form-check-label' htmlFor={o.id}>{o.label[lang]}</label>
+                <label className='form-check-label' htmlFor={o.id}>{o.label}</label>
               </div>
             ))}
           </div>
@@ -110,7 +121,7 @@ const RruFormElement = props => {
             <div key={`${name}_${o.id}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
               <div className='custom-control custom-checkbox m-1'>
                 <input id={`${name}_${o.id}`} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
-                <label htmlFor={`${name}_${o.id}`} className='custom-control-label'>{o.label[lang]}</label>
+                <label htmlFor={`${name}_${o.id}`} className='custom-control-label'>{o.label}</label>
               </div>
             </div>
           ))
@@ -119,13 +130,13 @@ const RruFormElement = props => {
           : type === 'grouped-multi-checkbox' ?
           options.map(g => 
             <>
-              <div className='grouped-multi-checkbox-group-header'>{g.label[lang]}</div>
+              <div className='grouped-multi-checkbox-group-header'>{g.label}</div>
               <div className='grouped-multi-checkbox-group-row row col'>
                 {g.items.map(o => (
                   <div key={`${name}_${o.id}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
                     <div className='custom-control custom-checkbox m-1'>
                       <input id={`${name}_${o.id}`} name={name} ref={formContext.register} value={o.id} type='checkbox' className='custom-control-input' disabled={disabled} />
-                      <label htmlFor={`${name}_${o.id}`} className='custom-control-label'>{o.label[lang]}</label>
+                      <label htmlFor={`${name}_${o.id}`} className='custom-control-label'>{o.label}</label>
                     </div>
                   </div>
                 ))}
