@@ -7,6 +7,15 @@ import './style.css';
  * @author coder966
  */
 const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, className }) => {
+  // transform initialValues object to meet our requirements:
+
+  // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
+  for(const [key, value] of Object.entries(initialValues)){
+    if(value && Array.isArray(value)){
+      initialValues[key] = value.map(item => item+'');
+    }
+  }
+
   const form = useForm({
     mode: 'onChange',
     defaultValues: initialValues,
@@ -328,9 +337,6 @@ class DatePicker extends React.Component {
   );
 }
 
-// TODO: fix this issue and remove these two helper methods
-const getInitialValueForMultiCheckbox = array => array.length > 0 ? array.map(item => item.id+'') : undefined;
-
 const getSubmitValueForMultiCheckbox = array => {
   if(!array){
     return [];
@@ -341,4 +347,4 @@ const getSubmitValueForMultiCheckbox = array => {
   }
 };
 
-export {RruForm, RruFormElement, getInitialValueForMultiCheckbox, getSubmitValueForMultiCheckbox};
+export {RruForm, RruFormElement, getSubmitValueForMultiCheckbox};

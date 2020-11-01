@@ -17,28 +17,28 @@ const App = props => {
   ];
 
   const features = [
-    {id: 1, label: <FormattedMessage id='featureA' />},
-    {id: 2, label: <FormattedMessage id='featureB' />},
-    {id: 3, label: <FormattedMessage id='featureC' />},
-    {id: 4, label: <FormattedMessage id='featureD' />},
+    {id: '1', label: <FormattedMessage id='featureA' />},
+    {id: '2', label: <FormattedMessage id='featureB' />},
+    {id: '3', label: <FormattedMessage id='featureC' />},
+    {id: '4', label: <FormattedMessage id='featureD' />},
   ];
 
   const groups = [
     {
       label: <FormattedMessage id='group1' />,
       items: [
-        {id: 1, label: <FormattedMessage id='option1' />},
-        {id: 2, label: <FormattedMessage id='option2' />},
-        {id: 3, label: <FormattedMessage id='option3' />},
+        {id: '1', label: <FormattedMessage id='option1' />},
+        {id: '2', label: <FormattedMessage id='option2' />},
+        {id: '3', label: <FormattedMessage id='option3' />},
       ]
     },
     {
       label: <FormattedMessage id='group2' />,
       items: [
-        {id: 4, label: <FormattedMessage id='option4' />},
-        {id: 5, label: <FormattedMessage id='option5' />},
-        {id: 6, label: <FormattedMessage id='option6' />},
-        {id: 7, label: <FormattedMessage id='option7' />},
+        {id: '4', label: <FormattedMessage id='option4' />},
+        {id: '5', label: <FormattedMessage id='option5' />},
+        {id: '6', label: <FormattedMessage id='option6' />},
+        {id: '7', label: <FormattedMessage id='option7' />},
       ]
     }
   ]
@@ -52,6 +52,7 @@ const App = props => {
 
   const initialValues = {
     name: 'Khalid',
+    features: [1, '3']
   }
 
   const watcher = form => {
@@ -82,7 +83,7 @@ const App = props => {
         <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['accountType']))}>
           <Row>
             <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
-            <Col><RruFormElement type='text' name='Email' label={<FormattedMessage id='email' />} /></Col>
+            <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
             <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='INDIVIDUAL' /></Col>
           </Row>
           {accountType === 'ORGANIZATION' &&
