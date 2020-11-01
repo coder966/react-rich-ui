@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
-import {Container, Col, Row} from 'react-bootstrap'
+import {Container, Col, Row, Button} from 'react-bootstrap'
 import * as yup from 'yup';
 import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
 
 const App = props => {
-  const types = [
-    {id: 1, label: {ar: 'نوع 1', en: 'Type 1'}},
-    {id: 2, label: {ar: 'نوع 2', en: 'Type 2'}},
+
+  const accountTypes = [
+    {id: 'INDIVIDUAL', label: {ar: 'فرد', en: 'Individual'}},
+    {id: 'ORGANIZATION', label: {ar: 'منشأة', en: 'Organization'}},
   ];
 
-  const options = [
-    {id: 1, label: {ar: 'خيار 1', en: 'Option 1'}},
-    {id: 2, label: {ar: 'خيار 2', en: 'Option 2'}},
-    {id: 3, label: {ar: 'خيار 3', en: 'Option 3'}},
+  const features = [
+    {id: 1, label: {ar: 'ميزة أ', en: 'Feature A'}},
+    {id: 2, label: {ar: 'ميزة ب', en: 'Feature B'}},
+    {id: 3, label: {ar: 'ميزة ج', en: 'Feature C'}},
+    {id: 4, label: {ar: 'ميزة د', en: 'Feature D'}},
   ];
 
   const groups = [
@@ -41,58 +43,80 @@ const App = props => {
   ]
 
   // ui components that others depend on
-  const [type, setType] = useState('1');
+  const [accountType, setAccountType] = useState('INDIVIDUAL');
 
   const validationSchema = yup.object().shape({
     email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email is incorrect'),
   });
 
   const initialValues = {
-    type: '1',
+    name: 'Khalid',
   }
 
   const watcher = form => {
-    setType(form.type);
+    setAccountType(form.accountType);
   }
 
   const onSubmit = form => {
     console.log(form);
   };
 
+  const onConfirm = (form, setShow) => {
+    console.log(form);
+
+    // simulate delay or maybe perform API operation and then show error or proceed
+    setTimeout(() => {
+      setShow(false);
+    }, 5000);
+    return false;
+  }
+
   return (
     <Container>
-      <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
+
+      <h1>RruForm</h1>
+      <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['accountType']))}>
         <Row>
-          <Col><RruFormElement type='select' name='type' label='type' options={types} lang='en' /></Col>
-          <Col><RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' /></Col>
+          <Col><RruFormElement type='text' name='name' label='Full Name' lang='en'/></Col>
+          <Col><RruFormElement type='text' name='Email' label='email' lang='en'/></Col>
+          <Col><RruFormElement type='select' name='accountType' label='Account Type' options={accountTypes} lang='en'/></Col>
+        </Row>
+        {accountType === 'ORGANIZATION' &&
+          <Row>
+            <Col><RruFormElement type='text' name='moi' label='MOI' lang='en'/></Col>
+          </Row>
+        }
+        <Row>
+          <Col><RruFormElement type='multi-checkbox' name='features' label='Subscribe to Features' options={features} lang='en'/></Col>
         </Row>
         <Row>
-          <Col><RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' /></Col>
+          <Col><RruFormElement type='grouped-multi-checkbox' name='groups' label='Groups' options={groups} lang='en'/></Col>
         </Row>
         <Row>
-          <Col><RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' /></Col>
+          <Col md='4'><RruFormElement type='date' name='bookingDate' label='Booking Date' defaultValue='15-08-2020' maxYearLength='10' isPast lang='en'/></Col>
+          <Col md='4'><RruFormElement type='time' name='bookingTime' label='Booking Time' defaultValue="05:08" lang='en'/></Col>
         </Row>
         <Row>
-          <Col><RruFormElement type='date' name='field_4' label='birthDate' lang='en' defaultValue='15-08-2019' maxYearLength='10' isPast/></Col>
-          <Col><RruFormElement type='time' name='field_4' label='dd' lang='en' defaultValue="05:08" /></Col>
-          <Col><RruFormElement type='file' name='field_5' label='option' lang='en' /></Col>
+          <Col md='4'><RruFormElement type='file' name='attachment' label='Attachment' lang='en'/></Col>
         </Row>
         <Row>
-          <Col md='6'><RruFormElement type='text' name='email' label='email' lang='en' /></Col>
-        </Row>
-        <Row>
-          <button type='submit'>Submit</button>
+          <div style={{width: '100%'}}><Button type='submit' className='float-right'>Submit</Button></div>
         </Row>
       </RruForm>
 
+
+      <hr></hr>
+      <h1>RruButton</h1>
       <RruButton 
         variant='danger'
-        onConfirm={console.log}
+        onConfirm={onConfirm}
         label='Delete'
         validationSchema={yup.object().shape({reason: yup.string().required()})}
         formElements={<RruFormElement type='text' name='reason' label='reason' spans='12' />}
         confirmationTitle='Delete'
-        confirmationDesc='Are you sure you want to delete?' />
+        confirmationDesc='Are you sure you want to delete?'
+        confirmLabel='Confirm'
+        cancelLabel='Cancel' />
     </Container>
   );
 };
