@@ -32,7 +32,7 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
  */
 const RruFormElement = props => {
   const {
-    name, type, label, options, lang, disabled, prepend, append, stretch, 
+    name, type, label, options, lang, disabled, prepend, append, 
   } = props;
 
   const formContext = useFormContext();
@@ -52,7 +52,7 @@ const RruFormElement = props => {
   }
 
   return (
-    <div className={(props.className ? props.className : 'form-group')  + ((stretch || type === 'multi-checkbox' || type === 'grouped-multi-checkbox')? ' col-xl-12' : ' col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4')}>
+    <div className={(props.className ? props.className : 'form-group')}>
       {label ?
         <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
           <label className='custom-label' htmlFor={name}>{label}</label>

@@ -75,8 +75,6 @@ $ npm install --save @coder966/react-rich-ui
 | lang | The current language name. | If the type uses `options` | All |
 | prepend | Anything to render before the form element component | No | All |
 | append | Anything to render after the form element component | No | All |
-| spans | Deprecated, use `stretch` | No | All |
-| stretch | Set to `true` to make the from element spans the whole row | No | All |
 | className | Column class name | No | All |
 | labelClassName | `label` class name | No | All |
 | inputClassName | `input` class name | No | All |

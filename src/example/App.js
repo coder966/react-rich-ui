@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Row} from 'react-bootstrap'
+import {Container, Col, Row} from 'react-bootstrap'
 import * as yup from 'yup';
 import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
 
@@ -60,22 +60,25 @@ const App = props => {
   };
 
   return (
-    <>
+    <Container>
       <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['type']))}>
         <Row>
-          <RruFormElement type='select' name='type' label='type' options={types} lang='en' />
-          <RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' />
+          <Col><RruFormElement type='select' name='type' label='type' options={types} lang='en' /></Col>
+          <Col><RruFormElement type='multi-checkbox' name='field_1' label='option' options={options} lang='en' /></Col>
         </Row>
         <Row>
-          <RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' />
-          <RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' />
+          <Col><RruFormElement type='multi-checkbox' name='field_2' label='option' options={types} lang='en' /></Col>
         </Row>
         <Row>
-          <RruFormElement type='date' name='field_4' label='birthDate' lang='en' />
-          <RruFormElement type='file' name='field_5' label='option' lang='en' />
+          <Col><RruFormElement type='grouped-multi-checkbox' name='field_3' label='option' options={groups} lang='en' /></Col>
         </Row>
         <Row>
-          <RruFormElement type='text' name='email' label='email' lang='en' />
+          <Col><RruFormElement type='date' name='field_4' label='birthDate' lang='en' defaultValue='15-08-2019' maxYearLength='10' isPast/></Col>
+          <Col><RruFormElement type='time' name='field_4' label='dd' lang='en' defaultValue="05:08" /></Col>
+          <Col><RruFormElement type='file' name='field_5' label='option' lang='en' /></Col>
+        </Row>
+        <Row>
+          <Col md='6'><RruFormElement type='text' name='email' label='email' lang='en' /></Col>
         </Row>
         <Row>
           <button type='submit'>Submit</button>
@@ -90,7 +93,7 @@ const App = props => {
         formElements={<RruFormElement type='text' name='reason' label='reason' spans='12' />}
         confirmationTitle='Delete'
         confirmationDesc='Are you sure you want to delete?' />
-    </>
+    </Container>
   );
 };
 
