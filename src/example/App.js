@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
 import arMessages from './i18n/ar';
 import enMessages from './i18n/en';
+import './style.css';
 
 const App = props => {
 
