@@ -89,7 +89,6 @@ $ npm install --save @coder966/react-rich-ui
 | maxYearLength | Max number of years +- current year | No | `date` |
 | reverseDisplayOrder | Reverse the render order of the date or time selectors | No | `date, time` |
 | inline | Set to `true` to display `radio` buttons in one line | No | `radio` |
-| longLabel | This label is render beside the `checkbox` element | No | `checkbox` |
 
 ---
 

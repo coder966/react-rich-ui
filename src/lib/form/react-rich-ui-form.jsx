@@ -63,7 +63,7 @@ const RruFormElement = props => {
 
   return (
     <div className={(props.className ? props.className : 'form-group')}>
-      {label ?
+      {label && type !== 'checkbox' ?
         <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
           <label className='custom-label' htmlFor={name}>{label}</label>
         </div>
@@ -119,9 +119,9 @@ const RruFormElement = props => {
 
 
           : type === 'checkbox' ?
-          <div>  
-            <input {...sharedProps} type='checkbox' className={'form-check-input ' + (formContext.errors[name] ? 'is-invalid' : null)}/>
-            {props.longLabel && <label htmlFor={name}>{props.longLabel}</label>}
+          <div className='custom-control custom-checkbox m-1'>
+            <input id={name} name={name} ref={formContext.register} type='checkbox' className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')} disabled={disabled} />
+            <label htmlFor={name} className='custom-control-label'>{label}</label>
           </div>
 
 

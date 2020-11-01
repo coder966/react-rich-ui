@@ -8,6 +8,8 @@ export default {
     bookingDate: 'Booking Date',
     bookingTime: 'Booking Time',
     attachment: 'Attachment',
+    pledge: 'In this step you define long text templates and allocate these templates to certain asset classes. By means of these templates, the system then supports the long text entry when you create a fixed asset belonging to the class. Per asset class, you can store one template for all long texts of an asset respectively (general specifications, technical specifications and so on).',
+    sendEmails: 'Send Me Promotion Emails',
     submit: 'Submit',
 
     individual: 'Individual',
