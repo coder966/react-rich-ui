@@ -154,7 +154,7 @@ const RruFormElement = props => {
               type={type}
               onChange={value => formContext.setValue(name, value)}
               defaultValue={props.defaultValue}
-              reverseOrder={props.reverseOrder}
+              reverseDisplayOrder={props.reverseDisplayOrder}
               isHijri={props.isHijri}
               isFuture={props.isFuture}
               isPast={props.isPast}
@@ -203,14 +203,14 @@ class DatePicker extends React.Component {
     const defaultPartsDate = props.defaultValue ? props.defaultValue.split('-') : undefined;
     const defaultPartsTime = props.defaultValue ? props.defaultValue.split(':') : undefined;
 
-    const currentDayH = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayH[1]);
-    const currentDayG = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayG.getDate());
+    const currentDayH = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayH[1]);
+    const currentDayG = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayG.getDate());
 
     const currentMonthH = parseInt(defaultPartsDate ? defaultPartsDate[1] : todayH[0]);
     const currentMonthG = parseInt(defaultPartsDate ? defaultPartsDate[1] : todayG.getMonth()+1);
 
-    const currentYearH = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayH[2]);
-    const currentYearG = parseInt(defaultPartsDate ? defaultPartsDate[2] : todayG.getFullYear());
+    const currentYearH = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayH[2]);
+    const currentYearG = parseInt(defaultPartsDate ? defaultPartsDate[0] : todayG.getFullYear());
 
     this.state = props.isHijri ? {day: currentDayH, month: currentMonthH, year: currentYearH} : {day: currentDayG, month: currentMonthG, year: currentYearG};
 
@@ -248,13 +248,13 @@ class DatePicker extends React.Component {
         year = parseInt(year);    
         if(day < 10){day = '0'+day}
         if(month < 10){month = '0'+month}
-        this.props.onChange(`${day}-${month}-${year}`);
+        this.props.onChange(`${year}-${month}-${day}`);
       } else if(this.props.type === 'time' && (!prevState || prevState.minute !== minute || prevState.hour !== hour)){
         hour = parseInt(hour);
-        minute = parseInt(minute);    
+        minute = parseInt(minute);
         if(hour < 10){hour = '0'+hour}
         if(minute < 10){minute = '0'+minute}
-        this.props.onChange(`${hour}:${minute}:00.00`);
+        this.props.onChange(`${hour}:${minute}`);
       }
     }
   }
@@ -297,7 +297,7 @@ class DatePicker extends React.Component {
   render = () => (
     <>
       {this.props.type === 'date' ? 
-        (this.props.reverseOrder ?
+        (this.props.reverseDisplayOrder ?
           <>
             {this.renderField('day', this.getDays)}
             {this.renderField('month', this.getMonths)}
@@ -311,7 +311,7 @@ class DatePicker extends React.Component {
           </>
         )
       :this.props.type === 'time' ? 
-      (this.props.reverseOrder ?
+      (this.props.reverseDisplayOrder ?
         <>
           {this.renderField('minute', this.getMinutes)}
           {this.renderField('hour', this.getHours)}

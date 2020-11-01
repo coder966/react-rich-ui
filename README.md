@@ -87,7 +87,7 @@ $ npm install --save @coder966/react-rich-ui
 | clock | Clock style either 12-hours or 24-hours | No | `time` |
 | clock | Clock style either 12-hours or 24-hours | No | `time` |
 | maxYearLength | Max number of years +- current year | No | `date` |
-| reverseOrder | Reverse the render order of the date or time selectors | No | `date, time` |
+| reverseDisplayOrder | Reverse the render order of the date or time selectors | No | `date, time` |
 | inline | Set to `true` to display `radio` buttons in one line | No | `radio` |
 | longLabel | This label is render beside the `checkbox` element | No | `checkbox` |
 
