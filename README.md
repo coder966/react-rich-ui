@@ -84,7 +84,7 @@ Optional peer dependencies: `axios`, `yup`
 | inputClassName | `input` class name | No | All |
 | options | An array of objects of the form:<br>`{id: string label: [ar: string, en: string]}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: [ar: string, en: string], items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, radio, multi-checkbox, grouped-multi-checkbox` |
 | placeholder | A place holder | No |  |
-| maxlength | Maximum length | No |  |
+| maxLength | Maximum length | No |  |
 | disabled | Set to `true` to disable the editing of the form element | No | All |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No | `date` |
 | isFuture | Display only future years | No | `date` |

@@ -128,7 +128,7 @@ const App = props => {
           </Row>
           {accountType === 'ORGANIZATION' &&
             <Row>
-              <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} /></Col>
+              <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
             </Row>
           }
           <Row>

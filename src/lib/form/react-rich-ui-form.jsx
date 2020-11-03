@@ -62,7 +62,7 @@ const RruFormElement = props => {
     name: name,
     disabled: disabled,
     placeholder: props.placeholder,
-    maxlength: props.maxlength,
+    maxLength: props.maxLength,
   }
 
   if(type === 'date' || type === 'time' || type === 'select'){
