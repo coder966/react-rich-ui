@@ -120,7 +120,7 @@ const App = props => {
         <a onClick={e => setLocale(locale === 'ar' ? 'en' : 'ar')}>{locale === 'ar' ? 'English' : 'العربية'}</a>
 
         <h1>RruForm</h1>
-        <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={watch => watcher(watch(['accountType']))}>
+        <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['accountType']} watcher={watcher}>
           <Row>
             <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
             <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
