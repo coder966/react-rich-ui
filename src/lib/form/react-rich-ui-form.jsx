@@ -10,9 +10,11 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, children, c
   // transform initialValues object to meet our requirements:
 
   // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
-  for(const [key, value] of Object.entries(initialValues)){
-    if(value && Array.isArray(value)){
-      initialValues[key] = value.map(item => item+'');
+  if(initialValues){
+    for(const [key, value] of Object.entries(initialValues)){
+      if(value && Array.isArray(value)){
+        initialValues[key] = value.map(item => item+'');
+      }
     }
   }
 
