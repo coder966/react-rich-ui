@@ -8,6 +8,8 @@ A set of advanced React components with super friendly API featuring forms, paga
 $ npm install --save @coder966/react-rich-ui
 ```
 
+Optional peer dependencies: `axios`, `yup`
+
 ## API
 
 ---
@@ -28,6 +30,7 @@ $ npm install --save @coder966/react-rich-ui
 | actionsLabel | The action's column header label. | No |
 | previousLabel| This is the label for `previous` button in pagination.| No |
 | nextLabel | This is the label for `next` button in pagination. | No |
+| noDataLabel | This is the label used when no data is available. | No |
 
 ### RruPageableTable Columns
 
@@ -60,7 +63,7 @@ $ npm install --save @coder966/react-rich-ui
 | Prop | Description | Required |
 |-|-|-|
 | onSubmit | A function which takes the form data object.<br>Will be called if the user submits the form if there is no validation violation | Yes |
-| initialValues | An object containing the form default values.<br>Note: for types `date` and `time` use `defaultValue` prop. | No |
+| initialValues | An object containing the form default values.<br>Note: for types `date`, `time`, and `select` use `defaultValue` prop. | No |
 | validationSchema | `Yup` validation schema | No |
 | watch | A function which takes a function that you can run to listen to form data changes. | No |
 | className | `form` class name | No |

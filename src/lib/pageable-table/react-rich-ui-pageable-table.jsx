@@ -14,7 +14,7 @@ try{
 /**
  * @author coder966
  */
-const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, disableSorting, userPrivileges, onResponse}) => {
+const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse}) => {
 
   const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
   const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
@@ -154,7 +154,7 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
 
           {data.length === 0 && 
             <tr>
-              <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>لا توجد بيانات لعرضها</td>
+              <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
             </tr>
           }
 
