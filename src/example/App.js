@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {IntlProvider, FormattedMessage} from 'react-intl';
 import {Container, Col, Row, Button} from 'react-bootstrap'
 import * as yup from 'yup';
-import { RruForm, RruFormElement, RruButton } from '../lib/react-rich-ui';
+import { RruForm, RruFormElement, RruButton, RruPageableTable } from '../lib/react-rich-ui';
 import arMessages from './i18n/ar';
 import enMessages from './i18n/en';
 import './style.css';
@@ -73,6 +73,46 @@ const App = props => {
     return false;
   }
 
+  
+  const columns = [
+    {
+      label: <FormattedMessage id='serialNo' />,
+      value: '#'
+    },
+    {
+      label: <FormattedMessage id='personName' />,
+      value: row => (row.person.firstNameAr + ' ' + row.person.secondNameAr + ' ' + row.person.thirdNameAr + ' ' + row.person.lastNameAr),
+      sortKey: 'person.firstNameAr'
+    },
+    {
+      label: <FormattedMessage id='idNumber' />,
+      value: 'person.idNumber'
+    },
+  ];
+
+  const actions = [
+    {
+      icon: 'view',
+      privileges: ['USER:VIEW'],
+      action: user => console.log('view user'+user.id),
+    },
+    {
+      icon: 'edit',
+      privileges: ['USER:EDIT'],
+      action: user => console.log('edit user'+user.id),
+      display: user => user.status === 'CONFIRMED'
+    },
+    {
+      icon: 'delete',
+      action: user => console.log('delete user'+user.id),
+      onConfirm: user => console.log('confirm delete user'+user.id),
+      confirmationTitle: <FormattedMessage id='delete' />,
+      confirmationDesc: <FormattedMessage id='deleteConfirmation' />,
+      cancelLabel: <FormattedMessage id='cancel' />,
+      confirmLabel: <FormattedMessage id='confirm' />,
+    },
+  ];
+
   return (
     <IntlProvider messages={locale === 'ar' ? arMessages : enMessages} locale={locale}>
       <Container>
@@ -126,6 +166,18 @@ const App = props => {
           confirmationDesc={<FormattedMessage id='deleteConfirmation' />}
           confirmLabel={<FormattedMessage id='confirm' />}
           cancelLabel={<FormattedMessage id='cancel' />} />
+
+
+        <hr></hr>
+        <h1>RruPageableTable</h1>
+        <RruPageableTable
+          id='UsersListTable'
+          endpoint='/api/user'
+          columns={columns}
+          actions={actions}
+          search={{}}
+          userPrivileges={['USER:VIEW']} />
+
 
       </Container>
     </IntlProvider>

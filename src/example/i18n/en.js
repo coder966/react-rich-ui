@@ -37,4 +37,8 @@ export default {
     confirm: 'Confirm',
     cancel: 'Cancel',
 
+    serialNo: 'Serial No',
+    personName: 'Person Name',
+    idNumber: 'ID Number',
+    
 }

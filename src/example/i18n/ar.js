@@ -39,4 +39,8 @@ export default {
     confirm: 'تأكيد',
     cancel: 'إلغاء',
 
+    serialNo: 'الرقم التسلسلي',
+    personName: 'الاسم',
+    idNumber: 'رقم الهوية',
+
 }
