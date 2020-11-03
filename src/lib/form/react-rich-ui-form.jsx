@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useState } from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import Select from "react-select";
@@ -147,7 +147,7 @@ const RruFormElement = props => {
           : type === 'radio' ?
           <div className={props.inline ? 'form-check-inline' : null}>
             {options.map(o => (
-              <div className={'form-check' + disabled ? ' disabled' : null}> 
+              <div key={`${name}_${o.id}`} className={'form-check' + disabled ? ' disabled' : null}> 
                 <input type='radio' {...sharedProps} value={o.id} id={o.id} />
                 <label className='form-check-label' htmlFor={o.id}>{o.label}</label>
               </div>
@@ -185,8 +185,8 @@ const RruFormElement = props => {
             and if options size is zero then will result in false instead of an empty array */}
             <input id={`${name}_hidden1`} name={name} ref={formContext.register} value={'hidden1'} type='checkbox' disabled style={{display: 'none'}} />
             <input id={`${name}_hidden2`} name={name} ref={formContext.register} value={'hidden2'} type='checkbox' disabled style={{display: 'none'}} />
-            {options.map(g => 
-              <>
+            {options.map((g, i)=> 
+              <Fragment key={`${name}_g${i}`}>
                 <div className='grouped-multi-checkbox-group-header'>{g.label}</div>
                 <div className='grouped-multi-checkbox-group-row row col'>
                   {g.items.map(o => (
@@ -198,7 +198,7 @@ const RruFormElement = props => {
                     </div>
                   ))}
                 </div>
-              </>
+              </Fragment>
             )}
           </>
 
