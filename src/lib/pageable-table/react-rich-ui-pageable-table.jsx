@@ -1,8 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import ReactPaginate from 'react-paginate'
 import RruButton from '../button/react-rich-ui-button';
-import axios from 'axios';
 import './style.css'
+
+// dynamically loading Axios
+let axios;
+try{
+  axios = require('axios');
+}catch(e){
+  console.log('Axios is not installed. Falling back to fetch')
+}
 
 /**
  * @author coder966
@@ -33,22 +40,38 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
     persistState({currentPage, sortBy, sortDir});
   }, [currentPage, sortBy, sortDir]);
 
+  // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-    axios.get(endpoint, {
-      params: {
-        page: currentPage,
-        size: mPageSize,
-        sort: mSort,
-        ...search
+
+    const params = {
+      page: currentPage,
+      size: mPageSize,
+      sort: mSort,
+      ...search
+    };
+
+    // create an abstract promise for different HTTP client libs
+    const dataPromise = new Promise((resolve, reject) => {
+      if(axios){
+        axios.get(endpoint, {params: params})
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+      }else{
+        fetch(endpoint + '?' + new URLSearchParams(params))
+        .then(res => res.json())
+        .then(data => resolve(data))
+        .catch(err => reject(err));
       }
-    })
-    .then(res => {
+    });
+
+    // handle promise result
+    dataPromise.then(data => {
       setIsLoading(false);
-      setTotalPages(res.data.totalPages);
-      setData(res.data.content);
+      setTotalPages(data.totalPages);
+      setData(data.content);
       if(onResponse){
-        onResponse(res.data);
+        onResponse(data);
       }
     })
     .catch(err => {
