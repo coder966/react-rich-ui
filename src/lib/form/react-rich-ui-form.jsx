@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import useForm, {FormContext, useFormContext} from 'react-hook-form';
 import Select from "react-select";
 import './style.css';
@@ -47,6 +48,7 @@ const RruFormElement = props => {
     name, type, label, options, disabled, prepend, append, 
   } = props;
 
+  const [initialSelectOption, setInitialSelectOption] = useState();
   const formContext = useFormContext();
 
   const sharedProps = {
@@ -58,10 +60,33 @@ const RruFormElement = props => {
     maxlength: props.maxlength,
   }
 
-  // for date only
-  if(type === 'date' || type === 'time' || type === 'datetime' || type === 'select'){
+  if(type === 'date' || type === 'time' || type === 'select'){
     formContext.register({name});
   }
+
+  // because controlled fields need to call setValue for the initial value
+  // this issue is also present in date and time be is handled in the DatePicker constructor
+  useEffect(() => {
+    if(type === 'select'){
+
+      // determine the initial option
+      let option;
+      if(props.defaultValue){
+        const defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
+        if(defaultOption){
+          option = defaultOption;
+        }else{
+          option = options[0];
+        }
+      }else{
+        option = options[0];
+      }
+
+      // transform it to react-select schema and set form value
+      setInitialSelectOption({value: option.id, label: option.label});
+      formContext.setValue(name, option.id);
+    }  
+  }, []);
 
   return (
     <div className={(props.className ? props.className : 'form-group')}>
@@ -94,19 +119,24 @@ const RruFormElement = props => {
 
 
           : type === 'select' ?
-          <Select
-            name={name}
-            disabled={disabled}
-            defaultValue={options.find(o => o.id === props.defaultValue)}
-            onChange={option => formContext.setValue(name, option.value)}
-            options={options.map(o => ({value: o.id, label: o.label}))}
-            styles={{
-              container: (provided, state) => ({
-                ...provided,
-                width: '100%'
-              }),
-            }}
-          />
+          <>
+            {initialSelectOption ?
+              <Select
+                name={name}
+                disabled={disabled}
+                defaultValue={initialSelectOption}
+                onChange={option => formContext.setValue(name, option.value)}
+                options={options.map(o => ({value: o.id, label: o.label}))}
+                styles={{
+                  container: (provided, state) => ({
+                    ...provided,
+                    width: '100%'
+                  }),
+                }}
+              />
+            : null}
+          </>
+          
 
 
           : type === 'radio' ?
@@ -259,6 +289,7 @@ class DatePicker extends React.Component {
     this.hours12 = ['12 AM','01 AM','02 AM','03 AM','04 AM','05 AM','06 AM','07 AM','08 AM','09 AM','10 AM','11 AM','12 PM','01 PM','02 PM','03 PM','04 PM','05 PM','06 PM','07 PM','08 PM','09 PM','10 PM','11 PM'];
     this.minutes = ['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59'];
 
+      // because controlled fields need to call setValue for the initial value
     this.componentDidUpdate(props, null);
   }
 

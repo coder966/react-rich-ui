@@ -84,7 +84,7 @@ const App = props => {
           <Row>
             <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
             <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
-            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='INDIVIDUAL' /></Col>
+            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
           </Row>
           {accountType === 'ORGANIZATION' &&
             <Row>
