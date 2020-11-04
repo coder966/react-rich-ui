@@ -1,14 +1,22 @@
 # React Rich UI
 
-A set of advanced React components with super friendly API featuring forms, pagable tables, confirmation buttons.
+A set of advanced React components with super friendly API featuring forms, pagable tables, and dialogue buttons.
+
+> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
 ## Installation
 
 ```bash
-$ npm install --save @coder966/react-rich-ui
+$ npm i --save react-rich-ui
 ```
 
 Optional peer dependencies: `axios`, `yup`
+
+
+## Example
+
+There is an example app you can try it out https://github.com/coder966/react-rich-ui/blob/master/src/example/App.js
+
 
 ## API
 
