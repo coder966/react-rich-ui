@@ -19,6 +19,10 @@ export default {
     featureB: 'Feature B',
     featureC: 'Feature C',
     featureD: 'Feature D',
+    featureE: 'Feature E',
+    featureF: 'Feature F',
+    featureG: 'Feature G',
+    featureH: 'Feature H',
 
     group1: 'First Group',
     group2: 'Second Group',

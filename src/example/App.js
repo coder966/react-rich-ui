@@ -21,6 +21,10 @@ const App = props => {
     {id: '2', label: <FormattedMessage id='featureB' />},
     {id: '3', label: <FormattedMessage id='featureC' />},
     {id: '4', label: <FormattedMessage id='featureD' />},
+    {id: '5', label: <FormattedMessage id='featureE' />},
+    {id: '6', label: <FormattedMessage id='featureF' />},
+    {id: '7', label: <FormattedMessage id='featureG' />},
+    {id: '8', label: <FormattedMessage id='featureH' />},
   ];
 
   const groups = [
@@ -52,7 +56,7 @@ const App = props => {
 
   const initialValues = {
     name: 'Khalid',
-    features: [1, '3']
+    features: [1, '3',{id: '6', label: <FormattedMessage id='featureF' />}]
   }
 
   const watcher = form => {

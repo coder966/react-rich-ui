@@ -14,7 +14,13 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, ch
   if(initialValues){
     for(const [key, value] of Object.entries(initialValues)){
       if(value && Array.isArray(value)){
-        initialValues[key] = value.map(item => item+'');
+        initialValues[key] = value.map(item => {
+          if(typeof item === 'object' && item.id){
+            return item.id+'';
+          }else{
+            return item+'';
+          }
+        });
       }
     }
   }

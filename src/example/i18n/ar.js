@@ -20,6 +20,10 @@ export default {
     featureB: 'ميزة ب',
     featureC: 'ميزة ج',
     featureD: 'ميزة د',
+    featureE: 'ميزة ه',
+    featureF: 'ميزة و',
+    featureG: 'ميزة ز',
+    featureH: 'ميزة ح',
 
     group1: 'المجموعة الأولى',
     group2: 'المجموعة الثانية',
