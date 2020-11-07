@@ -94,8 +94,8 @@ const RruFormElement = props => {
       }
 
       // transform it to react-select schema and set form value
-      setInitialSelectOption({value: option.id, label: option.label});
-      formContext.setValue(name, option.id);
+      setInitialSelectOption({value: option ? option.id : undefined, label: option ? option.label : undefined});
+      formContext.setValue(name, option ? option.id : undefined);
     }  
   }, []);
 
