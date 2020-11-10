@@ -1,6 +1,7 @@
 export default {
     name: 'الإسم',
     email: 'البريد الإلكتروني',
+    gender: 'الجنس',
     accountType: 'نوع الحساب',
     moi: 'رقم المنشأة',
     features: 'الإشتراك في المميزات',
@@ -12,6 +13,9 @@ export default {
     sendEmails: 'أرغب بإستقبال رسائل ترويجية',
     submit: 'إرسال',
 
+
+    male: 'ذكر',
+    female: 'أنثى',
 
     individual: 'فرد',
     organization: 'منشأة',

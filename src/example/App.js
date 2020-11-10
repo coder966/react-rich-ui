@@ -11,6 +11,11 @@ const App = props => {
 
   const [locale, setLocale] = useState('en');
 
+  const genders = [
+    {id: 'MALE', label: <FormattedMessage id='male' />},
+    {id: 'FEMALE', label: <FormattedMessage id='female' />},
+  ];
+
   const accountTypes = [
     {id: 'INDIVIDUAL', label: <FormattedMessage id='individual' />},
     {id: 'ORGANIZATION', label: <FormattedMessage id='organization' />},
@@ -52,6 +57,7 @@ const App = props => {
 
   const validationSchema = yup.object().shape({
     email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email is incorrect'),
+    gender: yup.string().default('').min(1, 'This field is required') // default('') is necessary because Yup will not validate if value is undefined.
   });
 
   const initialValues = {
@@ -128,13 +134,14 @@ const App = props => {
           <Row>
             <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
             <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
-            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+            <Col><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
           </Row>
-          {accountType === 'ORGANIZATION' &&
-            <Row>
+          <Row>
+            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+            {accountType === 'ORGANIZATION' &&
               <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
-            </Row>
-          }
+            }
+          </Row>
           <Row>
             <Col><RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/></Col>
           </Row>
@@ -176,7 +183,7 @@ const App = props => {
         <h1>RruPageableTable</h1>
         <RruPageableTable
           id='UsersListTable'
-          endpoint='/api/user'
+          endpoint='/api/users'
           columns={columns}
           actions={actions}
           search={{}}
