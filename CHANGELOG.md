@@ -5,6 +5,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.3.0] - 2020-11-10
+
+### Added
+- RruFormElement: add new type `multi-select`
+- README: mention stylesheet dependencies.
+- Example App: more examples and improvements.
+
+### Changed
+- RruFormElement: select: leave select option empty if the default value not found in the options list.
+- Update dependencies.
+
+### Fixed
+- RruFormElement: select: Add red border to select if there is an error.
+
+--------------------------------------------------------------------------------
+
 ## [1.2.1] - 2020-11-07
 
 ### Fixed
