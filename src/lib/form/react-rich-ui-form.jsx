@@ -136,7 +136,11 @@ const RruFormElement = props => {
                 styles={{
                   container: (provided, state) => ({
                     ...provided,
-                    width: '100%'
+                    width: '100%',
+                  }),
+                  control: (provided, state) => ({
+                    ...provided,
+                    [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
                   }),
                 }}
               />
