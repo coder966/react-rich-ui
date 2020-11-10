@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { useState } from 'react';
-import useForm, {FormContext, useFormContext} from 'react-hook-form';
+import {useForm, FormContext, useFormContext} from 'react-hook-form';
 import Select from "react-select";
 import './style.css';
 
@@ -71,32 +71,30 @@ const RruFormElement = props => {
     maxLength: props.maxLength,
   }
 
-  if(type === 'date' || type === 'time' || type === 'select'){
+  if(type === 'date' || type === 'time' || type === 'select' || type === 'multi-select'){
     formContext.register({name});
   }
 
-  // because controlled fields need to call setValue for the initial value
+  // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   // this issue is also present in date and time be is handled in the DatePicker constructor
   useEffect(() => {
     if(type === 'select'){
-
-      // determine the initial option
-      let option;
+      let defaultOption;
       if(props.defaultValue){
-        const defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
-        if(defaultOption){
-          option = defaultOption;
-        }else{
-          option = options[0];
-        }
+        defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
       }else{
-        option = options[0];
+        defaultOption = options[0];
       }
-
-      // transform it to react-select schema and set form value
-      setInitialSelectOption({value: option ? option.id : undefined, label: option ? option.label : undefined});
-      formContext.setValue(name, option ? option.id : undefined);
-    }  
+      setInitialSelectOption({value: defaultOption ? defaultOption.id : undefined, label: defaultOption ? defaultOption.label : undefined});
+      formContext.setValue(name, defaultOption ? defaultOption.id : undefined);
+    }else if(type === 'multi-select'){
+      let defaultOptions = [];
+      if(props.defaultValue && Array.isArray(props.defaultValue)){
+        defaultOptions = options.filter(o => props.defaultValue.includes(o.id+''));
+      }
+      setInitialSelectOption(defaultOptions.map(o => ({value: o.id, label: o.label})));
+      formContext.setValue(name, defaultOptions.map(o => o.id));
+    }
   }, []);
 
   return (
@@ -129,25 +127,35 @@ const RruFormElement = props => {
           <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
 
 
-          : type === 'select' ?
+          : type === 'select' || type === 'multi-select' ?
           <>
             {initialSelectOption ?
               <Select
                 name={name}
+                isMulti={type === 'multi-select'}
                 disabled={disabled}
                 defaultValue={initialSelectOption}
-                onChange={option => formContext.setValue(name, option.value)}
+                onChange={result => {
+                  if(type === 'select'){
+                    formContext.setValue(name, result.value) // result is one option
+                  }else{
+                    formContext.setValue(name, result.map(o => o.value)) // result is an array of options
+                  }
+                }}
                 options={options.map(o => ({value: o.id, label: o.label}))}
                 styles={{
                   container: (provided, state) => ({
                     ...provided,
-                    width: '100%'
+                    width: '100%',
+                  }),
+                  control: (provided, state) => ({
+                    ...provided,
+                    [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
                   }),
                 }}
               />
             : null}
           </>
-          
 
 
           : type === 'radio' ?

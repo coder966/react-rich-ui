@@ -1,6 +1,8 @@
 export default {
     name: 'Name',
     email: 'Email',
+    gender: 'Gender',
+    color: 'Colour',
     accountType: 'Account Type',
     moi: 'MOI',
     features: 'Subscribe to Features',
@@ -12,8 +14,15 @@ export default {
     sendEmails: 'Send Me Promotion Emails',
     submit: 'Submit',
 
+    male: 'Male',
+    female: 'Female',
+
     individual: 'Individual',
     organization: 'Organization',
+
+    red: 'Red',
+    green: 'Green',
+    blue: 'Blue',
 
     featureA: 'Feature A',
     featureB: 'Feature B',

@@ -10,12 +10,22 @@ A set of advanced React components with super friendly API featuring forms, paga
 $ npm i --save react-rich-ui
 ```
 
-Optional peer dependencies: `axios`, `yup`
+Optional peer dependencies: `axios`, `yup`.
+
+You must have `bootstrap` stylesheet loaded.
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+```
+
+You must load `font-awesome` for icons to work.
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+```
 
 
 ## Example
 
-There is an example app you can try it out https://github.com/coder966/react-rich-ui/blob/master/src/example/App.js
+There is an example app that you can try https://github.com/coder966/react-rich-ui/blob/master/src/example/App.js
 
 
 ## API
@@ -71,7 +81,7 @@ There is an example app you can try it out https://github.com/coder966/react-ric
 | Prop | Description | Required |
 |-|-|-|
 | onSubmit | A function which takes the form data object.<br>Will be called if the user submits the form if there is no validation violation | Yes |
-| initialValues | An object containing the form default values.<br>Note: for types `date`, `time`, and `select` use `defaultValue` prop. For array-based elements (e.g. multi-checkbox) you can pass a flat array of ids or an array of options, or even a mix of both.  | No |
+| initialValues | An object containing the form default values.<br>Note: for types `date`, `time`, `select`, and `multi-select` use `defaultValue` prop. For multi-checkbox you can pass a flat array of ids or an array of options, or even a mix of both.  | No |
 | validationSchema | `Yup` validation schema | No |
 | watch(func) | DEPRECATED (use watch(array)) A function which takes a function that you can run to listen to form data changes. | No |
 | watch(array) | An array of the field names you want to monitor | No |
@@ -84,13 +94,13 @@ There is an example app you can try it out https://github.com/coder966/react-ric
 |-|-|-|-|
 | label | The form element label | Yes | All |
 | name | Unique form element name | Yes | All |
-| type | Available types: `text (default), password, textarea, select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file` | Yes | All |
+| type | Available types: `text (default), password, textarea, select, multi-select, radio, checkbox, multi-checkbox, grouped-multi-checkbox, date, time, file` | Yes | All |
 | prepend | Anything to render before the form element component | No | All |
 | append | Anything to render after the form element component | No | All |
 | className | Column class name | No | All |
 | labelClassName | `label` class name | No | All |
 | inputClassName | `input` class name | No | All |
-| options | An array of objects of the form:<br>`{id: string label: [ar: string, en: string]}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: [ar: string, en: string], items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, radio, multi-checkbox, grouped-multi-checkbox` |
+| options | An array of objects of the form:<br>`{id: string label: string}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: string, items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, multi-select, radio, multi-checkbox, grouped-multi-checkbox` |
 | placeholder | A place holder | No |  |
 | maxLength | Maximum length | No |  |
 | disabled | Set to `true` to disable the editing of the form element | No | All |

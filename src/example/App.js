@@ -10,6 +10,22 @@ import './style.css';
 const App = props => {
 
   const [locale, setLocale] = useState('en');
+  const toggleLocale = () => {
+    setLocale(locale === 'ar' ? 'en' : 'ar');
+    const html = document.getElementsByTagName('html')[0];
+    html.dir = locale == 'en' ? 'rtl' : 'ltr';
+  }
+
+  const genders = [
+    {id: 'MALE', label: <FormattedMessage id='male' />},
+    {id: 'FEMALE', label: <FormattedMessage id='female' />},
+  ];
+
+  const colors = [
+    {id: 'R', label: <FormattedMessage id='red' />},
+    {id: 'G', label: <FormattedMessage id='green' />},
+    {id: 'B', label: <FormattedMessage id='blue' />},
+  ];
 
   const accountTypes = [
     {id: 'INDIVIDUAL', label: <FormattedMessage id='individual' />},
@@ -52,6 +68,7 @@ const App = props => {
 
   const validationSchema = yup.object().shape({
     email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email is incorrect'),
+    gender: yup.string().default('').min(1, 'This field is required') // default('') is necessary because Yup will not validate if value is undefined.
   });
 
   const initialValues = {
@@ -121,20 +138,23 @@ const App = props => {
     <IntlProvider messages={locale === 'ar' ? arMessages : enMessages} locale={locale}>
       <Container>
 
-        <a onClick={e => setLocale(locale === 'ar' ? 'en' : 'ar')}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+        <a onClick={toggleLocale}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+        <hr></hr>
 
         <h1>RruForm</h1>
         <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['accountType']} watcher={watcher}>
           <Row>
             <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
             <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
-            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+            <Col><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
           </Row>
-          {accountType === 'ORGANIZATION' &&
-            <Row>
-              <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
-            </Row>
-          }
+          <Row>
+            <Col md='4'><RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} /></Col>
+            <Col md='4'><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+            {accountType === 'ORGANIZATION' &&
+              <Col md='4'><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
+            }
+          </Row>
           <Row>
             <Col><RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/></Col>
           </Row>
@@ -176,7 +196,7 @@ const App = props => {
         <h1>RruPageableTable</h1>
         <RruPageableTable
           id='UsersListTable'
-          endpoint='/api/user'
+          endpoint='/api/users'
           columns={columns}
           actions={actions}
           search={{}}
