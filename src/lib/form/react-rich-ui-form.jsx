@@ -83,12 +83,7 @@ const RruFormElement = props => {
       // determine the initial option
       let option;
       if(props.defaultValue){
-        const defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
-        if(defaultOption){
-          option = defaultOption;
-        }else{
-          option = options[0];
-        }
+        option = options.find(o => o.id+'' === props.defaultValue+'');
       }else{
         option = options[0];
       }
