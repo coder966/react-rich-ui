@@ -10,6 +10,11 @@ import './style.css';
 const App = props => {
 
   const [locale, setLocale] = useState('en');
+  const toggleLocale = () => {
+    setLocale(locale === 'ar' ? 'en' : 'ar');
+    const html = document.getElementsByTagName('html')[0];
+    html.dir = locale == 'en' ? 'rtl' : 'ltr';
+  }
 
   const genders = [
     {id: 'MALE', label: <FormattedMessage id='male' />},
@@ -127,7 +132,8 @@ const App = props => {
     <IntlProvider messages={locale === 'ar' ? arMessages : enMessages} locale={locale}>
       <Container>
 
-        <a onClick={e => setLocale(locale === 'ar' ? 'en' : 'ar')}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+        <a onClick={toggleLocale}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+        <hr></hr>
 
         <h1>RruForm</h1>
         <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['accountType']} watcher={watcher}>
