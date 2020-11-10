@@ -21,6 +21,12 @@ const App = props => {
     {id: 'FEMALE', label: <FormattedMessage id='female' />},
   ];
 
+  const colors = [
+    {id: 'R', label: <FormattedMessage id='red' />},
+    {id: 'G', label: <FormattedMessage id='green' />},
+    {id: 'B', label: <FormattedMessage id='blue' />},
+  ];
+
   const accountTypes = [
     {id: 'INDIVIDUAL', label: <FormattedMessage id='individual' />},
     {id: 'ORGANIZATION', label: <FormattedMessage id='organization' />},
@@ -143,9 +149,10 @@ const App = props => {
             <Col><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
           </Row>
           <Row>
-            <Col><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+            <Col md='4'><RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} /></Col>
+            <Col md='4'><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
             {accountType === 'ORGANIZATION' &&
-              <Col><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
+              <Col md='4'><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
             }
           </Row>
           <Row>
