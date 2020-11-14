@@ -1,7 +1,7 @@
 {
   "name": "react-rich-ui",
   "version": "1.3.0",
-  "description": "A set of advanced React components with super friendly API featuring forms, pagable tables, and dialogue buttons.",
+  "description": "A set of advanced React components with super friendly API featuring forms, tables, steps wizards, and dialogue buttons.",
   "keywords": [
     "React",
     "React Component",
@@ -9,9 +9,12 @@
     "table",
     "button",
     "confirmation",
+    "dialogue",
     "date picker",
     "time picker",
-    "from control"
+    "from control",
+    "steps wizard",
+    "wizard"
   ],
   "author": "Khalid H. Alharisi",
   "license": "Apache License Version 2.0",
