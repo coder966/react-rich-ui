@@ -133,13 +133,13 @@ const RruFormElement = props => {
               <Select
                 name={name}
                 isMulti={type === 'multi-select'}
-                disabled={disabled}
+                isDisabled={disabled}
                 defaultValue={initialSelectOption}
                 onChange={result => {
                   if(type === 'select'){
                     formContext.setValue(name, result.value) // result is one option
                   }else{
-                    formContext.setValue(name, result.map(o => o.value)) // result is an array of options
+                    formContext.setValue(name, result ? result.map(o => o.value) : []) // result is an array of options
                   }
                 }}
                 options={options.map(o => ({value: o.id, label: o.label}))}

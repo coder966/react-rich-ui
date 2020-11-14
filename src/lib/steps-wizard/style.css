@@ -1,0 +1,48 @@
+.rru-steps-wizard .header {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.rru-steps-wizard .header .step {
+    flex: 1;
+    border-bottom: 0.2rem solid;
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.rru-steps-wizard .header .step .step-number-container {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.7rem;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem auto;
+    color: #ffffff;
+    background: #6c757d;
+}
+
+.rru-steps-wizard .header .step .step-label-container {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* done and current steps */
+
+.rru-steps-wizard .header .step.done{
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.rru-steps-wizard .header .step.current{
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.rru-steps-wizard .header .step.done .step-number-container{
+    background: #28a745;
+}
+
+.rru-steps-wizard .header .step.current .step-number-container{
+    background: #007bff;
+}
