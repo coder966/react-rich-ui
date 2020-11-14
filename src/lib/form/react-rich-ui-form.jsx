@@ -133,7 +133,7 @@ const RruFormElement = props => {
               <Select
                 name={name}
                 isMulti={type === 'multi-select'}
-                disabled={disabled}
+                isDisabled={disabled}
                 defaultValue={initialSelectOption}
                 onChange={result => {
                   if(type === 'select'){
