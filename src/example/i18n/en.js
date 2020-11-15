@@ -1,8 +1,8 @@
-export default {
+const messages = {
     name: 'Name',
     email: 'Email',
     gender: 'Gender',
-    color: 'Colour',
+    colors: 'Colour',
     accountType: 'Account Type',
     moi: 'MOI',
     features: 'Subscribe to Features',
@@ -55,3 +55,5 @@ export default {
     idNumber: 'ID Number',
     
 }
+
+export default messages;

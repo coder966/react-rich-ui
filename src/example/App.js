@@ -180,7 +180,7 @@ const App = props => {
           </Row>
           <Row>
             <Col md='4'><RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} disabled /></Col>
-            <Col md='4'><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' disabled /></Col>
+            <Col md='4'><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
             {accountType === 'ORGANIZATION' &&
               <Col md='4'><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
             }
