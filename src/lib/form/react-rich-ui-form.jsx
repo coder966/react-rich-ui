@@ -117,7 +117,9 @@ const RruFormElement = props => {
       }
     }else if(type === 'multi-select'){
       const currentValue = formContext.getValues()[name];
-      onSelectChange(options.filter(o => currentValue.includes(o.id+'')).map(o => ({value: o.id, label: o.label})));
+      if(currentValue){
+        onSelectChange(options.filter(o => currentValue.includes(o.id+'')).map(o => ({value: o.id, label: o.label})));
+      }
     }
   }, [options]);
 
