@@ -15,8 +15,10 @@ const RruStepsWizard = props => {
     }else if(stepNumber > steps.length){
       stepNumber = steps.length;
     }
-    setCurrentStepNumber(stepNumber);
+
+    // call order is critical
     setPreviousStepData(data);
+    setCurrentStepNumber(stepNumber);
   }
 
   const firstStep = data => goToStep(1, data);
