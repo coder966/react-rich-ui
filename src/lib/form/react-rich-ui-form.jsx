@@ -361,7 +361,7 @@ class DatePicker extends React.Component {
       const month = parseInt(this.state.month);
       if(month === 2){
         const year = parseInt(this.state.year);
-        const isLeapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+        const isLeapYear = ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
         return isLeapYear ? this.daysG29 : this.daysG28;
       }else{
         return [1,3,5,7,8,10,12].includes(month) ? this.daysG31 : this.daysG30;
