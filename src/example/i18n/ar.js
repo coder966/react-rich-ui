@@ -1,8 +1,8 @@
-export default {
+const messages = {
     name: 'الإسم',
     email: 'البريد الإلكتروني',
     gender: 'الجنس',
-    color: 'الألوان',
+    colors: 'الألوان',
     accountType: 'نوع الحساب',
     moi: 'رقم المنشأة',
     features: 'الإشتراك في المميزات',
@@ -57,3 +57,5 @@ export default {
     idNumber: 'رقم الهوية',
 
 }
+
+export default messages;

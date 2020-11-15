@@ -9,7 +9,6 @@ import './style.css';
  */
 const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
   // transform initialValues object to meet our requirements:
-
   // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
   if(initialValues){
     for(const [key, value] of Object.entries(initialValues)){
@@ -31,14 +30,16 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, ch
     validationSchema: validationSchema
   });
 
-  if(watch){
-    if(Array.isArray(watch) && watcher){
-      watcher(form.watch(watch))
-    }else{
-      // TODO: remove deprecated
-      watch(form.watch);
+  useEffect(() => {
+    if(watch){
+      if(Array.isArray(watch) && watcher){
+        watcher(form.watch(watch))
+      }else{
+        // TODO: remove deprecated
+        watch(form.watch);
+      }
     }
-  }
+  });
 
   return (
     <FormContext {...form}>
@@ -59,7 +60,7 @@ const RruFormElement = props => {
     name, type, label, options, disabled, prepend, append, 
   } = props;
 
-  const [initialSelectOption, setInitialSelectOption] = useState();
+  const [selectControlValue, setSelectControlValue] = useState();
   const formContext = useFormContext();
 
   const sharedProps = {
@@ -75,27 +76,50 @@ const RruFormElement = props => {
     formContext.register({name});
   }
 
+  const onSelectChange = opt => { // react-select option datatype
+    if(type === 'select'){
+      setSelectControlValue({value: opt ? opt.value : '', label: opt ? opt.label : ''});
+      formContext.setValue(name, opt ? opt.value : '');
+    }else{
+      setSelectControlValue(opt || []);
+      formContext.setValue(name, opt ? opt.map(o => o.value) : []);
+    }
+  }
+
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   // this issue is also present in date and time be is handled in the DatePicker constructor
   useEffect(() => {
     if(type === 'select'){
-      let defaultOption;
+      let defaultOption = {id: '', label: ''};
       if(props.defaultValue){
-        defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
+        defaultOption = options.find(o => o.id+'' === props.defaultValue+'') || defaultOption;
       }else{
         defaultOption = options[0];
       }
-      setInitialSelectOption({value: defaultOption ? defaultOption.id : undefined, label: defaultOption ? defaultOption.label : undefined});
-      formContext.setValue(name, defaultOption ? defaultOption.id : undefined);
+      defaultOption.value = defaultOption.id;
+      onSelectChange(defaultOption);
     }else if(type === 'multi-select'){
       let defaultOptions = [];
       if(props.defaultValue && Array.isArray(props.defaultValue)){
         defaultOptions = options.filter(o => props.defaultValue.includes(o.id+''));
       }
-      setInitialSelectOption(defaultOptions.map(o => ({value: o.id, label: o.label})));
-      formContext.setValue(name, defaultOptions.map(o => o.id));
+      onSelectChange(defaultOptions.map(o => ({value: o.id, label: o.label})));
     }
   }, []);
+
+  useEffect(() => {
+    if(type === 'select'){
+      const currentValue = formContext.getValues()[name];
+      if(currentValue && !options.find(o => o.id+'' === currentValue+'')){
+        onSelectChange({value: '', label: ''});
+      }
+    }else if(type === 'multi-select'){
+      const currentValue = formContext.getValues()[name];
+      if(currentValue){
+        onSelectChange(options.filter(o => currentValue.includes(o.id+'')).map(o => ({value: o.id, label: o.label})));
+      }
+    }
+  }, [options]);
 
   return (
     <div className={(props.className ? props.className : 'form-group')}>
@@ -129,19 +153,13 @@ const RruFormElement = props => {
 
           : type === 'select' || type === 'multi-select' ?
           <>
-            {initialSelectOption ?
+            {selectControlValue ?
               <Select
                 name={name}
                 isMulti={type === 'multi-select'}
                 isDisabled={disabled}
-                defaultValue={initialSelectOption}
-                onChange={result => {
-                  if(type === 'select'){
-                    formContext.setValue(name, result.value) // result is one option
-                  }else{
-                    formContext.setValue(name, result ? result.map(o => o.value) : []) // result is an array of options
-                  }
-                }}
+                value={selectControlValue}
+                onChange={onSelectChange}
                 options={options.map(o => ({value: o.id, label: o.label}))}
                 styles={{
                   container: (provided, state) => ({
@@ -341,7 +359,7 @@ class DatePicker extends React.Component {
       const month = parseInt(this.state.month);
       if(month === 2){
         const year = parseInt(this.state.year);
-        const isLeapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+        const isLeapYear = ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
         return isLeapYear ? this.daysG29 : this.daysG28;
       }else{
         return [1,3,5,7,8,10,12].includes(month) ? this.daysG31 : this.daysG30;
