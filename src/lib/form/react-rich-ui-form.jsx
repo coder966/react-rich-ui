@@ -9,7 +9,6 @@ import './style.css';
  */
 const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
   // transform initialValues object to meet our requirements:
-
   // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
   if(initialValues){
     for(const [key, value] of Object.entries(initialValues)){
@@ -31,14 +30,16 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, ch
     validationSchema: validationSchema
   });
 
-  if(watch){
-    if(Array.isArray(watch) && watcher){
-      watcher(form.watch(watch))
-    }else{
-      // TODO: remove deprecated
-      watch(form.watch);
+  useEffect(() => {
+    if(watch){
+      if(Array.isArray(watch) && watcher){
+        watcher(form.watch(watch))
+      }else{
+        // TODO: remove deprecated
+        watch(form.watch);
+      }
     }
-  }
+  });
 
   return (
     <FormContext {...form}>
