@@ -78,8 +78,8 @@ const RruFormElement = props => {
 
   const onSelectChange = opt => { // react-select option datatype
     if(type === 'select'){
-      setSelectControlValue({value: opt ? opt.value : undefined, label: opt ? opt.label : undefined});
-      formContext.setValue(name, opt ? opt.value : undefined);
+      setSelectControlValue({value: opt ? opt.value : '', label: opt ? opt.label : ''});
+      formContext.setValue(name, opt ? opt.value : '');
     }else{
       setSelectControlValue(opt || []);
       formContext.setValue(name, opt ? opt.map(o => o.value) : []);
@@ -90,15 +90,13 @@ const RruFormElement = props => {
   // this issue is also present in date and time be is handled in the DatePicker constructor
   useEffect(() => {
     if(type === 'select'){
-      let defaultOption;
+      let defaultOption = {id: '', label: ''};
       if(props.defaultValue){
-        defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
+        defaultOption = options.find(o => o.id+'' === props.defaultValue+'') || defaultOption;
       }else{
         defaultOption = options[0];
       }
-      if(defaultOption){
-        defaultOption.value = defaultOption.id;
-      }
+      defaultOption.value = defaultOption.id;
       onSelectChange(defaultOption);
     }else if(type === 'multi-select'){
       let defaultOptions = [];
@@ -113,7 +111,7 @@ const RruFormElement = props => {
     if(type === 'select'){
       const currentValue = formContext.getValues()[name];
       if(currentValue && !options.find(o => o.id+'' === currentValue+'')){
-        onSelectChange({value: undefined, label: undefined});
+        onSelectChange({value: '', label: ''});
       }
     }else if(type === 'multi-select'){
       const currentValue = formContext.getValues()[name];
