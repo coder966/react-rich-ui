@@ -157,6 +157,7 @@ These props will be injected into the steps nodes:
 | lastStep | ([data: object]) => void | A function used to go to the last step. You can pass data to the last step. |
 | nextStep | ([data: object]) => void | A function used to go to the next step. You can pass data to the next step. |
 | previousStep | ([data: object]) => void | A function used to go to the previous step. You can pass data to the previous step. |
+| previousStepData | object | The data objected passed from the referring step. |
 
 
 
