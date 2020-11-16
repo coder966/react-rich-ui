@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.4.3] - 2020-11-16
+
+### Fixed
+- RruFormElement: fix select if no default value and the options array is empty.
+
+--------------------------------------------------------------------------------
+
 ## [1.4.2] - 2020-11-15
 
 ### Changed
