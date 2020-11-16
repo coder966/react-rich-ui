@@ -90,12 +90,13 @@ const RruFormElement = props => {
   // this issue is also present in date and time be is handled in the DatePicker constructor
   useEffect(() => {
     if(type === 'select'){
-      let defaultOption = {id: '', label: ''};
+      let defaultOption;
       if(props.defaultValue){
-        defaultOption = options.find(o => o.id+'' === props.defaultValue+'') || defaultOption;
+        defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
       }else{
         defaultOption = options[0];
       }
+      defaultOption = defaultOption || {id: '', label: ''};
       defaultOption.value = defaultOption.id;
       onSelectChange(defaultOption);
     }else if(type === 'multi-select'){
