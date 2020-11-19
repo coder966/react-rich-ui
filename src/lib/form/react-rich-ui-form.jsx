@@ -140,7 +140,7 @@ const RruFormElement = props => {
                 <span className='input-group-text'>{prepend}</span>
               </div>
             : null}
-            <input {...sharedProps} type={type} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
+            <input {...sharedProps} type={type} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
             {append ?
               <div className='input-group-prepend'>
                 <span className='input-group-text'>{append}</span>
@@ -150,7 +150,7 @@ const RruFormElement = props => {
 
 
           : type === 'textarea' ?
-          <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
+          <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
 
 
           : type === 'select' || type === 'multi-select' ?
@@ -269,7 +269,7 @@ const RruFormElement = props => {
                 setFileName(null);
               }
             }} />
-            <div className={'fileUpload' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
+            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
               {fileName}
             </div>
           </div>

@@ -1,3 +1,15 @@
+.table-striped thead tr{
+	background-color: #F2F2F2;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #f7f7f7;
+}
+
 .rru-pageable-table-centered {
     text-align: center !important;
 }
@@ -13,8 +25,14 @@
 	border-radius: 0;
 }
 
-.rru-pageable-table-loading-td {
-	padding: 0px !important;
+.rru-pageable-table-loading-upper-th {
+	border-bottom: 0 !important;
+}
+
+.rru-pageable-table-loading-th {
+	padding: 0 !important;
+	border-top: 0 !important;
+	border-bottom: 0 !important;
 }
 
 .sortable{
@@ -22,18 +40,15 @@
 }
 .sortable::before {
 	font-family: 'fontAwesome';
+	font-size: 0.9rem;
 	content: '\f0dc';
-	margin-inline-end: 5px;
+	margin-inline-end: 0.3rem;
 }
 .sortable.asc::before {
-	font-family: 'fontAwesome';
 	content: '\f0de ';
-	margin-inline-end: 5px;
 }
 .sortable.desc::before {
-	font-family: 'fontAwesome';
 	content: '\f0dd ';
-	margin-inline-end: 5px;
 }
 
 .progressBar {
@@ -42,7 +57,6 @@
 	display: block;
 	width: 100%;
 	background-color: #13213541;
-	border-radius: 2px;
 	background-clip: padding-box;
 	overflow: hidden;
 }
@@ -144,10 +158,11 @@
 }
 
 .pagination {
-    padding: 1px;
-    display: flex;
-    list-style: none;
     justify-content: center;
+}
+
+.pagination > li > a:focus {
+	outline: none;
 }
 
 .pageLink,
@@ -155,9 +170,8 @@
 .previous,
 .pageItem {
     display: block;
-    padding: 8px 14px;
-    margin: -1px;
-    line-height: 1.25;
+    padding: 0.5rem 0.8rem;
+    line-height: 1.25rem;
     color: #007942;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -184,12 +198,12 @@
     border-right: 1px solid #ddd;
 }
 
-.next{
-    cursor: pointer;
+.next:hover, .previous:hover{
+	cursor: pointer;
 }
 
-.previous{
-    cursor: pointer;
+.next:hover > a, .previous:hover > a{
+	text-decoration: none !important;
 }
 
 .disabled, .disabled:hover, .disabled > a{
