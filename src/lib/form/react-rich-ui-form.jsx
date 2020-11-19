@@ -61,6 +61,7 @@ const RruFormElement = props => {
   } = props;
 
   const [selectControlValue, setSelectControlValue] = useState();
+  const [fileName, setFileName] = useState(null);
   const formContext = useFormContext();
 
   const sharedProps = {
@@ -260,12 +261,16 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className='input-group-text fas fa-file'></span>
             </div>
-            <input type='file' {...sharedProps} />
+            <input type='file' {...sharedProps} onChange={e => {
+              const filesList = e.target.files;
+              if(filesList && filesList[0]){
+                setFileName(filesList[0].name);
+              }else{
+                setFileName(null);
+              }
+            }} />
             <div className={'fileUpload' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
-            {(() => {
-              const e = document.getElementById(name);
-              return e && e.files[0] ? e.files[0].name : null;
-            })()}
+              {fileName}
             </div>
           </div>
 
