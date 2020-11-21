@@ -1,42 +1,11 @@
 # React Rich UI
-
 A set of commonly-used React components with super friendly API
-
 > **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
-## Installation
-
-```bash
-$ npm i --save react-rich-ui
-```
-
-Optional peer dependencies: `axios`, `yup`.
-
-You must have `bootstrap` stylesheet loaded.
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-```
-
-You must load `font-awesome` for icons to work.
-```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-```
-
-
-## Example
-
-There is an example app that you can try https://github.com/coder966/react-rich-ui/blob/master/src/example/App.js
-
-
-## API reference
-- [RruForm](/docs/RruForm)
-- [RruPageableTable](/docs/RruPageableTable)
-- [RruStepsWizard](/docs/RruStepsWizard)
-- [RruButton](/docs/RruButton)
-
+## Docs
+Visit the official website [react-rich-ui.coder966.net](https://react-rich-ui.coder966.net/)
 
 ## License
-
 ```txt
 Copyright 2016 Khalid H. Alharisi
 
