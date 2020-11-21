@@ -55,7 +55,7 @@ const messages = {
 
     serialNo: 'الرقم التسلسلي',
     personName: 'الاسم',
-    idNumber: 'رقم الهوية',
+    username: 'اسم المستخدم',
 
 }
 

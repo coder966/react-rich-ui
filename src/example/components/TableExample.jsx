@@ -10,13 +10,13 @@ const TableExample = props => {
       value: '#'
     },
     {
-      label: <FormattedMessage id='personName' />,
-      value: row => (row.person.firstNameAr + ' ' + row.person.secondNameAr + ' ' + row.person.thirdNameAr + ' ' + row.person.lastNameAr),
-      sortKey: 'person.firstNameAr'
+      label: <FormattedMessage id='username' />,
+      value: 'username'
     },
     {
-      label: <FormattedMessage id='idNumber' />,
-      value: 'person.idNumber'
+      label: <FormattedMessage id='personName' />,
+      value: row => (row.person.firstName + ' ' + row.person.lastName),
+      sortKey: 'person.firstName'
     },
   ];
 
@@ -47,7 +47,8 @@ const TableExample = props => {
     <>
       <RruPageableTable
         id='UsersListTable'
-        endpoint='/api/users'
+        endpoint='https://338c0604-aac2-4d0b-a1b8-5edb481149bd.mock.pstmn.io/users'
+        pageSize='5'
         columns={columns}
         actions={actions}
         search={{}}

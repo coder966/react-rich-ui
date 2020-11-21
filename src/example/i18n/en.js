@@ -53,7 +53,7 @@ const messages = {
 
     serialNo: 'Serial No',
     personName: 'Person Name',
-    idNumber: 'ID Number',
+    username: 'Username',
     
 }
 
