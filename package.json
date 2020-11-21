@@ -1,7 +1,7 @@
 {
   "name": "react-rich-ui",
   "version": "1.4.3",
-  "description": "A set of advanced React components with super friendly API featuring forms, tables, steps wizards, and dialogue buttons.",
+  "description": "A set of commonly-used React components with super friendly API",
   "keywords": [
     "React",
     "React Component",
@@ -18,7 +18,7 @@
   ],
   "author": "Khalid H. Alharisi",
   "license": "Apache License Version 2.0",
-  "homepage": "https://github.com/coder966/react-rich-ui",
+  "homepage": "https://react-rich-ui.coder966.net/",
   "repository": {
     "type": "git",
     "url": "https://github.com/coder966/react-rich-ui"

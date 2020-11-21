@@ -1,6 +1,6 @@
 # React Rich UI
 
-A set of advanced React components with super friendly API featuring forms, pagable tables, and dialogue buttons.
+A set of commonly-used React components with super friendly API
 
 > **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
