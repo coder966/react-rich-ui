@@ -23,10 +23,10 @@ You must load `font-awesome` for icons to work.
 ```
 
 ## API reference
-- [RruForm](/docs/RruForm)
-- [RruPageableTable](/docs/RruPageableTable)
-- [RruStepsWizard](/docs/RruStepsWizard)
-- [RruButton](/docs/RruButton)
+- [RruForm](/RruForm)
+- [RruPageableTable](/RruPageableTable)
+- [RruStepsWizard](/RruStepsWizard)
+- [RruButton](/RruButton)
 
 
 ## License
