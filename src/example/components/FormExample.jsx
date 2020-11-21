@@ -104,6 +104,9 @@ const FormExample = props => {
           <Col><div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div></Col>
         </Row>
         <Row>
+          <Col><RruFormElement type='textarea' name='feedback' label={<FormattedMessage id='feedback' />} /></Col>
+        </Row>
+        <Row>
           <Col><RruFormElement type='checkbox' name='pledge' label={<FormattedMessage id='pledge' />} /></Col>
         </Row>
         <Row>
