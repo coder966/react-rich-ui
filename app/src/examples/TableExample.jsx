@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import { RruPageableTable } from '../../lib/react-rich-ui';
+import { RruPageableTable } from 'react-rich-ui';
 
 const TableExample = props => {
 

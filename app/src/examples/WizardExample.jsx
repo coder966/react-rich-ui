@@ -1,5 +1,5 @@
 import React from 'react';
-import { RruStepsWizard } from '../../lib/react-rich-ui';
+import { RruStepsWizard } from 'react-rich-ui';
 
 const WizardExample = props => {
 

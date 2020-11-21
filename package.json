@@ -24,7 +24,7 @@
     "url": "https://github.com/coder966/react-rich-ui"
   },
   "private": false,
-  "main": "dist/react-rich-ui.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -50,11 +50,10 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "axios": "^0.21.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-intl": "^5.10.0",
-    "react-scripts": "4.0.0",
-    "yup": "^0.29.3"
+    "react-scripts": "4.0.0"
   },
   "peerDependencies": {
     "react": "^16.13.0",
@@ -62,11 +61,11 @@
     "react-scripts": "4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "babel src/lib --out-dir dist --copy-files",
+    "build": "babel src --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepublish": "npm run build"
+    "prepublish": "yarn run build",
+    "start:app": "yarn run build && yarn link && yarn --cwd node_modules/react link && yarn --cwd ./app link react react-rich-ui && yarn --cwd ./app && yarn --cwd ./app run start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -82,6 +81,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:8089"
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import * as yup from 'yup';
-import { RruFormElement, RruButton } from '../../lib/react-rich-ui';
+import { RruFormElement, RruButton } from 'react-rich-ui';
 
 const ButtonExample = props => {
 

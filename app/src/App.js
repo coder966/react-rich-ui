@@ -4,10 +4,10 @@ import {Container, Tabs, Tab} from 'react-bootstrap'
 import arMessages from './i18n/ar';
 import enMessages from './i18n/en';
 import './style.css';
-import FormExample from './components/FormExample';
-import TableExample from './components/TableExample';
-import WizardExample from './components/WizardExample';
-import ButtonExample from './components/ButtonExample';
+import FormExample from './examples/FormExample';
+import TableExample from './examples/TableExample';
+import WizardExample from './examples/WizardExample';
+import ButtonExample from './examples/ButtonExample';
 
 const App = props => {
 
@@ -16,7 +16,7 @@ const App = props => {
     event.preventDefault();
     setLocale(locale === 'ar' ? 'en' : 'ar');
     const html = document.getElementsByTagName('html')[0];
-    html.dir = locale == 'en' ? 'rtl' : 'ltr';
+    html.dir = locale === 'en' ? 'rtl' : 'ltr';
   }
 
   return (
@@ -24,7 +24,7 @@ const App = props => {
       <Container>
 
         <div className='pt-4'>
-          <a href='' onClick={toggleLocale}>{locale === 'ar' ? 'English' : 'العربية'}</a>
+          <a href='/' onClick={toggleLocale}>{locale === 'ar' ? 'English' : 'العربية'}</a>
           <hr />
         </div>
 

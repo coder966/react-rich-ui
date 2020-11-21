@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Col, Row, Button} from 'react-bootstrap'
 import * as yup from 'yup';
-import { RruForm, RruFormElement } from '../../lib/react-rich-ui';
+import { RruForm, RruFormElement } from 'react-rich-ui';
 
 const FormExample = props => {
 
