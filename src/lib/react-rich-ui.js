@@ -4,8 +4,8 @@ import RruPageableTable from './pageable-table/react-rich-ui-pageable-table';
 import RruStepsWizard from './steps-wizard/react-rich-ui-steps-wizard';
 
 export {
-    RruForm, RruFormElement,
-    RruButton,
-    RruPageableTable,
-    RruStepsWizard,
+  RruForm, RruFormElement,
+  RruButton,
+  RruPageableTable,
+  RruStepsWizard,
 };
