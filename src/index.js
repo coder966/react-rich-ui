@@ -1,6 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './example/App';
+import {RruForm, RruFormElement} from './form/react-rich-ui-form';
+import RruButton from './button/react-rich-ui-button';
+import RruPageableTable from './pageable-table/react-rich-ui-pageable-table';
+import RruStepsWizard from './steps-wizard/react-rich-ui-steps-wizard';
 
-// This will run the example application
-ReactDOM.render(<App />, document.getElementById('root'));
+export {
+  RruForm, RruFormElement,
+  RruButton,
+  RruPageableTable,
+  RruStepsWizard,
+};

@@ -61,6 +61,7 @@ const RruFormElement = props => {
   } = props;
 
   const [selectControlValue, setSelectControlValue] = useState();
+  const [fileName, setFileName] = useState(null);
   const formContext = useFormContext();
 
   const sharedProps = {
@@ -139,7 +140,7 @@ const RruFormElement = props => {
                 <span className='input-group-text'>{prepend}</span>
               </div>
             : null}
-            <input {...sharedProps} type={type} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
+            <input {...sharedProps} type={type} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
             {append ?
               <div className='input-group-prepend'>
                 <span className='input-group-text'>{append}</span>
@@ -149,7 +150,7 @@ const RruFormElement = props => {
 
 
           : type === 'textarea' ?
-          <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : null)} />
+          <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
 
 
           : type === 'select' || type === 'multi-select' ?
@@ -260,12 +261,16 @@ const RruFormElement = props => {
             <div className='input-group-prepend'>
               <span className='input-group-text fas fa-file'></span>
             </div>
-            <input type='file' {...sharedProps} />
-            <div className={'fileUpload' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
-            {(() => {
-              const e = document.getElementById(name);
-              return e && e.files[0] ? e.files[0].name : null;
-            })()}
+            <input type='file' {...sharedProps} onChange={e => {
+              const filesList = e.target.files;
+              if(filesList && filesList[0]){
+                setFileName(filesList[0].name);
+              }else{
+                setFileName(null);
+              }
+            }} />
+            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
+              {fileName}
             </div>
           </div>
 

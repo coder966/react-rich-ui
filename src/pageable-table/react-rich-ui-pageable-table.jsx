@@ -127,32 +127,24 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
         <thead>
           <tr>
             {columns.map((col, index) => (col.display === undefined || col.display) &&
-              <th key={index} className={!disableSorting && getSortClassName(col)} onClick={!disableSorting && (e => onSort(col))}>
+              <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={!disableSorting && (e => onSort(col))}>
                 {col.label}
               </th>
             )}
-            {actions && <th>{actionsLabel}</th>}
+            {actions && <th className={isLoading ? ' rru-pageable-table-loading-upper-th' : ''}>{actionsLabel}</th>}
           </tr>
+          {isLoading && 
+            <tr>
+              <th colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-loading-th'>
+                <div colSpan={columns.length+(actions ? 1 : 0)}  className='progressBar'>
+                  <div className='indeterminate'></div>
+                </div>
+              </th>
+            </tr>
+          }
         </thead>
         <tbody>
-
-          {isLoading && 
-            <>
-              <tr>
-                <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-loading-td'>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-loading-td'>
-                  <div colSpan={columns.length+(actions ? 1 : 0)}  className='progressBar'>
-                    <div className='indeterminate'></div>
-                  </div>
-                </td>
-              </tr>
-            </>
-          }
-
-          {data.length === 0 && 
+          {data.length === 0 &&
             <tr>
               <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
             </tr>
