@@ -78,9 +78,9 @@ const FormExample = props => {
     <>
       <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit}>
         <Row>
-          <Col><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
-          <Col><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
-          <Col><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
+          <Col md='4'><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
+          <Col md='4'><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
+          <Col md='4'><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
         </Row>
         <Row>
           <Col md='4'><RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} disabled /></Col>
