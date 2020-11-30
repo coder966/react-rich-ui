@@ -127,7 +127,7 @@ const RruFormElement = props => {
     <div className={(props.className ? props.className : 'form-group')}>
       {label && type !== 'checkbox' ?
         <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
-          <label className='custom-label' htmlFor={name}>{label}</label>
+          <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
         </div>
       : null}
       <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
