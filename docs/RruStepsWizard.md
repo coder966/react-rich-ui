@@ -9,12 +9,14 @@
 | children | Steps `node`s | Yes |
 
 You can provide these props to the steps nodes:
+
 | Prop | Description | Required |
 |-|-|-|
 | stepLabel | Step label that will be shown in the header of the wizard | No |
 
 
 These props will be injected into the steps nodes:
+
 | Prop | Type | Description
 |-|-|-|
 | goToStep | (stepNumber: int, [data: object]) => void | A function used to set the desired step. You can pass data to the step which you're setting. |
