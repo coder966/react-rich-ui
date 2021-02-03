@@ -17,7 +17,7 @@ You can provide these props to the steps nodes:
 
 These props will be injected into the steps nodes:
 
-| Prop | Type | Description
+| Prop | Type | Description |
 |-|-|-|
 | goToStep | (stepNumber: int, [data: object]) => void | A function used to set the desired step. You can pass data to the step which you're setting. |
 | firstStep | ([data: object]) => void | A function used to go to the first step. You can pass data to the first step. |
