@@ -39,4 +39,5 @@
 | maxYearLength | Max number of years +- current year | No | `date` |
 | reverseDisplayOrder | Reverse the render order of the date or time selectors | No | `date, time` |
 | inline | Set to `true` to display `radio` buttons in one line | No | `radio` |
+| requiredAsterisk | Display an asterisk to indicate the field is required | No | All |
 

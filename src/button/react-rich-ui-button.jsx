@@ -23,7 +23,7 @@ const getIcon = name => icons[name] ? icons[name] : name;
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, watcher, userPrivileges, allowedPrivileges}) => {
+const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, validationSchema, watch, watcher, userPrivileges, allowedPrivileges}) => {
   const [show, setShow] = useState(false);
 
   if(allowedPrivileges && userPrivileges && !userPrivileges.some(p => allowedPrivileges.includes(p))){
@@ -45,7 +45,7 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
           <Modal.Header closeButton>
             <Modal.Title>{confirmationTitle}</Modal.Title>
           </Modal.Header>
-          <RruForm onSubmit={handleConfirm} validationSchema={validationSchema} watch={watcher}>
+          <RruForm onSubmit={handleConfirm} validationSchema={validationSchema} watch={watch} watcher={watcher}>
             <Modal.Body>
               {confirmationDesc}
               {formElements}

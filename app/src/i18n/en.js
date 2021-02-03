@@ -52,9 +52,10 @@ const messages = {
     cancel: 'Cancel',
 
     serialNo: 'Serial No',
-    personName: 'Person Name',
     username: 'Username',
-    
+    companyName: 'Company',
+    address: 'Address',
+
 }
 
 export default messages;

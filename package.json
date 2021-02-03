@@ -65,7 +65,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepublish": "yarn run build",
-    "start:app": "yarn run build && yarn link && yarn --cwd node_modules/react link && yarn --cwd ./app link react react-rich-ui && yarn --cwd ./app && yarn --cwd ./app run start"
+    "start:app": "yarn run build && yarn link && yarn --cwd node_modules/react link && yarn --cwd ./app link react react-rich-ui && yarn --cwd ./app && yarn --cwd ./app run start",
+    "relink:lib": "yarn --cwd ./app unlink react-rich-ui && yarn --cwd link"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -14,9 +14,13 @@ const TableExample = props => {
       value: 'username'
     },
     {
-      label: <FormattedMessage id='personName' />,
-      value: row => (row.person.firstName + ' ' + row.person.lastName),
-      sortKey: 'person.firstName'
+      label: <FormattedMessage id='companyName' />,
+      value: 'company.name'
+    },
+    {
+      label: <FormattedMessage id='address' />,
+      value: row => (row.address.city + ' - ' + row.address.zipCode),
+      sortKey: 'address.zipCode'
     },
   ];
 
@@ -47,7 +51,7 @@ const TableExample = props => {
     <>
       <RruPageableTable
         id='UsersListTable'
-        endpoint='https://338c0604-aac2-4d0b-a1b8-5edb481149bd.mock.pstmn.io/users'
+        endpoint='https://gtntvvjsp0.execute-api.us-east-2.amazonaws.com/default/spring-page-rest-api'
         pageSize='5'
         columns={columns}
         actions={actions}

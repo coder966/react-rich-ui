@@ -54,8 +54,9 @@ const messages = {
     cancel: 'إلغاء',
 
     serialNo: 'الرقم التسلسلي',
-    personName: 'الاسم',
     username: 'اسم المستخدم',
+    companyName: 'الشركة',
+    address: 'العنوان',
 
 }
 
