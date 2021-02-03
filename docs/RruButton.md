@@ -17,6 +17,7 @@
 | confirmLabel | Confirmation dialog confirm button label | No |
 | cancelLabel | Confirmation dialog cancel button label | No |
 | formElements | see `RruForm` section | No |
+| initialValues | see `RruForm` section | No |
 | validationSchema | see `RruForm` section | No |
 | watch | see `RruForm` section | No |
 | watcher | see `RruForm` section | No |
