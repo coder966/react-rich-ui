@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default GroupedMultiCheckboxInput = props => {
+const GroupedMultiCheckboxInput = props => {
     const {
         name, type, label, options, disabled, 
     } = props;
@@ -44,3 +44,5 @@ export default GroupedMultiCheckboxInput = props => {
         </div>
     );
 };
+
+export default GroupedMultiCheckboxInput;

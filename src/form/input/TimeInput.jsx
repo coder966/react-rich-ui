@@ -6,7 +6,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default TimeInput = props => {
+const TimeInput = props => {
     const {
         name, type, label, disabled, 
     } = props;
@@ -43,3 +43,5 @@ export default TimeInput = props => {
         </div>
     );
 };
+
+export default TimeInput;

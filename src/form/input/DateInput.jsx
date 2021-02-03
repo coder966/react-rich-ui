@@ -6,7 +6,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default DateInput = props => {
+const DateInput = props => {
     const {
         name, type, label, disabled, 
     } = props;
@@ -43,3 +43,5 @@ export default DateInput = props => {
         </div>
     );
 };
+
+export default DateInput;

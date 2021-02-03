@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default PasswordInput = props => {
+const PasswordInput = props => {
     const {
         name, type, label, disabled, prepend, append, 
     } = props;
@@ -47,3 +47,5 @@ export default PasswordInput = props => {
         </div>
     );
 };
+
+export default PasswordInput;

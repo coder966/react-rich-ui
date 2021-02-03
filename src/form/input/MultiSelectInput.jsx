@@ -7,7 +7,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default MultiSelectInput = props => {
+const MultiSelectInput = props => {
     const {
         name, type, label, options, disabled, 
     } = props;
@@ -95,3 +95,5 @@ export default MultiSelectInput = props => {
         </div>
     );
 };
+
+export default MultiSelectInput;

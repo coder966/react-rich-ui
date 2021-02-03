@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default TextareaInput = props => {
+const TextareaInput = props => {
     const {
         name, type, label, disabled, 
     } = props;
@@ -35,3 +35,5 @@ export default TextareaInput = props => {
         </div>
     );
 };
+
+export default TextareaInput;

@@ -6,7 +6,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default FileInput = props => {
+const FileInput = props => {
     const {
         name, type, label, disabled, 
     } = props;
@@ -52,3 +52,5 @@ export default FileInput = props => {
         </div>
     );
 };
+
+export default FileInput;

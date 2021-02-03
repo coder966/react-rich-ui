@@ -7,7 +7,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default SelectInput = props => {
+const SelectInput = props => {
     const {
         name, type, label, options, disabled, 
     } = props;
@@ -95,3 +95,5 @@ export default SelectInput = props => {
         </div>
     );
 };
+
+export default SelectInput;

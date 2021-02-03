@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default RadioInput = props => {
+const RadioInput = props => {
     const {
         name, type, label, options, disabled, 
     } = props;
@@ -42,3 +42,5 @@ export default RadioInput = props => {
         </div>
     );
 };
+
+export default RadioInput;

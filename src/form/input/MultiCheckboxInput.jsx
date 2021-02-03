@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default MultiCheckboxInput = props => {
+const MultiCheckboxInput = props => {
     const {
         name, type, label, options, disabled, 
     } = props;
@@ -37,3 +37,5 @@ export default MultiCheckboxInput = props => {
         </div>
     );
 };
+
+export default MultiCheckboxInput;

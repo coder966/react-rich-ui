@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default CheckboxInput = props => {
+const CheckboxInput = props => {
     const {
         name, type, label, disabled, 
     } = props;
@@ -29,3 +29,5 @@ export default CheckboxInput = props => {
         </div>
     );
 };
+
+export default CheckboxInput;

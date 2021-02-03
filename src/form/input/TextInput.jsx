@@ -5,7 +5,7 @@ import './../style.css';
 /**
   * @author coder966
   */
-export default TextInput = props => {
+const TextInput = props => {
     const {
         name, type, label, disabled, prepend, append, 
     } = props;
@@ -47,3 +47,5 @@ export default TextInput = props => {
         </div>
     );
 };
+
+export default TextInput;
