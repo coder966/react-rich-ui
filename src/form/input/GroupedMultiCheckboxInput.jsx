@@ -16,7 +16,7 @@ const GroupedMultiCheckboxInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
             {/* these hidden options are important because if options size is 1 then form submit result will be string instead of array with one item
             and if options size is zero then will result in false instead of an empty array */}
             <input id={`${name}_hidden1`} name={name} ref={formContext.register} value={'hidden1'} type='checkbox' disabled style={{display: 'none'}} />

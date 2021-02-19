@@ -9,24 +9,15 @@ import './../style.css';
   */
 const TextareaInput = props => {
     const {
-        name, disabled, 
+        name, disabled, maxLength, placeholder
     } = props;
 
     const formContext = useFormContext();
 
-    const sharedProps = {
-        ref: formContext.register,
-        id: name,
-        name: name,
-        disabled: disabled,
-        placeholder: props.placeholder,
-        maxLength: props.maxLength,
-    }
-
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+            <textarea ref={formContext.register} name={name} disabled={disabled} maxLength={maxLength} placeholder={placeholder} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
             <ErrorMessage inputName={name} />
         </div>
     );

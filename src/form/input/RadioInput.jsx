@@ -14,22 +14,13 @@ const RadioInput = props => {
 
     const formContext = useFormContext();
 
-    const sharedProps = {
-        ref: formContext.register,
-        id: name,
-        name: name,
-        disabled: disabled,
-        placeholder: props.placeholder,
-        maxLength: props.maxLength,
-    }
-
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
             <div className={props.inline ? 'form-check-inline' : null}>
                 {options.map(o => (
                     <div key={`${name}_${o.id}`} className={'form-check' + disabled ? ' disabled' : null}> 
-                        <input type='radio' {...sharedProps} value={o.id} id={o.id} />
+                        <input type='radio' ref={formContext.register} name={name} disabled={disabled} value={o.id} id={o.id} />
                         <label className='form-check-label' htmlFor={o.id}>{o.label}</label>
                     </div>
                 ))}

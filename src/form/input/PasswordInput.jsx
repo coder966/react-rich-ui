@@ -9,24 +9,15 @@ import './../style.css';
   */
 const PasswordInput = props => {
     const {
-        name, disabled,
+        name, disabled, maxLength, placeholder
     } = props;
 
     const formContext = useFormContext();
 
-    const sharedProps = {
-        ref: formContext.register,
-        id: name,
-        name: name,
-        disabled: disabled,
-        placeholder: props.placeholder,
-        maxLength: props.maxLength,
-    }
-
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+            <input ref={formContext.register} name={name} disabled={disabled} maxLength={maxLength} placeholder={placeholder} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
             <ErrorMessage inputName={name} />
         </div>
     );

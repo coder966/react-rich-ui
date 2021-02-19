@@ -10,24 +10,16 @@ import './../style.css';
   */
 const FileInput = props => {
     const {
-        name, placeholder
+        name, placeholder, disabled
     } = props;
 
     const [fileName, setFileName] = useState(null);
     const formContext = useFormContext();
 
-    const sharedProps = {
-        ref: formContext.register,
-        id: name,
-        name: name,
-        disabled: props.disabled,
-        maxLength: props.maxLength,
-    }
-
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <input type='file' {...sharedProps} onChange={e => {
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+            <input type='file' ref={formContext.register} name={name} disabled={disabled} onChange={e => {
                 const filesList = e.target.files;
                 if(filesList && filesList[0]){
                     setFileName(filesList[0].name);

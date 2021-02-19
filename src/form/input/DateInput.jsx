@@ -18,7 +18,7 @@ const DateInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
             <DatePicker
                 type='date'
                 onChange={value => formContext.setValue(name, value)}

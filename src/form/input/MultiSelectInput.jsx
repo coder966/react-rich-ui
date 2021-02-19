@@ -42,7 +42,7 @@ const MultiSelectInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
             {selectControlValue ?
                 <Select
                     name={name}
