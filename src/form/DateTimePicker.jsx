@@ -6,7 +6,7 @@ import './style.css';
  * TODO: directly implement into appropriate components
  * This is meant to be used internally
  */
-class DatePicker extends React.Component {
+class DateTimePicker extends React.Component {
 
   constructor(props){
     super(props);
@@ -111,7 +111,7 @@ class DatePicker extends React.Component {
   renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' || name === 'minute' ? i : v}>{v}</option>)}</select>;
 
   render = () => (
-    <>
+    <div className='rru-datepicker'>
       {this.props.type === 'date' ? 
         (this.props.reverseDisplayOrder ?
           <>
@@ -140,8 +140,8 @@ class DatePicker extends React.Component {
       )
       :null
       }
-    </>
+    </div>
   );
 }
 
-export default DatePicker;
+export default DateTimePicker;

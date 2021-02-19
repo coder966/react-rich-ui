@@ -1,6 +1,6 @@
 {
   "name": "react-rich-ui",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A set of commonly-used React components with super friendly API",
   "keywords": [
     "React",
@@ -38,10 +38,10 @@
     ]
   },
   "dependencies": {
-    "react-bootstrap": "^1.4.0",
+    "react-bootstrap": "1.5.0",
     "react-hook-form": "^4.10.2",
-    "react-paginate": "^6.5.0",
-    "react-select": "^3.1.0"
+    "react-paginate": "7.1.0",
+    "react-select": "4.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -52,21 +52,19 @@
     "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-intl": "^5.10.0",
     "react-scripts": "4.0.0"
   },
   "peerDependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "4.0.0"
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "scripts": {
     "build": "babel src --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepublish": "yarn run build",
-    "start:app": "yarn run build && yarn link && yarn --cwd node_modules/react link && yarn --cwd ./app link react react-rich-ui && yarn --cwd ./app && yarn --cwd ./app run start",
-    "relink:lib": "yarn --cwd ./app unlink react-rich-ui && yarn --cwd link"
+    "start": "babel src --out-dir dist --copy-files --watch",
+    "start:example": "yarn --cwd ./example run start"
   },
   "eslintConfig": {
     "extends": "react-app"

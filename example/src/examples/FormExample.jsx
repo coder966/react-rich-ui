@@ -79,7 +79,7 @@ const FormExample = props => {
       <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit}>
         <Row>
           <Col md='4'><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
-          <Col md='4'><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} /></Col>
+          <Col md='4'><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} requiredAsterisk /></Col>
           <Col md='4'><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
         </Row>
         <Row>
@@ -100,7 +100,7 @@ const FormExample = props => {
           <Col md='4'><RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/></Col>
         </Row>
         <Row>
-          <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />}/></Col>
+          <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />} placeholder='Select a file' /></Col>
           <Col><div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div></Col>
         </Row>
         <Row>

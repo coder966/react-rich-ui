@@ -1,5 +1,7 @@
 import React from 'react';
 import {useFormContext} from 'react-hook-form';
+import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -7,31 +9,16 @@ import './../style.css';
   */
 const TextareaInput = props => {
     const {
-        name, type, label, disabled, 
+        name, disabled, maxLength, placeholder
     } = props;
 
     const formContext = useFormContext();
 
-    const sharedProps = {
-        ref: formContext.register,
-        id: name,
-        name: name,
-        disabled: disabled,
-        placeholder: props.placeholder,
-        maxLength: props.maxLength,
-    }
-
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
-                <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
-                    <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
-                </div>
-            : null}
-            <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
-                <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
-                <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
-            </div>
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+            <textarea ref={formContext.register} name={name} disabled={disabled} maxLength={maxLength} placeholder={placeholder} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

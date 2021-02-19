@@ -168,8 +168,6 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
       <ReactPaginate
         previousLabel={previousLabel}
         nextLabel={nextLabel}
-        breakLabel={<a>...</a>}
-        breakClassName='break'
         pageCount={totalPages}
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
