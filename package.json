@@ -63,7 +63,7 @@
     "eject": "react-scripts eject",
     "prepublish": "yarn run build",
     "start": "babel src --out-dir dist --copy-files --watch",
-    "start:app": "yarn --cwd ./app run start"
+    "start:example": "yarn --cwd ./example run start"
   },
   "eslintConfig": {
     "extends": "react-app"
