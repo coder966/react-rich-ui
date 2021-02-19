@@ -33,7 +33,7 @@ const PasswordInput = props => {
                 : null}
                 <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
                 {append ?
-                    <div className='input-group-prepend'>
+                    <div className='input-group-append'>
                         <span className='input-group-text'>{append}</span>
                     </div>
                 : null}
