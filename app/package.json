@@ -10,7 +10,8 @@
     "react-dom": "^17.0.1",
     "react-intl": "^5.10.4",
     "react-scripts": "4.0.0",
-    "yup": "^0.30.0"
+    "yup": "^0.30.0",
+    "react-rich-ui": "link:../dist"
   },
   "scripts": {
     "start": "react-scripts start",
