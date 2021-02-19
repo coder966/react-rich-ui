@@ -24,7 +24,7 @@ const GroupedMultiCheckboxInput = props => {
             {options.map((g, i)=> 
                 <Fragment key={`${name}_g${i}`}>
                     <div className='grouped-multi-checkbox-group-header'>{g.label}</div>
-                    <div className='grouped-multi-checkbox-group-row row'>
+                    <div className='row mt-1 mb-1'>
                         {g.items.map(o => (
                             <div key={`${name}_${o.id}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
                                 <div className='custom-control custom-checkbox m-1'>

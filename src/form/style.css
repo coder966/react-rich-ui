@@ -9,13 +9,8 @@ input[type=file] {
 .grouped-multi-checkbox-group-header{
     color: white;
     background-color: #648aa5;
-    padding: 0.7rem;
+    padding: 0.5rem;
     width: 100%;
-}
-
-.grouped-multi-checkbox-group-row{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 label.required-asterisk:after {
