@@ -4,6 +4,7 @@ input[type=file] {
 
 .fileUpload {
     cursor: pointer;
+    overflow: hidden;
 }
 
 .grouped-multi-checkbox-group-header{

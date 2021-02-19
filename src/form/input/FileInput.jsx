@@ -19,7 +19,7 @@ const FileInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-            <input type='file' ref={formContext.register} name={name} disabled={disabled} onChange={e => {
+            <input type='file' id={`file_${name}`} ref={formContext.register} name={name} disabled={disabled} onChange={e => {
                 const filesList = e.target.files;
                 if(filesList && filesList[0]){
                     setFileName(filesList[0].name);
@@ -27,7 +27,7 @@ const FileInput = props => {
                     setFileName(null);
                 }
             }} />
-            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
+            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(`file_${name}`).click()}>
                 {fileName || placeholder}
             </div>
             <ErrorMessage inputName={name} />
