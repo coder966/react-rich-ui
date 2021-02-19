@@ -24,7 +24,7 @@ const SelectInput = props => {
     }
 
     // because controlled fields (registered through formContext.register) need to call setValue for the initial value
-    // this issue is also present in date and time be is handled in the DatePicker constructor
+    // this issue is also present in date and time but is handled in the DateTimePicker constructor
     useEffect(() => {
         let defaultOption;
         if(props.defaultValue){

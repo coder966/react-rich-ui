@@ -6,7 +6,7 @@ import './style.css';
  * TODO: directly implement into appropriate components
  * This is meant to be used internally
  */
-class DatePicker extends React.Component {
+class DateTimePicker extends React.Component {
 
   constructor(props){
     super(props);
@@ -144,4 +144,4 @@ class DatePicker extends React.Component {
   );
 }
 
-export default DatePicker;
+export default DateTimePicker;
