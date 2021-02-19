@@ -7,7 +7,7 @@ import './../style.css';
   */
 const PasswordInput = props => {
     const {
-        name, type, label, disabled, prepend, append, 
+        name, label, disabled, prepend, append, 
     } = props;
 
     const formContext = useFormContext();
@@ -23,7 +23,7 @@ const PasswordInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>
@@ -35,7 +35,7 @@ const PasswordInput = props => {
                             <span className='input-group-text'>{prepend}</span>
                         </div>
                     : null}
-                    <input {...sharedProps} type={type} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+                    <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
                     {append ?
                         <div className='input-group-prepend'>
                             <span className='input-group-text'>{append}</span>

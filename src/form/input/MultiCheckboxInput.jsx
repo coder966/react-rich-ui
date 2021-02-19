@@ -7,14 +7,14 @@ import './../style.css';
   */
 const MultiCheckboxInput = props => {
     const {
-        name, type, label, options, disabled, 
+        name, label, options, disabled, 
     } = props;
 
     const formContext = useFormContext();
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>

@@ -7,7 +7,7 @@ import './../style.css';
   */
 const TextareaInput = props => {
     const {
-        name, type, label, disabled, 
+        name, label, disabled, 
     } = props;
 
     const formContext = useFormContext();
@@ -23,7 +23,7 @@ const TextareaInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>

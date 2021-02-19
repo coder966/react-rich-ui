@@ -8,7 +8,7 @@ import './../style.css';
   */
 const TimeInput = props => {
     const {
-        name, type, label, disabled, 
+        name, label, disabled, 
     } = props;
 
     const formContext = useFormContext();
@@ -16,7 +16,7 @@ const TimeInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>
@@ -24,7 +24,7 @@ const TimeInput = props => {
             <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
                 <div className='input-group'>
                     <div className='input-group-prepend'>
-                        <span className={'input-group-text '+(type === 'date' ? 'fa fa-calendar-alt' : 'fas fa-clock')}></span>
+                        <span className={'input-group-text fas fa-clock'}></span>
                     </div>
                     <DatePicker
                         type='time'

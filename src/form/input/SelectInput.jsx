@@ -9,7 +9,7 @@ import './../style.css';
   */
 const SelectInput = props => {
     const {
-        name, type, label, options, disabled, 
+        name, label, options, disabled, 
     } = props;
 
     const [selectControlValue, setSelectControlValue] = useState();
@@ -17,54 +17,34 @@ const SelectInput = props => {
     formContext.register({name});
 
     const onSelectChange = opt => { // react-select option datatype
-        if(type === 'select'){
-            setSelectControlValue({value: opt ? opt.value : '', label: opt ? opt.label : ''});
-            formContext.setValue(name, opt ? opt.value : '');
-        }else{
-            setSelectControlValue(opt || []);
-            formContext.setValue(name, opt ? opt.map(o => o.value) : []);
-        }
+        setSelectControlValue({value: opt ? opt.value : '', label: opt ? opt.label : ''});
+        formContext.setValue(name, opt ? opt.value : '');
     }
 
     // because controlled fields (registered through formContext.register) need to call setValue for the initial value
     // this issue is also present in date and time be is handled in the DatePicker constructor
     useEffect(() => {
-        if(type === 'select'){
-            let defaultOption;
-            if(props.defaultValue){
-                defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
-            }else{
-                defaultOption = options[0];
-            }
-            defaultOption = defaultOption || {id: '', label: ''};
-            defaultOption.value = defaultOption.id;
-            onSelectChange(defaultOption);
-        }else if(type === 'multi-select'){
-            let defaultOptions = [];
-            if(props.defaultValue && Array.isArray(props.defaultValue)){
-                defaultOptions = options.filter(o => props.defaultValue.includes(o.id+''));
-            }
-            onSelectChange(defaultOptions.map(o => ({value: o.id, label: o.label})));
+        let defaultOption;
+        if(props.defaultValue){
+            defaultOption = options.find(o => o.id+'' === props.defaultValue+'');
+        }else{
+            defaultOption = options[0];
         }
+        defaultOption = defaultOption || {id: '', label: ''};
+        defaultOption.value = defaultOption.id;
+        onSelectChange(defaultOption);
     }, []);
 
     useEffect(() => {
-        if(type === 'select'){
-            const currentValue = formContext.getValues()[name];
-            if(currentValue && !options.find(o => o.id+'' === currentValue+'')){
-                onSelectChange({value: '', label: ''});
-            }
-        }else if(type === 'multi-select'){
-            const currentValue = formContext.getValues()[name];
-            if(currentValue){
-                onSelectChange(options.filter(o => currentValue.includes(o.id+'')).map(o => ({value: o.id, label: o.label})));
-            }
+        const currentValue = formContext.getValues()[name];
+        if(currentValue && !options.find(o => o.id+'' === currentValue+'')){
+            onSelectChange({value: '', label: ''});
         }
     }, [options]);
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>

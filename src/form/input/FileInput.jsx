@@ -8,7 +8,7 @@ import './../style.css';
   */
 const FileInput = props => {
     const {
-        name, type, label, disabled, 
+        name, label, disabled, 
     } = props;
 
     const [fileName, setFileName] = useState(null);
@@ -25,7 +25,7 @@ const FileInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label && type !== 'checkbox' ?
+            {label ?
                 <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
                     <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
                 </div>
