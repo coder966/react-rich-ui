@@ -18,22 +18,17 @@ const TimeInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <div className='input-group'>
-                <div className='input-group-prepend'>
-                    <span className={'input-group-text fas fa-clock'}></span>
-                </div>
-                <DatePicker
-                    type='time'
-                    onChange={value => formContext.setValue(name, value)}
-                    defaultValue={props.defaultValue}
-                    reverseDisplayOrder={props.reverseDisplayOrder}
-                    isHijri={props.isHijri}
-                    isFuture={props.isFuture}
-                    isPast={props.isPast}
-                    clock={props.clock}
-                    maxYearLength={props.maxYearLength}
-                    disabled={disabled} />
-            </div>
+            <DatePicker
+                type='time'
+                onChange={value => formContext.setValue(name, value)}
+                defaultValue={props.defaultValue}
+                reverseDisplayOrder={props.reverseDisplayOrder}
+                isHijri={props.isHijri}
+                isFuture={props.isFuture}
+                isPast={props.isPast}
+                clock={props.clock}
+                maxYearLength={props.maxYearLength}
+                disabled={disabled} />
             <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
         </div>
     );

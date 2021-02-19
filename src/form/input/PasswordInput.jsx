@@ -8,7 +8,7 @@ import './../style.css';
   */
 const PasswordInput = props => {
     const {
-        name, disabled, prepend, append, 
+        name, disabled,
     } = props;
 
     const formContext = useFormContext();
@@ -25,19 +25,7 @@ const PasswordInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <div className='input-group'>
-                {prepend ?
-                    <div className='input-group-prepend'>
-                        <span className='input-group-text'>{prepend}</span>
-                    </div>
-                : null}
-                <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
-                {append ?
-                    <div className='input-group-append'>
-                        <span className='input-group-text'>{append}</span>
-                    </div>
-                : null}
-            </div>
+            <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
             <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
         </div>
     );

@@ -100,7 +100,7 @@ const FormExample = props => {
           <Col md='4'><RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/></Col>
         </Row>
         <Row>
-          <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />}/></Col>
+          <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />} placeholder='Select a file' /></Col>
           <Col><div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div></Col>
         </Row>
         <Row>

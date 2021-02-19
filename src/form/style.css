@@ -1,17 +1,9 @@
-.input-group-text {
-    padding-top: 9px;
-}
-
 input[type=file] {
     display: none;
 }
 
 .fileUpload {
     cursor: pointer;
-}
-
-.fileUpload.is-invalid {
-    background-image: none;
 }
 
 .grouped-multi-checkbox-group-header{
@@ -29,4 +21,24 @@ input[type=file] {
 label.required-asterisk:after {
     content: ' *';
     color: #dc3545;
+}
+
+.rru-datepicker{
+    display: flex;
+}
+.rru-datepicker > select {
+    border-radius: 0;
+}
+.rru-datepicker > select:first-child {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+.rru-datepicker > select:last-child {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+[dir="rtl"] .rru-datepicker > select:first-child {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+[dir="rtl"] .rru-datepicker > select:last-child {
+    border-radius: 0.25rem 0 0 0.25rem;
 }
