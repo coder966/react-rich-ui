@@ -8,7 +8,7 @@ import './../style.css';
   */
 const PasswordInput = props => {
     const {
-        name, label, disabled, prepend, append, 
+        name, disabled, prepend, append, 
     } = props;
 
     const formContext = useFormContext();
@@ -25,22 +25,20 @@ const PasswordInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
-                <div className='input-group'>
-                    {prepend ?
-                        <div className='input-group-prepend'>
-                            <span className='input-group-text'>{prepend}</span>
-                        </div>
-                    : null}
-                    <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
-                    {append ?
-                        <div className='input-group-prepend'>
-                            <span className='input-group-text'>{append}</span>
-                        </div>
-                    : null}
-                </div>
-                <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <div className='input-group'>
+                {prepend ?
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>{prepend}</span>
+                    </div>
+                : null}
+                <input {...sharedProps} type='password' className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+                {append ?
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>{append}</span>
+                    </div>
+                : null}
             </div>
+            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
         </div>
     );
 };

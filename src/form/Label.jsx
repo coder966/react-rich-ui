@@ -5,13 +5,11 @@ import React from 'react';
   */
 const Label = props => {
     const {
-        inputName, label, requiredAsterisk, labelClassName
+        inputName, label, requiredAsterisk
     } = props;
 
     return label ?
-        <div className={(labelClassName ? labelClassName : 'mr-1 ml-1') + ' row'}>
-            <label className={requiredAsterisk ? 'required-asterisk' : ''} htmlFor={inputName}>{label}</label>
-        </div>
+        <label className={requiredAsterisk ? 'required-asterisk' : ''} htmlFor={inputName}>{label}</label>
     : null;
 };
 

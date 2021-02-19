@@ -8,7 +8,7 @@ import './../style.css';
   */
 const TextareaInput = props => {
     const {
-        name, label, disabled, 
+        name, disabled, 
     } = props;
 
     const formContext = useFormContext();
@@ -25,10 +25,8 @@ const TextareaInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
-                <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
-                <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
-            </div>
+            <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
+            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
         </div>
     );
 };

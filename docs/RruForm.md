@@ -25,8 +25,6 @@
 | prepend | Anything to render before the form element component | No | All |
 | append | Anything to render after the form element component | No | All |
 | className | Column class name | No | All |
-| labelClassName | `label` class name | No | All |
-| inputClassName | `input` class name | No | All |
 | options | An array of objects of the form:<br>`{id: string label: string}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: string, items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, multi-select, radio, multi-checkbox, grouped-multi-checkbox` |
 | placeholder | A place holder | No |  |
 | maxLength | Maximum length | No |  |

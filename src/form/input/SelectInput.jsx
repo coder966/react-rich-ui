@@ -10,7 +10,7 @@ import './../style.css';
   */
 const SelectInput = props => {
     const {
-        name, label, options, disabled, 
+        name, options, disabled, 
     } = props;
 
     const [selectControlValue, setSelectControlValue] = useState();
@@ -46,29 +46,27 @@ const SelectInput = props => {
     return (
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
-            <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
-                {selectControlValue ?
-                    <Select
-                        name={name}
-                        isMulti={false}
-                        isDisabled={disabled}
-                        value={selectControlValue}
-                        onChange={onSelectChange}
-                        options={options.map(o => ({value: o.id, label: o.label}))}
-                        styles={{
-                            container: (provided, state) => ({
-                                ...provided,
-                                width: '100%',
-                            }),
-                            control: (provided, state) => ({
-                                ...provided,
-                                [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
-                            }),
-                        }}
-                    />
-                : null}
-                <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
-            </div>
+            {selectControlValue ?
+                <Select
+                    name={name}
+                    isMulti={false}
+                    isDisabled={disabled}
+                    value={selectControlValue}
+                    onChange={onSelectChange}
+                    options={options.map(o => ({value: o.id, label: o.label}))}
+                    styles={{
+                        container: (provided, state) => ({
+                            ...provided,
+                            width: '100%',
+                        }),
+                        control: (provided, state) => ({
+                            ...provided,
+                            [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
+                        }),
+                    }}
+                />
+            : null}
+            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
         </div>
     );
 };
