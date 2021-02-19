@@ -1,5 +1,6 @@
 import React from 'react';
 import {useFormContext} from 'react-hook-form';
+import Label from '../Label';
 import './../style.css';
 
 /**
@@ -23,11 +24,7 @@ const TextareaInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label ?
-                <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
-                    <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
-                </div>
-            : null}
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
             <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
                 <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
                 <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>

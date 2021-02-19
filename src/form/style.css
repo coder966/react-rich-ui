@@ -25,3 +25,8 @@ input[type=file] {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+label.required-asterisk:after {
+    content: ' *';
+    color: #dc3545;
+}

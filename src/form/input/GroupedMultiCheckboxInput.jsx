@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import {useFormContext} from 'react-hook-form';
+import Label from '../Label';
 import './../style.css';
 
 /**
@@ -14,11 +15,7 @@ const GroupedMultiCheckboxInput = props => {
 
     return (
         <div className={(props.className ? props.className : 'form-group')}>
-            {label ?
-                <div className={(props.labelClassName ? props.labelClassName : 'mr-1 ml-1') + ' row'}>
-                    <label className='custom-label' htmlFor={name}>{label}{props.requiredAsterisk ? <span style={{color: '#dc3545'}}> *</span> : ''}</label>
-                </div>
-            : null}
+            <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
             <div className={(props.inputClassName ? props.inputClassName : label ? 'mr-1 ml-1' : '') + ' row'}>
                 {/* these hidden options are important because if options size is 1 then form submit result will be string instead of array with one item
                 and if options size is zero then will result in false instead of an empty array */}
