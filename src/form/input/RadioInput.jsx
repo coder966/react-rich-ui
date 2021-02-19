@@ -1,6 +1,7 @@
 import React from 'react';
 import {useFormContext} from 'react-hook-form';
 import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -33,7 +34,7 @@ const RadioInput = props => {
                     </div>
                 ))}
             </div>
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

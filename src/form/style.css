@@ -23,6 +23,10 @@ label.required-asterisk:after {
     color: #dc3545;
 }
 
+span.rru-form-input-error-message{
+    color: #dc3545;
+}
+
 .rru-datepicker{
     display: flex;
 }

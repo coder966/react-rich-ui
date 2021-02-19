@@ -1,6 +1,7 @@
 import React from 'react';
 import {useFormContext} from 'react-hook-form';
 import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -26,7 +27,7 @@ const TextareaInput = props => {
         <div className={(props.className ? props.className : 'form-group')}>
             <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} labelClassName={props.labelClassName} />
             <textarea {...sharedProps} className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')} />
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

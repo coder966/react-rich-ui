@@ -1,5 +1,6 @@
 import React from 'react';
 import {useFormContext} from 'react-hook-form';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -18,7 +19,7 @@ const CheckboxInput = props => {
                 <input id={name} name={name} ref={formContext.register} type='checkbox' className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')} disabled={disabled} />
                 <label htmlFor={name} className='custom-control-label'>{label}</label>
             </div>
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {useFormContext} from 'react-hook-form';
 import Select from "react-select";
 import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -66,7 +67,7 @@ const SelectInput = props => {
                     }}
                 />
             : null}
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

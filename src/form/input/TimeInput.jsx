@@ -2,6 +2,7 @@ import React from 'react';
 import {useFormContext} from 'react-hook-form';
 import DatePicker from "../DatePicker";
 import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -29,7 +30,7 @@ const TimeInput = props => {
                 clock={props.clock}
                 maxYearLength={props.maxYearLength}
                 disabled={disabled} />
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };

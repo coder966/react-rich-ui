@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import {useFormContext} from 'react-hook-form';
 import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 import './../style.css';
 
 /**
@@ -37,7 +38,7 @@ const FileInput = props => {
             <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(name).click()}>
                 {fileName || placeholder}
             </div>
-            <div>{formContext.errors[name] ? formContext.errors[name].message : null}</div>
+            <ErrorMessage inputName={name} />
         </div>
     );
 };
