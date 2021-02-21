@@ -103,7 +103,7 @@ header nav .nav-item.icon {
 @media screen and (max-width: 775px) {
     header nav > div {
         padding: 0 !important;
-        max-width: 100%;
+        max-width: 100% !important;
     }
     header nav .nav-item{
         display: none;

@@ -1,9 +1,9 @@
 # React Rich UI
 A set of commonly-used React components with super friendly API
-> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui){:target="_blank"}
+> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
 ## Docs
-Visit the official website [react-rich-ui.coder966.net](https://react-rich-ui.coder966.net/){:target="_blank"}
+Visit the official website [react-rich-ui.coder966.net](https://react-rich-ui.coder966.net/)
 
 ## License
 ```txt
