@@ -9,6 +9,14 @@ body {
     color: #606c71
 }
 
+a, a:visited {
+    color: #1e6bb8;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
 /* container */
 
 .container{
@@ -138,6 +146,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
     font-weight: normal;
     color: #EA296A
+}
+
+blockquote {
+    margin-left: 0px;
+    color: #819198;
+    padding: 0px 1rem;
+    border-left: 0.3rem solid #dce6f0;
 }
 
 pre {
