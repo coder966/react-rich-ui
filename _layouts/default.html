@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    {% seo %}
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='theme-color' content='#0D3C72'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+    <link rel='stylesheet' href='/assets/style.css'>
+  </head>
+  <body>
+    <header>
+      <div class='header container'>
+        <a href='/'>React Rich UI</a>
+      </div>
+      <input type='checkbox' id='nav-checkbox' />
+      <nav>
+        <div class='container'>
+          <a class='nav-item' href='/'>Home</a>
+          <a class='nav-item' href='/docs/v1/RruForm'>Forms</a>
+          <a class='nav-item' href='/docs/v1/RruPageableTable'>Tables</a>
+          <a class='nav-item' href='/docs/v1/RruStepsWizard'>Wizards</a>
+          <a class='nav-item' href='/docs/v1/RruButton'>Buttons</a>
+          <a class='nav-item' href='/CHANGELOG'>Releases</a>
+          <a class='nav-item' href='https://github.com/coder966/react-rich-ui' target='_blank'>Github</a>
+          <label class='nav-item icon' for='nav-checkbox' />
+        </div>
+      </div>
+    </header>
+    <main class='container'>
+      {{ content }}
+    </main>
+  </body>
+  <footer></footer>
+</html>
