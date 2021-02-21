@@ -4,27 +4,30 @@
     <meta charset="UTF-8">
     {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
+    <meta name="theme-color" content="#0D3C72">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="/style.css">
-    <style>
-      .project-name > a {
-        color: #ffffff;
-        text-decoration: none;
-      }
-      .project-name > a:hover {
-        text-decoration: underline;
-      }
-    </style>
   </head>
   <body>
-    <header class="page-header" role="banner">
-      <h1 class="project-name"><a href='/'>React Rich UI</a></h1>
-      <h2 class="project-tagline">A set of commonly-used React components with super friendly API</h2>
-      <a href="https://github.com/coder966/react-rich-ui" class="btn">View on GitHub</a>
-      <a href="https://coder966.net/" target="_blank" class="btn">About author</a>
+    <header>
+      <div class="header container">
+        <a href='/'>React Rich UI</a>
+      </div>
+      <input type="checkbox" id='nav-checkbox' />
+      <nav>
+        <div class="container">
+          <a class='nav-item' href="/">Home</a>
+          <a class='nav-item' href="/docs/v1/RruForm">Forms</a>
+          <a class='nav-item' href="/docs/v1/RruPageableTable">Tables</a>
+          <a class='nav-item' href="/docs/v1/StepsWizard">Wizards</a>
+          <a class='nav-item' href="/docs/v1/RruButton">Buttons</a>
+          <a class='nav-item' href="/CHANGELOG">Releases</a>
+          <a class='nav-item' href="/about">About</a>
+          <label class="nav-item icon" for="nav-checkbox" />
+        </div>
+      </div>
     </header>
-    <main id="content" class="main-content" role="main">
+    <main class="conatiner">
       {{ content }}
     </main>
   </body>
