@@ -1,7 +1,7 @@
 ## React Rich UI
 A set of commonly-used React components with super friendly API
 
-> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
+> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui){:target="_blank"}
 
 ## Installation
 
@@ -21,7 +21,7 @@ You must have `bootstrap` stylesheet loaded. Either by importing it from the npm
 
 
 ## Author
-This project is created and maintained by Khalid H. Alharisi. [coder966.net](https://coder966.net)
+This project is created and maintained by Khalid H. Alharisi. [coder966.net](https://coder966.net){:target="_blank"}
 
 
 ## License
