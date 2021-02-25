@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {IntlProvider} from 'react-intl';
-import {Container, Tabs, Tab} from 'react-bootstrap'
 import arMessages from './i18n/ar';
 import enMessages from './i18n/en';
 import './style.css';
@@ -21,29 +20,30 @@ const App = props => {
 
   return (
     <IntlProvider messages={locale === 'ar' ? arMessages : enMessages} locale={locale}>
-      <Container>
 
+      <div style={{maxWidth: '960px', margin: '0 auto', padding: '0 15px'}}>
         <div className='pt-4'>
           <a href='/' onClick={toggleLocale}>{locale === 'ar' ? 'English' : 'العربية'}</a>
           <hr />
         </div>
 
-        <Tabs>
-          <Tab eventKey='RruForm' title='RruForm' className='pt-4 pb-4'>
-            <FormExample />
-          </Tab>
-          <Tab eventKey='RruPageableTable' title='RruPageableTable' className='pt-4 pb-4'>
-            <TableExample />
-          </Tab>
-          <Tab eventKey='RruStepsWizard' title='RruStepsWizard' className='pt-4 pb-4'>
-            <WizardExample />
-          </Tab>
-          <Tab eventKey='RruButton' title='RruButton' className='pt-4 pb-4'>
-            <ButtonExample />
-          </Tab>
-        </Tabs>
+        <FormExample />
 
-      </Container>
+        <br /><hr /><br />
+
+        <TableExample />
+
+        <br /><hr /><br />
+
+        <WizardExample />
+
+        <br /><hr /><br />
+
+        <ButtonExample />
+
+        <br /><hr /><br />
+      </div>
+
     </IntlProvider>
   );
 };
