@@ -1,3 +1,5 @@
+[Docs](/) > [v1](/docs/v1/get-started) > [Tables](/docs/v1/components/RruPageableTable)
+
 
 # RruPageableTable
 
