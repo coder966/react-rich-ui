@@ -100,7 +100,7 @@ header nav .nav-item.icon {
     background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 775px) {
+@media screen and (max-width: 550px) {
     header nav > div {
         padding: 0 !important;
         max-width: 100% !important;
@@ -183,7 +183,7 @@ code {
     padding: 2px 4px;
     font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-size: 0.9rem;
-    color: #567482;
+    color: #0818dc;
     background-color: #f3f6fa;
     border-radius: 0.3rem
 }
