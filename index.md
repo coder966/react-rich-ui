@@ -12,7 +12,7 @@ A set of commonly-used React components with super friendly API
 - Customizable: You can override and add your own CSS.
 
 ## Getting Started
-Please visit the documentations page for [v1](/docs/v1/get-started).
+Please visit the documentations page for [v1](/docs/v1/get-started) or [v2](/docs/v2/get-started).
 
 
 ## Author
