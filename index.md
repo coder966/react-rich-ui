@@ -3,21 +3,16 @@ A set of commonly-used React components with super friendly API
 
 > **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui){:target="_blank"}
 
-## Installation
+## Why Use React Rich UI ?
+- Rich: We provide more than 15 different components.
+- Simple: There is almost no learning curve required to use the components. You can get started in under a minute.
+- Tiny: 1.4kB (minified & gzipped).
+- Performant: Built with performance in mind from the first release.
+- Elegant: Components come with builtin styles.
+- Customizable: You can override and add your own CSS.
 
-```bash
-$ npm i --save react-rich-ui
-```
-
-You must have `bootstrap` stylesheet loaded. Either by importing it from the npm package, or from a CDN. Example:
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-```
-
-## Optional peer dependencies:
-- `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruPageableTable`.
-- `yup`: For form validation. See `RruForm` section for more details.
-- `font-awesome`: You must load `font-awesome` for icons to work.
+## Getting Started
+Please visit the documentations page for [v1](/docs/v1/get-started).
 
 
 ## Author
