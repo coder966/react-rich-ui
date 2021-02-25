@@ -23,12 +23,8 @@ const getIcon = name => icons[name] ? icons[name] : name;
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher, userPrivileges, allowedPrivileges}) => {
+const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher}) => {
   const [show, setShow] = useState(false);
-
-  if(allowedPrivileges && userPrivileges && !userPrivileges.some(p => allowedPrivileges.includes(p))){
-    return null;
-  }
 
   if(onConfirm){
     const handleConfirm = data => {
