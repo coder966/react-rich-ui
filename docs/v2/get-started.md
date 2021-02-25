@@ -17,7 +17,6 @@ You must have `bootstrap` stylesheet loaded. Either by importing it from the npm
 ## Optional peer dependencies:
 - `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruPageableTable`.
 - `yup`: For form validation. See `RruForm` section for more details.
-- `font-awesome`: You must load `font-awesome` for icons to work.
 
 ## Components:
 - [Forms](/docs/v2/components/RruForm)

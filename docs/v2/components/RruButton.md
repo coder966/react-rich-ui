@@ -9,7 +9,6 @@
 |-|-|-|
 | label | Button label | Yes |
 | variant | Bootstrap `button` variant | No |
-| icon | Can be class name for an icon (i.e. `font-awesome` icons) or one of the predefined icons `view, edit, lock, unlock, delete, add, remove, check, times, pdf, excel, download` | No |
 | onClick | A function | Yes if no `onConfirm` |
 | onConfirm | If you want to have a confirmation dialog<br>just use this prop instead of `onClick`.<br> It is a function which receives the form data object (if `formElements` is used) and a function `setShow(bool)` to control dialogue visibility. You can return false to stop refuse the confirmation and keep the dialogue open | No |
 | confirmationTitle | Confirmation dialog title | No |

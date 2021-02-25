@@ -1,29 +1,11 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap'
 import {RruForm} from '../form/react-rich-ui-form';
-import './style.css';
-
-const icons = {
-  view: 'fa fa-eye icon view',
-  edit: 'fas fa-edit icon edit',
-  lock: 'fas fa-lock icon lock',
-  unlock: 'fas fa-unlock icon unlock',
-  delete: 'far fa-trash-alt icon delete',
-  add: 'fas fa-plus icon add',
-  remove: 'fas fa-minus icon remove',
-  check: 'fas fa-check icon check',
-  times: 'fas fa-times icon remove',
-  pdf: 'far fa-file-pdf icon pdf',
-  excel: 'far fa-file-excel icon excel',
-  download: 'fas fa-download icon download',
-}
-
-const getIcon = name => icons[name] ? icons[name] : name;
 
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher}) => {
+const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher}) => {
   const [show, setShow] = useState(false);
 
   if(onConfirm){
@@ -52,19 +34,11 @@ const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirm
             </Modal.Footer>
           </RruForm>
         </Modal>
-        {icon ?
-          <span onClick={() => setShow(true)} className={getIcon(icon)} />
-        : 
-          <Button variant={variant} onClick={() => setShow(true)}>{label}</Button>
-        }
-        
+        <Button variant={variant} onClick={() => setShow(true)}>{label}</Button>
       </>
     )
   }else{
-    return icon ?
-      <span onClick={onClick} className={getIcon(icon)} />
-    : 
-      <Button variant={variant} onClick={onClick}>{label}</Button>
+    return <Button variant={variant} onClick={onClick}>{label}</Button>
   }
 
 }
