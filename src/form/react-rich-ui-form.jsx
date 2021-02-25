@@ -41,13 +41,8 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, ch
     });
 
     useEffect(() => {
-        if(watch){
-            if(Array.isArray(watch) && watcher){
-                watcher(form.watch(watch))
-            }else{
-                // TODO: remove deprecated
-                watch(form.watch);
-            }
+        if(watch && watcher){
+            watcher(form.watch(watch));
         }
     });
 
