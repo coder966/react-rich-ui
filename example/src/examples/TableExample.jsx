@@ -22,28 +22,12 @@ const TableExample = props => {
       value: row => (row.address.city + ' - ' + row.address.zipCode),
       sortKey: 'address.zipCode'
     },
-  ];
-
-  const actions = [
     {
-      icon: 'view',
-      privileges: ['USER:VIEW'],
-      action: user => console.log('view user'+user.id),
-    },
-    {
-      icon: 'edit',
-      privileges: ['USER:EDIT'],
-      action: user => console.log('edit user'+user.id),
-      display: user => user.status === 'CONFIRMED'
-    },
-    {
-      icon: 'delete',
-      action: user => console.log('delete user'+user.id),
-      onConfirm: user => console.log('confirm delete user'+user.id),
-      confirmationTitle: <FormattedMessage id='delete' />,
-      confirmationDesc: <FormattedMessage id='deleteConfirmation' />,
-      cancelLabel: <FormattedMessage id='cancel' />,
-      confirmLabel: <FormattedMessage id='confirm' />,
+      label: <FormattedMessage id='Actions' />,
+      value: row => <>
+        <button onClick={event => console.log('Viewing user: '+row.id)}>View</button>
+        <button onClick={event => console.log('Deleting user: '+row.id)}>Delete</button>
+      </>,
     },
   ];
 
@@ -54,9 +38,7 @@ const TableExample = props => {
         endpoint='https://gtntvvjsp0.execute-api.us-east-2.amazonaws.com/default/spring-page-rest-api'
         pageSize='5'
         columns={columns}
-        actions={actions}
-        search={{}}
-        userPrivileges={['USER:VIEW']} />
+        search={{}} />
     </>
   );
 };

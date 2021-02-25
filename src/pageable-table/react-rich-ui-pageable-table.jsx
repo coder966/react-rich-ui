@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import ReactPaginate from 'react-paginate'
-import RruButton from '../button/react-rich-ui-button';
 import './style.css'
 
 // dynamically loading Axios
@@ -14,7 +13,7 @@ try{
 /**
  * @author coder966
  */
-const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse}) => {
+const RruPageableTable = ({id, endpoint, columns, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, onResponse}) => {
 
   const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
   const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
@@ -131,12 +130,11 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
                 {col.label}
               </th>
             )}
-            {actions && <th className={isLoading ? ' rru-pageable-table-loading-upper-th' : ''}>{actionsLabel}</th>}
           </tr>
           {isLoading && 
             <tr>
-              <th colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-loading-th'>
-                <div colSpan={columns.length+(actions ? 1 : 0)}  className='progressBar'>
+              <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
+                <div colSpan={columns.length} className='progressBar'>
                   <div className='indeterminate'></div>
                 </div>
               </th>
@@ -146,23 +144,14 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
         <tbody>
           {data.length === 0 &&
             <tr>
-              <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
+              <td colSpan={columns.length} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
             </tr>
           }
-
           {data.map((row, i) => (
             <tr key={i}>
               {columns.map((col, j) => (col.display === undefined || col.display) && <td key={j}>{typeof col.value === 'function' ? col.value(row) : col.value === '#' ? getSerialNo(i) : resolve(col.value, row)}</td>)}
-              {actions &&
-                <td>
-                  {actions.map((a, k) => {
-                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => a.onConfirm(row) : undefined} onClick={() => a.action(row)} /> : null;
-                  })}
-                </td>
-              }
             </tr>
           ))}
-
         </tbody>
       </table>
       <ReactPaginate
