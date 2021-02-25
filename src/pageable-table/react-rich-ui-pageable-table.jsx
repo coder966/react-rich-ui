@@ -5,9 +5,9 @@ import './style.css'
 // dynamically loading Axios
 let axios;
 try{
-  axios = require('axios');
+    axios = require('axios');
 }catch(e){
-  console.log('Axios is not installed. Falling back to fetch')
+    console.log('Axios is not installed. Falling back to fetch')
 }
 
 /**
@@ -15,162 +15,162 @@ try{
  */
 const RruPageableTable = ({id, endpoint, columns, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, onResponse}) => {
 
-  const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
-  const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
+    const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
+    const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
 
-  // fetched
-  const [totalPages, setTotalPages] = useState(0);
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
+    // fetched
+    const [totalPages, setTotalPages] = useState(0);
+    const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
 
-  // flags
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+    // flags
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-  // sort
-  const [sortBy, setSortBy] = useState(getInitialState().sortBy);
-  const [sortDir, setSortDir] = useState(getInitialState().sortDir);
+    // sort
+    const [sortBy, setSortBy] = useState(getInitialState().sortBy);
+    const [sortDir, setSortDir] = useState(getInitialState().sortDir);
 
-  // defaults
-  const mPageSize = pageSize ? pageSize : 10;
-  const mSort = sortBy ? (sortBy+','+(sortDir ? sortDir : '')) : '';
+    // defaults
+    const mPageSize = pageSize ? pageSize : 10;
+    const mSort = sortBy ? (sortBy+','+(sortDir ? sortDir : '')) : '';
 
-  useEffect(() => {
-    persistState({currentPage, sortBy, sortDir});
-  }, [currentPage, sortBy, sortDir]);
+    useEffect(() => {
+        persistState({currentPage, sortBy, sortDir});
+    }, [currentPage, sortBy, sortDir]);
 
-  // reload list when search, page, sort changes
-  useEffect(() => {
-    setIsLoading(true);
+    // reload list when search, page, sort changes
+    useEffect(() => {
+        setIsLoading(true);
 
-    const params = {
-      page: currentPage,
-      size: mPageSize,
-      sort: mSort,
-      ...search
+        const params = {
+            page: currentPage,
+            size: mPageSize,
+            sort: mSort,
+            ...search
+        };
+
+        // create an abstract promise for different HTTP client libs
+        const dataPromise = new Promise((resolve, reject) => {
+            if(axios){
+                axios.get(endpoint, {params: params})
+                .then(res => resolve(res.data))
+                .catch(err => reject(err));
+            }else{
+                fetch(endpoint + '?' + new URLSearchParams(params))
+                .then(res => res.json())
+                .then(data => resolve(data))
+                .catch(err => reject(err));
+            }
+        });
+
+        // handle promise result
+        dataPromise.then(data => {
+            setIsLoading(false);
+            setTotalPages(data.totalPages);
+            setData(data.content);
+            if(onResponse){
+                onResponse(data);
+            }
+        })
+        .catch(err => {
+            setIsLoading(false);
+            setError(err);
+        })
+    }, [currentPage, search, sortBy, sortDir]);
+
+    const getSerialNo = index => (currentPage*mPageSize)+(index+1);
+
+    const getSortKey = col => {
+        if(col.sortable === undefined || col.sortable){
+            if(typeof col.value === 'function'){
+                return col.sortKey;
+            }else if(col.value !== '#'){
+                return col.value;
+            }else{
+                return undefined;
+            }
+        }else{
+            return undefined;
+        }
     };
 
-    // create an abstract promise for different HTTP client libs
-    const dataPromise = new Promise((resolve, reject) => {
-      if(axios){
-        axios.get(endpoint, {params: params})
-        .then(res => resolve(res.data))
-        .catch(err => reject(err));
-      }else{
-        fetch(endpoint + '?' + new URLSearchParams(params))
-        .then(res => res.json())
-        .then(data => resolve(data))
-        .catch(err => reject(err));
-      }
-    });
+    const getSortClassName = col => {
+        const sortKey = getSortKey(col);
+        if(sortKey){
+            if(sortKey === sortBy){
+                return 'sortable '+sortDir;
+            }else{
+                return 'sortable';
+            }
+        }else{
+            return '';
+        }
+    };
 
-    // handle promise result
-    dataPromise.then(data => {
-      setIsLoading(false);
-      setTotalPages(data.totalPages);
-      setData(data.content);
-      if(onResponse){
-        onResponse(data);
-      }
-    })
-    .catch(err => {
-      setIsLoading(false);
-      setError(err);
-    })
-  }, [currentPage, search, sortBy, sortDir]);
+    const onSort = col => {
+        const sortKey = getSortKey(col);
+        if(sortKey){
+            if(sortBy !== sortKey){
+                setSortBy(sortKey);
+            }
+            setSortDir(sortDir === 'asc' ? 'desc' : 'asc');    
+        }
+    };
 
-  const getSerialNo = index => (currentPage*mPageSize)+(index+1);
+    const resolve = (path, obj) => path.split('.').reduce((prev, curr) => (prev ? prev[curr] : null), obj);
 
-  const getSortKey = col => {
-    if(col.sortable === undefined || col.sortable){
-      if(typeof col.value === 'function'){
-        return col.sortKey;
-      }else if(col.value !== '#'){
-        return col.value;
-      }else{
-        return undefined;
-      }
-    }else{
-      return undefined;
-    }
-  };
-
-  const getSortClassName = col => {
-    const sortKey = getSortKey(col);
-    if(sortKey){
-      if(sortKey === sortBy){
-        return 'sortable '+sortDir;
-      }else{
-        return 'sortable';
-      }
-    }else{
-      return '';
-    }
-  };
-
-  const onSort = col => {
-    const sortKey = getSortKey(col);
-    if(sortKey){
-      if(sortBy !== sortKey){
-        setSortBy(sortKey);
-      }
-      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');  
-    }
-  };
-
-  const resolve = (path, obj) => path.split('.').reduce((prev, curr) => (prev ? prev[curr] : null), obj);
-
-  return (
-    <>
-      <table className='table table-striped'>
-        <thead>
-          <tr>
-            {columns.map((col, index) => (col.display === undefined || col.display) &&
-              <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={!disableSorting && (e => onSort(col))}>
-                {col.label}
-              </th>
-            )}
-          </tr>
-          {isLoading && 
-            <tr>
-              <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
-                <div colSpan={columns.length} className='progressBar'>
-                  <div className='indeterminate'></div>
-                </div>
-              </th>
-            </tr>
-          }
-        </thead>
-        <tbody>
-          {data.length === 0 &&
-            <tr>
-              <td colSpan={columns.length} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
-            </tr>
-          }
-          {data.map((row, i) => (
-            <tr key={i}>
-              {columns.map((col, j) => (col.display === undefined || col.display) && <td key={j}>{typeof col.value === 'function' ? col.value(row) : col.value === '#' ? getSerialNo(i) : resolve(col.value, row)}</td>)}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <ReactPaginate
-        previousLabel={previousLabel}
-        nextLabel={nextLabel}
-        pageCount={totalPages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
-        onPageChange={event => setCurrentPage(event.selected)}
-        forcePage={currentPage}
-        containerClassName='pagination'
-        pageLinkClassName='pageLink'
-        previousClassName='previous'
-        nextClassName='next'
-        disabledClassName='disabled'
-        activeClassName='activePage'
-        />
-    </>
-  )
+    return (
+        <>
+            <table className='table table-striped'>
+                <thead>
+                    <tr>
+                        {columns.map((col, index) => (col.display === undefined || col.display) &&
+                            <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={!disableSorting && (e => onSort(col))}>
+                                {col.label}
+                            </th>
+                        )}
+                    </tr>
+                    {isLoading && 
+                        <tr>
+                            <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
+                                <div colSpan={columns.length} className='progressBar'>
+                                    <div className='indeterminate'></div>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                </thead>
+                <tbody>
+                    {data.length === 0 &&
+                        <tr>
+                            <td colSpan={columns.length} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
+                        </tr>
+                    }
+                    {data.map((row, i) => (
+                        <tr key={i}>
+                            {columns.map((col, j) => (col.display === undefined || col.display) && <td key={j}>{typeof col.value === 'function' ? col.value(row) : col.value === '#' ? getSerialNo(i) : resolve(col.value, row)}</td>)}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <ReactPaginate
+                previousLabel={previousLabel}
+                nextLabel={nextLabel}
+                pageCount={totalPages}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={event => setCurrentPage(event.selected)}
+                forcePage={currentPage}
+                containerClassName='pagination'
+                pageLinkClassName='pageLink'
+                previousClassName='previous'
+                nextClassName='next'
+                disabledClassName='disabled'
+                activeClassName='activePage'
+                />
+        </>
+    )
 }
 
 export default RruPageableTable;
