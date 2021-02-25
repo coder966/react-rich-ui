@@ -1,5 +1,4 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 import * as yup from 'yup';
 import { RruFormElement, RruButton } from 'react-rich-ui';
 
@@ -28,16 +27,16 @@ const ButtonExample = props => {
       <RruButton 
         variant='danger'
         onConfirm={onConfirm}
-        label={<FormattedMessage id='delete' />}
+        label='Delete'
         initialValues={initialValues}
         validationSchema={validationSchema}
         formElements={
-          <RruFormElement type='text' name='reason' label={<FormattedMessage id='reason' />} />
+          <RruFormElement type='text' name='reason' label='Reason' />
         }
-        confirmationTitle={<FormattedMessage id='delete' />}
-        confirmationDesc={<FormattedMessage id='deleteConfirmation' />}
-        confirmLabel={<FormattedMessage id='confirm' />}
-        cancelLabel={<FormattedMessage id='cancel' />} />
+        confirmationTitle='Delete'
+        confirmationDesc='Are you sure you want to delete ?'
+        confirmLabel='Confirm'
+        cancelLabel='Cancel' />
     </>
   );
 };
