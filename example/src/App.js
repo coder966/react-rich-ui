@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {IntlProvider} from 'react-intl';
-import {Container, Tabs, Tab} from 'react-bootstrap'
-import arMessages from './i18n/ar';
-import enMessages from './i18n/en';
-import './style.css';
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { IntlProvider } from 'react-intl';
+import ButtonExample from './examples/ButtonExample';
 import FormExample from './examples/FormExample';
 import TableExample from './examples/TableExample';
 import WizardExample from './examples/WizardExample';
-import ButtonExample from './examples/ButtonExample';
+import arMessages from './i18n/ar';
+import enMessages from './i18n/en';
+import './style.css';
 
 const App = props => {
 
@@ -28,20 +28,15 @@ const App = props => {
           <hr />
         </div>
 
-        <Tabs>
-          <Tab eventKey='RruForm' title='RruForm' className='pt-4 pb-4'>
-            <FormExample />
-          </Tab>
-          <Tab eventKey='RruPageableTable' title='RruPageableTable' className='pt-4 pb-4'>
-            <TableExample />
-          </Tab>
-          <Tab eventKey='RruStepsWizard' title='RruStepsWizard' className='pt-4 pb-4'>
-            <WizardExample />
-          </Tab>
-          <Tab eventKey='RruButton' title='RruButton' className='pt-4 pb-4'>
-            <ButtonExample />
-          </Tab>
-        </Tabs>
+        <div>
+          <FormExample />
+          <br /><br /><br />
+          <TableExample />
+          <br /><br /><br />
+          <WizardExample />
+          <br /><br /><br />
+          <ButtonExample />
+        </div>
 
       </Container>
     </IntlProvider>

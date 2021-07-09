@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {Col, Row, Button} from 'react-bootstrap'
-import * as yup from 'yup';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { RruForm, RruFormElement } from 'react-rich-ui';
+import * as yup from 'yup';
 
 const FormExample = props => {
 
@@ -77,41 +76,41 @@ const FormExample = props => {
   return (
     <>
       <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit}>
-        <Row>
-          <Col md='4'><RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/></Col>
-          <Col md='4'><RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} requiredAsterisk /></Col>
-          <Col md='4'><RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' /></Col>
-        </Row>
-        <Row>
-          <Col md='4'><RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} disabled /></Col>
-          <Col md='4'><RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' /></Col>
+        <div>
+          <RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/>
+          <RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} requiredAsterisk />
+          <RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' />
+        </div>
+        <div>
+          <RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} disabled />
+          <RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' />
           {accountType === 'ORGANIZATION' &&
-            <Col md='4'><RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' /></Col>
+            <RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' />
           }
-        </Row>
-        <Row>
-          <Col><RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/></Col>
-        </Row>
-        <Row>
-          <Col><RruFormElement type='grouped-multi-checkbox' name='groups' label={<FormattedMessage id='groups' />} options={groups}/></Col>
-        </Row>
-        <Row>
-          <Col md='4'><RruFormElement type='date' name='bookingDate' label={<FormattedMessage id='bookingDate' />} defaultValue='2020-08-13' maxYearLength='10' isPast/></Col>
-          <Col md='4'><RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/></Col>
-        </Row>
-        <Row>
-          <Col md='4'><RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />} placeholder='Select a file' /></Col>
-          <Col><div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div></Col>
-        </Row>
-        <Row>
-          <Col><RruFormElement type='textarea' name='feedback' label={<FormattedMessage id='feedback' />} /></Col>
-        </Row>
-        <Row>
-          <Col><RruFormElement type='checkbox' name='pledge' label={<FormattedMessage id='pledge' />} /></Col>
-        </Row>
-        <Row>
-          <div style={{width: '100%'}}><Button type='submit' className='float-right'><FormattedMessage id='submit' /></Button></div>
-        </Row>
+        </div>
+        <div>
+          <RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/>
+        </div>
+        <div>
+          <RruFormElement type='grouped-multi-checkbox' name='groups' label={<FormattedMessage id='groups' />} options={groups}/>
+        </div>
+        <div>
+          <RruFormElement type='date' name='bookingDate' label={<FormattedMessage id='bookingDate' />} defaultValue='2020-08-13' maxYearLength='10' isPast/>
+          <RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/>
+        </div>
+        <div>
+          <RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />} placeholder='Select a file' />
+          <div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div>
+        </div>
+        <div>
+          <RruFormElement type='textarea' name='feedback' label={<FormattedMessage id='feedback' />} />
+        </div>
+        <div>
+          <RruFormElement type='checkbox' name='pledge' label={<FormattedMessage id='pledge' />} />
+        </div>
+        <div>
+          <div style={{width: '100%'}}><button type='submit' className='float-right'><FormattedMessage id='submit' /></button></div>
+        </div>
       </RruForm>
     </>
   );
