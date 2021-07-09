@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
 import ButtonExample from './examples/ButtonExample';
 import FormExample from './examples/FormExample';
 import TableExample from './examples/TableExample';
@@ -17,21 +16,21 @@ const App = props => {
   }
 
   return (
-      <Container>
-        <div className='pt-4'>
-          <a href='/' onClick={toggleLocale}>{locale === 'rtl' ? 'LTR' : 'RTL'}</a>
-          <hr />
-        </div>
-        <div>
-          <FormExample />
-          <br /><br /><br />
-          <TableExample />
-          <br /><br /><br />
-          <WizardExample />
-          <br /><br /><br />
-          <ButtonExample />
-        </div>
-      </Container>
+    <div style={{maxWidth: '960px', margin: '0 auto', padding: '0 15px'}}>
+      <div className='pt-4'>
+        <a href='/' onClick={toggleLocale}>{locale === 'rtl' ? 'LTR' : 'RTL'}</a>
+        <hr />
+      </div>
+      <div>
+        <FormExample />
+        <br /><br /><br />
+        <TableExample />
+        <br /><br /><br />
+        <WizardExample />
+        <br /><br /><br />
+        <ButtonExample />
+      </div>
+    </div>
   );
 };
 
