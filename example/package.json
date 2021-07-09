@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react-intl": "^5.10.4",
     "react-rich-ui": "link:../dist",
     "react-scripts": "4.0.0",
     "yup": "^0.30.0"

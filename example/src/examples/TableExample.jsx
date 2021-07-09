@@ -1,24 +1,23 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
 import { RruPageableTable } from 'react-rich-ui';
 
 const TableExample = props => {
 
   const columns = [
     {
-      label: <FormattedMessage id='serialNo' />,
+      label: 'No.',
       value: '#'
     },
     {
-      label: <FormattedMessage id='username' />,
+      label: 'Username',
       value: 'username'
     },
     {
-      label: <FormattedMessage id='companyName' />,
+      label: 'Company',
       value: 'company.name'
     },
     {
-      label: <FormattedMessage id='address' />,
+      label: 'Address',
       value: row => (row.address.city + ' - ' + row.address.zipCode),
       sortKey: 'address.zipCode'
     },
@@ -40,10 +39,10 @@ const TableExample = props => {
       icon: 'delete',
       action: user => console.log('delete user'+user.id),
       onConfirm: user => console.log('confirm delete user'+user.id),
-      confirmationTitle: <FormattedMessage id='delete' />,
-      confirmationDesc: <FormattedMessage id='deleteConfirmation' />,
-      cancelLabel: <FormattedMessage id='cancel' />,
-      confirmLabel: <FormattedMessage id='confirm' />,
+      confirmationTitle: 'Delete',
+      confirmationDesc: 'Are you sure you want to delete ?',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
     },
   ];
 

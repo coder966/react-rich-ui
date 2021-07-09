@@ -1,63 +1,62 @@
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { RruForm, RruFormElement } from 'react-rich-ui';
 import * as yup from 'yup';
 
 const FormExample = props => {
 
   const genders = [
-    {id: 'MALE', label: <FormattedMessage id='male' />},
-    {id: 'FEMALE', label: <FormattedMessage id='female' />},
+    {id: 'MALE', label: 'Male'},
+    {id: 'FEMALE', label: 'Female'},
   ];
 
   const colors = [
-    {id: 'R', label: <FormattedMessage id='red' />},
-    {id: 'G', label: <FormattedMessage id='green' />},
-    {id: 'B', label: <FormattedMessage id='blue' />},
+    {id: 'R', label: 'Red'},
+    {id: 'G', label: 'Green'},
+    {id: 'B', label: 'Blue'},
   ];
 
   const accountTypes = [
-    {id: 'INDIVIDUAL', label: <FormattedMessage id='individual' />},
-    {id: 'ORGANIZATION', label: <FormattedMessage id='organization' />},
+    {id: 'INDIVIDUAL', label: 'Individual'},
+    {id: 'ORGANIZATION', label: 'Organization'},
   ];
 
   const features = [
-    {id: '1', label: <FormattedMessage id='featureA' />},
-    {id: '2', label: <FormattedMessage id='featureB' />},
-    {id: '3', label: <FormattedMessage id='featureC' />},
-    {id: '4', label: <FormattedMessage id='featureD' />},
-    {id: '5', label: <FormattedMessage id='featureE' />},
-    {id: '6', label: <FormattedMessage id='featureF' />},
-    {id: '7', label: <FormattedMessage id='featureG' />},
-    {id: '8', label: <FormattedMessage id='featureH' />},
+    {id: '1', label: 'Feature A'},
+    {id: '2', label: 'Feature B'},
+    {id: '3', label: 'Feature C'},
+    {id: '4', label: 'Feature D'},
+    {id: '5', label: 'Feature E'},
+    {id: '6', label: 'Feature F'},
+    {id: '7', label: 'Feature G'},
+    {id: '8', label: 'Feature H'},
   ];
 
   const groups = [
     {
-      label: <FormattedMessage id='group1' />,
+      label: 'First Group',
       items: [
-        {id: '1', label: <FormattedMessage id='option1' />},
-        {id: '2', label: <FormattedMessage id='option2' />},
-        {id: '3', label: <FormattedMessage id='option3' />},
+        {id: '1', label: 'Option 1'},
+        {id: '2', label: 'Option 2'},
+        {id: '3', label: 'Option 3'},
       ]
     },
     {
-      label: <FormattedMessage id='group2' />,
+      label: 'Second Group',
       items: [
-        {id: '4', label: <FormattedMessage id='option4' />},
-        {id: '5', label: <FormattedMessage id='option5' />},
-        {id: '6', label: <FormattedMessage id='option6' />},
-        {id: '7', label: <FormattedMessage id='option7' />},
+        {id: '4', label: 'Option 4'},
+        {id: '5', label: 'Option 5'},
+        {id: '6', label: 'Option 6'},
+        {id: '7', label: 'Option 7'},
       ]
     }
-  ]
+  ];
 
   // ui components that others depend on
   const [accountType, setAccountType] = useState('INDIVIDUAL');
 
   const initialValues = {
     name: 'Khalid',
-    features: [1, '3',{id: '6', label: <FormattedMessage id='featureF' />}]
+    features: [1, '3',{id: '6', label: 'Feature F'}]
   }
 
   const validationSchema = yup.object().shape({
@@ -77,39 +76,39 @@ const FormExample = props => {
     <>
       <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit}>
         <div>
-          <RruFormElement type='text' name='name' label={<FormattedMessage id='name' />}/>
-          <RruFormElement type='text' name='email' label={<FormattedMessage id='email' />} requiredAsterisk />
-          <RruFormElement type='select' name='gender' label={<FormattedMessage id='gender' />} options={genders} defaultValue='unknown' />
+          <RruFormElement type='text' name='name' label='Name' />
+          <RruFormElement type='text' name='email' label='Email' requiredAsterisk />
+          <RruFormElement type='select' name='gender' label='Gender' options={genders} defaultValue='unknown' />
         </div>
         <div>
-          <RruFormElement type='multi-select' name='colors' label={<FormattedMessage id='colors' />} options={colors} defaultValue={['B']} disabled />
-          <RruFormElement type='select' name='accountType' label={<FormattedMessage id='accountType' />} options={accountTypes} defaultValue='ORGANIZATION' />
+          <RruFormElement type='multi-select' name='colors' label='Colors' options={colors} defaultValue={['B']} disabled />
+          <RruFormElement type='select' name='accountType' label='Account Type' options={accountTypes} defaultValue='ORGANIZATION' />
           {accountType === 'ORGANIZATION' &&
-            <RruFormElement type='text' name='moi' label={<FormattedMessage id='moi' />} maxLength='10' />
+            <RruFormElement type='text' name='moi' label='MOI' maxLength='10' />
           }
         </div>
         <div>
-          <RruFormElement type='multi-checkbox' name='features' label={<FormattedMessage id='features' />} options={features}/>
+          <RruFormElement type='multi-checkbox' name='features' label='Features' options={features}/>
         </div>
         <div>
-          <RruFormElement type='grouped-multi-checkbox' name='groups' label={<FormattedMessage id='groups' />} options={groups}/>
+          <RruFormElement type='grouped-multi-checkbox' name='groups' label='Groups' options={groups}/>
         </div>
         <div>
-          <RruFormElement type='date' name='bookingDate' label={<FormattedMessage id='bookingDate' />} defaultValue='2020-08-13' maxYearLength='10' isPast/>
-          <RruFormElement type='time' name='bookingTime' label={<FormattedMessage id='bookingTime' />} defaultValue="05:08"/>
+          <RruFormElement type='date' name='bookingDate' label='Booking Date' defaultValue='2020-08-13' maxYearLength='10' isPast/>
+          <RruFormElement type='time' name='bookingTime' label='Booking Time' defaultValue="05:08"/>
         </div>
         <div>
-          <RruFormElement type='file' name='attachment' label={<FormattedMessage id='attachment' />} placeholder='Select a file' />
-          <div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label={<FormattedMessage id='sendEmails' />} /></div>
+          <RruFormElement type='file' name='attachment' label='Attachment' placeholder='Select a file' />
+          <div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label='Allow promotion emails' /></div>
         </div>
         <div>
-          <RruFormElement type='textarea' name='feedback' label={<FormattedMessage id='feedback' />} />
+          <RruFormElement type='textarea' name='feedback' label='Feedback' />
         </div>
         <div>
-          <RruFormElement type='checkbox' name='pledge' label={<FormattedMessage id='pledge' />} />
+          <RruFormElement type='checkbox' name='pledge' label='In this step you define long text templates and allocate these templates to certain asset classes. By means of these templates, the system then supports the long text entry when you create a fixed asset belonging to the class. Per asset class, you can store one template for all long texts of an asset respectively (general specifications, technical specifications and so on).' />
         </div>
         <div>
-          <div style={{width: '100%'}}><button type='submit' className='float-right'><FormattedMessage id='submit' /></button></div>
+          <div style={{width: '100%'}}><button type='submit' className='float-right'>Submit</button></div>
         </div>
       </RruForm>
     </>
