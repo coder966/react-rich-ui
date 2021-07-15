@@ -171,6 +171,11 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
           }
         </thead>
         <tbody>
+          {error &&
+            <tr>
+              <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>An Error Occurred</td>
+            </tr>
+          }
           {data.length === 0 &&
             <tr>
               <td colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-centered'>{noDataLabel || 'No Data'}</td>
