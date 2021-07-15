@@ -1,7 +1,12 @@
 import React from 'react';
-import { RruStepsWizard } from 'react-rich-ui';
+import RruStepsWizard from '../src/steps-wizard/react-rich-ui-steps-wizard';
 
-const WizardExample = props => {
+export default {
+  title: 'Wizard',
+  component: RruStepsWizard,
+};
+
+export const WizardExample = props => {
 
   const FirstStep = props => (
     <div>
@@ -42,5 +47,3 @@ const WizardExample = props => {
     </>
   );
 };
-
-export default WizardExample;

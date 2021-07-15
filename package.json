@@ -44,10 +44,15 @@
     "@babel/cli": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/react": "^6.3.4",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "yup": "^0.32.9"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",
@@ -58,8 +63,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepublish": "yarn run build",
-    "start": "babel src --out-dir dist --copy-files --watch",
-    "start:example": "yarn --cwd ./example run start"
+    "start": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"

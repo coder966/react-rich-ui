@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { RruPageableTable } from 'react-rich-ui';
+import RruPageableTable from '../src/pageable-table/react-rich-ui-pageable-table';
 
-const TableExample = props => {
+export default {
+  title: 'Table',
+  component: RruPageableTable,
+};
+
+export const TableExample = props => {
 
   const [searchParams, setSearchParams] = useState({});
 
@@ -64,8 +69,10 @@ const TableExample = props => {
   return (
     <>
       <form onSubmit={onSearch}>
-        <label>Name</label><input name='name' />
-        <label>Email</label><input name='email' />
+        <label>Name</label>
+        <input name='name'/>
+        <label>Email</label>
+        <input name='email' />
         <button type='submit'>Search</button>
       </form>
 
@@ -82,5 +89,3 @@ const TableExample = props => {
     </>
   );
 };
-
-export default TableExample;

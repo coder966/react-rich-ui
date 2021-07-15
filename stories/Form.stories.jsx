@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { RruForm, RruFormElement } from 'react-rich-ui';
 import * as yup from 'yup';
+import { RruForm, RruFormElement } from '../src/form/react-rich-ui-form';
 
-const FormExample = props => {
+export default {
+  title: 'Form',
+  component: RruForm,
+};
+
+export const FormExample = props => {
 
   const genders = [
     {id: 'MALE', label: 'Male'},
@@ -114,5 +119,3 @@ const FormExample = props => {
     </>
   );
 };
-
-export default FormExample;
