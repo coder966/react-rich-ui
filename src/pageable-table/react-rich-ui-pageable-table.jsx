@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import ReactPaginate from 'react-paginate'
+import React, { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import RruButton from '../button/react-rich-ui-button';
-import './style.css'
+import './style.css';
 
-// dynamically loading Axios
+// dynamically load Axios
 let axios;
 try{
   axios = require('axios');
@@ -39,6 +39,13 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
   useEffect(() => {
     persistState({currentPage, sortBy, sortDir});
   }, [currentPage, sortBy, sortDir]);
+
+  // reset page to 0 when the search changes
+  useEffect(() => {
+    if(currentPage !== 0){
+      setCurrentPage(0);
+    }
+  }, [search]);
 
   // reload list when search, page, sort changes
   useEffect(() => {
