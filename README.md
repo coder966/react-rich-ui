@@ -1,5 +1,5 @@
 # React Rich UI
-A set of commonly-used React components with super friendly API
+A set of commonly-used React components with a declarative API
 > **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
 ## Docs
