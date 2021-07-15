@@ -35,6 +35,8 @@
     "node": ">=10"
   },
   "dependencies": {
+    "@types/react-paginate": "^7.1.1",
+    "@types/react-select": "^4.0.17",
     "react-bootstrap": "^1.6.1",
     "react-hook-form": "^4.10.2",
     "react-paginate": "^7.1.3",
