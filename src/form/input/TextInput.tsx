@@ -1,13 +1,22 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
-import Label from '../Label';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+
+export interface TextInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    maxLength: number,
+    placeholder: string,
+}
 
 /**
   * @author coder966
   */
-const TextInput = props => {
+const TextInput: FC<TextInputProps> = props => {
     const {
         name, disabled, maxLength, placeholder
     } = props;

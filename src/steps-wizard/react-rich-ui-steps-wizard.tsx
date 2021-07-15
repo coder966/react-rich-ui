@@ -1,8 +1,20 @@
-import React from 'react';
-import { useState } from 'react';
-import './style.css';
+import React, { FC, useState } from 'react';
 
-const RruStepsWizard = props => {
+export interface RruStepsWizardStepProps {
+  stepLabel?: JSX.Element,
+  goToStep: (stepNumber: number, data?: object) => void,
+  firstStep: (data?: object) => void,
+  lastStep: (data?: object) => void,
+  nextStep: (data?: object) => void,
+  previousStep: (data?: object) => void,
+  previousStepData: object,
+}
+export interface RruStepsWizardProps {
+  noHeader?: boolean,
+  children: React.ReactElement<RruStepsWizardStepProps>[],
+}
+
+const RruStepsWizard: FC<RruStepsWizardProps> = props => {
 
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
   const [previousStepData, setPreviousStepData] = useState(null);

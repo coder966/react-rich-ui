@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react';
-import {useForm, FormContext} from 'react-hook-form';
-import TextInput from './input/TextInput';
+import React, { FC, useEffect } from 'react';
+import { FormContext, useForm } from 'react-hook-form';
+import CheckboxInput from './input/CheckboxInput';
+import DateInput from './input/DateInput';
+import FileInput from './input/FileInput';
+import GroupedMultiCheckboxInput from './input/GroupedMultiCheckboxInput';
+import MultiCheckboxInput from './input/MultiCheckboxInput';
+import MultiSelectInput from './input/MultiSelectInput';
 import PasswordInput from './input/PasswordInput';
-import TextareaInput from './input/TextareaInput';
 import RadioInput from './input/RadioInput';
 import SelectInput from './input/SelectInput';
-import MultiSelectInput from './input/MultiSelectInput';
-import CheckboxInput from './input/CheckboxInput';
-import MultiCheckboxInput from './input/MultiCheckboxInput';
-import GroupedMultiCheckboxInput from './input/GroupedMultiCheckboxInput';
-import DateInput from './input/DateInput';
+import TextareaInput from './input/TextareaInput';
+import TextInput from './input/TextInput';
 import TimeInput from './input/TimeInput';
-import FileInput from './input/FileInput';
-import './style.css';
+
+export interface RruFormProps {
+    initialValues?: object,
+    validationSchema?: object,
+    onSubmit: (form: object) => void,
+    watch?: Array<string> | ((watch: ((fieldNames: Array<string>) => object)) => void),
+    watcher?: (form: object) => void,
+    children: JSX.Element | JSX.Element[],
+    className?: string,
+}
 
 /**
   * @author coder966
   */
-const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
+const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
     // transform initialValues object to meet our requirements:
     // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
     if(initialValues){
@@ -42,11 +51,11 @@ const RruForm = ({ initialValues, validationSchema, onSubmit, watch, watcher, ch
 
     useEffect(() => {
         if(watch){
-            if(Array.isArray(watch) && watcher){
-                watcher(form.watch(watch))
-            }else{
+            if(typeof watch === 'function'){
                 // TODO: remove deprecated
                 watch(form.watch);
+            }else if(Array.isArray(watch) && watcher){
+                watcher(form.watch(watch))
             }
         }
     });
@@ -95,4 +104,4 @@ const RruFormElement = props => {
     }
 };
 
-export {RruForm, RruFormElement};
+export { RruForm, RruFormElement };

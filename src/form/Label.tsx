@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
+
+export interface LabelProps {
+    inputName: string,
+    label: JSX.Element,
+    requiredAsterisk: boolean,
+}
 
 /**
   * @author coder966
   */
-const Label = props => {
+const Label: FC<LabelProps> = props => {
     const {
         inputName, label, requiredAsterisk
     } = props;

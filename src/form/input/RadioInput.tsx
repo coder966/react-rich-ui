@@ -1,13 +1,23 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
-import Label from '../Label';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+import Option from './types/Option';
+
+export interface RadioInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    options: Option[],
+    inline: boolean,
+}
 
 /**
   * @author coder966
   */
-const RadioInput = props => {
+const RadioInput: FC<RadioInputProps> = props => {
     const {
         name, options, disabled, 
     } = props;

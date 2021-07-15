@@ -1,6 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
+import '../src/button/style.css';
 import RruPageableTable from '../src/pageable-table/react-rich-ui-pageable-table';
+import '../src/pageable-table/style.css';
 
 export default {
   title: 'Table',

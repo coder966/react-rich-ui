@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import React from 'react';
 import * as yup from 'yup';
 import RruButton from '../src/button/react-rich-ui-button';
+import '../src/button/style.css';
 import { RruFormElement } from '../src/form/react-rich-ui-form';
 
 export default {

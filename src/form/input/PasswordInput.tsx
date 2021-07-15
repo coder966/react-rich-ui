@@ -1,13 +1,22 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
-import Label from '../Label';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+
+export interface PasswordInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    placeholder?: string,
+    maxLength?: number,
+}
 
 /**
   * @author coder966
   */
-const PasswordInput = props => {
+const PasswordInput: FC<PasswordInputProps> = props => {
     const {
         name, disabled, maxLength, placeholder
     } = props;

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import RruButton from '../button/react-rich-ui-button';
-import './style.css';
+import SpringPage from './types/SpringPage';
+import TableAction from './types/TableAction';
+import TableColumn from './types/TableColumn';
 
 // dynamically load Axios
 let axios;
@@ -11,10 +13,26 @@ try{
   console.log('Axios is not installed. Falling back to fetch')
 }
 
+export interface RruPageableTableProps {
+  id: string,
+  endpoint: string,
+  columns: Array<TableColumn>,
+  actions: Array<TableAction>,
+  actionsLabel: JSX.Element,
+  search: object,
+  pageSize: number,
+  previousLabel: JSX.Element,
+  nextLabel: JSX.Element,
+  noDataLabel: JSX.Element,
+  disableSorting: boolean,
+  userPrivileges: Array<string>,
+  onResponse: (body: object) => void,
+}
+
 /**
  * @author coder966
  */
-const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse}) => {
+const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse}) => {
 
   const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
   const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
@@ -65,7 +83,9 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
         .then(res => resolve(res.data))
         .catch(err => reject(err));
       }else{
-        fetch(endpoint + '?' + new URLSearchParams(params))
+        const searchParams = new URLSearchParams();
+        Object.keys(params).forEach(key => searchParams.append(key, params[key]))
+        fetch(endpoint + '?' + searchParams)
         .then(res => res.json())
         .then(data => resolve(data))
         .catch(err => reject(err));
@@ -73,7 +93,7 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
     });
 
     // handle promise result
-    dataPromise.then(data => {
+    dataPromise.then((data: SpringPage) => {
       setIsLoading(false);
       setTotalPages(data.totalPages);
       setData(data.content);
@@ -143,7 +163,7 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
           {isLoading && 
             <tr>
               <th colSpan={columns.length+(actions ? 1 : 0)} className='rru-pageable-table-loading-th'>
-                <div colSpan={columns.length+(actions ? 1 : 0)}  className='progressBar'>
+                <div className='progressBar'>
                   <div className='indeterminate'></div>
                 </div>
               </th>
@@ -163,7 +183,8 @@ const RruPageableTable = ({id, endpoint, columns, actions, actionsLabel, search,
               {actions &&
                 <td>
                   {actions.map((a, k) => {
-                    return (!a.display || a.display(row)) ? <RruButton key={k} labelId={a.labelId} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => a.onConfirm(row) : undefined} onClick={() => a.action(row)} /> : null;
+                    const shouldDisplay = (typeof a.display === 'function' && a.display(row)) || !a.display
+                    return shouldDisplay ? <RruButton key={k} label={a.label} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => a.onConfirm(row) : undefined} onClick={() => a.action(row)} /> : null;
                   })}
                 </td>
               }

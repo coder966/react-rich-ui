@@ -1,14 +1,21 @@
-import React from 'react';
-import { useState } from 'react';
-import {useFormContext} from 'react-hook-form';
-import Label from '../Label';
+import React, { FC, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+
+export interface FileInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    placeholder?: string,
+    requiredAsterisk?: boolean,
+}
 
 /**
   * @author coder966
   */
-const FileInput = props => {
+const FileInput: FC<FileInputProps> = props => {
     const {
         name, placeholder, disabled
     } = props;

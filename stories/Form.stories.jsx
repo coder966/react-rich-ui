@@ -1,7 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import * as yup from 'yup';
+import '../src/button/style.css';
 import { RruForm, RruFormElement } from '../src/form/react-rich-ui-form';
+import '../src/form/style.css';
 
 export default {
   title: 'Form',

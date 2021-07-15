@@ -1,13 +1,22 @@
-import React, { Fragment } from 'react';
-import {useFormContext} from 'react-hook-form';
-import Label from '../Label';
+import React, { FC, Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+import GroupOption from './types/GroupOption';
+
+export interface GroupedMultiCheckboxInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    options: GroupOption[],
+}
 
 /**
   * @author coder966
   */
-const GroupedMultiCheckboxInput = props => {
+const GroupedMultiCheckboxInput: FC<GroupedMultiCheckboxInputProps> = props => {
     const {
         name, options, disabled, 
     } = props;

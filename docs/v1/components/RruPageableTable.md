@@ -37,7 +37,8 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| icon | Refer to `RruButton` section| Yes |
+| label | Button label | Either this or `icon` |
+| icon | It can be either an icon name (see `RruButton` section) or a function that returns an icon name. | Either this or `label` |
 | action | A function which takes the row object | Yes |
 | display | A function which takes the row object and<br>returns a `boolean` whether the action should be available for this row. | No |
 | privileges | An array of the required privilege for this actions. The `userPrivileges` provided in the table will be used. | No |

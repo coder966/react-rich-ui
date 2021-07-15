@@ -1,14 +1,26 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import DateTimePicker from "../DateTimePicker";
-import Label from '../Label';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+
+export interface TimeInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    defaultValue: string,
+    reverseDisplayOrder: boolean,
+    isPast: boolean,
+    isFuture: boolean,
+    clock: 24 | 12,
+}
 
 /**
   * @author coder966
   */
-const TimeInput = props => {
+const TimeInput: FC<TimeInputProps> = props => {
     const {
         name, disabled, 
     } = props;
@@ -24,11 +36,9 @@ const TimeInput = props => {
                 onChange={value => formContext.setValue(name, value)}
                 defaultValue={props.defaultValue}
                 reverseDisplayOrder={props.reverseDisplayOrder}
-                isHijri={props.isHijri}
                 isFuture={props.isFuture}
                 isPast={props.isPast}
                 clock={props.clock}
-                maxYearLength={props.maxYearLength}
                 disabled={disabled} />
             <ErrorMessage inputName={name} />
         </div>

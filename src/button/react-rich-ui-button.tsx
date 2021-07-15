@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap'
-import {RruForm} from '../form/react-rich-ui-form';
-import './style.css';
+import React, { FC, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { RruForm } from '../form/react-rich-ui-form';
 
 const icons = {
   view: 'fa fa-eye icon view',
@@ -19,11 +18,29 @@ const icons = {
 }
 
 const getIcon = name => icons[name] ? icons[name] : name;
+export interface RruButtonProps {
+  label?: JSX.Element,
+  confirmLabel?: JSX.Element,
+  cancelLabel?: JSX.Element,
+  confirmationTitle?: JSX.Element,
+  confirmationDesc?: JSX.Element,
+  icon?: 'view' | 'edit' | 'lock' | 'unlock' | 'delete' | 'add' | 'remove' | 'check' | 'times' | 'pdf' | 'excel' | 'download' | string,
+  onConfirm?: (form?: object, setShow?: (isShowing: boolean) => void) => boolean,
+  onClick?: () => void,
+  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-dark' | 'outline-light',
+  formElements?: JSX.Element,
+  initialValues?: object,
+  validationSchema?: object,
+  watch?: Array<string> | ((watch: ((fieldNames: Array<string>) => object)) => void),
+  watcher?: (form: object) => void,
+  userPrivileges?: Array<string>,
+  allowedPrivileges?: Array<string>,
+}
 
 /**
  * @author coder966
  */
-const RruButton = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher, userPrivileges, allowedPrivileges}) => {
+const RruButton: FC<RruButtonProps> = ({label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher, userPrivileges, allowedPrivileges}) => {
   const [show, setShow] = useState(false);
 
   if(allowedPrivileges && userPrivileges && !userPrivileges.some(p => allowedPrivileges.includes(p))){

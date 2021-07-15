@@ -1,12 +1,18 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+
+export interface CheckboxInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+}
 
 /**
   * @author coder966
   */
-const CheckboxInput = props => {
+const CheckboxInput: FC<CheckboxInputProps> = props => {
     const {
         name, label, disabled, 
     } = props;

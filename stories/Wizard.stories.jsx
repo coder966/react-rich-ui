@@ -1,5 +1,7 @@
 import React from 'react';
+import '../src/button/style.css';
 import RruStepsWizard from '../src/steps-wizard/react-rich-ui-steps-wizard';
+import '../src/steps-wizard/style.css';
 
 export default {
   title: 'Wizard',

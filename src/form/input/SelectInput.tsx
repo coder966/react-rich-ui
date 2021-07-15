@@ -1,20 +1,29 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import {useFormContext} from 'react-hook-form';
+import React, { FC, useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import Select from "react-select";
-import Label from '../Label';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+import Option from './types/Option';
+
+export interface SelectInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    options: Option[],
+    defaultValue: string
+}
 
 /**
   * @author coder966
   */
-const SelectInput = props => {
+const SelectInput: FC<SelectInputProps> = props => {
     const {
         name, options, disabled, 
     } = props;
 
-    const [selectControlValue, setSelectControlValue] = useState();
+    const [selectControlValue, setSelectControlValue] = useState(null);
     const formContext = useFormContext();
     formContext.register({name});
 

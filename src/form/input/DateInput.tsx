@@ -1,14 +1,27 @@
-import React from 'react';
-import {useFormContext} from 'react-hook-form';
+import React, { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 import DateTimePicker from "../DateTimePicker";
-import Label from '../Label';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+
+export interface DateInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    defaultValue?: string,
+    isHijri: boolean,
+    isPast: boolean,
+    isFuture: boolean,
+    maxYearLength: number,
+    reverseDisplayOrder?: boolean,
+}
 
 /**
   * @author coder966
   */
-const DateInput = props => {
+const DateInput: FC<DateInputProps> = props => {
     const {
         name, disabled, 
     } = props;
@@ -27,7 +40,6 @@ const DateInput = props => {
                 isHijri={props.isHijri}
                 isFuture={props.isFuture}
                 isPast={props.isPast}
-                clock={props.clock}
                 maxYearLength={props.maxYearLength}
                 disabled={disabled} />
             <ErrorMessage inputName={name} />

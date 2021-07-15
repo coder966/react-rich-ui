@@ -1,15 +1,24 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import {useFormContext} from 'react-hook-form';
+import React, { FC, useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import Select from "react-select";
-import Label from '../Label';
 import ErrorMessage from '../ErrorMessage';
-import './../style.css';
+import Label from '../Label';
+import Option from './types/Option';
+
+export interface MultiSelectInputProps {
+    name: string,
+    label?: JSX.Element,
+    disabled?: boolean,
+    className?: string,
+    requiredAsterisk?: boolean,
+    options: Option[],
+    defaultValue?: string,
+}
 
 /**
   * @author coder966
   */
-const MultiSelectInput = props => {
+const MultiSelectInput: FC<MultiSelectInputProps> = props => {
     const {
         name, options, disabled, 
     } = props;
