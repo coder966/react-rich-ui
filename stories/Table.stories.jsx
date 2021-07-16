@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import RruPageableTable from '../src/pageable-table/react-rich-ui-pageable-table';
 
@@ -47,18 +48,18 @@ export const TableExample = props => {
     {
       icon: 'view',
       privileges: ['USER:VIEW'],
-      action: user => console.log('view user'+user.id),
+      action: user => action('view user')(user),
     },
     {
       icon: 'edit',
       privileges: ['USER:EDIT'],
-      action: user => console.log('edit user'+user.id),
+      action: user => action('edit user')(user),
       display: user => user.status === 'CONFIRMED'
     },
     {
       icon: 'delete',
-      action: user => console.log('delete user'+user.id),
-      onConfirm: user => console.log('confirm delete user'+user.id),
+      action: user => action('delete user')(user),
+      onConfirm: user => action('confirm delete user')(user),
       confirmationTitle: 'Delete',
       confirmationDesc: 'Are you sure you want to delete ?',
       cancelLabel: 'Cancel',

@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { RruForm, RruFormElement } from '../src/form/react-rich-ui-form';
@@ -74,7 +75,7 @@ export const FormExample = props => {
   }
 
   const onSubmit = form => {
-    console.log(form);
+    action('submitting the form')(form);
   };
 
   return (

@@ -19,10 +19,14 @@ export const ButtonExample = props => {
     reason: 'default reason'
   }
 
+  const onConfirm = (form, setShow) => {
+    action('action confirmed')(form)
+  }
+
   return (
     <RruButton 
       variant='danger'
-      onConfirm={action('Confirmed')}
+      onConfirm={onConfirm}
       label='Delete'
       initialValues={initialValues}
       validationSchema={validationSchema}
