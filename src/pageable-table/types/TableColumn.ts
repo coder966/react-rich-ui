@@ -1,6 +1,6 @@
 interface TableColumn {
-    label: JSX.Element,
-    value: string | ((row: object) => JSX.Element),
+    label: React.ReactNode,
+    value: string | ((row: object) => React.ReactNode),
     sortable: boolean,
     sortKey: string,
     display: boolean,

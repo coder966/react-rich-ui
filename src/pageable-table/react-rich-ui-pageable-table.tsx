@@ -1,12 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import RruButton from '../button/react-rich-ui-button';
+import { isObjKey } from '../utils/utilFunction';
+import PersistableTableData from './types/PersistableTableData';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
+import TableDataRow from './types/TableDataRow';
 
 // dynamically load Axios
-let axios;
+let axios: any;
 try{
   axios = require('axios');
 }catch(e){
@@ -18,12 +21,12 @@ export interface RruPageableTableProps {
   endpoint: string,
   columns: Array<TableColumn>,
   actions: Array<TableAction>,
-  actionsLabel: JSX.Element,
+  actionsLabel: React.ReactNode,
   search: object,
   pageSize: number,
-  previousLabel: JSX.Element,
-  nextLabel: JSX.Element,
-  noDataLabel: JSX.Element,
+  previousLabel: React.ReactNode,
+  nextLabel: React.ReactNode,
+  noDataLabel: React.ReactNode,
   disableSorting: boolean,
   userPrivileges: Array<string>,
   onResponse: (body: object) => void,
@@ -34,12 +37,22 @@ export interface RruPageableTableProps {
  */
 const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse}) => {
 
-  const getInitialState = () => JSON.parse(sessionStorage.getItem('RruPageableTable_'+id)) || {currentPage: 0, sortBy: 'id', sortDir: 'desc'};
-  const persistState = state => sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
+  const getInitialState = () : PersistableTableData => {
+    const persistedData = sessionStorage.getItem('RruPageableTable_'+id);
+    if(persistedData){
+      return JSON.parse(persistedData);
+    }else{
+      return {currentPage: 0, sortBy: 'id', sortDir: 'desc'}
+    }
+  }
+
+  const persistState = (state: PersistableTableData) => {
+    sessionStorage.setItem('RruPageableTable_'+id, JSON.stringify(state));
+  };
 
   // fetched
   const [totalPages, setTotalPages] = useState(0);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TableDataRow[]>([]);
   const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
 
   // flags
@@ -77,14 +90,18 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
     };
 
     // create an abstract promise for different HTTP client libs
-    const dataPromise = new Promise((resolve, reject) => {
+    const dataPromise = new Promise((resolve: (data: SpringPage) => void, reject) => {
       if(axios){
-        axios.get(endpoint, {params: params})
-        .then(res => resolve(res.data))
-        .catch(err => reject(err));
+        axios(endpoint, {params: params})
+        .then((res: any) => resolve(res.data))
+        .catch((err: any) => reject(err));
       }else{
         const searchParams = new URLSearchParams();
-        Object.keys(params).forEach(key => searchParams.append(key, params[key]))
+        Object.keys(params).forEach(key => {
+          if(isObjKey(params, key)){
+            searchParams.append(key, params[key]+'')
+          }
+        })
         fetch(endpoint + '?' + searchParams)
         .then(res => res.json())
         .then(data => resolve(data))
@@ -107,9 +124,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
     })
   }, [currentPage, search, sortBy, sortDir]);
 
-  const getSerialNo = index => (currentPage*mPageSize)+(index+1);
+  const getSerialNo = (index: number) => (currentPage*mPageSize)+(index+1);
 
-  const getSortKey = col => {
+  const getSortKey = (col: TableColumn) => {
     if(col.sortable === undefined || col.sortable){
       if(typeof col.value === 'function'){
         return col.sortKey;
@@ -123,7 +140,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
     }
   };
 
-  const getSortClassName = col => {
+  const getSortClassName = (col: TableColumn) => {
     const sortKey = getSortKey(col);
     if(sortKey){
       if(sortKey === sortBy){
@@ -136,9 +153,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
     }
   };
 
-  const onSort = col => {
+  const onSort = (col: TableColumn) => {
     const sortKey = getSortKey(col);
-    if(sortKey){
+    if(sortKey && !disableSorting){
       if(sortBy !== sortKey){
         setSortBy(sortKey);
       }
@@ -146,7 +163,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
     }
   };
 
-  const resolve = (path, obj) => path.split('.').reduce((prev, curr) => (prev ? prev[curr] : null), obj);
+  const resolve = (path: string, obj: object): any => {
+    path.split('.').reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj)
+  };
 
   return (
     <>
@@ -154,7 +173,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
         <thead>
           <tr>
             {columns.map((col, index) => (col.display === undefined || col.display) &&
-              <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={!disableSorting && (e => onSort(col))}>
+              <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={() => onSort(col)}>
                 {col.label}
               </th>
             )}
@@ -189,7 +208,12 @@ const RruPageableTable: FC<RruPageableTableProps> = ({id, endpoint, columns, act
                 <td>
                   {actions.map((a, k) => {
                     const shouldDisplay = (typeof a.display === 'function' && a.display(row)) || !a.display
-                    return shouldDisplay ? <RruButton key={k} label={a.label} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => a.onConfirm(row) : undefined} onClick={() => a.action(row)} /> : null;
+                    return shouldDisplay ? <RruButton key={k} label={a.label} icon={typeof a.icon === 'function' ? a.icon(row) : a.icon} userPrivileges={userPrivileges} allowedPrivileges={a.privileges} confirmationTitle={a.confirmationTitle} confirmationDesc={a.confirmationDesc} cancelLabel={a.cancelLabel} confirmLabel={a.confirmLabel} onConfirm={a.onConfirm ? () => {
+                      if(a.onConfirm){
+                        a.onConfirm(row);
+                      }
+                      return true;
+                    }: undefined} onClick={() => a.action(row)} /> : null;
                   })}
                 </td>
               }

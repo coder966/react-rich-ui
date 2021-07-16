@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
+import { isObjKey } from '../utils/utilFunction';
 import CheckboxInput from './input/CheckboxInput';
 import DateInput from './input/DateInput';
 import FileInput from './input/FileInput';
@@ -12,14 +13,17 @@ import SelectInput from './input/SelectInput';
 import TextareaInput from './input/TextareaInput';
 import TextInput from './input/TextInput';
 import TimeInput from './input/TimeInput';
+import FormInitialValues from './types/FormInitialValues';
+import FormValues from './types/FormValues';
+import IRHFDefaultValues from './types/IRHFDefaultValues';
 
 export interface RruFormProps {
-    initialValues?: object,
+    initialValues?: FormInitialValues,
     validationSchema?: object,
-    onSubmit: (form: object) => void,
-    watch?: Array<string> | ((watch: ((fieldNames: Array<string>) => object)) => void),
-    watcher?: (form: object) => void,
-    children: JSX.Element | JSX.Element[],
+    onSubmit: (form: FormValues) => void,
+    watch?: string[] | ((watch: ((fieldNames: string[]) => FormValues)) => void),
+    watcher?: (form: FormValues) => void,
+    children: React.ReactNode | React.ReactNode[],
     className?: string,
 }
 
@@ -31,8 +35,8 @@ const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, 
     // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
     if(initialValues){
         for(const [key, value] of Object.entries(initialValues)){
-            if(value && Array.isArray(value)){
-                initialValues[key] = value.map(item => {
+            if(value && Array.isArray(value) && isObjKey(initialValues, key)){
+                initialValues[key] = (value as any[]).map(item => {
                     if(typeof item === 'object' && item.id){
                         return item.id+'';
                     }else{
@@ -45,7 +49,7 @@ const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, 
 
     const form = useForm({
         mode: 'onChange',
-        defaultValues: initialValues,
+        defaultValues: initialValues as IRHFDefaultValues,
         validationSchema: validationSchema
     });
 
@@ -73,7 +77,7 @@ const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, 
 /**
   * @author coder966
   */
-const RruFormElement = props => {
+const RruFormElement = (props: any) => {
     switch (props.type) {
         case 'text':
             return <TextInput {...props} />;

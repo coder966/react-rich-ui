@@ -3,16 +3,17 @@ import { useFormContext } from 'react-hook-form';
 import Select from "react-select";
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
+import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
 export interface MultiSelectInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     requiredAsterisk?: boolean,
     options: Option[],
-    defaultValue?: string,
+    defaultValue?: string[],
 }
 
 /**
@@ -20,14 +21,14 @@ export interface MultiSelectInputProps {
   */
 const MultiSelectInput: FC<MultiSelectInputProps> = props => {
     const {
-        name, options, disabled, 
+        name, options, disabled, defaultValue
     } = props;
 
-    const [selectControlValue, setSelectControlValue] = useState();
+    const [selectControlValue, setSelectControlValue] = useState<readonly IReactSelectOption[]>();
     const formContext = useFormContext();
     formContext.register({name});
 
-    const onSelectChange = opt => { // react-select option datatype
+    const onSelectChange = (opt: readonly IReactSelectOption[] | null) => { // react-select option datatype
         setSelectControlValue(opt || []);
         formContext.setValue(name, opt ? opt.map(o => o.value) : []);
     }
@@ -35,11 +36,13 @@ const MultiSelectInput: FC<MultiSelectInputProps> = props => {
     // because controlled fields (registered through formContext.register) need to call setValue for the initial value
     // this issue is also present in date and time but is handled in the DateTimePicker constructor
     useEffect(() => {
-        let defaultOptions = [];
-        if(props.defaultValue && Array.isArray(props.defaultValue)){
-            defaultOptions = options.filter(o => props.defaultValue.includes(o.id+''));
+        let defaultOptions: IReactSelectOption[] = [];
+        if(defaultValue){
+            defaultOptions = options
+                .filter(o => defaultValue.includes(o.id+''))
+                .map(o => ({value: o.id, label: o.label}));
         }
-        onSelectChange(defaultOptions.map(o => ({value: o.id, label: o.label})));
+        onSelectChange(defaultOptions);
     }, []);
 
     useEffect(() => {

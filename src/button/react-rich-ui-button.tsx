@@ -1,6 +1,9 @@
 import React, { FC, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { RruForm } from '../form/react-rich-ui-form';
+import FormInitialValues from '../form/types/FormInitialValues';
+import FormValues from '../form/types/FormValues';
+import { isObjKey } from '../utils/utilFunction';
 
 const icons = {
   view: 'fa fa-eye icon view',
@@ -17,22 +20,23 @@ const icons = {
   download: 'fas fa-download icon download',
 }
 
-const getIcon = name => icons[name] ? icons[name] : name;
+const getIcon = (name: (keyof typeof icons) | string) => isObjKey(icons, name) ? icons[name] : name;
+
 export interface RruButtonProps {
-  label?: JSX.Element,
-  confirmLabel?: JSX.Element,
-  cancelLabel?: JSX.Element,
-  confirmationTitle?: JSX.Element,
-  confirmationDesc?: JSX.Element,
+  label?: React.ReactNode,
+  confirmLabel?: React.ReactNode,
+  cancelLabel?: React.ReactNode,
+  confirmationTitle?: React.ReactNode,
+  confirmationDesc?: React.ReactNode,
   icon?: 'view' | 'edit' | 'lock' | 'unlock' | 'delete' | 'add' | 'remove' | 'check' | 'times' | 'pdf' | 'excel' | 'download' | string,
-  onConfirm?: (form?: object, setShow?: (isShowing: boolean) => void) => boolean,
+  onConfirm?: (form?: FormValues, setShow?: (isShowing: boolean) => void) => boolean,
   onClick?: () => void,
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-dark' | 'outline-light',
-  formElements?: JSX.Element,
-  initialValues?: object,
+  formElements?: React.ReactNode,
+  initialValues?: FormInitialValues,
   validationSchema?: object,
   watch?: Array<string> | ((watch: ((fieldNames: Array<string>) => object)) => void),
-  watcher?: (form: object) => void,
+  watcher?: (form: FormValues) => void,
   userPrivileges?: Array<string>,
   allowedPrivileges?: Array<string>,
 }
@@ -48,7 +52,7 @@ const RruButton: FC<RruButtonProps> = ({label, confirmLabel, cancelLabel, confir
   }
 
   if(onConfirm){
-    const handleConfirm = data => {
+    const handleConfirm = (data: object) => {
       const result = onConfirm((formElements ? data : undefined), setShow);
       if(result !== undefined){
         setShow(!result);

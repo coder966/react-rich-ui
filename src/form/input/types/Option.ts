@@ -1,6 +1,6 @@
 interface Option {
     id: string,
-    label: JSX.Element,
+    label: React.ReactNode,
 }
 
 export default Option;

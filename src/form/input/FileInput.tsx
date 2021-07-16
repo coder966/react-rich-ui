@@ -5,7 +5,7 @@ import Label from '../Label';
 
 export interface FileInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     placeholder?: string,
@@ -20,7 +20,7 @@ const FileInput: FC<FileInputProps> = props => {
         name, placeholder, disabled
     } = props;
 
-    const [fileName, setFileName] = useState(null);
+    const [fileName, setFileName] = useState<string | null>(null);
     const formContext = useFormContext();
 
     return (
@@ -34,7 +34,12 @@ const FileInput: FC<FileInputProps> = props => {
                     setFileName(null);
                 }
             }} />
-            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => document.getElementById(`file_${name}`).click()}>
+            <div className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')} onClick={e => {
+                const fileInput = document.getElementById(`file_${name}`);
+                if(fileInput){
+                    fileInput.click();
+                }
+            }}>
                 {fileName || placeholder}
             </div>
             <ErrorMessage inputName={name} />

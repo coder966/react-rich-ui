@@ -1,7 +1,7 @@
 import Option from "./Option";
 
 interface GroupOption {
-    label: JSX.Element,
+    label: React.ReactNode,
     items: Option[],
 }
 

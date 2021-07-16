@@ -5,7 +5,7 @@ import Label from '../Label';
 
 export interface TextInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     requiredAsterisk?: boolean,

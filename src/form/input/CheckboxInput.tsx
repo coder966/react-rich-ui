@@ -4,7 +4,7 @@ import ErrorMessage from '../ErrorMessage';
 
 export interface CheckboxInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
 }

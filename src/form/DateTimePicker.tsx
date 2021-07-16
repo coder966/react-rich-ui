@@ -87,7 +87,7 @@ class DateTimePicker extends React.Component<DateTimePickerProps, DateTimePicker
     this.componentDidUpdate(props, null);
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = (prevProps: any, prevState: any) => {
     let {day, month, year, hour, minute} = this.state;
     if(this.props.onChange){
       if(this.props.type === 'date' && (!prevState || prevState.day !== day || prevState.month !== month || prevState.year !== year)){
@@ -98,7 +98,7 @@ class DateTimePicker extends React.Component<DateTimePickerProps, DateTimePicker
     }
   }
 
-  range = (s, e) => Array(e-s+1).fill(s).map((x, y) => x + y);
+  range = (s: number, e: number) => Array(e-s+1).fill(s).map((x, y) => x + y);
 
   getDays = () => {
     if(this.props.isHijri){
@@ -115,12 +115,12 @@ class DateTimePicker extends React.Component<DateTimePickerProps, DateTimePicker
     }
   };
 
-  getMonths = () => precomputed.months;
-  getYears = () => this.props.isHijri ? this.range(this.state.minYearH, this.state.maxYearH) : this.range(this.state.minYearG, this.state.maxYearG);
-  getHours = () => this.props.clock === 24 ? precomputed.hours24 : precomputed.hours12;
-  getMinutes = () => precomputed.minutes;
+  getMonths = () : string[] => precomputed.months;
+  getYears = () : string[] => this.props.isHijri ? this.range(this.state.minYearH, this.state.maxYearH) : this.range(this.state.minYearG, this.state.maxYearG);
+  getHours = () : string[] => this.props.clock === 24 ? precomputed.hours24 : precomputed.hours12;
+  getMinutes = () : string[] => precomputed.minutes;
 
-  handleField = event => {
+  handleField = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const name = event.target.name;
     const value = parseInt(event.target.value);
     if(name === 'year'){
@@ -135,7 +135,7 @@ class DateTimePicker extends React.Component<DateTimePickerProps, DateTimePicker
     }
   };
 
-  renderField = (name, valuesGetter) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' || name === 'minute' ? i : v}>{v}</option>)}</select>;
+  renderField = (name: keyof DateTimePickerState, valuesGetter: () => string[]) => <select name={name} className='custom-select' value={this.state[name]} disabled={this.props.disabled} onChange={this.handleField}>{valuesGetter().map((v, i) => <option key={v} value={name === 'hour' || name === 'minute' ? i : v}>{v}</option>)}</select>;
 
   render = () => (
     <div className='rru-datepicker'>

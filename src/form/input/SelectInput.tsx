@@ -3,11 +3,12 @@ import { useFormContext } from 'react-hook-form';
 import Select from "react-select";
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
+import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
 export interface SelectInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     requiredAsterisk?: boolean,
@@ -23,11 +24,11 @@ const SelectInput: FC<SelectInputProps> = props => {
         name, options, disabled, 
     } = props;
 
-    const [selectControlValue, setSelectControlValue] = useState(null);
+    const [selectControlValue, setSelectControlValue] = useState<IReactSelectOption | null>(null);
     const formContext = useFormContext();
     formContext.register({name});
 
-    const onSelectChange = opt => { // react-select option datatype
+    const onSelectChange = (opt: IReactSelectOption | null) => { // react-select option datatype
         setSelectControlValue({value: opt ? opt.value : '', label: opt ? opt.label : ''});
         formContext.setValue(name, opt ? opt.value : '');
     }
@@ -42,8 +43,10 @@ const SelectInput: FC<SelectInputProps> = props => {
             defaultOption = options[0];
         }
         defaultOption = defaultOption || {id: '', label: ''};
-        defaultOption.value = defaultOption.id;
-        onSelectChange(defaultOption);
+        onSelectChange({
+            value: defaultOption.id,
+            label: defaultOption.label,
+        });
     }, []);
 
     useEffect(() => {

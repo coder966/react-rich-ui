@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 
 export interface LabelProps {
     inputName: string,
-    label: JSX.Element,
-    requiredAsterisk: boolean,
+    label?: React.ReactNode,
+    requiredAsterisk?: boolean,
 }
 
 /**

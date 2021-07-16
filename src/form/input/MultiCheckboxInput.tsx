@@ -6,7 +6,7 @@ import Option from './types/Option';
 
 export interface MultiCheckboxInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     requiredAsterisk?: boolean,

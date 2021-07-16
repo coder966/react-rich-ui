@@ -6,7 +6,7 @@ import GroupOption from './types/GroupOption';
 
 export interface GroupedMultiCheckboxInputProps {
     name: string,
-    label?: JSX.Element,
+    label?: React.ReactNode,
     disabled?: boolean,
     className?: string,
     requiredAsterisk?: boolean,

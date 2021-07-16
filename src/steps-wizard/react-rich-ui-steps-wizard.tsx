@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 
 export interface RruStepsWizardStepProps {
-  stepLabel?: JSX.Element,
+  stepLabel?: React.ReactNode,
   goToStep: (stepNumber: number, data?: object) => void,
   firstStep: (data?: object) => void,
   lastStep: (data?: object) => void,
   nextStep: (data?: object) => void,
   previousStep: (data?: object) => void,
-  previousStepData: object,
+  previousStepData: object | undefined,
 }
 export interface RruStepsWizardProps {
   noHeader?: boolean,
@@ -17,11 +17,11 @@ export interface RruStepsWizardProps {
 const RruStepsWizard: FC<RruStepsWizardProps> = props => {
 
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
-  const [previousStepData, setPreviousStepData] = useState(null);
+  const [previousStepData, setPreviousStepData] = useState<object | undefined>();
 
   const steps = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
-  const goToStep = (stepNumber, data) => {
+  const goToStep = (stepNumber: number, data?: object) => {
     if(stepNumber < 1){
       stepNumber = 1;
     }else if(stepNumber > steps.length){
@@ -33,13 +33,13 @@ const RruStepsWizard: FC<RruStepsWizardProps> = props => {
     setCurrentStepNumber(stepNumber);
   }
 
-  const firstStep = data => goToStep(1, data);
+  const firstStep = (data?: object) => goToStep(1, data);
 
-  const lastStep = data => goToStep(steps.length, data);
+  const lastStep = (data?: object) => goToStep(steps.length, data);
 
-  const nextStep = data => goToStep(currentStepNumber+1, data);
+  const nextStep = (data?: object) => goToStep(currentStepNumber+1, data);
 
-  const previousStep = data => goToStep(currentStepNumber-1, data);
+  const previousStep = (data?: object) => goToStep(currentStepNumber-1, data);
 
   return (
     <div className='rru-steps-wizard'>
@@ -62,11 +62,11 @@ const RruStepsWizard: FC<RruStepsWizardProps> = props => {
       <div className='body'>
         {steps.map((step, index) => {
           if(index+1 === currentStepNumber){
-            return React.cloneElement(step, {
-              key: index,
+            const stepProps: RruStepsWizardStepProps = {
               goToStep, firstStep, lastStep, nextStep, previousStep,
               previousStepData,
-            });
+            };
+            return React.cloneElement(step, stepProps);
           }else{
             return null;
           }

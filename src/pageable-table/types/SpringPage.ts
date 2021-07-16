@@ -1,11 +1,12 @@
 import SpringPageable from "./SpringPageable";
+import TableDataRow from "./TableDataRow";
 
 /**
  * An interface for org.springframework.data.domain.Page
  */
 interface SpringPage {
     pageable: SpringPageable,
-    content: Array<Object>,
+    content: TableDataRow[],
     totalPages: number,
     totalElements: number,
     number: number,
