@@ -1,6 +1,20 @@
 interface TableAction {
   label?: React.ReactNode;
-  icon?: ((row: object) => string) | 'view' | 'edit' | 'lock' | 'unlock' | 'delete' | 'add' | 'remove' | 'check' | 'times' | 'pdf' | 'excel' | 'download' | string;
+  icon?:
+    | ((row: object) => string)
+    | 'view'
+    | 'edit'
+    | 'lock'
+    | 'unlock'
+    | 'delete'
+    | 'add'
+    | 'remove'
+    | 'check'
+    | 'times'
+    | 'pdf'
+    | 'excel'
+    | 'download'
+    | string;
   action: (row: object) => void;
   display?: boolean | ((row: object) => boolean);
   privileges?: string[];

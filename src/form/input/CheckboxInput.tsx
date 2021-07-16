@@ -27,7 +27,14 @@ const CheckboxInput: FC<CheckboxInputProps> = (props) => {
   return (
     <div className={props.className ? props.className : 'form-group'}>
       <div className='custom-control custom-checkbox m-1'>
-        <input id={'checkbox_' + name} name={name} ref={formContext.register} type='checkbox' className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')} disabled={disabled} />
+        <input
+          id={'checkbox_' + name}
+          name={name}
+          ref={formContext.register}
+          type='checkbox'
+          className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')}
+          disabled={disabled}
+        />
         <label htmlFor={'checkbox_' + name} className='custom-control-label'>
           {label}
         </label>

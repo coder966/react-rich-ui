@@ -26,10 +26,40 @@ export interface RruButtonProps {
   label?: React.ReactNode;
 
   /** An icon name from the predefined-list or a string representing a css class name for an icon from external library like `font-awesome`. */
-  icon?: 'view' | 'edit' | 'lock' | 'unlock' | 'delete' | 'add' | 'remove' | 'check' | 'times' | 'pdf' | 'excel' | 'download' | string;
+  icon?:
+    | 'view'
+    | 'edit'
+    | 'lock'
+    | 'unlock'
+    | 'delete'
+    | 'add'
+    | 'remove'
+    | 'check'
+    | 'times'
+    | 'pdf'
+    | 'excel'
+    | 'download'
+    | string;
 
   /**  */
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-dark' | 'outline-light';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'dark'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-info'
+    | 'outline-dark'
+    | 'outline-light';
 
   /**  */
   onClick?: () => void;
@@ -83,7 +113,24 @@ export interface RruButtonProps {
  *
  * @author coder966
  */
-const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher, userPrivileges, allowedPrivileges }) => {
+const RruButton: FC<RruButtonProps> = ({
+  label,
+  icon,
+  variant,
+  onClick,
+  onConfirm,
+  confirmationTitle,
+  confirmationDesc,
+  confirmLabel,
+  cancelLabel,
+  formElements,
+  initialValues,
+  validationSchema,
+  watch,
+  watcher,
+  allowedPrivileges,
+  userPrivileges,
+}) => {
   const [show, setShow] = useState(false);
 
   if (allowedPrivileges && userPrivileges && !userPrivileges.some((p) => allowedPrivileges.includes(p))) {
@@ -101,7 +148,13 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     };
     return (
       <>
-        <RruForm onSubmit={handleConfirm} initialValues={initialValues} validationSchema={validationSchema} watch={watch} watcher={watcher}>
+        <RruForm
+          onSubmit={handleConfirm}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          watch={watch}
+          watcher={watcher}
+        >
           <div className={show ? 'modal display-block' : 'modal display-none'}>
             <div>
               <section className='modal-header'>

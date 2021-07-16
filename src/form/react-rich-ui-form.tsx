@@ -46,7 +46,15 @@ export interface RruFormProps {
  *
  * @author coder966
  */
-const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
+const RruForm: FC<RruFormProps> = ({
+  initialValues,
+  validationSchema,
+  onSubmit,
+  watch,
+  watcher,
+  children,
+  className,
+}) => {
   // transform initialValues object to meet our requirements:
   // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
   if (initialValues) {

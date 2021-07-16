@@ -26,14 +26,20 @@ export interface RruPageableTableProps {
   /**  */
   actions?: TableAction[];
 
-  /** The column label of the actions */
-  actionsLabel?: React.ReactNode;
-
   /** The search params object. */
   search?: object;
 
   /**  */
   pageSize: number;
+
+  /**  */
+  disableSorting?: boolean;
+
+  /** A callback function in case you want to do anything with response of the api */
+  onResponse?: (body: object) => void;
+
+  /** The column label of the actions */
+  actionsLabel?: React.ReactNode;
 
   /** The label of the previous page button */
   previousLabel?: React.ReactNode;
@@ -45,13 +51,7 @@ export interface RruPageableTableProps {
   noDataLabel?: React.ReactNode;
 
   /**  */
-  disableSorting?: boolean;
-
-  /**  */
   userPrivileges?: string[];
-
-  /** A callback function in case you want to do anything with response of the api */
-  onResponse?: (body: object) => void;
 
   /** Only specify this if you want to persist the table state */
   id?: string;
@@ -67,7 +67,21 @@ export interface RruPageableTableProps {
  *
  * @author coder966
  */
-const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse }) => {
+const RruPageableTable: FC<RruPageableTableProps> = ({
+  endpoint,
+  columns,
+  actions,
+  search,
+  pageSize,
+  disableSorting,
+  onResponse,
+  actionsLabel,
+  previousLabel,
+  nextLabel,
+  noDataLabel,
+  userPrivileges,
+  id,
+}) => {
   const getInitialState = (): PersistableTableData => {
     const persistedData = sessionStorage.getItem('RruPageableTable_' + id);
     if (persistedData) {
@@ -195,7 +209,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
   };
 
   const resolve = (path: string, obj: object): any => {
-    path.split('.').reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
+    path
+      .split('.')
+      .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
   };
 
   return (
@@ -206,7 +222,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
             {columns.map(
               (col, index) =>
                 (col.display === undefined || col.display) && (
-                  <th key={index} className={(!disableSorting && getSortClassName(col)) + (isLoading ? ' rru-pageable-table-loading-upper-th' : '')} onClick={() => onSort(col)}>
+                  <th
+                    key={index}
+                    className={
+                      (!disableSorting && getSortClassName(col)) +
+                      (isLoading ? ' rru-pageable-table-loading-upper-th' : '')
+                    }
+                    onClick={() => onSort(col)}
+                  >
                     {col.label}
                   </th>
                 )
@@ -241,7 +264,18 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
 
           {data.map((row, i) => (
             <tr key={i}>
-              {columns.map((col, j) => (col.display === undefined || col.display) && <td key={j}>{typeof col.value === 'function' ? col.value(row) : col.value === '#' ? getSerialNo(i) : resolve(col.value, row)}</td>)}
+              {columns.map(
+                (col, j) =>
+                  (col.display === undefined || col.display) && (
+                    <td key={j}>
+                      {typeof col.value === 'function'
+                        ? col.value(row)
+                        : col.value === '#'
+                        ? getSerialNo(i)
+                        : resolve(col.value, row)}
+                    </td>
+                  )
+              )}
               {actions && (
                 <td>
                   {actions.map((a, k) => {
@@ -277,7 +311,21 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
           ))}
         </tbody>
       </table>
-      <ReactPaginate previousLabel={previousLabel} nextLabel={nextLabel} pageCount={totalPages} marginPagesDisplayed={2} pageRangeDisplayed={3} onPageChange={(event) => setCurrentPage(event.selected)} forcePage={currentPage} containerClassName='pagination' pageLinkClassName='pageLink' previousClassName='previous' nextClassName='next' disabledClassName='disabled' activeClassName='activePage' />
+      <ReactPaginate
+        previousLabel={previousLabel}
+        nextLabel={nextLabel}
+        pageCount={totalPages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={(event) => setCurrentPage(event.selected)}
+        forcePage={currentPage}
+        containerClassName='pagination'
+        pageLinkClassName='pageLink'
+        previousClassName='previous'
+        nextClassName='next'
+        disabledClassName='disabled'
+        activeClassName='activePage'
+      />
     </>
   );
 };

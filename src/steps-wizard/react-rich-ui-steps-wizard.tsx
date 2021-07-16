@@ -70,7 +70,14 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
             const stepNumber = index + 1;
             const stepLabel = step.props.stepLabel;
             return (
-              <div key={index} className={'step ' + (stepNumber < currentStepNumber ? 'done' : '') + (stepNumber === currentStepNumber ? 'current' : '')}>
+              <div
+                key={index}
+                className={
+                  'step ' +
+                  (stepNumber < currentStepNumber ? 'done' : '') +
+                  (stepNumber === currentStepNumber ? 'current' : '')
+                }
+              >
                 <div className='step-number-container'>{stepNumber}</div>
                 <div className='step-label-container'>{stepLabel}</div>
               </div>

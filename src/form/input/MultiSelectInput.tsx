@@ -50,7 +50,9 @@ const MultiSelectInput: FC<MultiSelectInputProps> = (props) => {
   useEffect(() => {
     let defaultOptions: IReactSelectOption[] = [];
     if (defaultValue) {
-      defaultOptions = options.filter((o) => defaultValue.includes(o.id + '')).map((o) => ({ value: o.id, label: o.label }));
+      defaultOptions = options
+        .filter((o) => defaultValue.includes(o.id + ''))
+        .map((o) => ({ value: o.id, label: o.label }));
     }
     onSelectChange(defaultOptions);
   }, []);
@@ -58,7 +60,9 @@ const MultiSelectInput: FC<MultiSelectInputProps> = (props) => {
   useEffect(() => {
     const currentValue = formContext.getValues()[name];
     if (currentValue) {
-      onSelectChange(options.filter((o) => currentValue.includes(o.id + '')).map((o) => ({ value: o.id, label: o.label })));
+      onSelectChange(
+        options.filter((o) => currentValue.includes(o.id + '')).map((o) => ({ value: o.id, label: o.label }))
+      );
     }
   }, [options]);
 

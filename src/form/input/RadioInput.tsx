@@ -41,7 +41,14 @@ const RadioInput: FC<RadioInputProps> = (props) => {
       <div className={props.inline ? 'form-check-inline' : undefined}>
         {options.map((o) => (
           <div key={`${name}_${o.id}`} className={'form-check' + disabled ? ' disabled' : undefined}>
-            <input type='radio' ref={formContext.register} name={name} disabled={disabled} value={o.id} id={`${name}_${o.id}`} />
+            <input
+              type='radio'
+              ref={formContext.register}
+              name={name}
+              disabled={disabled}
+              value={o.id}
+              id={`${name}_${o.id}`}
+            />
             <label className='form-check-label' htmlFor={`${name}_${o.id}`}>
               {o.label}
             </label>
