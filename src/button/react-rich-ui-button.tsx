@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
 import { RruForm } from '../form/react-rich-ui-form';
 import FormInitialValues from '../form/types/FormInitialValues';
 import FormValues from '../form/types/FormValues';
@@ -62,31 +61,35 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     };
     return (
       <>
-        <Modal show={show} onHide={() => setShow(false)} centered={true}>
-          <Modal.Header closeButton>
-            <Modal.Title>{confirmationTitle}</Modal.Title>
-          </Modal.Header>
-          <RruForm onSubmit={handleConfirm} initialValues={initialValues} validationSchema={validationSchema} watch={watch} watcher={watcher}>
-            <Modal.Body>
-              {confirmationDesc}
-              {formElements}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant='secondary' onClick={() => setShow(false)}>
-                {cancelLabel}
-              </Button>
-              <Button variant='primary' type='submit'>
-                {confirmLabel}
-              </Button>
-            </Modal.Footer>
-          </RruForm>
-        </Modal>
+        <RruForm onSubmit={handleConfirm} initialValues={initialValues} validationSchema={validationSchema} watch={watch} watcher={watcher}>
+          <div className={show ? "modal display-block" : "modal display-none"}>
+            <div>
+              <section className='modal-header'>
+                <span className='modal-header-close'>{confirmationTitle}</span>
+                <span className='modal-header-close' onClick={() => setShow(false)}>X</span>
+              </section>
+              <section>
+                {confirmationDesc}
+                {formElements}
+              </section>
+              <section className='modal-footer'>
+                <button className='btn btn-secondary' onClick={() => setShow(false)}>
+                  {cancelLabel}
+                </button>
+                <button className='btn btn-primary' type='submit'>
+                  {confirmLabel}
+                </button>
+              </section>
+            </div>
+          </div>
+        </RruForm>
+
         {icon ? (
           <span onClick={() => setShow(true)} className={getIcon(icon)} />
         ) : (
-          <Button variant={variant} onClick={() => setShow(true)}>
+          <button className={'btn btn-'+variant} onClick={() => setShow(true)}>
             {label}
-          </Button>
+          </button>
         )}
       </>
     );
@@ -94,9 +97,9 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     return icon ? (
       <span onClick={onClick} className={getIcon(icon)} />
     ) : (
-      <Button variant={variant} onClick={onClick}>
+      <button className={'btn btn-'+variant} onClick={onClick}>
         {label}
-      </Button>
+      </button>
     );
   }
 };
