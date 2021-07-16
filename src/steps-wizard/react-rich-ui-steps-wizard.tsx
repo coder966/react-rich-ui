@@ -82,4 +82,5 @@ RruStepsWizard.defaultProps = {
   noHeader: false,
 };
 
-export default RruStepsWizard;
+export { RruStepsWizard };
+

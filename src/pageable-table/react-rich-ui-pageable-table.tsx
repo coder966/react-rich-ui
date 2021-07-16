@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import RruButton from '../button/react-rich-ui-button';
+import { RruButton } from '../button/react-rich-ui-button';
 import { isObjKey } from '../utils/utilFunction';
 import PersistableTableData from './types/PersistableTableData';
 import SpringPage from './types/SpringPage';
@@ -259,4 +259,5 @@ RruPageableTable.defaultProps = {
   disableSorting: false,
 };
 
-export default RruPageableTable;
+export { RruPageableTable };
+

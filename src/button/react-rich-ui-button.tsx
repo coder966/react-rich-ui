@@ -109,4 +109,5 @@ RruButton.defaultProps = {
   variant: 'primary',
 };
 
-export default RruButton;
+export { RruButton };
+
