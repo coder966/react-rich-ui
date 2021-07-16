@@ -72,13 +72,13 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   columns,
   actions,
   search,
-  pageSize,
-  disableSorting,
+  pageSize = 10,
+  disableSorting = false,
   onResponse,
-  actionsLabel,
-  previousLabel,
-  nextLabel,
-  noDataLabel,
+  actionsLabel = 'Actions',
+  previousLabel = 'Previous',
+  nextLabel = 'Next',
+  noDataLabel = 'No Data',
   userPrivileges,
   id,
 }) => {
@@ -328,15 +328,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       />
     </>
   );
-};
-
-RruPageableTable.defaultProps = {
-  pageSize: 10,
-  actionsLabel: '',
-  previousLabel: 'Previous',
-  nextLabel: 'Next',
-  noDataLabel: 'No Data',
-  disableSorting: false,
 };
 
 export { RruPageableTable };

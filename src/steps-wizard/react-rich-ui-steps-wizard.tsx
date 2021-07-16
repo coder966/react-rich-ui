@@ -107,8 +107,4 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   );
 };
 
-RruStepsWizard.defaultProps = {
-  noHeader: false,
-};
-
 export { RruStepsWizard };

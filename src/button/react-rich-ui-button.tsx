@@ -114,9 +114,9 @@ export interface RruButtonProps {
  * @author coder966
  */
 const RruButton: FC<RruButtonProps> = ({
-  label,
+  label = 'Button',
   icon,
-  variant,
+  variant = 'primary',
   onClick,
   onConfirm,
   confirmationTitle,
@@ -197,11 +197,6 @@ const RruButton: FC<RruButtonProps> = ({
       </button>
     );
   }
-};
-
-RruButton.defaultProps = {
-  label: 'Button',
-  variant: 'primary',
 };
 
 export { RruButton };
