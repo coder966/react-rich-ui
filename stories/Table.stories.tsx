@@ -1,13 +1,16 @@
 import { action } from '@storybook/addon-actions';
+import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import '../src/button/style.css';
 import { RruPageableTable, RruPageableTableProps } from '../src/pageable-table/react-rich-ui-pageable-table';
 import '../src/pageable-table/style.css';
 
-export default {
+const storyMeta: Meta = {
   title: 'Table',
   component: RruPageableTable,
 };
+
+export default storyMeta;
 
 export const TableExample = (args: RruPageableTableProps) => {
 
