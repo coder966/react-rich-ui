@@ -3,7 +3,7 @@ interface TableAction {
   icon?: ((row: object) => string) | 'view' | 'edit' | 'lock' | 'unlock' | 'delete' | 'add' | 'remove' | 'check' | 'times' | 'pdf' | 'excel' | 'download' | string;
   action: (row: object) => void;
   display?: boolean | ((row: object) => boolean);
-  privileges?: Array<string>;
+  privileges?: string[];
   onConfirm?: (row: object) => boolean;
   confirmLabel?: React.ReactNode;
   cancelLabel?: React.ReactNode;

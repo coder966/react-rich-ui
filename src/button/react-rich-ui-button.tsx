@@ -35,10 +35,10 @@ export interface RruButtonProps {
   formElements?: React.ReactNode;
   initialValues?: FormInitialValues;
   validationSchema?: object;
-  watch?: Array<string> | ((watch: (fieldNames: Array<string>) => object) => void);
+  watch?: string[] | ((watch: (fieldNames: string[]) => object) => void);
   watcher?: (form: FormValues) => void;
-  userPrivileges?: Array<string>;
-  allowedPrivileges?: Array<string>;
+  userPrivileges?: string[];
+  allowedPrivileges?: string[];
 }
 
 /**
@@ -100,5 +100,10 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     );
   }
 };
+
+RruButton.defaultProps = {
+  label: 'Button',
+  variant: 'primary',
+}
 
 export default RruButton;

@@ -17,19 +17,19 @@ try {
 }
 
 export interface RruPageableTableProps {
-  id: string;
+  id?: string;
   endpoint: string;
-  columns: Array<TableColumn>;
-  actions: Array<TableAction>;
-  actionsLabel: React.ReactNode;
-  search: object;
+  columns: TableColumn[];
+  actions?: TableAction[];
+  actionsLabel?: React.ReactNode;
+  search?: object;
   pageSize: number;
-  previousLabel: React.ReactNode;
-  nextLabel: React.ReactNode;
-  noDataLabel: React.ReactNode;
-  disableSorting: boolean;
-  userPrivileges: Array<string>;
-  onResponse: (body: object) => void;
+  previousLabel?: React.ReactNode;
+  nextLabel?: React.ReactNode;
+  noDataLabel?: React.ReactNode;
+  disableSorting?: boolean;
+  userPrivileges?: string[];
+  onResponse?: (body: object) => void;
 }
 
 /**
@@ -63,7 +63,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
   const [sortDir, setSortDir] = useState(getInitialState().sortDir);
 
   // defaults
-  const mPageSize = pageSize ? pageSize : 10;
   const mSort = sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '';
 
   useEffect(() => {
@@ -83,7 +82,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
 
     const params = {
       page: currentPage,
-      size: mPageSize,
+      size: pageSize,
       sort: mSort,
       ...search,
     };
@@ -124,7 +123,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
       });
   }, [currentPage, search, sortBy, sortDir]);
 
-  const getSerialNo = (index: number) => currentPage * mPageSize + (index + 1);
+  const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
   const getSortKey = (col: TableColumn) => {
     if (col.sortable === undefined || col.sortable) {
@@ -250,5 +249,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, ac
     </>
   );
 };
+
+RruPageableTable.defaultProps = {
+  pageSize: 10,
+  actionsLabel: '',
+  previousLabel: 'Previous',
+  nextLabel: 'Next',
+  noDataLabel: 'No Data',
+  disableSorting: false,
+}
 
 export default RruPageableTable;
