@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RruPageableTable } from 'react-rich-ui';
 
 const TableExample = props => {
+
+  const [searchParams, setSearchParams] = useState({});
+
+  /**
+   * not the best way to get form data,
+   * this is just an example to show how you may want to implement search
+   */
+  const onSearch = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    setSearchParams({
+      name: event.target.elements.name.value,
+      email: event.target.elements.email.value
+    })
+  }
 
   const columns = [
     {
@@ -9,17 +24,17 @@ const TableExample = props => {
       value: '#'
     },
     {
-      label: 'Username',
-      value: 'username'
+      label: 'Name',
+      value: 'name'
     },
     {
-      label: 'Company',
-      value: 'company.name'
+      label: 'Email',
+      value: 'email'
     },
     {
       label: 'Address',
-      value: row => (row.address.city + ' - ' + row.address.zipCode),
-      sortKey: 'address.zipCode'
+      value: row => (row.address.city + ' - ' + row.address.street),
+      sortKey: 'address.city'
     },
   ];
 
@@ -48,13 +63,21 @@ const TableExample = props => {
 
   return (
     <>
+      <form onSubmit={onSearch}>
+        <label>Name</label><input name='name' />
+        <label>Email</label><input name='email' />
+        <button type='submit'>Search</button>
+      </form>
+
+      <br />
+
       <RruPageableTable
         id='UsersListTable'
-        endpoint='https://gtntvvjsp0.execute-api.us-east-2.amazonaws.com/default/spring-page-rest-api'
+        endpoint='http://spring-pagination-example.coder966.net/api/user'
         pageSize='5'
         columns={columns}
         actions={actions}
-        search={{}}
+        search={searchParams}
         userPrivileges={['USER:VIEW']} />
     </>
   );
