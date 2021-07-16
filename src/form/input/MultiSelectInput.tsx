@@ -7,13 +7,28 @@ import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
 export interface MultiSelectInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   options: Option[];
+
+  /**  */
   defaultValue?: string[];
+
 }
 
 /**

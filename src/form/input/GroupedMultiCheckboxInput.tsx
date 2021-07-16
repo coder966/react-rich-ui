@@ -5,12 +5,25 @@ import Label from '../Label';
 import GroupOption from './types/GroupOption';
 
 export interface GroupedMultiCheckboxInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   options: GroupOption[];
+
 }
 
 /**

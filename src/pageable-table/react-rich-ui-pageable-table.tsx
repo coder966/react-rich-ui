@@ -17,22 +17,56 @@ try {
 }
 
 export interface RruPageableTableProps {
-  id?: string;
+
+  /** Spring Page api endpoint */
   endpoint: string;
+
+  /**  */
   columns: TableColumn[];
+
+  /**  */
   actions?: TableAction[];
+
+  /** The column label of the actions */
   actionsLabel?: React.ReactNode;
+
+  /** The search params object. */
   search?: object;
+
+  /**  */
   pageSize: number;
+
+  /** The label of the previous page button */
   previousLabel?: React.ReactNode;
+
+  /** The label of the next page button */
   nextLabel?: React.ReactNode;
+
+  /** Rendered when no data has been returned from the api. */
   noDataLabel?: React.ReactNode;
+
+  /**  */
   disableSorting?: boolean;
+
+  /**  */
   userPrivileges?: string[];
+
+  /** A callback function in case you want to do anything with response of the api */
   onResponse?: (body: object) => void;
+
+  /** Only specify this if you want to persist the table state */
+  id?: string;
+
 }
 
 /**
+ * A table the features:
+ *  1- Declarative API.
+ *  2- Handles API networking.
+ *  3- Handles pagination.
+ *  4- Allows search + sort.
+ *  5- Compatible with Spring (Page+Pageable) interfaces.
+ * 
  * @author coder966
  */
 const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse }) => {

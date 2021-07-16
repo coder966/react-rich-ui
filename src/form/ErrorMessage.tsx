@@ -3,7 +3,10 @@ import { useFormContext } from 'react-hook-form';
 import { isObjKey } from '../utils/utilFunction';
 
 export interface ErrorMessageProps {
+
+  /**  */
   inputName: string;
+
 }
 
 /**

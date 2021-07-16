@@ -5,17 +5,40 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface DateInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /** yyyy-mm-dd */
   defaultValue?: string;
+
+  /**  */
   isHijri: boolean;
+
+  /** Display only past years */
   isPast: boolean;
+
+  /** Display future past years */
   isFuture: boolean;
+
+  /** The maximum number of years +/- current year that will be available in the select menus */
   maxYearLength: number;
+
+  /** Reverse the render order of the date parts selectors */
   reverseDisplayOrder?: boolean;
+
 }
 
 /**

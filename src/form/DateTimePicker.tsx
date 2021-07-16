@@ -14,16 +14,37 @@ const precomputed = {
 };
 
 export interface DateTimePickerProps {
+
+  /**  */
   type: 'time' | 'date';
+
+  /**  */
   onChange: (value: string) => void;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   defaultValue?: string;
+
+  /**  */
   isHijri?: boolean;
+
+  /**  */
   isPast?: boolean;
+
+  /**  */
   isFuture?: boolean;
+
+  /**  */
   maxYearLength?: number;
+
+  /**  */
   reverseDisplayOrder?: boolean;
+
+  /**  */
   clock?: 24 | 12;
+
 }
 
 interface DateTimePickerState {

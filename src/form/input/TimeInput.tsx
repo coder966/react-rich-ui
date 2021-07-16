@@ -5,16 +5,37 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface TimeInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /** hh:mm */
   defaultValue: string;
+
+  /** Reverse the render order of the time parts selectors */
   reverseDisplayOrder: boolean;
+
+  /** Display only past hours of the day */
   isPast: boolean;
+
+  /** Display only future hours of the day */
   isFuture: boolean;
+
+  /** Clock style either 24-hours or 12-hours */
   clock: 24 | 12;
+
 }
 
 /**

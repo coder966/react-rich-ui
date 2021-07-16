@@ -5,12 +5,25 @@ import Label from '../Label';
 import Option from './types/Option';
 
 export interface MultiCheckboxInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   options: Option[];
+
 }
 
 /**

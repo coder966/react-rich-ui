@@ -1,9 +1,16 @@
 import React, { FC } from 'react';
 
 export interface LabelProps {
+
+  /**  */
   inputName: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   requiredAsterisk?: boolean;
+
 }
 
 /**

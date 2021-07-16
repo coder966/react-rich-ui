@@ -4,13 +4,28 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface PasswordInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   placeholder?: string;
+
+  /**  */
   maxLength?: number;
+
 }
 
 /**

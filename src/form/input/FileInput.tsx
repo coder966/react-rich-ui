@@ -4,12 +4,25 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface FileInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /** A placeholder to be displayed in the place of the filename of the file selected. */
   placeholder?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
 }
 
 /**

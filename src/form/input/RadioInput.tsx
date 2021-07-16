@@ -5,13 +5,28 @@ import Label from '../Label';
 import Option from './types/Option';
 
 export interface RadioInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   options: Option[];
+
+  /** Display all radio buttons in the same line */
   inline: boolean;
+
 }
 
 /**

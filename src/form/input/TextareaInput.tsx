@@ -4,13 +4,28 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface TextareaInputProps {
+
+  /**  */
   name: string;
+
+  /**  */
   label?: React.ReactNode;
+
+  /**  */
   disabled?: boolean;
+
+  /**  */
   className?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
+
+  /**  */
   maxLength: number;
+
+  /**  */
   placeholder: string;
+
 }
 
 /**
