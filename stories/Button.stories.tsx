@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 import * as yup from 'yup';
-import RruButton from '../src/button/react-rich-ui-button';
+import { RruButton, RruButtonProps } from '../src/button/react-rich-ui-button';
 import '../src/button/style.css';
 import { RruFormElement } from '../src/form/react-rich-ui-form';
 
@@ -10,7 +10,7 @@ export default {
   component: RruButton,
 };
 
-export const ButtonExample = props => {
+const Template = (args: RruButtonProps) => {
 
   const validationSchema = yup.object().shape({
     reason: yup.string().required(),
@@ -21,7 +21,8 @@ export const ButtonExample = props => {
   }
 
   const onConfirm = (form, setShow) => {
-    action('action confirmed')(form)
+    action('action confirmed')(form);
+    return true;
   }
 
   return (
@@ -37,6 +38,14 @@ export const ButtonExample = props => {
       confirmationTitle='Delete'
       confirmationDesc='Are you sure you want to delete ?'
       confirmLabel='Confirm'
-      cancelLabel='Cancel' />
+      cancelLabel='Cancel'
+      {...args} />
   );
 };
+
+
+export const PrimaryExample = Template.bind({});
+PrimaryExample.args = {
+  
+}
+

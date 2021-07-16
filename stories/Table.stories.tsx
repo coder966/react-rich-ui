@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import '../src/button/style.css';
-import RruPageableTable from '../src/pageable-table/react-rich-ui-pageable-table';
+import { RruPageableTable, RruPageableTableProps } from '../src/pageable-table/react-rich-ui-pageable-table';
 import '../src/pageable-table/style.css';
 
 export default {
@@ -9,7 +9,7 @@ export default {
   component: RruPageableTable,
 };
 
-export const TableExample = props => {
+export const TableExample = (args: RruPageableTableProps) => {
 
   const [searchParams, setSearchParams] = useState({});
 
@@ -84,11 +84,12 @@ export const TableExample = props => {
       <RruPageableTable
         id='UsersListTable'
         endpoint='http://spring-pagination-example.coder966.net/api/user'
-        pageSize='5'
+        pageSize={5}
         columns={columns}
         actions={actions}
         search={searchParams}
-        userPrivileges={['USER:VIEW']} />
+        userPrivileges={['USER:VIEW']}
+        {...args} />
     </>
   );
 };

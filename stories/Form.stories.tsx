@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import '../src/button/style.css';
-import { RruForm, RruFormElement } from '../src/form/react-rich-ui-form';
+import { RruForm, RruFormElement, RruFormProps } from '../src/form/react-rich-ui-form';
 import '../src/form/style.css';
 
 export default {
@@ -10,7 +10,7 @@ export default {
   component: RruForm,
 };
 
-export const FormExample = props => {
+export const FormExample = (args: RruFormProps) => {
 
   const genders = [
     {id: 'MALE', label: 'Male'},
@@ -64,7 +64,8 @@ export const FormExample = props => {
 
   const initialValues = {
     name: 'Khalid',
-    features: [1, '3',{id: '6', label: 'Feature F'}]
+    features: [1, 3],
+    groups: ['4', '5'],
   }
 
   const validationSchema = yup.object().shape({
@@ -82,7 +83,7 @@ export const FormExample = props => {
 
   return (
     <>
-      <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit}>
+      <RruForm initialValues={initialValues} validationSchema={validationSchema} watch={['accountType']} watcher={watcher} onSubmit={onSubmit} {...args}>
         <div>
           <RruFormElement type='text' name='name' label='Name' />
           <RruFormElement type='text' name='email' label='Email' requiredAsterisk />

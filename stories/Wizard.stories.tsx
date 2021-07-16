@@ -1,6 +1,6 @@
 import React from 'react';
 import '../src/button/style.css';
-import RruStepsWizard from '../src/steps-wizard/react-rich-ui-steps-wizard';
+import { RruStepsWizard, RruStepsWizardStepProps } from '../src/steps-wizard/react-rich-ui-steps-wizard';
 import '../src/steps-wizard/style.css';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: RruStepsWizard,
 };
 
-export const WizardExample = props => {
+export const WizardExample = (args: RruStepsWizardStepProps) => {
 
   const FirstStep = props => (
     <div>
@@ -41,7 +41,7 @@ export const WizardExample = props => {
 
   return (
     <>
-      <RruStepsWizard>
+      <RruStepsWizard {...args}>
         <FirstStep stepLabel='First Step' />
         <SecondStep stepLabel='Second Step' />
         <ThirdStep stepLabel='Third Step' />
