@@ -18,94 +18,93 @@ import FormValues from './types/FormValues';
 import IRHFDefaultValues from './types/IRHFDefaultValues';
 
 export interface RruFormProps {
-    initialValues?: FormInitialValues,
-    validationSchema?: object,
-    onSubmit: (form: FormValues) => void,
-    watch?: string[] | ((watch: ((fieldNames: string[]) => FormValues)) => void),
-    watcher?: (form: FormValues) => void,
-    children: React.ReactNode | React.ReactNode[],
-    className?: string,
+  initialValues?: FormInitialValues;
+  validationSchema?: object;
+  onSubmit: (form: FormValues) => void;
+  watch?: string[] | ((watch: (fieldNames: string[]) => FormValues) => void);
+  watcher?: (form: FormValues) => void;
+  children: React.ReactNode | React.ReactNode[];
+  className?: string;
 }
 
 /**
-  * @author coder966
-  */
+ * @author coder966
+ */
 const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
-    // transform initialValues object to meet our requirements:
-    // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
-    if(initialValues){
-        for(const [key, value] of Object.entries(initialValues)){
-            if(value && Array.isArray(value) && isObjKey(initialValues, key)){
-                initialValues[key] = (value as any[]).map(item => {
-                    if(typeof item === 'object' && item.id){
-                        return item.id+'';
-                    }else{
-                        return item+'';
-                    }
-                });
-            }
-        }
+  // transform initialValues object to meet our requirements:
+  // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
+  if (initialValues) {
+    for (const [key, value] of Object.entries(initialValues)) {
+      if (value && Array.isArray(value) && isObjKey(initialValues, key)) {
+        initialValues[key] = (value as any[]).map((item) => {
+          if (typeof item === 'object' && item.id) {
+            return item.id + '';
+          } else {
+            return item + '';
+          }
+        });
+      }
     }
+  }
 
-    const form = useForm({
-        mode: 'onChange',
-        defaultValues: initialValues as IRHFDefaultValues,
-        validationSchema: validationSchema
-    });
+  const form = useForm({
+    mode: 'onChange',
+    defaultValues: initialValues as IRHFDefaultValues,
+    validationSchema: validationSchema,
+  });
 
-    useEffect(() => {
-        if(watch){
-            if(typeof watch === 'function'){
-                // TODO: remove deprecated
-                watch(form.watch);
-            }else if(Array.isArray(watch) && watcher){
-                watcher(form.watch(watch))
-            }
-        }
-    });
+  useEffect(() => {
+    if (watch) {
+      if (typeof watch === 'function') {
+        // TODO: remove deprecated
+        watch(form.watch);
+      } else if (Array.isArray(watch) && watcher) {
+        watcher(form.watch(watch));
+      }
+    }
+  });
 
-    return (
-        <FormContext {...form}>
-            <form className={className} onSubmit={form.handleSubmit(onSubmit)}>
-                {children}
-            </form>
-        </FormContext>
-    );
+  return (
+    <FormContext {...form}>
+      <form className={className} onSubmit={form.handleSubmit(onSubmit)}>
+        {children}
+      </form>
+    </FormContext>
+  );
 };
 
-
 /**
-  * @author coder966
-  */
+ * @author coder966
+ */
 const RruFormElement = (props: any) => {
-    switch (props.type) {
-        case 'text':
-            return <TextInput {...props} />;
-        case 'password':
-            return <PasswordInput {...props} />;
-        case 'textarea':
-            return <TextareaInput {...props} />;
-        case 'radio':
-            return <RadioInput {...props} />;    
-        case 'select':
-            return <SelectInput {...props} />;
-        case 'multi-select':
-            return <MultiSelectInput {...props} />;
-        case 'checkbox':
-            return <CheckboxInput {...props} />;
-        case 'multi-checkbox':
-            return <MultiCheckboxInput {...props} />;
-        case 'grouped-multi-checkbox':
-            return <GroupedMultiCheckboxInput {...props} />;
-        case 'date':
-            return <DateInput {...props} />;
-        case 'time':
-            return <TimeInput {...props} />;
-        case 'file':
-            return <FileInput {...props} />;
-        default:
-            return null;
-    }
+  switch (props.type) {
+    case 'text':
+      return <TextInput {...props} />;
+    case 'password':
+      return <PasswordInput {...props} />;
+    case 'textarea':
+      return <TextareaInput {...props} />;
+    case 'radio':
+      return <RadioInput {...props} />;
+    case 'select':
+      return <SelectInput {...props} />;
+    case 'multi-select':
+      return <MultiSelectInput {...props} />;
+    case 'checkbox':
+      return <CheckboxInput {...props} />;
+    case 'multi-checkbox':
+      return <MultiCheckboxInput {...props} />;
+    case 'grouped-multi-checkbox':
+      return <GroupedMultiCheckboxInput {...props} />;
+    case 'date':
+      return <DateInput {...props} />;
+    case 'time':
+      return <TimeInput {...props} />;
+    case 'file':
+      return <FileInput {...props} />;
+    default:
+      return null;
+  }
 };
 
 export { RruForm, RruFormElement };

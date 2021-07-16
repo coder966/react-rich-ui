@@ -1,5 +1,5 @@
 interface TableDataRow {
-    [key: string]: string | TableDataRow
+  [key: string]: string | TableDataRow;
 }
 
 export default TableDataRow;

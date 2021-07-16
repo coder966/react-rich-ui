@@ -1,7 +1,7 @@
 interface PersistableTableData {
-    currentPage: number,
-    sortBy: string,
-    sortDir: string,
+  currentPage: number;
+  sortBy: string;
+  sortDir: string;
 }
 
 export default PersistableTableData;

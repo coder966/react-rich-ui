@@ -1,6 +1,5 @@
-
 interface IRHFDefaultValues {
-    [key: string]: string
+  [key: string]: string;
 }
 
 export default IRHFDefaultValues;
