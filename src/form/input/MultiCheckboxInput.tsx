@@ -5,7 +5,6 @@ import Label from '../Label';
 import Option from './types/Option';
 
 export interface MultiCheckboxInputProps {
-
   /**  */
   name: string;
 
@@ -23,7 +22,6 @@ export interface MultiCheckboxInputProps {
 
   /**  */
   options: Option[];
-
 }
 
 /**

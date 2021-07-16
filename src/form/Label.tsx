@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 export interface LabelProps {
-
   /**  */
   inputName: string;
 
@@ -10,7 +9,6 @@ export interface LabelProps {
 
   /**  */
   requiredAsterisk?: boolean;
-
 }
 
 /**

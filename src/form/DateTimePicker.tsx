@@ -14,7 +14,6 @@ const precomputed = {
 };
 
 export interface DateTimePickerProps {
-
   /**  */
   type: 'time' | 'date';
 
@@ -44,7 +43,6 @@ export interface DateTimePickerProps {
 
   /**  */
   clock?: 24 | 12;
-
 }
 
 interface DateTimePickerState {

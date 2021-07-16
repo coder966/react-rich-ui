@@ -4,7 +4,6 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface FileInputProps {
-
   /**  */
   name: string;
 
@@ -22,7 +21,6 @@ export interface FileInputProps {
 
   /**  */
   requiredAsterisk?: boolean;
-
 }
 
 /**

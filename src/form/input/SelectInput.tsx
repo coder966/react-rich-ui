@@ -7,7 +7,6 @@ import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
 export interface SelectInputProps {
-
   /**  */
   name: string;
 
@@ -27,8 +26,7 @@ export interface SelectInputProps {
   options: Option[];
 
   /**  */
-  defaultValue: string
-
+  defaultValue: string;
 }
 
 /**

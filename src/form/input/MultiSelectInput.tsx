@@ -7,7 +7,6 @@ import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
 export interface MultiSelectInputProps {
-
   /**  */
   name: string;
 
@@ -28,7 +27,6 @@ export interface MultiSelectInputProps {
 
   /**  */
   defaultValue?: string[];
-
 }
 
 /**

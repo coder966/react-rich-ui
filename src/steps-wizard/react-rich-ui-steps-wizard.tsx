@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 
 export interface RruStepsWizardStepProps {
-
   /** Optional name to be displayed in the wizard header */
   stepLabel?: React.ReactNode;
 
@@ -22,22 +21,19 @@ export interface RruStepsWizardStepProps {
 
   /** The data sent by the caller step (normally previous step) */
   previousStepData: object | undefined;
-
 }
 
 export interface RruStepsWizardProps {
-
   /** Should hide the default header (with steps name and current step indicator) */
   noHeader?: boolean;
 
   /** The steps: can be any component. These step components will receive props of type: `RruStepsWizardStepProps` */
   children: React.ReactElement<RruStepsWizardStepProps>[];
-
 }
 
 /**
  * A steps wizard. Render any number of child components and they will be treated as steps of this wizard.
- * 
+ *
  * @author coder966
  */
 const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
@@ -109,4 +105,3 @@ RruStepsWizard.defaultProps = {
 };
 
 export { RruStepsWizard };
-

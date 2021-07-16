@@ -5,7 +5,6 @@ import Label from '../Label';
 import Option from './types/Option';
 
 export interface RadioInputProps {
-
   /**  */
   name: string;
 
@@ -26,7 +25,6 @@ export interface RadioInputProps {
 
   /** Display all radio buttons in the same line */
   inline: boolean;
-
 }
 
 /**

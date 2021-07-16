@@ -5,7 +5,6 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface DateInputProps {
-
   /**  */
   name: string;
 
@@ -38,7 +37,6 @@ export interface DateInputProps {
 
   /** Reverse the render order of the date parts selectors */
   reverseDisplayOrder?: boolean;
-
 }
 
 /**

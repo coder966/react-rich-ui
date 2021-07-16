@@ -5,7 +5,6 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface TimeInputProps {
-
   /**  */
   name: string;
 
@@ -35,7 +34,6 @@ export interface TimeInputProps {
 
   /** Clock style either 24-hours or 12-hours */
   clock: 24 | 12;
-
 }
 
 /**

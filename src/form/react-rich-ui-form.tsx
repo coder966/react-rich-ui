@@ -18,7 +18,6 @@ import FormValues from './types/FormValues';
 import IRHFDefaultValues from './types/IRHFDefaultValues';
 
 export interface RruFormProps {
-
   /**  */
   initialValues?: FormInitialValues;
 
@@ -39,13 +38,12 @@ export interface RruFormProps {
 
   /**  */
   className?: string;
-
 }
 
 /**
  * A form that is capable of initializing and validating uncontrolled input elements as well as
  * providing a subscription pattern to these elements.
- * 
+ *
  * @author coder966
  */
 const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, watch, watcher, children, className }) => {
@@ -93,7 +91,7 @@ const RruForm: FC<RruFormProps> = ({ initialValues, validationSchema, onSubmit, 
 
 /**
  * An uncontrolled input element. Checkout the props definition based on the type of the element.
- * 
+ *
  * @author coder966
  */
 const RruFormElement = (props: any) => {

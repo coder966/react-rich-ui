@@ -3,7 +3,6 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 
 export interface CheckboxInputProps {
-
   /**  */
   name: string;
 
@@ -15,7 +14,6 @@ export interface CheckboxInputProps {
 
   /**  */
   className?: string;
-
 }
 
 /**

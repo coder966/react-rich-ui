@@ -4,7 +4,6 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
 export interface PasswordInputProps {
-
   /**  */
   name: string;
 
@@ -25,7 +24,6 @@ export interface PasswordInputProps {
 
   /**  */
   maxLength?: number;
-
 }
 
 /**

@@ -17,7 +17,6 @@ try {
 }
 
 export interface RruPageableTableProps {
-
   /** Spring Page api endpoint */
   endpoint: string;
 
@@ -56,7 +55,6 @@ export interface RruPageableTableProps {
 
   /** Only specify this if you want to persist the table state */
   id?: string;
-
 }
 
 /**
@@ -66,7 +64,7 @@ export interface RruPageableTableProps {
  *  3- Handles pagination.
  *  4- Allows search + sort.
  *  5- Compatible with Spring (Page+Pageable) interfaces.
- * 
+ *
  * @author coder966
  */
 const RruPageableTable: FC<RruPageableTableProps> = ({ id, endpoint, columns, actions, actionsLabel, search, pageSize, previousLabel, nextLabel, noDataLabel, disableSorting, userPrivileges, onResponse }) => {
@@ -294,4 +292,3 @@ RruPageableTable.defaultProps = {
 };
 
 export { RruPageableTable };
-

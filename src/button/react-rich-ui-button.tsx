@@ -22,7 +22,6 @@ const icons = {
 const getIcon = (name: keyof typeof icons | string) => (isObjKey(icons, name) ? icons[name] : name);
 
 export interface RruButtonProps {
-
   /** Button label */
   label?: React.ReactNode;
 
@@ -34,10 +33,10 @@ export interface RruButtonProps {
 
   /**  */
   onClick?: () => void;
-  
+
   /** Set this function if you want the button to act as a confirmation button.
    * This function will be called when the user confirms the action.
-   * 
+   *
    * When this function is defined, the `onClick` function will be ignored.
    */
   onConfirm?: (form?: FormValues, setShow?: (isShowing: boolean) => void) => boolean;
@@ -76,13 +75,12 @@ export interface RruButtonProps {
 
   /** The use privileges array. */
   userPrivileges?: string[];
-
 }
 
 /**
  * A versatile button that can be used as an ordinary button or to
  * show a confirmation modal with a fully fledged form context (see `RruForm`).
- * 
+ *
  * @author coder966
  */
 const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confirmationTitle, confirmationDesc, icon, onConfirm, onClick, variant, formElements, initialValues, validationSchema, watch, watcher, userPrivileges, allowedPrivileges }) => {
@@ -104,11 +102,13 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     return (
       <>
         <RruForm onSubmit={handleConfirm} initialValues={initialValues} validationSchema={validationSchema} watch={watch} watcher={watcher}>
-          <div className={show ? "modal display-block" : "modal display-none"}>
+          <div className={show ? 'modal display-block' : 'modal display-none'}>
             <div>
               <section className='modal-header'>
                 <span className='modal-header-close'>{confirmationTitle}</span>
-                <span className='modal-header-close' onClick={() => setShow(false)}>X</span>
+                <span className='modal-header-close' onClick={() => setShow(false)}>
+                  X
+                </span>
               </section>
               <section>
                 {confirmationDesc}
@@ -129,7 +129,7 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
         {icon ? (
           <span onClick={() => setShow(true)} className={getIcon(icon)} />
         ) : (
-          <button className={'btn btn-'+variant} onClick={() => setShow(true)}>
+          <button className={'btn btn-' + variant} onClick={() => setShow(true)}>
             {label}
           </button>
         )}
@@ -139,7 +139,7 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
     return icon ? (
       <span onClick={onClick} className={getIcon(icon)} />
     ) : (
-      <button className={'btn btn-'+variant} onClick={onClick}>
+      <button className={'btn btn-' + variant} onClick={onClick}>
         {label}
       </button>
     );
@@ -152,4 +152,3 @@ RruButton.defaultProps = {
 };
 
 export { RruButton };
-

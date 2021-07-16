@@ -5,7 +5,6 @@ import Label from '../Label';
 import GroupOption from './types/GroupOption';
 
 export interface GroupedMultiCheckboxInputProps {
-
   /**  */
   name: string;
 
@@ -23,7 +22,6 @@ export interface GroupedMultiCheckboxInputProps {
 
   /**  */
   options: GroupOption[];
-
 }
 
 /**
