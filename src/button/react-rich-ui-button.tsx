@@ -104,6 +104,6 @@ const RruButton: FC<RruButtonProps> = ({ label, confirmLabel, cancelLabel, confi
 RruButton.defaultProps = {
   label: 'Button',
   variant: 'primary',
-}
+};
 
 export default RruButton;

@@ -257,6 +257,6 @@ RruPageableTable.defaultProps = {
   nextLabel: 'Next',
   noDataLabel: 'No Data',
   disableSorting: false,
-}
+};
 
 export default RruPageableTable;
