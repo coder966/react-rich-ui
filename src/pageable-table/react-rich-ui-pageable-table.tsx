@@ -209,7 +209,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   };
 
   const resolve = (path: string, obj: object): any => {
-    path
+    return path
       .split('.')
       .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
   };
@@ -331,3 +331,4 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
 };
 
 export { RruPageableTable };
+
