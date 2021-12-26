@@ -262,7 +262,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
               </td>
             </tr>
           )}
-          {data.length === 0 && (
+          {data.length === 0 && !error && (
             <tr>
               <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
                 {noDataLabel || 'No Data'}
@@ -270,7 +270,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
             </tr>
           )}
 
-          {data.map((row, i) => (
+          {(data || []).map((row, i) => (
             <tr key={i}>
               {columns.map(
                 (col, j) =>
