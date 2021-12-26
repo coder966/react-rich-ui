@@ -158,10 +158,8 @@ const RruButton: FC<RruButtonProps> = ({
           <div className={show ? 'modal display-block' : 'modal display-none'}>
             <div>
               <section className='modal-header'>
-                <span className='modal-header-close'>{confirmationTitle}</span>
-                <span className='modal-header-close' onClick={() => setShow(false)}>
-                  X
-                </span>
+                <span className='modal-header-title'>{confirmationTitle}</span>
+                <span className='modal-header-close' onClick={() => setShow(false)}></span>
               </section>
               <section>
                 {confirmationDesc}
@@ -200,3 +198,4 @@ const RruButton: FC<RruButtonProps> = ({
 };
 
 export { RruButton };
+
