@@ -90,6 +90,8 @@ export const TableExample = (args: RruPageableTableProps) => {
         pageSize={5}
         columns={columns}
         actions={actions}
+        defaultSortBy='id'
+        defaultSortDir='desc'
         search={searchParams}
         userPrivileges={['USER:VIEW']}
         {...args} />

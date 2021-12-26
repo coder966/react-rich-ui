@@ -18,6 +18,8 @@
 | userPrivileges | An array of the user's privileges. This is used to only show permitted actions. | No |
 | pageSize | The page size. The default value is `10`| No |
 | disableSorting | Set to false to disable sorting feature.| No |
+| defaultSortBy | Set the default sort key | No |
+| defaultSortDir | Set to default sort direction | No |
 | actionsLabel | The action's column header label. | No |
 | previousLabel| This is the label for `previous` button in pagination.| No |
 | nextLabel | This is the label for `next` button in pagination. | No |

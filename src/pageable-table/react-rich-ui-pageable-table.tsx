@@ -35,6 +35,12 @@ export interface RruPageableTableProps {
   /**  */
   disableSorting?: boolean;
 
+  /** */
+  defaultSortBy?: string,
+  
+  /** */
+  defaultSortDir?: 'asc' | 'desc',
+
   /** A callback function in case you want to do anything with response of the api */
   onResponse?: (body: object) => void;
 
@@ -74,6 +80,8 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   search,
   pageSize = 10,
   disableSorting = false,
+  defaultSortBy,
+  defaultSortDir,
   onResponse,
   actionsLabel = 'Actions',
   previousLabel = 'Previous',
@@ -87,7 +95,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     if (persistedData) {
       return JSON.parse(persistedData);
     } else {
-      return { currentPage: 0, sortBy: 'id', sortDir: 'desc' };
+      return { currentPage: 0, sortBy: defaultSortBy, sortDir: defaultSortDir };
     }
   };
 
