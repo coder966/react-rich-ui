@@ -19,6 +19,14 @@ try {
 export interface RruPageableTableProps {
   /** Spring Page api endpoint */
   endpoint: string;
+  
+  /** 
+   * Specify the HTTP method to be used when sending the API request.
+   * By default it uses GET.
+   * If GET is used, then the pageable object and the search object are merged and sent in the request query string.
+   * If POST is used, then the pageable is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
+   */
+  requestMethod?: 'GET' | 'POST',
 
   /**  */
   columns: TableColumn[];
@@ -75,6 +83,7 @@ export interface RruPageableTableProps {
  */
 const RruPageableTable: FC<RruPageableTableProps> = ({
   endpoint,
+  requestMethod = 'GET',
   columns,
   actions,
   search,
@@ -134,17 +143,31 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   useEffect(() => {
     setIsLoading(true);
 
-    const params = {
+    // prepare request info
+    const pageable = {
       page: currentPage,
       size: pageSize,
       sort: mSort,
-      ...search,
     };
+    let params: object;
+    let body: object | undefined;
+    if(requestMethod === 'POST'){
+      params = pageable;
+      body = search;
+    }else{
+      params = {...pageable, ...search};
+      body = undefined;
+    }
 
     // create an abstract promise for different HTTP client libs
     const dataPromise = new Promise((resolve: (data: SpringPage) => void, reject) => {
       if (axios) {
-        axios(endpoint, { params: params })
+        axios({
+          method: requestMethod,
+          url: endpoint,
+          params: params,
+          data: body,
+        })
           .then((res: any) => resolve(res.data))
           .catch((err: any) => reject(err));
       } else {
@@ -154,7 +177,11 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
             searchParams.append(key, params[key] + '');
           }
         });
-        fetch(endpoint + '?' + searchParams)
+        const requestOptions = {
+          method: requestMethod,
+          body: JSON.stringify(body),
+        };
+        fetch(endpoint + '?' + searchParams, requestOptions)
           .then((res) => res.json())
           .then((data) => resolve(data))
           .catch((err) => reject(err));

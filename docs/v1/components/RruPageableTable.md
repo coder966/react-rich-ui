@@ -11,6 +11,7 @@
 |-|-|-|
 | id | ID| No |
 | endpoint | The endpoint which returns `org.springframework.data.domain.Page` | Yes|
+| requestMethod | Specify the HTTP method to be used when sending the API request. | No |
 | columns| An array of column objects| Yes|
 | actions| An array of action objects| No |
 | search | The search parameters the will be sent to the endpoint specified| No |
