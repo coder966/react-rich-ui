@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
 import { isObjKey } from '../utils/utilFunction';
-import PersistableTableData from './types/PersistableTableData';
+import { calculateTablePersistenceId, getPersistedTableState, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
@@ -69,9 +69,6 @@ export interface RruPageableTableProps {
 
   /**  */
   userPrivileges?: string[];
-
-  /** Only specify this if you want to persist the table state */
-  id?: string;
 }
 
 /**
@@ -101,39 +98,32 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
   userPrivileges,
-  id,
 }) => {
-  const getInitialState = (): PersistableTableData => {
-    const persistedData = sessionStorage.getItem('RruPageableTable_' + id);
-    if (persistedData) {
-      return JSON.parse(persistedData);
-    } else {
-      return { currentPage: 0, sortBy: defaultSortBy, sortDir: defaultSortDir };
-    }
-  };
 
-  const persistState = (state: PersistableTableData) => {
-    sessionStorage.setItem('RruPageableTable_' + id, JSON.stringify(state));
-  };
+  const tablePersistenceId: string = useMemo(() => calculateTablePersistenceId(requestMethod, endpoint, columns), [
+    requestMethod,
+    endpoint,
+    columns,
+  ]);
 
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState<TableDataRow[]>([]);
-  const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
+  const [currentPage, setCurrentPage] = useState(getPersistedTableState(tablePersistenceId)?.currentPage || 0);
 
   // flags
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // sort
-  const [sortBy, setSortBy] = useState(getInitialState().sortBy);
-  const [sortDir, setSortDir] = useState(getInitialState().sortDir);
+  const [sortBy, setSortBy] = useState(getPersistedTableState(tablePersistenceId)?.sortBy || defaultSortBy);
+  const [sortDir, setSortDir] = useState(getPersistedTableState(tablePersistenceId)?.sortDir || defaultSortDir);
 
   // defaults
   const mSort = sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '';
 
   useEffect(() => {
-    persistState({ currentPage, sortBy, sortDir });
+    persistTableState(tablePersistenceId, { currentPage, sortBy, sortDir });
   }, [currentPage, sortBy, sortDir]);
 
   // reset page to 0 when the search changes

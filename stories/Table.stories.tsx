@@ -85,8 +85,7 @@ export const TableExample = (args: RruPageableTableProps) => {
       <br />
 
       <RruPageableTable
-        id='UsersListTable'
-        endpoint='http://spring-pagination-example.coder966.net/api/user'
+        endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
         actions={actions}
