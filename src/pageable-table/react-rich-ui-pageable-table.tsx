@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
-import { isObjKey } from '../utils/utilFunction';
+import resolveObjectAttribute from '../utils/resolveObjectAttribute';
 import { getApiResultPromise } from './table-network';
 import { calculateTablePersistenceId, getPersistedTableState, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
@@ -182,12 +182,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     }
   };
 
-  const resolve = (path: string, obj: object): any => {
-    return path
-      .split('.')
-      .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
-  };
-
   return (
     <>
       <table className='table table-striped'>
@@ -246,7 +240,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                         ? col.value(row)
                         : col.value === '#'
                         ? getSerialNo(i)
-                        : resolve(col.value, row)}
+                        : resolveObjectAttribute(col.value, row)}
                     </td>
                   )
               )}
