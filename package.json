@@ -48,6 +48,9 @@
   "peerDependenciesMeta": {
     "axios": {
       "optional": true
+    },
+    "yup": {
+      "optional": true
     }
   },
   "devDependencies": {
