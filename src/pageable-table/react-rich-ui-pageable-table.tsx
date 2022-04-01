@@ -64,6 +64,9 @@ export interface RruPageableTableProps {
   /** Rendered when no data has been returned from the api. */
   noDataLabel?: React.ReactNode;
 
+  /** Rendered when no data has been returned from the api. */
+  apiErrorLabel?: React.ReactNode;
+
   /**  */
   userPrivileges?: string[];
 
@@ -96,6 +99,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   previousLabel = 'Previous',
   nextLabel = 'Next',
   noDataLabel = 'No Data',
+  apiErrorLabel = 'API Error',
   userPrivileges,
   id,
 }) => {
@@ -285,14 +289,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
           {error && (
             <tr>
               <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
-                An Error Occurred
+                {apiErrorLabel}
               </td>
             </tr>
           )}
           {data.length === 0 && !error && (
             <tr>
               <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
-                {noDataLabel || 'No Data'}
+                {noDataLabel}
               </td>
             </tr>
           )}

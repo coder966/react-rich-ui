@@ -25,6 +25,7 @@
 | previousLabel| This is the label for `previous` button in pagination.| No |
 | nextLabel | This is the label for `next` button in pagination. | No |
 | noDataLabel | This is the label used when no data is available. | No |
+| apiErrorLabel | This is the label used when there has been an error in the API call to fetch the data. | No |
 
 ### Columns
 
