@@ -1,11 +1,13 @@
 # React Rich UI
+
 A set of commonly-used React components with a declarative API
-> **_NOTE:_**  Previously known as [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui)
 
 ## Docs
+
 Visit the official website [react-rich-ui.coder966.net](https://react-rich-ui.coder966.net/)
 
 ## License
+
 ```txt
 Copyright 2016 Khalid H. Alharisi
 
