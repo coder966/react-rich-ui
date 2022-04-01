@@ -13,12 +13,12 @@ import TableDataRow from './types/TableDataRow';
 export interface RruPageableTableProps {
   /** Spring Page api endpoint */
   endpoint: string;
-  
+
   /** 
    * Specify the HTTP method to be used when sending the API request.
    * By default it uses GET.
-   * If GET is used, then the pageable object and the search object are merged and sent in the request query string.
-   * If POST is used, then the pageable is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
+   * If GET is used, then the pagination object and the search object are merged and sent in the request query string.
+   * If POST is used, then the pagination is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
    */
   requestMethod?: 'GET' | 'POST',
 
@@ -72,6 +72,7 @@ export interface RruPageableTableProps {
  *  3- Handles pagination.
  *  4- Allows search + sort.
  *  5- Compatible with Spring (Page+Pageable) interfaces.
+ *  6- Capable of retaining its state (search params + sort + current page) after re-mounting.
  *
  * @author coder966
  */
