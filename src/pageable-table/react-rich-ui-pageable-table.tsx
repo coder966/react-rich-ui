@@ -30,6 +30,9 @@ export interface RruPageableTableProps {
   /** The search params object. */
   search?: object;
 
+  /** use `getRetainedTableSearchObject` to read the retained object */
+  retainSearchObject?: boolean;
+
   /**  */
   pageSize: number;
 
@@ -81,6 +84,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   columns,
   actions,
   search,
+  retainSearchObject = false,
   pageSize = 10,
   disableSorting = false,
   defaultSortBy,
@@ -133,13 +137,15 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
-        persistTableState(persistenceKey, {
-          search: search, 
-          totalPages: totalPages, 
-          currentPage: currentPage, 
-          sortBy: sortBy, 
-          sortDir: sortDir,
-        });
+        if(retainSearchObject){
+          persistTableState(persistenceKey, {
+            search: search, 
+            totalPages: totalPages, 
+            currentPage: currentPage, 
+            sortBy: sortBy, 
+            sortDir: sortDir,
+          });  
+        }
         if(!hasBeenInitialized){
           setHasBeenInitialized(true);
         }

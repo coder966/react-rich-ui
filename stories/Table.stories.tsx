@@ -109,6 +109,7 @@ export const TableExample = (args: RruPageableTableProps) => {
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams1}
+        retainSearchObject={true}
         userPrivileges={['USER:VIEW']}
         {...args}
       />
@@ -131,6 +132,7 @@ export const TableExample = (args: RruPageableTableProps) => {
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams2}
+        retainSearchObject={true}
         userPrivileges={['USER:VIEW']}
         {...args}
       />
