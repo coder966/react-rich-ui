@@ -44,7 +44,8 @@
   "peerDependencies": {
     "axios": ">=0.17.0",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "yup": ">=0.27.0"
   },
   "peerDependenciesMeta": {
     "axios": {
