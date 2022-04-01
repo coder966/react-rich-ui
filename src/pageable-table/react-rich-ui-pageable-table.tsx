@@ -2,19 +2,13 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
 import { isObjKey } from '../utils/utilFunction';
+import { getApiResultPromise } from './table-network';
 import { calculateTablePersistenceId, getPersistedTableState, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
 import TableDataRow from './types/TableDataRow';
 
-// dynamically load Axios
-let axios: any;
-try {
-  axios = require('axios');
-} catch (e) {
-  console.log('Axios is not installed. Falling back to fetch');
-}
 
 export interface RruPageableTableProps {
   /** Spring Page api endpoint */
@@ -120,9 +114,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   const [sortBy, setSortBy] = useState(getPersistedTableState(tablePersistenceId)?.sortBy || defaultSortBy);
   const [sortDir, setSortDir] = useState(getPersistedTableState(tablePersistenceId)?.sortDir || defaultSortDir);
 
-  // defaults
-  const mSort = sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '';
-
   // reset page to 0 when the search changes
   useEffect(() => {
     if (currentPage !== 0 && hasBeenInitialized) {
@@ -133,54 +124,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-
-    // prepare request info
-    const pageable = {
-      page: currentPage,
-      size: pageSize,
-      sort: mSort,
-    };
-    let params: object;
-    let body: object | undefined;
-    if(requestMethod === 'POST'){
-      params = pageable;
-      body = search;
-    }else{
-      params = {...pageable, ...search};
-      body = undefined;
-    }
-
-    // create an abstract promise for different HTTP client libs
-    const dataPromise = new Promise((resolve: (data: SpringPage) => void, reject) => {
-      if (axios) {
-        axios({
-          method: requestMethod,
-          url: endpoint,
-          params: params,
-          data: body,
-        })
-          .then((res: any) => resolve(res.data))
-          .catch((err: any) => reject(err));
-      } else {
-        const searchParams = new URLSearchParams();
-        Object.keys(params).forEach((key) => {
-          if (isObjKey(params, key)) {
-            searchParams.append(key, params[key] + '');
-          }
-        });
-        const requestOptions = {
-          method: requestMethod,
-          body: JSON.stringify(body),
-        };
-        fetch(endpoint + '?' + searchParams, requestOptions)
-          .then((res) => res.json())
-          .then((data) => resolve(data))
-          .catch((err) => reject(err));
-      }
-    });
-
-    // handle promise result
-    dataPromise
+    getApiResultPromise(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
       .then((data: SpringPage) => {
         setIsLoading(false);
         setTotalPages(data.totalPages);
