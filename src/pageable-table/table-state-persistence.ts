@@ -1,4 +1,5 @@
 import hashCode from '../utils/hashCode';
+import safeStringify from '../utils/safeStringify';
 import PersistableTableState from './types/PersistableTableState';
 import TableColumn from './types/TableColumn';
 
@@ -15,7 +16,7 @@ const getKeyPrefix = (): string => {
 };
 
 const generatePersistenceKey = (requestMethod: string, endpoint: string, columns: TableColumn[]): string => {
-  const tableSignature: number = hashCode(JSON.stringify({ requestMethod, endpoint, columns }));
+  const tableSignature: number = hashCode(safeStringify({ requestMethod, endpoint, columns }));
   const keyPrefix = getKeyPrefix();
   for (let i = INDEX_STARTS_FROM; i < 20; i++) {
     const key: string = keyPrefix + i;
