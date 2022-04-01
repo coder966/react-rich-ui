@@ -107,11 +107,12 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   ]);
 
   // fetched
-  const [totalPages, setTotalPages] = useState(0);
-  const [data, setData] = useState<TableDataRow[]>([]);
+  const [totalPages, setTotalPages] = useState(getPersistedTableState(tablePersistenceId)?.totalPages || 0);
   const [currentPage, setCurrentPage] = useState(getPersistedTableState(tablePersistenceId)?.currentPage || 0);
+  const [data, setData] = useState<TableDataRow[]>([]);
 
   // flags
+  const [hasBeenInitialized, setHasBeenInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -122,13 +123,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // defaults
   const mSort = sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '';
 
-  useEffect(() => {
-    persistTableState(tablePersistenceId, { currentPage, sortBy, sortDir });
-  }, [currentPage, sortBy, sortDir]);
-
   // reset page to 0 when the search changes
   useEffect(() => {
-    if (currentPage !== 0) {
+    if (currentPage !== 0 && hasBeenInitialized) {
       setCurrentPage(0);
     }
   }, [search]);
@@ -188,6 +185,10 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
+        persistTableState(tablePersistenceId, { totalPages, currentPage, sortBy, sortDir });
+        if(!hasBeenInitialized){
+          setHasBeenInitialized(true);
+        }
         if (onResponse) {
           onResponse(data);
         }
