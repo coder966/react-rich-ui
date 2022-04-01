@@ -9,19 +9,23 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| id | ID| No |
 | endpoint | The endpoint which returns `org.springframework.data.domain.Page` | Yes|
-| columns| An array of column objects| Yes|
-| actions| An array of action objects| No |
-| search | The search parameters the will be sent to the endpoint specified| No |
+| requestMethod | Specify the HTTP method to be used when sending the API request. | No |
+| columns| An array of column objects | Yes|
+| actions| An array of action objects | No |
+| search | The search parameters the will be sent to the endpoint specified | No |
+| retainSearchObject | Whether or not to retain table search object. To read the retained object use `getRetainedTableSearchObject`. | No |
 | onResponse | A callback function. `data => void` | No |
 | userPrivileges | An array of the user's privileges. This is used to only show permitted actions. | No |
 | pageSize | The page size. The default value is `10`| No |
 | disableSorting | Set to false to disable sorting feature.| No |
+| defaultSortBy | Set the default sort key | No |
+| defaultSortDir | Set to default sort direction | No |
 | actionsLabel | The action's column header label. | No |
 | previousLabel| This is the label for `previous` button in pagination.| No |
 | nextLabel | This is the label for `next` button in pagination. | No |
 | noDataLabel | This is the label used when no data is available. | No |
+| apiErrorLabel | This is the label used when there has been an error in the API call to fetch the data. | No |
 
 ### Columns
 
@@ -47,3 +51,9 @@
 | confirmationDesc | Confirmation dialog description | No |
 | confirmLabel | Confirmation dialog confirm button label | No |
 | cancelLabel | Confirmation dialog cancel button label | No |
+
+### getRetainedTableSearchObject
+This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
+
+In case you have multiple tables in the same page, just provide the function with the table index (1-based). Please note that the index counts only the tables that have `retainSearchObject=true`.
+

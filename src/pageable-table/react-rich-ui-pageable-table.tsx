@@ -1,24 +1,25 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
-import { isObjKey } from '../utils/utilFunction';
-import PersistableTableData from './types/PersistableTableData';
+import resolveObjectAttribute from '../utils/resolveObjectAttribute';
+import { getApiResultPromise } from './table-network';
+import { generatePersistenceKey, getPersistedTableState, getPersistedTableStateByTableIndex, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
 import TableDataRow from './types/TableDataRow';
 
-// dynamically load Axios
-let axios: any;
-try {
-  axios = require('axios');
-} catch (e) {
-  console.log('Axios is not installed. Falling back to fetch');
-}
-
 export interface RruPageableTableProps {
   /** Spring Page api endpoint */
   endpoint: string;
+
+  /** 
+   * Specify the HTTP method to be used when sending the API request.
+   * By default it uses GET.
+   * If GET is used, then the pagination object and the search object are merged and sent in the request query string.
+   * If POST is used, then the pagination is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
+   */
+  requestMethod?: 'GET' | 'POST',
 
   /**  */
   columns: TableColumn[];
@@ -29,11 +30,20 @@ export interface RruPageableTableProps {
   /** The search params object. */
   search?: object;
 
+  /** use `getRetainedTableSearchObject` to read the retained object */
+  retainSearchObject?: boolean;
+
   /**  */
   pageSize: number;
 
   /**  */
   disableSorting?: boolean;
+
+  /** */
+  defaultSortBy?: string,
+  
+  /** */
+  defaultSortDir?: 'asc' | 'desc',
 
   /** A callback function in case you want to do anything with response of the api */
   onResponse?: (body: object) => void;
@@ -50,11 +60,11 @@ export interface RruPageableTableProps {
   /** Rendered when no data has been returned from the api. */
   noDataLabel?: React.ReactNode;
 
+  /** Rendered when no data has been returned from the api. */
+  apiErrorLabel?: React.ReactNode;
+
   /**  */
   userPrivileges?: string[];
-
-  /** Only specify this if you want to persist the table state */
-  id?: string;
 }
 
 /**
@@ -64,60 +74,52 @@ export interface RruPageableTableProps {
  *  3- Handles pagination.
  *  4- Allows search + sort.
  *  5- Compatible with Spring (Page+Pageable) interfaces.
+ *  6- Capable of retaining its state (search params + sort + current page) after re-mounting.
  *
  * @author coder966
  */
 const RruPageableTable: FC<RruPageableTableProps> = ({
   endpoint,
+  requestMethod = 'GET',
   columns,
   actions,
   search,
+  retainSearchObject = false,
   pageSize = 10,
   disableSorting = false,
+  defaultSortBy,
+  defaultSortDir,
   onResponse,
   actionsLabel = 'Actions',
   previousLabel = 'Previous',
   nextLabel = 'Next',
   noDataLabel = 'No Data',
+  apiErrorLabel = 'API Error',
   userPrivileges,
-  id,
 }) => {
-  const getInitialState = (): PersistableTableData => {
-    const persistedData = sessionStorage.getItem('RruPageableTable_' + id);
-    if (persistedData) {
-      return JSON.parse(persistedData);
-    } else {
-      return { currentPage: 0, sortBy: 'id', sortDir: 'desc' };
-    }
-  };
+  // generate persistence key
+  const [persistenceKey] = useState(generatePersistenceKey(requestMethod, endpoint, columns));
 
-  const persistState = (state: PersistableTableData) => {
-    sessionStorage.setItem('RruPageableTable_' + id, JSON.stringify(state));
-  };
+
+  const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(persistenceKey)?.search;
 
   // fetched
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(getPersistedTableState(persistenceKey)?.totalPages || 0);
+  const [currentPage, setCurrentPage] = useState(getPersistedTableState(persistenceKey)?.currentPage || 0);
   const [data, setData] = useState<TableDataRow[]>([]);
-  const [currentPage, setCurrentPage] = useState(getInitialState().currentPage);
 
   // flags
+  const [hasBeenInitialized, setHasBeenInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // sort
-  const [sortBy, setSortBy] = useState(getInitialState().sortBy);
-  const [sortDir, setSortDir] = useState(getInitialState().sortDir);
-
-  // defaults
-  const mSort = sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '';
-
-  useEffect(() => {
-    persistState({ currentPage, sortBy, sortDir });
-  }, [currentPage, sortBy, sortDir]);
+  const [sortBy, setSortBy] = useState(getPersistedTableState(persistenceKey)?.sortBy || defaultSortBy);
+  const [sortDir, setSortDir] = useState(getPersistedTableState(persistenceKey)?.sortDir || defaultSortDir);
 
   // reset page to 0 when the search changes
   useEffect(() => {
-    if (currentPage !== 0) {
+    if (currentPage !== 0 && hasBeenInitialized) {
       setCurrentPage(0);
     }
   }, [search]);
@@ -125,40 +127,28 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-
-    const params = {
-      page: currentPage,
-      size: pageSize,
-      sort: mSort,
-      ...search,
-    };
-
-    // create an abstract promise for different HTTP client libs
-    const dataPromise = new Promise((resolve: (data: SpringPage) => void, reject) => {
-      if (axios) {
-        axios(endpoint, { params: params })
-          .then((res: any) => resolve(res.data))
-          .catch((err: any) => reject(err));
-      } else {
-        const searchParams = new URLSearchParams();
-        Object.keys(params).forEach((key) => {
-          if (isObjKey(params, key)) {
-            searchParams.append(key, params[key] + '');
-          }
-        });
-        fetch(endpoint + '?' + searchParams)
-          .then((res) => res.json())
-          .then((data) => resolve(data))
-          .catch((err) => reject(err));
-      }
-    });
-
-    // handle promise result
-    dataPromise
+    getApiResultPromise(
+      requestMethod, endpoint,
+      currentPage, pageSize,
+      getSearchObject(),
+      sortBy, sortDir
+    )
       .then((data: SpringPage) => {
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
+        if(retainSearchObject){
+          persistTableState(persistenceKey, {
+            search: search, 
+            totalPages: totalPages, 
+            currentPage: currentPage, 
+            sortBy: sortBy, 
+            sortDir: sortDir,
+          });  
+        }
+        if(!hasBeenInitialized){
+          setHasBeenInitialized(true);
+        }
         if (onResponse) {
           onResponse(data);
         }
@@ -208,12 +198,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     }
   };
 
-  const resolve = (path: string, obj: object): any => {
-    path
-      .split('.')
-      .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
-  };
-
   return (
     <>
       <table className='table table-striped'>
@@ -250,19 +234,19 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
           {error && (
             <tr>
               <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
-                An Error Occurred
+                {apiErrorLabel}
               </td>
             </tr>
           )}
-          {data.length === 0 && (
+          {data.length === 0 && !error && (
             <tr>
               <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
-                {noDataLabel || 'No Data'}
+                {noDataLabel}
               </td>
             </tr>
           )}
 
-          {data.map((row, i) => (
+          {(data || []).map((row, i) => (
             <tr key={i}>
               {columns.map(
                 (col, j) =>
@@ -272,7 +256,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                         ? col.value(row)
                         : col.value === '#'
                         ? getSerialNo(i)
-                        : resolve(col.value, row)}
+                        : resolveObjectAttribute(col.value, row)}
                     </td>
                   )
               )}
@@ -330,4 +314,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   );
 };
 
-export { RruPageableTable };
+const getRetainedTableSearchObject = (tableIndex?: number) : {[key: string]: any;} | undefined => {
+  return getPersistedTableStateByTableIndex(tableIndex)?.search;
+}
+
+export { RruPageableTable, getRetainedTableSearchObject };
+

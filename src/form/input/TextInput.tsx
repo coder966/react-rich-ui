@@ -24,6 +24,10 @@ export interface TextInputProps {
 
   /**  */
   placeholder: string;
+
+  /**  */
+  dir?: 'auto' | 'ltr' | 'rtl';
+
 }
 
 /**
@@ -43,6 +47,7 @@ const TextInput: FC<TextInputProps> = (props) => {
         disabled={disabled}
         maxLength={maxLength}
         placeholder={placeholder}
+        dir={props.dir}
         type='text'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />

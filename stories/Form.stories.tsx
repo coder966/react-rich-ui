@@ -110,7 +110,7 @@ export const FormExample = (args: RruFormProps) => {
           <RruFormElement type='time' name='bookingTime' label='Booking Time' defaultValue="05:08"/>
         </div>
         <div>
-          <RruFormElement type='file' name='attachment' label='Attachment' placeholder='Select a file' />
+          <RruFormElement type='file' name='attachment' label='Attachment' placeholder='Select a file' accept='.sh' />
           <div style={{marginTop: '2rem'}}><RruFormElement type='checkbox' name='sendEmails' label='Allow promotion emails' /></div>
         </div>
         <div>

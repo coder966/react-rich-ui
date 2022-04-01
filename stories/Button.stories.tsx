@@ -13,7 +13,21 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-const Template = (args: RruButtonProps) => {
+export const Normal = (args: RruButtonProps) => {
+
+  const onClick = () => {
+    action('action click')();
+  }
+
+  return (
+    <RruButton 
+      variant='info'
+      onClick={onClick}
+      label='OK' />
+  );
+};
+
+export const Confirmation = (args: RruButtonProps) => {
 
   const validationSchema = yup.object().shape({
     reason: yup.string().required(),
@@ -41,14 +55,7 @@ const Template = (args: RruButtonProps) => {
       confirmationTitle='Delete'
       confirmationDesc='Are you sure you want to delete ?'
       confirmLabel='Confirm'
-      cancelLabel='Cancel'
-      {...args} />
+      cancelLabel='Cancel' />
   );
 };
-
-
-export const PrimaryExample = Template.bind({});
-PrimaryExample.args = {
-  
-}
 
