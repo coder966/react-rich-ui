@@ -38,5 +38,6 @@
 | maxYearLength | Max number of years +- current year | No | `date` |
 | reverseDisplayOrder | Reverse the render order of the date or time selectors | No | `date, time` |
 | inline | Set to `true` to display `radio` buttons in one line | No | `radio` |
+| accept | Specify the accepted data-types of file extensions. Note that the user can still bypass this. | No | `file` |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No | All |
 

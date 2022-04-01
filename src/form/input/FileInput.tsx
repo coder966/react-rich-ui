@@ -20,6 +20,9 @@ export interface FileInputProps {
   placeholder?: string;
 
   /**  */
+  accept?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
 }
 
@@ -41,6 +44,7 @@ const FileInput: FC<FileInputProps> = (props) => {
         ref={formContext.register}
         name={name}
         disabled={disabled}
+        accept={props.accept}
         onChange={(e) => {
           const filesList = e.target.files;
           if (filesList && filesList[0]) {
