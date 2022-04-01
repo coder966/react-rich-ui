@@ -1,14 +1,13 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
 import resolveObjectAttribute from '../utils/resolveObjectAttribute';
 import { getApiResultPromise } from './table-network';
-import { calculateTablePersistenceId, getPersistedTableState, persistTableState } from './table-state-persistence';
+import { generatePersistenceKey, getPersistedTableState, getPersistedTableStateByTableIndex, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
 import TableDataRow from './types/TableDataRow';
-
 
 export interface RruPageableTableProps {
   /** Spring Page api endpoint */
@@ -94,16 +93,15 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   apiErrorLabel = 'API Error',
   userPrivileges,
 }) => {
+  // generate persistence key
+  const [persistenceKey] = useState(generatePersistenceKey(requestMethod, endpoint, columns));
 
-  const tablePersistenceId: string = useMemo(() => calculateTablePersistenceId(requestMethod, endpoint, columns), [
-    requestMethod,
-    endpoint,
-    columns,
-  ]);
+
+  const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(persistenceKey)?.search;
 
   // fetched
-  const [totalPages, setTotalPages] = useState(getPersistedTableState(tablePersistenceId)?.totalPages || 0);
-  const [currentPage, setCurrentPage] = useState(getPersistedTableState(tablePersistenceId)?.currentPage || 0);
+  const [totalPages, setTotalPages] = useState(getPersistedTableState(persistenceKey)?.totalPages || 0);
+  const [currentPage, setCurrentPage] = useState(getPersistedTableState(persistenceKey)?.currentPage || 0);
   const [data, setData] = useState<TableDataRow[]>([]);
 
   // flags
@@ -112,8 +110,8 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   const [error, setError] = useState(null);
 
   // sort
-  const [sortBy, setSortBy] = useState(getPersistedTableState(tablePersistenceId)?.sortBy || defaultSortBy);
-  const [sortDir, setSortDir] = useState(getPersistedTableState(tablePersistenceId)?.sortDir || defaultSortDir);
+  const [sortBy, setSortBy] = useState(getPersistedTableState(persistenceKey)?.sortBy || defaultSortBy);
+  const [sortDir, setSortDir] = useState(getPersistedTableState(persistenceKey)?.sortDir || defaultSortDir);
 
   // reset page to 0 when the search changes
   useEffect(() => {
@@ -128,14 +126,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     getApiResultPromise(
       requestMethod, endpoint,
       currentPage, pageSize,
-      hasBeenInitialized ? search : getPersistedTableState(tablePersistenceId)?.search,
+      getSearchObject(),
       sortBy, sortDir
     )
       .then((data: SpringPage) => {
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
-        persistTableState(tablePersistenceId, { 
+        persistTableState(persistenceKey, {
           search: search, 
           totalPages: totalPages, 
           currentPage: currentPage, 
@@ -310,5 +308,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   );
 };
 
-export { RruPageableTable };
+const getRetainedTableSearchObject = (tableIndex?: number) : {[key: string]: any;} | undefined => {
+  return getPersistedTableStateByTableIndex(tableIndex)?.search;
+}
+
+export { RruPageableTable, getRetainedTableSearchObject };
 

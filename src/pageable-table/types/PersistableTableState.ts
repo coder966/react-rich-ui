@@ -1,5 +1,7 @@
 interface PersistableTableState {
-  search?: object,
+  search?: {
+    [key: string]: any;
+  },
   totalPages: number;
   currentPage: number;
   sortBy?: string;

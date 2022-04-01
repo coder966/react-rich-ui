@@ -50,3 +50,9 @@
 | confirmationDesc | Confirmation dialog description | No |
 | confirmLabel | Confirmation dialog confirm button label | No |
 | cancelLabel | Confirmation dialog cancel button label | No |
+
+### getRetainedTableSearchObject
+This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
+
+In case you have multiple tables in the same page, just provide the function with the table index (1-based).
+
