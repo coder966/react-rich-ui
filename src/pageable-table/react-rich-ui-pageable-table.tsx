@@ -125,12 +125,23 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-    getApiResultPromise(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
+    getApiResultPromise(
+      requestMethod, endpoint,
+      currentPage, pageSize,
+      hasBeenInitialized ? search : getPersistedTableState(tablePersistenceId)?.search,
+      sortBy, sortDir
+    )
       .then((data: SpringPage) => {
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
-        persistTableState(tablePersistenceId, { totalPages, currentPage, sortBy, sortDir });
+        persistTableState(tablePersistenceId, { 
+          search: search, 
+          totalPages: totalPages, 
+          currentPage: currentPage, 
+          sortBy: sortBy, 
+          sortDir: sortDir,
+        });
         if(!hasBeenInitialized){
           setHasBeenInitialized(true);
         }
