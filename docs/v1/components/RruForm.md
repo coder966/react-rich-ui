@@ -27,6 +27,7 @@
 | className | Column class name | No | All |
 | options | An array of objects of the form:<br>`{id: string label: string}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: string, items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, multi-select, radio, multi-checkbox, grouped-multi-checkbox` |
 | placeholder | A place holder | No | `text`, `textarea`, `password`, `file` |
+| dir | Text direction | No | `text`, `textarea`, `password` |
 | maxLength | Maximum length | No |  |
 | disabled | Set to `true` to disable the editing of the form element | No | All |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No | `date` |

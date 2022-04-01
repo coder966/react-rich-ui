@@ -24,6 +24,10 @@ export interface TextareaInputProps {
 
   /**  */
   placeholder: string;
+
+  /**  */
+  dir?: 'auto' | 'ltr' | 'rtl';
+
 }
 
 /**
@@ -43,6 +47,7 @@ const TextareaInput: FC<TextareaInputProps> = (props) => {
         disabled={disabled}
         maxLength={maxLength}
         placeholder={placeholder}
+        dir={props.dir}
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />

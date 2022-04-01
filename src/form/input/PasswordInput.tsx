@@ -23,6 +23,9 @@ export interface PasswordInputProps {
   placeholder?: string;
 
   /**  */
+  dir?: 'auto' | 'ltr' | 'rtl';
+
+  /**  */
   maxLength?: number;
 }
 
@@ -43,6 +46,7 @@ const PasswordInput: FC<PasswordInputProps> = (props) => {
         disabled={disabled}
         maxLength={maxLength}
         placeholder={placeholder}
+        dir={props.dir}
         type='password'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
