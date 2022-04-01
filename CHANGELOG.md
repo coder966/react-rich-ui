@@ -2,6 +2,33 @@
 Pre-release versions will not be mentioned here.
 
 
+## [1.6.0] - 2022-04-02
+
+### Added
+- RruFormElement: Added `dir` prop to `text`, `textarea`, and `password`.
+- RruFormElement: Added `accept` prop to `file`.
+- RruPageableTable: Added the ability to specify the default sort configuration using `defaultSortBy` and `defaultSortDir`.
+- RruPageableTable: Added the ability to use POST method in the api call using `requestMethod`.
+- RruPageableTable: Added the ability to show a message when there is an api call error using `apiErrorLabel`.
+- RruPageableTable: Added the ability to retain the search form object (through the use of `retainSearchObject` and `getRetainedTableSearchObject`). Please refer to the documentations for details.
+
+### Changed
+- RruPageableTable: Reset to the first page after search params change.
+- RruButton: Confirmation dialogue now uses a custom-built modal instead of `react-bootstrap` `Modal`.
+
+### Removed
+- RruPageableTable: Removed `id` prop. Now the component will generate a unique id which is used for persisting the table state.
+
+### Internal
+- Rewrite components in Typescript.
+- Drop the example app and use Storybook instead.
+- Use TSDX for building the library
+- Properly mention axios as a peer dependency in package.json
+- Add `yup` to `peerDependencies`.
+- Upgrade Dependencies.
+
+--------------------------------------------------------------------------------
+
 ## [1.5.3] - 2021-02-20
 
 ### Fixed
