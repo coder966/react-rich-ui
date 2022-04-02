@@ -1,13 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
-import '../src/button/style.css';
 import {
   getRetainedTableSearchObject,
   RruPageableTable,
   RruPageableTableProps
 } from '../src/pageable-table/react-rich-ui-pageable-table';
-import '../src/pageable-table/style.css';
 
 const storyMeta: Meta = {
   title: 'Table',
@@ -17,8 +15,8 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const TableExample = (args: RruPageableTableProps) => {
-  const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject());
-  const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject(2));
+  const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user1'));
+  const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user2'));
 
   /**
    * not the best way to get form data,

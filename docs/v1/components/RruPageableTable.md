@@ -14,7 +14,7 @@
 | columns| An array of column objects | Yes|
 | actions| An array of action objects | No |
 | search | The search parameters the will be sent to the endpoint specified | No |
-| retainSearchObject | Whether or not to retain table search object. To read the retained object use `getRetainedTableSearchObject`. | No |
+| retainTableState | Whether or not to retain the table state (current page and current sort configuration and current search object). To read the retained search object use `getRetainedTableSearchObject`. | No |
 | onResponse | A callback function. `data => void` | No |
 | userPrivileges | An array of the user's privileges. This is used to only show permitted actions. | No |
 | pageSize | The page size. The default value is `10`| No |
@@ -53,7 +53,6 @@
 | cancelLabel | Confirmation dialog cancel button label | No |
 
 ### getRetainedTableSearchObject
-This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
+This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes in handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
 
-In case you have multiple tables in the same page, just provide the function with the table index (1-based). Please note that the index counts only the tables that have `retainSearchObject=true`.
-
+In case you have multiple tables in the same page, just provide the function with the table endpoint. If you don't specify the endpoint, there is no guarantee on which table of which it will return the search object.

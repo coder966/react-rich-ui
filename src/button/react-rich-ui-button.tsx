@@ -3,6 +3,7 @@ import { RruForm } from '../form/react-rich-ui-form';
 import FormInitialValues from '../form/types/FormInitialValues';
 import FormValues from '../form/types/FormValues';
 import { isObjKey } from '../utils/utilFunction';
+import './style.css';
 
 const icons = {
   view: 'fa fa-eye icon view',
@@ -155,21 +156,21 @@ const RruButton: FC<RruButtonProps> = ({
           watch={watch}
           watcher={watcher}
         >
-          <div className={show ? 'modal display-block' : 'modal display-none'}>
-            <div>
-              <section className='modal-header'>
-                <span className='modal-header-title'>{confirmationTitle}</span>
-                <span className='modal-header-close' onClick={() => setShow(false)}></span>
+          <div className={show ? 'rru-button-modal__container rru-button-modal__container--visible' : 'rru-button-modal__container rru-button-modal__container--hidden'}>
+            <div className='rru-button-modal__box'>
+              <section className='rru-button-modal__section rru-button-modal__header'>
+                <span className='rru-button-modal__title'>{confirmationTitle}</span>
+                <span className='rru-button-modal__close-button' onClick={() => setShow(false)}></span>
               </section>
-              <section>
+              <section className='rru-button-modal__section'>
                 {confirmationDesc}
                 {formElements}
               </section>
-              <section className='modal-footer'>
-                <button className='btn btn-secondary' onClick={() => setShow(false)}>
+              <section className='rru-button-modal__section rru-button-modal__footer'>
+                <button className='btn btn-secondary m-1' onClick={() => setShow(false)}>
                   {cancelLabel}
                 </button>
-                <button className='btn btn-primary' type='submit'>
+                <button className='btn btn-primary m-1' type='submit'>
                   {confirmLabel}
                 </button>
               </section>

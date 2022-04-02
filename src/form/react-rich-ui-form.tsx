@@ -13,6 +13,7 @@ import SelectInput from './input/SelectInput';
 import TextareaInput from './input/TextareaInput';
 import TextInput from './input/TextInput';
 import TimeInput from './input/TimeInput';
+import './style.css';
 import FormInitialValues from './types/FormInitialValues';
 import FormValues from './types/FormValues';
 import IRHFDefaultValues from './types/IRHFDefaultValues';

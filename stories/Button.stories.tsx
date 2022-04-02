@@ -3,7 +3,6 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
 import { RruButton, RruButtonProps } from '../src/button/react-rich-ui-button';
-import '../src/button/style.css';
 import { RruFormElement } from '../src/form/react-rich-ui-form';
 
 const storyMeta: Meta = {

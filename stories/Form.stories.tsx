@@ -2,9 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import '../src/button/style.css';
 import { RruForm, RruFormElement, RruFormProps } from '../src/form/react-rich-ui-form';
-import '../src/form/style.css';
 
 const storyMeta: Meta = {
   title: 'Form',
