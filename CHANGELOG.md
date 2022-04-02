@@ -22,8 +22,8 @@ Pre-release versions will not be mentioned here.
 ### Internal
 - Rewrite components in Typescript.
 - Drop the example app and use Storybook instead.
-- Use TSDX for building the library
-- Properly mention axios as a peer dependency in package.json
+- Use Microbundle for building the library.
+- Properly mention axios as a peer dependency in package.json.
 - Add `yup` to `peerDependencies`.
 - Upgrade Dependencies.
 
