@@ -28,8 +28,7 @@
   "typings": "dist/index.d.ts",
   "module": "dist/react-rich-ui.esm.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
