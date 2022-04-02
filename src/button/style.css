@@ -1,4 +1,4 @@
-.modal {
+.rru-button-modal__container {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,7 +8,20 @@
     display: block;
 }
 
-.modal > div {
+.rru-button-modal__container--visible {
+    opacity: 1;
+    transform: scale(1) ;
+    transition: transform 0s, opacity 0.3s ease-in-out;
+
+}
+
+.rru-button-modal__container--hidden {
+    opacity: 0;
+    transform: scale(0.0) ;
+    transition: transform 0s linear 0.3s, opacity 0.3s ease-in-out;
+}
+
+.rru-button-modal__box {
     position: relative;
     background: white;
     width: auto;
@@ -23,48 +36,39 @@
 }
 
 @media (min-width:576px) {
-    .modal > div {
+    .rru-button-modal__box {
         max-width: 500px;
     }
 }
 
-
-.modal > div > section {
-    padding: 1rem;
+.rru-button-modal__section {
+    padding: 0.75rem;
 }
 
-.modal > div > .modal-header {
-    border-bottom: 2px solid #ebebeb;
+.rru-button-modal__header {
+    display: flex;
+    padding: 1.25rem;
+    border-bottom: 1px solid #dee2e6;
 }
 
-.modal > div > .modal-header > .modal-header-title {
+.rru-button-modal__title {
+    flex-grow: 1;
     font-size: 1.5rem;
     line-height: 1;
 }
 
-.modal > div > .modal-header > .modal-header-close {
+.rru-button-modal__close-button {
     width: 1.5em;
     height: 1.5em;
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 0.5;
     background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat
 }
 
-.modal > div > .modal-footer {
-    border-top: 2px solid #ebebeb;
-}
-
-.display-block {
-    opacity: 1;
-    transform: scale(1) ;
-    transition: transform 0s, opacity 0.3s ease-in-out;
-
-}
-
-.display-none {
-    opacity: 0;
-    transform: scale(0.0) ;
-    transition: transform 0s linear 0.3s, opacity 0.3s ease-in-out;
+.rru-button-modal__footer {
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid #dee2e6;
 }
 
 
