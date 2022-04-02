@@ -14,7 +14,7 @@
 | columns| An array of column objects | Yes|
 | actions| An array of action objects | No |
 | search | The search parameters the will be sent to the endpoint specified | No |
-| retainSearchObject | Whether or not to retain table search object. To read the retained object use `getRetainedTableSearchObject`. | No |
+| retainTableState | Whether or not to retain the table state (current page and current sort configuration and current search object). To read the retained search object use `getRetainedTableSearchObject`. | No |
 | onResponse | A callback function. `data => void` | No |
 | userPrivileges | An array of the user's privileges. This is used to only show permitted actions. | No |
 | pageSize | The page size. The default value is `10`| No |

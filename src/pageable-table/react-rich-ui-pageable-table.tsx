@@ -32,7 +32,7 @@ export interface RruPageableTableProps {
   search?: object;
 
   /** use `getRetainedTableSearchObject` to read the retained object */
-  retainSearchObject?: boolean;
+  retainTableState?: boolean;
 
   /**  */
   pageSize: number;
@@ -85,7 +85,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   columns,
   actions,
   search,
-  retainSearchObject = false,
+  retainTableState = false,
   pageSize = 10,
   disableSorting = false,
   defaultSortBy,
@@ -134,7 +134,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setIsLoading(false);
         setTotalPages(data.totalPages);
         setData(data.content);
-        if(retainSearchObject){
+        if(retainTableState){
           persistTableState(endpoint, {
             search: search, 
             totalPages: totalPages, 

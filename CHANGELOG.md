@@ -10,7 +10,7 @@ Pre-release versions will not be mentioned here.
 - RruPageableTable: Added the ability to specify the default sort configuration using `defaultSortBy` and `defaultSortDir`.
 - RruPageableTable: Added the ability to use POST method in the api call using `requestMethod`.
 - RruPageableTable: Added the ability to show a message when there is an api call error using `apiErrorLabel`.
-- RruPageableTable: Added the ability to retain the search form object (through the use of `retainSearchObject` and `getRetainedTableSearchObject`). Please refer to the documentations for details.
+- RruPageableTable: Added the ability to retain the table state (current page and current sort configuration and current search object) (through the use of `retainTableState` and `getRetainedTableSearchObject`). Please refer to the documentations for details.
 
 ### Changed
 - You must now explicitly import the library stylesheet `react-rich-ui/dist/index.css` in you react app (usually in `index.js`).
