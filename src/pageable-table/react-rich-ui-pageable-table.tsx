@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { RruButton } from '../button/react-rich-ui-button';
 import resolveObjectAttribute from '../utils/resolveObjectAttribute';
+import './style.css';
 import { getApiResultPromise } from './table-network';
 import { generatePersistenceKey, getPersistedTableState, getPersistedTableStateByTableIndex, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';

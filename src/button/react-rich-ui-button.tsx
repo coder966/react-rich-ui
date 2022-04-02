@@ -3,6 +3,7 @@ import { RruForm } from '../form/react-rich-ui-form';
 import FormInitialValues from '../form/types/FormInitialValues';
 import FormValues from '../form/types/FormValues';
 import { isObjKey } from '../utils/utilFunction';
+import './style.css';
 
 const icons = {
   view: 'fa fa-eye icon view',

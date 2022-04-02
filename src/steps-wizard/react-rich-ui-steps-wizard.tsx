@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import './style.css';
 
 export interface RruStepsWizardStepProps {
   /** Optional name to be displayed in the wizard header */

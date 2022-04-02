@@ -1,13 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
-import '../src/button/style.css';
 import {
   getRetainedTableSearchObject,
   RruPageableTable,
   RruPageableTableProps
 } from '../src/pageable-table/react-rich-ui-pageable-table';
-import '../src/pageable-table/style.css';
 
 const storyMeta: Meta = {
   title: 'Table',
