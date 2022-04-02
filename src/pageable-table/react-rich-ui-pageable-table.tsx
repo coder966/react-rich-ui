@@ -4,7 +4,7 @@ import { RruButton } from '../button/react-rich-ui-button';
 import resolveObjectAttribute from '../utils/resolveObjectAttribute';
 import './style.css';
 import { getApiResultPromise } from './table-network';
-import { generatePersistenceKey, getPersistedTableState, getPersistedTableStateByTableIndex, persistTableState } from './table-state-persistence';
+import { getFirstPersistedTableState, getPersistedTableState, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
 import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
@@ -98,15 +98,11 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   apiErrorLabel = 'API Error',
   userPrivileges,
 }) => {
-  // generate persistence key
-  const [persistenceKey] = useState(generatePersistenceKey(requestMethod, endpoint, columns));
-
-
-  const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(persistenceKey)?.search;
+  const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
 
   // fetched
-  const [totalPages, setTotalPages] = useState(getPersistedTableState(persistenceKey)?.totalPages || 0);
-  const [currentPage, setCurrentPage] = useState(getPersistedTableState(persistenceKey)?.currentPage || 0);
+  const [totalPages, setTotalPages] = useState(getPersistedTableState(endpoint)?.totalPages || 0);
+  const [currentPage, setCurrentPage] = useState(getPersistedTableState(endpoint)?.currentPage || 0);
   const [data, setData] = useState<TableDataRow[]>([]);
 
   // flags
@@ -115,8 +111,8 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   const [error, setError] = useState(null);
 
   // sort
-  const [sortBy, setSortBy] = useState(getPersistedTableState(persistenceKey)?.sortBy || defaultSortBy);
-  const [sortDir, setSortDir] = useState(getPersistedTableState(persistenceKey)?.sortDir || defaultSortDir);
+  const [sortBy, setSortBy] = useState(getPersistedTableState(endpoint)?.sortBy || defaultSortBy);
+  const [sortDir, setSortDir] = useState(getPersistedTableState(endpoint)?.sortDir || defaultSortDir);
 
   // reset page to 0 when the search changes
   useEffect(() => {
@@ -139,7 +135,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setTotalPages(data.totalPages);
         setData(data.content);
         if(retainSearchObject){
-          persistTableState(persistenceKey, {
+          persistTableState(endpoint, {
             search: search, 
             totalPages: totalPages, 
             currentPage: currentPage, 
@@ -315,8 +311,15 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   );
 };
 
-const getRetainedTableSearchObject = (tableIndex?: number) : {[key: string]: any;} | undefined => {
-  return getPersistedTableStateByTableIndex(tableIndex)?.search;
+/**
+ * If you don't specify the endpoint it will return the first table data in the current page.
+ */
+const getRetainedTableSearchObject = (endpoint?: string) : {[key: string]: any;} | undefined => {
+  if(endpoint){
+    return getPersistedTableState(endpoint)?.search;
+  }else{
+    return getFirstPersistedTableState()?.search;
+  }
 }
 
 export { RruPageableTable, getRetainedTableSearchObject };

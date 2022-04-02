@@ -53,7 +53,6 @@
 | cancelLabel | Confirmation dialog cancel button label | No |
 
 ### getRetainedTableSearchObject
-This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
+This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes in handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
 
-In case you have multiple tables in the same page, just provide the function with the table index (1-based). Please note that the index counts only the tables that have `retainSearchObject=true`.
-
+In case you have multiple tables in the same page, just provide the function with the table endpoint. If you don't specify the endpoint, there is no guarantee on which table of which it will return the search object.

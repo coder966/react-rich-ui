@@ -15,8 +15,8 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const TableExample = (args: RruPageableTableProps) => {
-  const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject());
-  const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject(2));
+  const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user1'));
+  const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user2'));
 
   /**
    * not the best way to get form data,
