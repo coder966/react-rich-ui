@@ -1,6 +1,6 @@
 {
   "name": "react-rich-ui",
-  "version": "1.6.0-RC7",
+  "version": "1.6.0",
   "description": "A set of commonly-used React components with a declarative API",
   "keywords": [
     "React",
