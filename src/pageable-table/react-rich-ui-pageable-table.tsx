@@ -131,13 +131,13 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       sortBy, sortDir
     )
       .then((data: SpringPage) => {
-        setIsLoading(false);
+        setError(null);
         setTotalPages(data.totalPages);
         setData(data.content);
         if(retainTableState){
           persistTableState(endpoint, {
             search: search, 
-            totalPages: totalPages, 
+            totalPages: data.totalPages, 
             currentPage: currentPage, 
             sortBy: sortBy, 
             sortDir: sortDir,
@@ -151,8 +151,24 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         }
       })
       .catch((err) => {
-        setIsLoading(false);
         setError(err);
+        setTotalPages(0);
+        setData([]);
+        if(retainTableState){
+          persistTableState(endpoint, {
+            search: search, 
+            totalPages: 0, 
+            currentPage: 0, 
+            sortBy: sortBy, 
+            sortDir: sortDir,
+          });  
+        }
+        if(!hasBeenInitialized){
+          setHasBeenInitialized(true);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [currentPage, search, sortBy, sortDir]);
 
