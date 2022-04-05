@@ -1,6 +1,11 @@
 # Changelog
 Pre-release versions will not be mentioned here.
 
+## [1.6.1] - 2022-04-05
+
+### Fixed
+- RruButton: The cancel button in the confirmation was submitting the form.
+
 
 ## [1.6.0] - 2022-04-02
 
