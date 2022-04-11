@@ -25,15 +25,14 @@
 | name | Unique form element name | Yes | All |
 | type | Available types: `text (default), password, textarea, select, multi-select, radio, checkbox, multi-checkbox, grouped-multi-checkbox (deprecated), date, time, file` | Yes | All |
 | className | Column class name | No | All |
-| options | An array of objects of the form:<br>`{id: string label: string}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: string, items: [...]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, multi-select, radio, multi-checkbox, grouped-multi-checkbox` |
+| options | An array of objects of the form:<br>`{id: string, label: ReactNode}`<br>But if the type is `grouped-multi-checkbox` the form is:<br>`{label: string, items: [{id: string, label: ReactNode}]}`| Yes if type in `select, radio, multi-checkbox, grouped-multi-checkbox` | `select, multi-select, radio, multi-checkbox, grouped-multi-checkbox` |
 | placeholder | A place holder | No | `text`, `textarea`, `password`, `file` |
 | dir | Text direction | No | `text`, `textarea`, `password` |
-| maxLength | Maximum length | No |  |
+| maxLength | Maximum length | No | `text`, `textarea`, `password` |
 | disabled | Set to `true` to disable the editing of the form element | No | All |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No | `date` |
 | isFuture | Display only future years | No | `date` |
 | isPast | Display only past years | No | `date` |
-| clock | Clock style either 12-hours or 24-hours | No | `time` |
 | clock | Clock style either 12-hours or 24-hours | No | `time` |
 | maxYearLength | Max number of years +- current year | No | `date` |
 | reverseDisplayOrder | Reverse the render order of the date or time selectors | No | `date, time` |
