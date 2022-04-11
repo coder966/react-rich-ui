@@ -48,6 +48,7 @@ const PasswordInput: FC<PasswordInputProps> = (props) => {
         placeholder={placeholder}
         dir={props.dir}
         type='password'
+        autoComplete='new-password'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />

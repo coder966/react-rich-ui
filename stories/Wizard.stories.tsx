@@ -33,7 +33,7 @@ export const WizardExample = (args: RruStepsWizardStepProps) => {
       {props.previousStepData ? 
         <>
           <p>Name: {props.previousStepData.name}</p>
-          <p>colour: {props.previousStepData.colour}</p>
+          <p>Colour: {props.previousStepData.colour}</p>
         </>
       : null}
       <button onClick={props.firstStep}>first step</button>

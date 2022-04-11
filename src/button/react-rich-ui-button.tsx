@@ -167,7 +167,7 @@ const RruButton: FC<RruButtonProps> = ({
                 {formElements}
               </section>
               <section className='rru-button-modal__section rru-button-modal__footer'>
-                <button className='btn btn-secondary m-1' onClick={() => setShow(false)}>
+                <button type='button' className='btn btn-secondary m-1' onClick={() => setShow(false)}>
                   {cancelLabel}
                 </button>
                 <button className='btn btn-primary m-1' type='submit'>

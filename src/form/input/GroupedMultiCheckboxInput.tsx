@@ -26,6 +26,7 @@ export interface GroupedMultiCheckboxInputProps {
 
 /**
  * @author coder966
+ * @deprecated
  */
 const GroupedMultiCheckboxInput: FC<GroupedMultiCheckboxInputProps> = (props) => {
   const { name, options, disabled } = props;

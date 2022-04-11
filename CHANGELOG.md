@@ -1,6 +1,19 @@
 # Changelog
 Pre-release versions will not be mentioned here.
 
+## [1.6.1] - 2022-04-12
+
+### Added
+- RruForm: add typescript support for boolean type in initialValues prop.
+- RruFormElement: add autoComplete='new-password' to password type.
+
+### Fixed
+- RruButton: The cancel button in the confirmation was submitting the form.
+
+### Internal
+- Storybook stories improvements.
+- upgrade dev dependencies.
+
 
 ## [1.6.0] - 2022-04-02
 
