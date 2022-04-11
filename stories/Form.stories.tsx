@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import { RruForm, RruFormElement, RruFormProps } from '../src/form/react-rich-ui-form';
 
@@ -325,6 +325,41 @@ export const File = (args: RruFormProps) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
       <RruFormElement type='file' name='attachment' label='Attachment' />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+export const Watcher = (args: RruFormProps) => {
+  const [color, setColor] = useState();
+
+  const colors = [
+    { id: 'RED', label: 'Red' },
+    { id: 'BLUE', label: 'Blue' },
+    { id: 'GREEN', label: 'Green' },
+  ];
+
+  const initialValues = {
+
+  }
+
+  const validationSchema = yup.object().shape({
+
+  });
+
+  const watcher = form => {
+    setColor(form.color);
+  };
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher} {...args}>
+      <RruFormElement type='select' name='color' label='Color' options={colors} defaultValue='BLUE' />
+      {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit'>Submit</button>
     </RruForm>
   );
