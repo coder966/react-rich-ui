@@ -365,3 +365,45 @@ export const Watcher = (args: RruFormProps) => {
   );
 
 };
+
+export const TwoFormsInOnePage = (args: RruFormProps) => {
+
+  const initialValues1 = {
+    name: 'Khalid',
+  }
+
+  const initialValues2 = {
+    favoriteNumber: '10',
+  }
+
+  const validationSchema1 = yup.object().shape({
+    name: yup.string().min(3).max(10),
+  });
+
+  const validationSchema2 = yup.object().shape({
+    favoriteNumber: yup.number().min(0),
+  });
+
+  const onSubmit1 = form => {
+    action('submitting the form 1')(form);
+  };
+
+  const onSubmit2 = form => {
+    action('submitting the form 2')(form);
+  };
+
+  return (
+    <>
+      <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1} {...args}>
+        <RruFormElement type='text' name='name' label='Name' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+      <br></br>
+      <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2} {...args}>
+        <RruFormElement type='text' name='favoriteNumber' label='Favorite Number' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    </>
+  );
+
+};
