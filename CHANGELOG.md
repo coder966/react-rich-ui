@@ -1,6 +1,12 @@
 # Changelog
 Pre-release versions will not be mentioned here.
 
+## [1.6.2] - 2022-04-12
+
+### Fixed
+- RruFormElement: revert adding autoComplete='new-password' to password type in v1.6.1 because this broke the login form auto completion.
+
+
 ## [1.6.1] - 2022-04-12
 
 ### Added
