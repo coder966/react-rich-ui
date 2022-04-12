@@ -1,6 +1,12 @@
 # Changelog
 Pre-release versions will not be mentioned here.
 
+## [1.6.3] - 2022-04-12
+
+### Internal
+- Improvements.
+
+
 ## [1.6.2] - 2022-04-12
 
 ### Fixed
