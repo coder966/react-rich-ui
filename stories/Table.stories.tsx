@@ -3,9 +3,9 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   getRetainedTableSearchObject,
-  RruPageableTable,
-  RruPageableTableProps
+  RruPageableTable
 } from '../src/pageable-table/react-rich-ui-pageable-table';
+import RruPageableTableProps from '../src/pageable-table/types/RruPageableTableProps';
 
 const storyMeta: Meta = {
   title: 'Table',
