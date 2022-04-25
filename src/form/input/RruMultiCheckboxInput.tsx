@@ -15,9 +15,6 @@ export interface RruMultiCheckboxInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
@@ -33,7 +30,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       {/* these hidden options are important because if options size is 1 then form submit result will be string instead of array with one item
             and if options size is zero then will result in false instead of an empty array */}

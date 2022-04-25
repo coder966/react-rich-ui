@@ -9,7 +9,6 @@
 |-|-|-|
 | label | The form element label | Yes |
 | name | Unique form element name | Yes |
-| className | Column class name | No |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | clock | Clock style either 12-hours or 24-hours | No |
 | reverseDisplayOrder | Reverse the render order of the date or time selectors | No |

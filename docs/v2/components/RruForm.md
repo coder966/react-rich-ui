@@ -13,7 +13,6 @@
 | watch(func) | DEPRECATED (use watch(array)) A function which takes a function that you can run to listen to form data changes. | No |
 | watch(array) | An array of the field names you want to monitor | No |
 | watcher | A function which takes the form data. Can be used only in combination with watch(array). | No |
-| className | `form` class name | No |
 
 ## Input Components
 

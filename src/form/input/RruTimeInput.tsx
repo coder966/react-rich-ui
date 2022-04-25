@@ -15,9 +15,6 @@ export interface RruTimeInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /** hh:mm */
@@ -40,7 +37,7 @@ const RruTimeInput: FC<RruTimeInputProps> = (props) => {
   formContext.register({ name });
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <DateTimePicker
         type='time'

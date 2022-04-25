@@ -15,9 +15,6 @@ export interface RruRadioInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
@@ -36,7 +33,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div className={props.inline ? 'form-check-inline' : undefined}>
         {options.map((o) => (

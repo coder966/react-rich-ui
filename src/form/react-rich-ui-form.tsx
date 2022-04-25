@@ -25,8 +25,6 @@ export interface RruFormProps {
   /**  */
   children: React.ReactNode | React.ReactNode[];
 
-  /**  */
-  className?: string;
 }
 
 /**
@@ -42,7 +40,6 @@ const RruForm: FC<RruFormProps> = ({
   watch,
   watcher,
   children,
-  className,
 }) => {
   // transform initialValues object to meet our requirements:
   // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
@@ -79,7 +76,7 @@ const RruForm: FC<RruFormProps> = ({
 
   return (
     <FormContext {...form}>
-      <form className={className} onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         {children}
       </form>
     </FormContext>

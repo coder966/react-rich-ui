@@ -14,9 +14,6 @@ export interface RruPasswordInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
@@ -38,7 +35,7 @@ const RruPasswordInput: FC<RruPasswordInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         ref={formContext.register}

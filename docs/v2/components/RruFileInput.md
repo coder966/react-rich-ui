@@ -9,7 +9,6 @@
 |-|-|-|
 | label | The form element label | Yes |
 | name | Unique form element name | Yes |
-| className | Column class name | No |
 | placeholder | A place holder | No |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | accept | Specify the accepted data-types of file extensions. Note that the user can still bypass this. | No |

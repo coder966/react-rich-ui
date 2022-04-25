@@ -13,9 +13,6 @@ export interface RruFileInputProps {
   /**  */
   disabled?: boolean;
 
-  /**  */
-  className?: string;
-
   /** A placeholder to be displayed in the place of the filename of the file selected. */
   placeholder?: string;
 
@@ -36,7 +33,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         type='file'

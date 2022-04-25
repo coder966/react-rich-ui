@@ -9,7 +9,6 @@
 |-|-|-|
 | label | The form element label | Yes |
 | name | Unique form element name | Yes |
-| className | Column class name | No |
 | placeholder | A place holder | No |
 | dir | Text direction | No |
 | maxLength | Maximum length | No |

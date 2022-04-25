@@ -12,8 +12,6 @@ export interface RruCheckboxInputProps {
   /**  */
   disabled?: boolean;
 
-  /**  */
-  className?: string;
 }
 
 /**
@@ -25,7 +23,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <div className='custom-control custom-checkbox m-1'>
         <input
           id={'checkbox_' + name}

@@ -17,9 +17,6 @@ export interface RruSelectInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
@@ -69,7 +66,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   }, [options]);
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       {selectControlValue ? (
         <Select

@@ -14,9 +14,6 @@ export interface RruTextareaInputProps {
   disabled?: boolean;
 
   /**  */
-  className?: string;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
@@ -39,7 +36,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const formContext = useFormContext();
 
   return (
-    <div className={props.className ? props.className : 'form-group'}>
+    <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <textarea
         ref={formContext.register}

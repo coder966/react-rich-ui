@@ -9,7 +9,6 @@
 |-|-|-|
 | label | The form element label | Yes |
 | name | Unique form element name | Yes |
-| className | Column class name | No |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No |
 | isFuture | Display only future years | No |
