@@ -277,7 +277,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                       <RruButton
                         key={k}
                         label={a.label}
-                        icon={typeof a.icon === 'function' ? a.icon(row) : a.icon}
                         confirmationTitle={a.confirmationTitle}
                         confirmationDesc={a.confirmationDesc}
                         cancelLabel={a.cancelLabel}

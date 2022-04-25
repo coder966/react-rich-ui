@@ -69,27 +69,3 @@
     justify-content: flex-end;
     border-top: 1px solid #dee2e6;
 }
-
-
-/*  */
-
-
-.icon{
-    font-size: 1.25rem;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    cursor: pointer;
-}
-
-.icon.view{color: #a37bba;}
-.icon.edit{color: #5fbdd6;}
-.icon.lock{color: #c09027;}
-.icon.unlock{color: #c09027;}
-.icon.delete{color: #c77172;}
-.icon.add{color: #17a70a;}
-.icon.remove{color: #c77172;}
-.icon.check{color: #17a70a;}
-.icon.times{color: #c77172;}
-.icon.pdf{color: #c77172;}
-.icon.excel{color: #17a70a;}
-.icon.download{color: #880aa7;}

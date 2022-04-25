@@ -2,45 +2,11 @@ import React, { FC, useState } from 'react';
 import { RruForm } from '../form/react-rich-ui-form';
 import FormInitialValues from '../form/types/FormInitialValues';
 import FormValues from '../form/types/FormValues';
-import { isObjKey } from '../utils/utilFunction';
 import './style.css';
-
-const icons = {
-  view: 'fa fa-eye icon view',
-  edit: 'fas fa-edit icon edit',
-  lock: 'fas fa-lock icon lock',
-  unlock: 'fas fa-unlock icon unlock',
-  delete: 'far fa-trash-alt icon delete',
-  add: 'fas fa-plus icon add',
-  remove: 'fas fa-minus icon remove',
-  check: 'fas fa-check icon check',
-  times: 'fas fa-times icon remove',
-  pdf: 'far fa-file-pdf icon pdf',
-  excel: 'far fa-file-excel icon excel',
-  download: 'fas fa-download icon download',
-};
-
-const getIcon = (name: keyof typeof icons | string) => (isObjKey(icons, name) ? icons[name] : name);
 
 export interface RruButtonProps {
   /** Button label */
   label?: React.ReactNode;
-
-  /** An icon name from the predefined-list or a string representing a css class name for an icon from external library like `font-awesome`. */
-  icon?:
-    | 'view'
-    | 'edit'
-    | 'lock'
-    | 'unlock'
-    | 'delete'
-    | 'add'
-    | 'remove'
-    | 'check'
-    | 'times'
-    | 'pdf'
-    | 'excel'
-    | 'download'
-    | string;
 
   /**  */
   variant?:
@@ -110,7 +76,6 @@ export interface RruButtonProps {
  */
 const RruButton: FC<RruButtonProps> = ({
   label = 'Button',
-  icon,
   variant = 'primary',
   onClick,
   onConfirm,
@@ -166,23 +131,11 @@ const RruButton: FC<RruButtonProps> = ({
           </div>
         </RruForm>
 
-        {icon ? (
-          <span onClick={() => setShow(true)} className={getIcon(icon)} />
-        ) : (
-          <button className={'btn btn-' + variant} onClick={() => setShow(true)}>
-            {label}
-          </button>
-        )}
+        <button className={'btn btn-' + variant} onClick={() => setShow(true)}>{label}</button>
       </>
     );
   } else {
-    return icon ? (
-      <span onClick={onClick} className={getIcon(icon)} />
-    ) : (
-      <button className={'btn btn-' + variant} onClick={onClick}>
-        {label}
-      </button>
-    );
+    return <button className={'btn btn-' + variant} onClick={onClick}>{label}</button>
   }
 };
 
