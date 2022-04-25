@@ -63,9 +63,6 @@ export interface RruPageableTableProps {
 
   /** Rendered when no data has been returned from the api. */
   apiErrorLabel?: React.ReactNode;
-
-  /**  */
-  userPrivileges?: string[];
 }
 
 /**
@@ -96,7 +93,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   nextLabel = 'Next',
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
-  userPrivileges,
 }) => {
   const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
 
@@ -282,8 +278,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                         key={k}
                         label={a.label}
                         icon={typeof a.icon === 'function' ? a.icon(row) : a.icon}
-                        userPrivileges={userPrivileges}
-                        allowedPrivileges={a.privileges}
                         confirmationTitle={a.confirmationTitle}
                         confirmationDesc={a.confirmationDesc}
                         cancelLabel={a.cancelLabel}

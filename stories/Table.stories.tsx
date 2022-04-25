@@ -67,12 +67,10 @@ export const TableExample = (args: RruPageableTableProps) => {
   const actions = [
     {
       icon: 'view',
-      privileges: ['USER:VIEW'],
       action: (user) => action('view user')(user),
     },
     {
       icon: 'edit',
-      privileges: ['USER:EDIT'],
       action: (user) => action('edit user')(user),
       display: (user) => user.status === 'CONFIRMED',
     },
@@ -108,7 +106,6 @@ export const TableExample = (args: RruPageableTableProps) => {
         defaultSortDir='desc'
         search={searchParams1}
         retainTableState={true}
-        userPrivileges={['USER:VIEW']}
         {...args}
       />
 
@@ -131,7 +128,6 @@ export const TableExample = (args: RruPageableTableProps) => {
         defaultSortDir='desc'
         search={searchParams2}
         retainTableState={true}
-        userPrivileges={['USER:VIEW']}
         {...args}
       />
     </>

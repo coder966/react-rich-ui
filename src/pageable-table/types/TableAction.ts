@@ -17,7 +17,6 @@ interface TableAction {
     | string;
   action: (row: object) => void;
   display?: boolean | ((row: object) => boolean);
-  privileges?: string[];
   onConfirm?: (row: object) => boolean | void;
   confirmLabel?: React.ReactNode;
   cancelLabel?: React.ReactNode;
