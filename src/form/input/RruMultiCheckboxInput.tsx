@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
-import Option from './types/Option';
+import IReactSelectOption from './types/IReactSelectOption';
 
 export interface RruMultiCheckboxInputProps {
   /**  */
@@ -18,7 +18,7 @@ export interface RruMultiCheckboxInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: Option[];
+  options: IReactSelectOption[];
 }
 
 /**
@@ -54,18 +54,18 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
       />
       <div className='row'>
         {options.map((o) => (
-          <div key={`${name}_${o.id}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
+          <div key={`${name}_${o.value}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
             <div className='custom-control custom-checkbox m-1'>
               <input
-                id={`${name}_${o.id}`}
+                id={`${name}_${o.value}`}
                 name={name}
                 ref={formContext.register}
-                value={o.id}
+                value={o.value}
                 type='checkbox'
                 className='custom-control-input'
                 disabled={disabled}
               />
-              <label htmlFor={`${name}_${o.id}`} className='custom-control-label'>
+              <label htmlFor={`${name}_${o.value}`} className='custom-control-label'>
                 {o.label}
               </label>
             </div>

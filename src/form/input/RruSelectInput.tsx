@@ -4,7 +4,6 @@ import Select from 'react-select';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
-import Option from './types/Option';
 
 export interface RruSelectInputProps {
   /**  */
@@ -20,7 +19,7 @@ export interface RruSelectInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: Option[];
+  options: IReactSelectOption[];
 
   /**  */
   defaultValue: string;
@@ -47,20 +46,20 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   useEffect(() => {
     let defaultOption;
     if (props.defaultValue) {
-      defaultOption = options.find((o) => o.id + '' === props.defaultValue + '');
+      defaultOption = options.find((o) => o.value + '' === props.defaultValue + '');
     } else {
       defaultOption = options[0];
     }
-    defaultOption = defaultOption || { id: '', label: '' };
+    defaultOption = defaultOption || { value: '', label: '' };
     onSelectChange({
-      value: defaultOption.id,
+      value: defaultOption.value,
       label: defaultOption.label,
     });
   }, []);
 
   useEffect(() => {
     const currentValue = formContext.getValues()[name];
-    if (currentValue && !options.find((o) => o.id + '' === currentValue + '')) {
+    if (currentValue && !options.find((o) => o.value + '' === currentValue + '')) {
       onSelectChange({ value: '', label: '' });
     }
   }, [options]);
@@ -75,7 +74,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           isDisabled={disabled}
           value={selectControlValue}
           onChange={onSelectChange}
-          options={options.map((o) => ({ value: o.id, label: o.label }))}
+          options={options.map((o) => ({ value: o.value, label: o.label }))}
           styles={{
             container: (provided, state) => ({
               ...provided,

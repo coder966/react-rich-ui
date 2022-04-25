@@ -95,9 +95,9 @@ export const Textarea = (args: RruFormProps) => {
 export const Select = (args: RruFormProps) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -124,9 +124,9 @@ export const Select = (args: RruFormProps) => {
 export const MultiSelect = (args: RruFormProps) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -176,9 +176,9 @@ export const Checkbox = (args: RruFormProps) => {
 export const MultiCheckbox = (args: RruFormProps) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -205,9 +205,9 @@ export const MultiCheckbox = (args: RruFormProps) => {
 export const Radio = (args: RruFormProps) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -304,9 +304,9 @@ export const Watcher = (args: RruFormProps) => {
   const [color, setColor] = useState();
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {

@@ -9,7 +9,7 @@
 |-|-|-|
 | label | The form element label | Yes |
 | name | Unique form element name | Yes |
-| options | An array of objects of the form:<br>`{id: string, label: ReactNode}`<br> | Yes |
+| options | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No |
 

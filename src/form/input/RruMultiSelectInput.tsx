@@ -4,7 +4,6 @@ import Select from 'react-select';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
-import Option from './types/Option';
 
 export interface RruMultiSelectInputProps {
   /**  */
@@ -20,7 +19,7 @@ export interface RruMultiSelectInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: Option[];
+  options: IReactSelectOption[];
 
   /**  */
   defaultValue?: string[];
@@ -48,8 +47,8 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     let defaultOptions: IReactSelectOption[] = [];
     if (defaultValue) {
       defaultOptions = options
-        .filter((o) => defaultValue.includes(o.id + ''))
-        .map((o) => ({ value: o.id, label: o.label }));
+        .filter((o) => defaultValue.includes(o.value + ''))
+        .map((o) => ({ value: o.value, label: o.label }));
     }
     onSelectChange(defaultOptions);
   }, []);
@@ -58,7 +57,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     const currentValue = formContext.getValues()[name];
     if (currentValue) {
       onSelectChange(
-        options.filter((o) => currentValue.includes(o.id + '')).map((o) => ({ value: o.id, label: o.label }))
+        options.filter((o) => currentValue.includes(o.value + '')).map((o) => ({ value: o.value, label: o.label }))
       );
     }
   }, [options]);
@@ -73,7 +72,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
           isDisabled={disabled}
           value={selectControlValue}
           onChange={onSelectChange}
-          options={options.map((o) => ({ value: o.id, label: o.label }))}
+          options={options.map((o) => ({ value: o.value, label: o.label }))}
           styles={{
             container: (provided, state) => ({
               ...provided,
