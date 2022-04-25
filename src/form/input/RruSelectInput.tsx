@@ -42,7 +42,6 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   };
 
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
-  // this issue is also present in date and time but is handled in the DateTimePicker constructor
   useEffect(() => {
     let defaultOption;
     if (props.defaultValue) {
@@ -51,10 +50,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       defaultOption = options[0];
     }
     defaultOption = defaultOption || { value: '', label: '' };
-    onSelectChange({
-      value: defaultOption.value,
-      label: defaultOption.label,
-    });
+    onSelectChange(defaultOption);
   }, []);
 
   useEffect(() => {
@@ -74,7 +70,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           isDisabled={disabled}
           value={selectControlValue}
           onChange={onSelectChange}
-          options={options.map((o) => ({ value: o.value, label: o.label }))}
+          options={options}
           styles={{
             container: (provided, state) => ({
               ...provided,

@@ -42,13 +42,10 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   };
 
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
-  // this issue is also present in date and time but is handled in the DateTimePicker constructor
   useEffect(() => {
     let defaultOptions: IReactSelectOption[] = [];
     if (defaultValue) {
-      defaultOptions = options
-        .filter((o) => defaultValue.includes(o.value + ''))
-        .map((o) => ({ value: o.value, label: o.label }));
+      defaultOptions = options.filter((o) => defaultValue.includes(o.value + ''));
     }
     onSelectChange(defaultOptions);
   }, []);
@@ -57,7 +54,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     const currentValue = formContext.getValues()[name];
     if (currentValue) {
       onSelectChange(
-        options.filter((o) => currentValue.includes(o.value + '')).map((o) => ({ value: o.value, label: o.label }))
+        options.filter((o) => currentValue.includes(o.value + ''))
       );
     }
   }, [options]);
@@ -72,7 +69,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
           isDisabled={disabled}
           value={selectControlValue}
           onChange={onSelectChange}
-          options={options.map((o) => ({ value: o.value, label: o.label }))}
+          options={options}
           styles={{
             container: (provided, state) => ({
               ...provided,
