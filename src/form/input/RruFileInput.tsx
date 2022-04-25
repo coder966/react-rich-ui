@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface FileInputProps {
+export interface RruFileInputProps {
   /**  */
   name: string;
 
@@ -29,7 +29,7 @@ export interface FileInputProps {
 /**
  * @author coder966
  */
-const FileInput: FC<FileInputProps> = (props) => {
+const RruFileInput: FC<RruFileInputProps> = (props) => {
   const { name, placeholder, disabled } = props;
 
   const [fileName, setFileName] = useState<string | null>(null);
@@ -70,4 +70,5 @@ const FileInput: FC<FileInputProps> = (props) => {
   );
 };
 
-export default FileInput;
+export { RruFileInput };
+

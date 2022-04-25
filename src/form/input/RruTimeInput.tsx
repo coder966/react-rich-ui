@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
+import DateTimePicker from '../DateTimePicker';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface TextInputProps {
+export interface RruTimeInputProps {
   /**  */
   name: string;
 
@@ -19,41 +20,40 @@ export interface TextInputProps {
   /**  */
   requiredAsterisk?: boolean;
 
-  /**  */
-  maxLength: number;
+  /** hh:mm */
+  defaultValue?: string;
 
-  /**  */
-  placeholder: string;
+  /** Reverse the render order of the time parts selectors */
+  reverseDisplayOrder?: boolean;
 
-  /**  */
-  dir?: 'auto' | 'ltr' | 'rtl';
-
+  /** Clock style either 24-hours or 12-hours */
+  clock?: 24 | 12;
 }
 
 /**
  * @author coder966
  */
-const TextInput: FC<TextInputProps> = (props) => {
-  const { name, disabled, maxLength, placeholder } = props;
+const RruTimeInput: FC<RruTimeInputProps> = (props) => {
+  const { name, disabled } = props;
 
   const formContext = useFormContext();
+  formContext.register({ name });
 
   return (
     <div className={props.className ? props.className : 'form-group'}>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      <input
-        ref={formContext.register}
-        name={name}
+      <DateTimePicker
+        type='time'
+        onChange={(value) => formContext.setValue(name, value)}
+        defaultValue={props.defaultValue}
+        reverseDisplayOrder={props.reverseDisplayOrder}
+        clock={props.clock}
         disabled={disabled}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        dir={props.dir}
-        type='text'
-        className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />
     </div>
   );
 };
 
-export default TextInput;
+export { RruTimeInput };
+

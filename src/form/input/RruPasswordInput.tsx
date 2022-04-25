@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface PasswordInputProps {
+export interface RruPasswordInputProps {
   /**  */
   name: string;
 
@@ -32,7 +32,7 @@ export interface PasswordInputProps {
 /**
  * @author coder966
  */
-const PasswordInput: FC<PasswordInputProps> = (props) => {
+const RruPasswordInput: FC<RruPasswordInputProps> = (props) => {
   const { name, disabled, maxLength, placeholder } = props;
 
   const formContext = useFormContext();
@@ -55,4 +55,5 @@ const PasswordInput: FC<PasswordInputProps> = (props) => {
   );
 };
 
-export default PasswordInput;
+export { RruPasswordInput };
+

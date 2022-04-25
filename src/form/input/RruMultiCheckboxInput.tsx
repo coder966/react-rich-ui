@@ -4,7 +4,7 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import Option from './types/Option';
 
-export interface MultiCheckboxInputProps {
+export interface RruMultiCheckboxInputProps {
   /**  */
   name: string;
 
@@ -27,7 +27,7 @@ export interface MultiCheckboxInputProps {
 /**
  * @author coder966
  */
-const MultiCheckboxInput: FC<MultiCheckboxInputProps> = (props) => {
+const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const { name, options, disabled } = props;
 
   const formContext = useFormContext();
@@ -80,4 +80,5 @@ const MultiCheckboxInput: FC<MultiCheckboxInputProps> = (props) => {
   );
 };
 
-export default MultiCheckboxInput;
+export { RruMultiCheckboxInput };
+

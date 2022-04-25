@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 
-export interface CheckboxInputProps {
+export interface RruCheckboxInputProps {
   /**  */
   name: string;
 
@@ -19,7 +19,7 @@ export interface CheckboxInputProps {
 /**
  * @author coder966
  */
-const CheckboxInput: FC<CheckboxInputProps> = (props) => {
+const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   const { name, label, disabled } = props;
 
   const formContext = useFormContext();
@@ -44,4 +44,5 @@ const CheckboxInput: FC<CheckboxInputProps> = (props) => {
   );
 };
 
-export default CheckboxInput;
+export { RruCheckboxInput };
+

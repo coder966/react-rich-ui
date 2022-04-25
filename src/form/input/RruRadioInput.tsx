@@ -4,7 +4,7 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import Option from './types/Option';
 
-export interface RadioInputProps {
+export interface RruRadioInputProps {
   /**  */
   name: string;
 
@@ -24,13 +24,13 @@ export interface RadioInputProps {
   options: Option[];
 
   /** Display all radio buttons in the same line */
-  inline: boolean;
+  inline?: boolean;
 }
 
 /**
  * @author coder966
  */
-const RadioInput: FC<RadioInputProps> = (props) => {
+const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const { name, options, disabled } = props;
 
   const formContext = useFormContext();
@@ -60,4 +60,5 @@ const RadioInput: FC<RadioInputProps> = (props) => {
   );
 };
 
-export default RadioInput;
+export { RruRadioInput };
+

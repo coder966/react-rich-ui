@@ -49,7 +49,7 @@ interface RruButtonProps {
   cancelLabel?: React.ReactNode;
 
   /** If you want to have a form in the confirmation modal use this to render the form elements.
-   * Use `RruFormElement` directly. The form `RruForm` is already embedded for you.
+   * The form `RruForm` is already embedded for you.
    */
   formElements?: React.ReactNode;
 

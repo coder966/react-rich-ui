@@ -2,7 +2,19 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { RruForm, RruFormElement, RruFormProps } from '../src/form/react-rich-ui-form';
+import { RruFileInput } from '../src//form/input/RruFileInput';
+import { RruGroupedMultiCheckboxInput } from '../src//form/input/RruGroupedMultiCheckboxInput';
+import { RruMultiCheckboxInput } from '../src//form/input/RruMultiCheckboxInput';
+import { RruMultiSelectInput } from '../src//form/input/RruMultiSelectInput';
+import { RruPasswordInput } from '../src//form/input/RruPasswordInput';
+import { RruRadioInput } from '../src//form/input/RruRadioInput';
+import { RruSelectInput } from '../src//form/input/RruSelectInput';
+import { RruTextareaInput } from '../src//form/input/RruTextareaInput';
+import { RruTextInput } from '../src//form/input/RruTextInput';
+import { RruTimeInput } from '../src//form/input/RruTimeInput';
+import { RruCheckboxInput } from '../src/form/input/RruCheckboxInput';
+import { RruDateInput } from '../src/form/input/RruDateInput';
+import { RruForm, RruFormProps } from '../src/form/react-rich-ui-form';
 
 const storyMeta: Meta = {
   title: 'Form',
@@ -27,8 +39,8 @@ export const Text = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='text' name='name' label='Name' />
-      <RruFormElement type='text' name='email' label='Email' requiredAsterisk />
+      <RruTextInput name='name' label='Name' />
+      <RruTextInput name='email' label='Email' requiredAsterisk />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -51,7 +63,7 @@ export const Password = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='password' name='password' label='Password' />
+      <RruPasswordInput name='password' label='Password' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -74,7 +86,7 @@ export const Textarea = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='textarea' name='content' label='Content' />
+      <RruTextareaInput name='content' label='Content' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -103,7 +115,7 @@ export const Select = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='select' name='color' label='Color' options={colors} defaultValue='BLUE' />
+      <RruSelectInput name='color' label='Color' options={colors} defaultValue='BLUE' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -132,7 +144,7 @@ export const MultiSelect = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='multi-select' name='color' label='Color' options={colors} defaultValue={['RED', 'GREEN']} />
+      <RruMultiSelectInput name='color' label='Color' options={colors} defaultValue={['RED', 'GREEN']} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -155,7 +167,7 @@ export const Checkbox = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='checkbox' name='agreed' label='Agree' />
+      <RruCheckboxInput name='agreed' label='Agree' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -184,7 +196,7 @@ export const MultiCheckbox = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='multi-checkbox' name='color' label='Color' options={colors} />
+      <RruMultiCheckboxInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -226,7 +238,7 @@ export const GroupedMultiCheckbox = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='grouped-multi-checkbox' name='color' label='Color' options={groupedOptions} />
+      <RruGroupedMultiCheckboxInput name='color' label='Color' options={groupedOptions} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -255,7 +267,7 @@ export const Radio = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='radio' name='color' label='Color' options={colors} />
+      <RruRadioInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -278,7 +290,7 @@ export const Date = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='date' name='birthDate' label='Birth Date' isPast isHijri />
+      <RruDateInput name='birthDate' label='Birth Date' isPast isHijri />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -301,7 +313,7 @@ export const Time = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='time' name='appointmentTime' label='Appointment Time' />
+      <RruTimeInput name='appointmentTime' label='Appointment Time' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -324,7 +336,7 @@ export const File = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='file' name='attachment' label='Attachment' />
+      <RruFileInput name='attachment' label='Attachment' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -358,7 +370,7 @@ export const Watcher = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher} {...args}>
-      <RruFormElement type='select' name='color' label='Color' options={colors} defaultValue='BLUE' />
+      <RruSelectInput name='color' label='Color' options={colors} defaultValue='BLUE' />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit'>Submit</button>
     </RruForm>
@@ -395,12 +407,12 @@ export const TwoFormsInOnePage = (args: RruFormProps) => {
   return (
     <>
       <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1} {...args}>
-        <RruFormElement type='text' name='name' label='Name' />
+        <RruTextInput name='name' label='Name' />
         <button type='submit'>Submit</button>
       </RruForm>
       <br></br>
       <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2} {...args}>
-        <RruFormElement type='text' name='favoriteNumber' label='Favorite Number' />
+        <RruTextInput name='favoriteNumber' label='Favorite Number' />
         <button type='submit'>Submit</button>
       </RruForm>
     </>

@@ -6,7 +6,7 @@ import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
-export interface SelectInputProps {
+export interface RruSelectInputProps {
   /**  */
   name: string;
 
@@ -32,7 +32,7 @@ export interface SelectInputProps {
 /**
  * @author coder966
  */
-const SelectInput: FC<SelectInputProps> = (props) => {
+const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const { name, options, disabled } = props;
 
   const [selectControlValue, setSelectControlValue] = useState<IReactSelectOption | null>(null);
@@ -96,4 +96,5 @@ const SelectInput: FC<SelectInputProps> = (props) => {
   );
 };
 
-export default SelectInput;
+export { RruSelectInput };
+

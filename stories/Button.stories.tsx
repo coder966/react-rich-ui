@@ -2,8 +2,9 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import { RruButton, RruButtonProps } from '../src/button/react-rich-ui-button';
-import { RruFormElement } from '../src/form/react-rich-ui-form';
+import { RruButton } from '../src/button/react-rich-ui-button';
+import RruButtonProps from '../src/button/types/RruButtonProps';
+import { RruTextInput } from '../src/form/input/RruTextInput';
 
 const storyMeta: Meta = {
   title: 'Button',
@@ -49,7 +50,7 @@ export const Confirmation = (args: RruButtonProps) => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       formElements={
-        <RruFormElement type='text' name='reason' label='Reason' />
+        <RruTextInput name='reason' label='Reason' />
       }
       confirmationTitle='Delete'
       confirmationDesc='Are you sure you want to delete ?'

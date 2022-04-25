@@ -1,18 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import { isObjKey } from '../utils/utilFunction';
-import CheckboxInput from './input/CheckboxInput';
-import DateInput from './input/DateInput';
-import FileInput from './input/FileInput';
-import GroupedMultiCheckboxInput from './input/GroupedMultiCheckboxInput';
-import MultiCheckboxInput from './input/MultiCheckboxInput';
-import MultiSelectInput from './input/MultiSelectInput';
-import PasswordInput from './input/PasswordInput';
-import RadioInput from './input/RadioInput';
-import SelectInput from './input/SelectInput';
-import TextareaInput from './input/TextareaInput';
-import TextInput from './input/TextInput';
-import TimeInput from './input/TimeInput';
 import './style.css';
 import FormInitialValues from './types/FormInitialValues';
 import FormValues from './types/FormValues';
@@ -98,40 +86,4 @@ const RruForm: FC<RruFormProps> = ({
   );
 };
 
-/**
- * An uncontrolled input element. Checkout the props definition based on the type of the element.
- *
- * @author coder966
- */
-const RruFormElement = (props: any) => {
-  switch (props.type) {
-    case 'text':
-      return <TextInput {...props} />;
-    case 'password':
-      return <PasswordInput {...props} />;
-    case 'textarea':
-      return <TextareaInput {...props} />;
-    case 'radio':
-      return <RadioInput {...props} />;
-    case 'select':
-      return <SelectInput {...props} />;
-    case 'multi-select':
-      return <MultiSelectInput {...props} />;
-    case 'checkbox':
-      return <CheckboxInput {...props} />;
-    case 'multi-checkbox':
-      return <MultiCheckboxInput {...props} />;
-    case 'grouped-multi-checkbox':
-      return <GroupedMultiCheckboxInput {...props} />;
-    case 'date':
-      return <DateInput {...props} />;
-    case 'time':
-      return <TimeInput {...props} />;
-    case 'file':
-      return <FileInput {...props} />;
-    default:
-      return null;
-  }
-};
-
-export { RruForm, RruFormElement };
+export { RruForm };

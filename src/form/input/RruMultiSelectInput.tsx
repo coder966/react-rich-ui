@@ -6,7 +6,7 @@ import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
 import Option from './types/Option';
 
-export interface MultiSelectInputProps {
+export interface RruMultiSelectInputProps {
   /**  */
   name: string;
 
@@ -32,7 +32,7 @@ export interface MultiSelectInputProps {
 /**
  * @author coder966
  */
-const MultiSelectInput: FC<MultiSelectInputProps> = (props) => {
+const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const { name, options, disabled, defaultValue } = props;
 
   const [selectControlValue, setSelectControlValue] = useState<readonly IReactSelectOption[]>();
@@ -94,4 +94,5 @@ const MultiSelectInput: FC<MultiSelectInputProps> = (props) => {
   );
 };
 
-export default MultiSelectInput;
+export { RruMultiSelectInput };
+

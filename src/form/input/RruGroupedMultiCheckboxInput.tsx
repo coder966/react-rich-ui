@@ -4,7 +4,7 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import GroupOption from './types/GroupOption';
 
-export interface GroupedMultiCheckboxInputProps {
+export interface RruGroupedMultiCheckboxInputProps {
   /**  */
   name: string;
 
@@ -28,7 +28,7 @@ export interface GroupedMultiCheckboxInputProps {
  * @author coder966
  * @deprecated
  */
-const GroupedMultiCheckboxInput: FC<GroupedMultiCheckboxInputProps> = (props) => {
+const RruGroupedMultiCheckboxInput: FC<RruGroupedMultiCheckboxInputProps> = (props) => {
   const { name, options, disabled } = props;
 
   const formContext = useFormContext();
@@ -86,4 +86,5 @@ const GroupedMultiCheckboxInput: FC<GroupedMultiCheckboxInputProps> = (props) =>
   );
 };
 
-export default GroupedMultiCheckboxInput;
+export { RruGroupedMultiCheckboxInput };
+

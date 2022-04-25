@@ -4,7 +4,7 @@ import DateTimePicker from '../DateTimePicker';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface DateInputProps {
+export interface RruDateInputProps {
   /**  */
   name: string;
 
@@ -24,16 +24,16 @@ export interface DateInputProps {
   defaultValue?: string;
 
   /**  */
-  isHijri: boolean;
+  isHijri?: boolean;
 
   /** Display only past years */
-  isPast: boolean;
+  isPast?: boolean;
 
   /** Display future past years */
-  isFuture: boolean;
+  isFuture?: boolean;
 
   /** The maximum number of years +/- current year that will be available in the select menus */
-  maxYearLength: number;
+  maxYearLength?: number;
 
   /** Reverse the render order of the date parts selectors */
   reverseDisplayOrder?: boolean;
@@ -42,7 +42,7 @@ export interface DateInputProps {
 /**
  * @author coder966
  */
-const DateInput: FC<DateInputProps> = (props) => {
+const RruDateInput: FC<RruDateInputProps> = (props) => {
   const { name, disabled } = props;
 
   const formContext = useFormContext();
@@ -67,4 +67,5 @@ const DateInput: FC<DateInputProps> = (props) => {
   );
 };
 
-export default DateInput;
+export { RruDateInput };
+

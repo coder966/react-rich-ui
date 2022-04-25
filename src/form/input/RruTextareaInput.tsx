@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface TextareaInputProps {
+export interface RruTextareaInputProps {
   /**  */
   name: string;
 
@@ -20,10 +20,10 @@ export interface TextareaInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  maxLength: number;
+  maxLength?: number;
 
   /**  */
-  placeholder: string;
+  placeholder?: string;
 
   /**  */
   dir?: 'auto' | 'ltr' | 'rtl';
@@ -33,7 +33,7 @@ export interface TextareaInputProps {
 /**
  * @author coder966
  */
-const TextareaInput: FC<TextareaInputProps> = (props) => {
+const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const { name, disabled, maxLength, placeholder } = props;
 
   const formContext = useFormContext();
@@ -55,4 +55,5 @@ const TextareaInput: FC<TextareaInputProps> = (props) => {
   );
 };
 
-export default TextareaInput;
+export { RruTextareaInput };
+
