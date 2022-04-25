@@ -100,12 +100,6 @@ export interface RruButtonProps {
 
   /** The `watcher` to be injected into the form `RruForm`. */
   watcher?: (form: FormValues) => void;
-
-  /** If you want render this component conditionally based on whether the use has enough permissions from this array. */
-  allowedPrivileges?: string[];
-
-  /** The use privileges array. */
-  userPrivileges?: string[];
 }
 
 /**
@@ -129,14 +123,8 @@ const RruButton: FC<RruButtonProps> = ({
   validationSchema,
   watch,
   watcher,
-  allowedPrivileges,
-  userPrivileges,
 }) => {
   const [show, setShow] = useState(false);
-
-  if (allowedPrivileges && userPrivileges && !userPrivileges.some((p) => allowedPrivileges.includes(p))) {
-    return null;
-  }
 
   if (onConfirm) {
     const handleConfirm = (data: object) => {
