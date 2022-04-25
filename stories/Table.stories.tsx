@@ -66,16 +66,16 @@ export const TableExample = (args: RruPageableTableProps) => {
 
   const actions = [
     {
-      icon: 'view',
+      label: 'View',
       action: (user) => action('view user')(user),
     },
     {
-      icon: 'edit',
+      label: 'Edit',
       action: (user) => action('edit user')(user),
       display: (user) => user.status === 'CONFIRMED',
     },
     {
-      icon: 'delete',
+      label: 'Delete',
       action: (user) => action('delete user')(user),
       onConfirm: (user) => action('confirm delete user')(user),
       confirmationTitle: 'Delete',

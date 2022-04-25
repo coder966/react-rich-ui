@@ -1,20 +1,5 @@
 interface TableAction {
-  label?: React.ReactNode;
-  icon?:
-    | ((row: object) => string)
-    | 'view'
-    | 'edit'
-    | 'lock'
-    | 'unlock'
-    | 'delete'
-    | 'add'
-    | 'remove'
-    | 'check'
-    | 'times'
-    | 'pdf'
-    | 'excel'
-    | 'download'
-    | string;
+  label: React.ReactNode;
   action: (row: object) => void;
   display?: boolean | ((row: object) => boolean);
   onConfirm?: (row: object) => boolean | void;

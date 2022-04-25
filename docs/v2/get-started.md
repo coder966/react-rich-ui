@@ -24,7 +24,6 @@ import 'react-rich-ui/dist/index.css';
 ## Optional peer dependencies:
 - `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruPageableTable`.
 - `yup`: For form validation. See `RruForm` section for more details.
-- `font-awesome`: You must load `font-awesome` stylesheet for icons to work.
 
 ## Components:
 - [Forms](/docs/v2/components/RruForm)

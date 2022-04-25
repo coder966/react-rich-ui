@@ -40,8 +40,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | Button label | Either this or `icon` |
-| icon | It can be either an icon name (see `RruButton` section) or a function that returns an icon name. | Either this or `label` |
+| label | Button label | Yes |
 | action | A function which takes the row object | Yes |
 | display | A function which takes the row object and<br>returns a `boolean` whether the action should be available for this row. | No |
 | onConfirm | If you want to have a confirmation dialog<br>for an action, just use this prop instead of `action`.<br> The is also a function same as `action` but will<br>only be called when the user confirms the action | No |
