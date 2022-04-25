@@ -7,7 +7,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | Yes |
+| label | The form element label | No |
 | name | Unique form element name | Yes |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No |

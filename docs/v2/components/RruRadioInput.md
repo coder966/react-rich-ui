@@ -7,7 +7,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | Yes |
+| label | The form element label | No |
 | name | Unique form element name | Yes |
 | options | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes |
 | inline | Set to `true` to display `radio` buttons in one line | No |

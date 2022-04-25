@@ -7,7 +7,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | Yes |
+| label | The form element label | No |
 | name | Unique form element name | Yes |
 | disabled | Set to `true` to disable the editing of the form element | No |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No |

@@ -7,7 +7,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | Yes |
+| label | The form element label | No |
 | name | Unique form element name | Yes |
 | placeholder | A place holder | No |
 | dir | Text direction | No |

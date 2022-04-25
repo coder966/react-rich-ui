@@ -7,7 +7,7 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | Yes |
+| label | The form element label | No |
 | name | Unique form element name | Yes |
 | options | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes |
 | disabled | Set to `true` to disable the editing of the form element | No |
