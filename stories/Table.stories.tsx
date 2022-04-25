@@ -62,26 +62,12 @@ export const TableExample = (args: RruPageableTableProps) => {
       value: (row) => row.address.city + ' - ' + row.address.street,
       sortKey: 'address.city',
     },
-  ];
-
-  const actions = [
     {
-      label: 'View',
-      action: (user) => action('view user')(user),
-    },
-    {
-      label: 'Edit',
-      action: (user) => action('edit user')(user),
-      display: (user) => user.status === 'CONFIRMED',
-    },
-    {
-      label: 'Delete',
-      action: (user) => action('delete user')(user),
-      onConfirm: (user) => action('confirm delete user')(user),
-      confirmationTitle: 'Delete',
-      confirmationDesc: 'Are you sure you want to delete ?',
-      cancelLabel: 'Cancel',
-      confirmLabel: 'Confirm',
+      label: 'Actions',
+      value: (user) => <>
+        <button onClick={e => action('view user')(user)}>View</button>
+        {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
+      </>,
     },
   ];
 
@@ -101,7 +87,6 @@ export const TableExample = (args: RruPageableTableProps) => {
         endpoint='http://localhost:8080/api/user1'
         pageSize={5}
         columns={columns}
-        actions={actions}
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams1}
@@ -123,7 +108,6 @@ export const TableExample = (args: RruPageableTableProps) => {
         endpoint='http://localhost:8080/api/user2'
         pageSize={5}
         columns={columns}
-        actions={actions}
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams2}

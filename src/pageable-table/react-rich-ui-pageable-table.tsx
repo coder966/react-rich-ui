@@ -1,12 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { RruButton } from '../button/react-rich-ui-button';
 import resolveObjectAttribute from '../utils/resolveObjectAttribute';
 import './style.css';
 import { getApiResultPromise } from './table-network';
 import { getFirstPersistedTableState, getPersistedTableState, persistTableState } from './table-state-persistence';
 import SpringPage from './types/SpringPage';
-import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
 import TableDataRow from './types/TableDataRow';
 
@@ -24,9 +22,6 @@ export interface RruPageableTableProps {
 
   /**  */
   columns: TableColumn[];
-
-  /**  */
-  actions?: TableAction[];
 
   /** The search params object. */
   search?: object;
@@ -48,9 +43,6 @@ export interface RruPageableTableProps {
 
   /** A callback function in case you want to do anything with response of the api */
   onResponse?: (body: object) => void;
-
-  /** The column label of the actions */
-  actionsLabel?: React.ReactNode;
 
   /** The label of the previous page button */
   previousLabel?: React.ReactNode;
@@ -80,7 +72,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   endpoint,
   requestMethod = 'GET',
   columns,
-  actions,
   search,
   retainTableState = false,
   pageSize = 10,
@@ -88,7 +79,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   defaultSortBy,
   defaultSortDir,
   onResponse,
-  actionsLabel = 'Actions',
   previousLabel = 'Previous',
   nextLabel = 'Next',
   noDataLabel = 'No Data',
@@ -227,11 +217,10 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                   </th>
                 )
             )}
-            {actions && <th className={isLoading ? ' rru-pageable-table-loading-upper-th' : ''}>{actionsLabel}</th>}
           </tr>
           {isLoading && (
             <tr>
-              <th colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-loading-th'>
+              <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
                 <div className='progressBar'>
                   <div className='indeterminate'></div>
                 </div>
@@ -242,14 +231,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         <tbody>
           {error && (
             <tr>
-              <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='rru-pageable-table-centered'>
                 {apiErrorLabel}
               </td>
             </tr>
           )}
           {data.length === 0 && !error && (
             <tr>
-              <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='rru-pageable-table-centered'>
                 {noDataLabel}
               </td>
             </tr>
@@ -268,34 +257,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                         : resolveObjectAttribute(col.value, row)}
                     </td>
                   )
-              )}
-              {actions && (
-                <td>
-                  {actions.map((a, k) => {
-                    const shouldDisplay = (typeof a.display === 'function' && a.display(row)) || !a.display;
-                    return shouldDisplay ? (
-                      <RruButton
-                        key={k}
-                        label={a.label}
-                        confirmationTitle={a.confirmationTitle}
-                        confirmationDesc={a.confirmationDesc}
-                        cancelLabel={a.cancelLabel}
-                        confirmLabel={a.confirmLabel}
-                        onConfirm={
-                          a.onConfirm
-                            ? () => {
-                                if (a.onConfirm) {
-                                  a.onConfirm(row);
-                                }
-                                return true;
-                              }
-                            : undefined
-                        }
-                        onClick={() => a.action(row)}
-                      />
-                    ) : null;
-                  })}
-                </td>
               )}
             </tr>
           ))}
