@@ -32,7 +32,6 @@
 ### Checkbox
 - [RruCheckboxInput](/docs/v2/components/RruCheckboxInput)
 - [RruMultiCheckboxInput](/docs/v2/components/RruMultiCheckboxInput)
-- [RruGroupedMultiCheckboxInput](/docs/v2/components/RruGroupedMultiCheckboxInput)
 
 ### Radio
 - [RruRadioInput](/docs/v2/components/RruRadioInput)

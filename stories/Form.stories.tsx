@@ -3,7 +3,6 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { RruFileInput } from '../src//form/input/RruFileInput';
-import { RruGroupedMultiCheckboxInput } from '../src//form/input/RruGroupedMultiCheckboxInput';
 import { RruMultiCheckboxInput } from '../src//form/input/RruMultiCheckboxInput';
 import { RruMultiSelectInput } from '../src//form/input/RruMultiSelectInput';
 import { RruPasswordInput } from '../src//form/input/RruPasswordInput';
@@ -197,48 +196,6 @@ export const MultiCheckbox = (args: RruFormProps) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
       <RruMultiCheckboxInput name='color' label='Color' options={colors} />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const GroupedMultiCheckbox = (args: RruFormProps) => {
-
-  const groupedOptions = [
-    {
-      label: 'Colors',
-      items: [
-        { id: 'RED', label: 'Red' },
-        { id: 'BLUE', label: 'Blue' },
-        { id: 'GREEN', label: 'Green' },
-      ]
-    },
-    {
-      label: 'Fruits',
-      items: [
-        { id: 'apple', label: 'Apple' },
-        { id: 'banana', label: 'Banana' },
-        { id: 'orange', label: 'Orange' },
-      ]
-    },
-  ];
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruGroupedMultiCheckboxInput name='color' label='Color' options={groupedOptions} />
       <button type='submit'>Submit</button>
     </RruForm>
   );

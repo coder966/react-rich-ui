@@ -2,7 +2,6 @@ export { RruButton } from './button/react-rich-ui-button';
 export { RruCheckboxInput } from './form/input/RruCheckboxInput';
 export { RruDateInput } from './form/input/RruDateInput';
 export { RruFileInput } from './form/input/RruFileInput';
-export { RruGroupedMultiCheckboxInput } from './form/input/RruGroupedMultiCheckboxInput';
 export { RruMultiCheckboxInput } from './form/input/RruMultiCheckboxInput';
 export { RruMultiSelectInput } from './form/input/RruMultiSelectInput';
 export { RruPasswordInput } from './form/input/RruPasswordInput';
