@@ -7,9 +7,9 @@
 
 | Prop | Description | Required |
 |-|-|-|
-| label | The form element label | No |
 | name | Unique form element name | Yes |
+| label | The form element label | No |
+| requiredAsterisk | Display an asterisk to indicate the field is required | No |
 | options | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes |
 | disabled | Set to `true` to disable the editing of the form element | No |
-| requiredAsterisk | Display an asterisk to indicate the field is required | No |
 
