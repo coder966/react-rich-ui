@@ -4,15 +4,14 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
 
-export interface RruMultiCheckboxInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruMultiCheckboxInputProps extends InputProps {
   /**  */
   name: string;
 
   /**  */
   label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
 
   /**  */
   requiredAsterisk?: boolean;
@@ -25,7 +24,7 @@ export interface RruMultiCheckboxInputProps {
  * @author coder966
  */
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
-  const { name, options, disabled } = props;
+  const { name, options } = props;
 
   const formContext = useFormContext();
 
@@ -57,13 +56,13 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
           <div key={`${name}_${o.value}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
             <div className='custom-control custom-checkbox m-1'>
               <input
+                {...props}
                 id={`${name}_${o.value}`}
                 name={name}
                 ref={formContext.register}
                 value={o.value}
                 type='checkbox'
                 className='custom-control-input'
-                disabled={disabled}
               />
               <label htmlFor={`${name}_${o.value}`} className='custom-control-label'>
                 {o.label}

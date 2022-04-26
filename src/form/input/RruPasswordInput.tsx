@@ -3,7 +3,9 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface RruPasswordInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruPasswordInputProps extends InputProps {
   /**  */
   name: string;
 
@@ -11,26 +13,15 @@ export interface RruPasswordInputProps {
   label?: React.ReactNode;
 
   /**  */
-  disabled?: boolean;
-
-  /**  */
   requiredAsterisk?: boolean;
 
-  /**  */
-  placeholder?: string;
-
-  /**  */
-  dir?: 'auto' | 'ltr' | 'rtl';
-
-  /**  */
-  maxLength?: number;
 }
 
 /**
  * @author coder966
  */
 const RruPasswordInput: FC<RruPasswordInputProps> = (props) => {
-  const { name, disabled, maxLength, placeholder } = props;
+  const { name } = props;
 
   const formContext = useFormContext();
 
@@ -38,12 +29,9 @@ const RruPasswordInput: FC<RruPasswordInputProps> = (props) => {
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
+        {...props}
         ref={formContext.register}
         name={name}
-        disabled={disabled}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        dir={props.dir}
         type='password'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />

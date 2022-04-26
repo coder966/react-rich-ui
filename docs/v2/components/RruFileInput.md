@@ -4,13 +4,12 @@
 # RruFileInput
 
 ## API
+All `input` HTML element props are available as well.
 
 | Prop | Description | Required |
 |-|-|-|
 | label | The form element label | No |
 | name | Unique form element name | Yes |
 | placeholder | A place holder | No |
-| disabled | Set to `true` to disable the editing of the form element | No |
-| accept | Specify the accepted data-types of file extensions. Note that the user can still bypass this. | No |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No |
 

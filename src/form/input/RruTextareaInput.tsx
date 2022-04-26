@@ -3,7 +3,9 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface RruTextareaInputProps {
+type TextareaProps = JSX.IntrinsicElements['textarea'];
+
+export interface RruTextareaInputProps extends TextareaProps {
   /**  */
   name: string;
 
@@ -11,19 +13,7 @@ export interface RruTextareaInputProps {
   label?: React.ReactNode;
 
   /**  */
-  disabled?: boolean;
-
-  /**  */
   requiredAsterisk?: boolean;
-
-  /**  */
-  maxLength?: number;
-
-  /**  */
-  placeholder?: string;
-
-  /**  */
-  dir?: 'auto' | 'ltr' | 'rtl';
 
 }
 
@@ -31,7 +21,7 @@ export interface RruTextareaInputProps {
  * @author coder966
  */
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
-  const { name, disabled, maxLength, placeholder } = props;
+  const { name } = props;
 
   const formContext = useFormContext();
 
@@ -39,12 +29,9 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <textarea
+        {...props}
         ref={formContext.register}
         name={name}
-        disabled={disabled}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        dir={props.dir}
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />

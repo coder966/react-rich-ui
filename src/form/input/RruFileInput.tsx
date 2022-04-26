@@ -3,21 +3,17 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface RruFileInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruFileInputProps extends InputProps {
   /**  */
   name: string;
 
   /**  */
   label?: React.ReactNode;
 
-  /**  */
-  disabled?: boolean;
-
   /** A placeholder to be displayed in the place of the filename of the file selected. */
   placeholder?: string;
-
-  /**  */
-  accept?: string;
 
   /**  */
   requiredAsterisk?: boolean;
@@ -27,7 +23,7 @@ export interface RruFileInputProps {
  * @author coder966
  */
 const RruFileInput: FC<RruFileInputProps> = (props) => {
-  const { name, placeholder, disabled } = props;
+  const { name, placeholder } = props;
 
   const [fileName, setFileName] = useState<string | null>(null);
   const formContext = useFormContext();
@@ -36,12 +32,11 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
+        {...props}
         type='file'
         id={`file_${name}`}
         ref={formContext.register}
         name={name}
-        disabled={disabled}
-        accept={props.accept}
         onChange={(e) => {
           const filesList = e.target.files;
           if (filesList && filesList[0]) {

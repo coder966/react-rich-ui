@@ -3,7 +3,9 @@ import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 
-export interface RruTextInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruTextInputProps extends InputProps {
   /**  */
   name: string;
 
@@ -11,19 +13,7 @@ export interface RruTextInputProps {
   label?: React.ReactNode;
 
   /**  */
-  disabled?: boolean;
-
-  /**  */
   requiredAsterisk?: boolean;
-
-  /**  */
-  maxLength?: number;
-
-  /**  */
-  placeholder?: string;
-
-  /**  */
-  dir?: 'auto' | 'ltr' | 'rtl';
 
 }
 
@@ -31,7 +21,7 @@ export interface RruTextInputProps {
  * @author coder966
  */
 const RruTextInput: FC<RruTextInputProps> = (props) => {
-  const { name, disabled, maxLength, placeholder } = props;
+  const { name } = props;
 
   const formContext = useFormContext();
 
@@ -39,12 +29,9 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
+        {...props}
         ref={formContext.register}
         name={name}
-        disabled={disabled}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        dir={props.dir}
         type='text'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />

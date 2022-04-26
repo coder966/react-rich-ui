@@ -2,15 +2,14 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
 
-export interface RruCheckboxInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruCheckboxInputProps extends InputProps {
   /**  */
   name: string;
 
   /**  */
   label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
 
 }
 
@@ -18,7 +17,7 @@ export interface RruCheckboxInputProps {
  * @author coder966
  */
 const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
-  const { name, label, disabled } = props;
+  const { name, label } = props;
 
   const formContext = useFormContext();
 
@@ -26,12 +25,12 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
     <div className='form-group'>
       <div className='custom-control custom-checkbox m-1'>
         <input
+          {...props}
           id={'checkbox_' + name}
           name={name}
           ref={formContext.register}
           type='checkbox'
           className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')}
-          disabled={disabled}
         />
         <label htmlFor={'checkbox_' + name} className='custom-control-label'>
           {label}

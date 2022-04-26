@@ -293,7 +293,7 @@ export const File = (args: RruFormProps) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFileInput name='attachment' label='Attachment' />
+      <RruFileInput name='attachment' label='Attachment' accept='.txt' />
       <button type='submit'>Submit</button>
     </RruForm>
   );

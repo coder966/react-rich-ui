@@ -4,15 +4,14 @@ import ErrorMessage from '../ErrorMessage';
 import Label from '../Label';
 import IReactSelectOption from './types/IReactSelectOption';
 
-export interface RruRadioInputProps {
+type InputProps = JSX.IntrinsicElements['input'];
+
+export interface RruRadioInputProps extends InputProps {
   /**  */
   name: string;
 
   /**  */
   label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
 
   /**  */
   requiredAsterisk?: boolean;
@@ -28,7 +27,7 @@ export interface RruRadioInputProps {
  * @author coder966
  */
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
-  const { name, options, disabled } = props;
+  const { name, options } = props;
 
   const formContext = useFormContext();
 
@@ -37,12 +36,12 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div className={props.inline ? 'form-check-inline' : undefined}>
         {options.map((o) => (
-          <div key={`${name}_${o.value}`} className={'form-check' + disabled ? ' disabled' : undefined}>
+          <div key={`${name}_${o.value}`} className={'form-check' + props.disabled ? ' disabled' : undefined}>
             <input
+              {...props}
               type='radio'
               ref={formContext.register}
               name={name}
-              disabled={disabled}
               value={o.value}
               id={`${name}_${o.value}`}
             />
