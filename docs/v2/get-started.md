@@ -29,5 +29,5 @@ import 'react-rich-ui/dist/index.css';
 - [Forms](/docs/v2/components/RruForm)
 - [Tables](/docs/v2/components/RruPageableTable)
 - [Wizards](/docs/v2/components/RruStepsWizard)
-- [Buttons](/docs/v2/components/RruButton)
+- [ModalButton](/docs/v2/components/RruModalButton)
 
