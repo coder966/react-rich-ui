@@ -56,12 +56,17 @@
     "@storybook/addon-links": "^6.4.21",
     "@storybook/addons": "^6.4.21",
     "@storybook/react": "^6.4.21",
-    "@types/react": "^18.0.1",
-    "@types/react-dom": "^18.0.0",
+    "@testing-library/react": "^12.1.5",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^17.0.44",
+    "@types/react-dom": "^17.0.16",
     "axios": "^0.26.1",
+    "jest": "^27.5.1",
+    "jest-transform-css": "^4.0.0",
     "microbundle": "^0.14.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-jest": "^27.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -69,6 +74,7 @@
     "build": "microbundle --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "test": "jest"
   }
 }
