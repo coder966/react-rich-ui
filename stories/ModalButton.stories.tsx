@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { RruModalButton } from '../src/modal-button/RruModalButton';
-import RruModalButtonProps from '../src/modal-button/types/RruModalButtonProps';
+import { RruModalButton } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'ModalButton',
@@ -10,7 +9,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const Basic = (args: RruModalButtonProps) => {
+export const Basic = (args) => {
 
   return (
     <RruModalButton
@@ -21,7 +20,7 @@ export const Basic = (args: RruModalButtonProps) => {
   
 };
 
-export const Advanced = (args: RruModalButtonProps) => {
+export const Advanced = (args) => {
 
   return (
     <RruModalButton

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { RruStepsWizard, RruStepsWizardStepProps } from '../src/steps-wizard/react-rich-ui-steps-wizard';
+import { RruStepsWizard } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Wizard',
@@ -9,7 +9,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const WizardExample = (args: RruStepsWizardStepProps) => {
+export const WizardExample = (args) => {
 
   const FirstStep = props => (
     <div>

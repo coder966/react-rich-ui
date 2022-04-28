@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import {
   getRetainedTableSearchObject,
   RruPageableTable
-} from '../src/pageable-table/react-rich-ui-pageable-table';
-import RruPageableTableProps from '../src/pageable-table/types/RruPageableTableProps';
+} from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Table',
@@ -14,7 +13,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const TableExample = (args: RruPageableTableProps) => {
+export const TableExample = (args) => {
   const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user1'));
   const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user2'));
 

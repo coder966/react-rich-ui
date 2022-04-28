@@ -2,18 +2,20 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { RruFileInput } from '../src//form/input/RruFileInput';
-import { RruMultiCheckboxInput } from '../src//form/input/RruMultiCheckboxInput';
-import { RruMultiSelectInput } from '../src//form/input/RruMultiSelectInput';
-import { RruPasswordInput } from '../src//form/input/RruPasswordInput';
-import { RruRadioInput } from '../src//form/input/RruRadioInput';
-import { RruSelectInput } from '../src//form/input/RruSelectInput';
-import { RruTextareaInput } from '../src//form/input/RruTextareaInput';
-import { RruTextInput } from '../src//form/input/RruTextInput';
-import { RruTimeInput } from '../src//form/input/RruTimeInput';
-import { RruCheckboxInput } from '../src/form/input/RruCheckboxInput';
-import { RruDateInput } from '../src/form/input/RruDateInput';
-import { RruForm, RruFormProps } from '../src/form/react-rich-ui-form';
+import {
+  RruCheckboxInput,
+  RruDateInput,
+  RruFileInput,
+  RruForm,
+  RruMultiCheckboxInput,
+  RruMultiSelectInput,
+  RruPasswordInput,
+  RruRadioInput,
+  RruSelectInput,
+  RruTextareaInput,
+  RruTextInput,
+  RruTimeInput
+} from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form',
@@ -22,7 +24,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const Text = (args: RruFormProps) => {
+export const Text = (args) => {
 
   const initialValues = {
     name: 'Khalid',
@@ -46,7 +48,7 @@ export const Text = (args: RruFormProps) => {
 
 };
 
-export const Password = (args: RruFormProps) => {
+export const Password = (args) => {
 
   const initialValues = {
 
@@ -69,7 +71,7 @@ export const Password = (args: RruFormProps) => {
 
 };
 
-export const Textarea = (args: RruFormProps) => {
+export const Textarea = (args) => {
 
   const initialValues = {
 
@@ -92,7 +94,7 @@ export const Textarea = (args: RruFormProps) => {
 
 };
 
-export const Select = (args: RruFormProps) => {
+export const Select = (args) => {
 
   const colors = [
     { value: 'RED', label: 'Red' },
@@ -121,7 +123,7 @@ export const Select = (args: RruFormProps) => {
 
 };
 
-export const MultiSelect = (args: RruFormProps) => {
+export const MultiSelect = (args) => {
 
   const colors = [
     { value: 'RED', label: 'Red' },
@@ -150,7 +152,7 @@ export const MultiSelect = (args: RruFormProps) => {
 
 };
 
-export const Checkbox = (args: RruFormProps) => {
+export const Checkbox = (args) => {
 
   const initialValues = {
     agreed: true,
@@ -173,7 +175,7 @@ export const Checkbox = (args: RruFormProps) => {
 
 };
 
-export const MultiCheckbox = (args: RruFormProps) => {
+export const MultiCheckbox = (args) => {
 
   const colors = [
     { value: 'RED', label: 'Red' },
@@ -202,7 +204,7 @@ export const MultiCheckbox = (args: RruFormProps) => {
 
 };
 
-export const Radio = (args: RruFormProps) => {
+export const Radio = (args) => {
 
   const colors = [
     { value: 'RED', label: 'Red' },
@@ -231,7 +233,7 @@ export const Radio = (args: RruFormProps) => {
 
 };
 
-export const Date = (args: RruFormProps) => {
+export const Date = (args) => {
 
   const initialValues = {
 
@@ -254,7 +256,7 @@ export const Date = (args: RruFormProps) => {
 
 };
 
-export const Time = (args: RruFormProps) => {
+export const Time = (args) => {
 
   const initialValues = {
 
@@ -277,7 +279,7 @@ export const Time = (args: RruFormProps) => {
 
 };
 
-export const File = (args: RruFormProps) => {
+export const File = (args) => {
 
   const initialValues = {
 
@@ -300,7 +302,7 @@ export const File = (args: RruFormProps) => {
 
 };
 
-export const Watcher = (args: RruFormProps) => {
+export const Watcher = (args) => {
   const [color, setColor] = useState();
 
   const colors = [
@@ -335,7 +337,7 @@ export const Watcher = (args: RruFormProps) => {
 
 };
 
-export const TwoFormsInOnePage = (args: RruFormProps) => {
+export const TwoFormsInOnePage = (args) => {
 
   const initialValues1 = {
     name: 'Khalid',
