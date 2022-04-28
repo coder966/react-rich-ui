@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
-import { isObjKey } from '../utils/utilFunction';
+import { isObjKey } from '../../utils/utilFunction';
 import './style.css';
 import FormInitialValues from './types/FormInitialValues';
 import FormValues from './types/FormValues';

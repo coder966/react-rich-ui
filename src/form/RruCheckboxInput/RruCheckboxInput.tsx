@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../common/ErrorMessage';
 
 type InputProps = JSX.IntrinsicElements['input'];
 

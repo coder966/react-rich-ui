@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ErrorMessage from '../ErrorMessage';
-import Label from '../Label';
+import ErrorMessage from '../common/ErrorMessage';
+import Label from '../common/Label';
 
-type InputProps = JSX.IntrinsicElements['input'];
+type TextareaProps = JSX.IntrinsicElements['textarea'];
 
-export interface RruTextInputProps extends InputProps {
+export interface RruTextareaInputProps extends TextareaProps {
   /**  */
   name: string;
 
@@ -20,7 +20,7 @@ export interface RruTextInputProps extends InputProps {
 /**
  * @author coder966
  */
-const RruTextInput: FC<RruTextInputProps> = (props) => {
+const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const { name } = props;
 
   const formContext = useFormContext();
@@ -28,11 +28,10 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      <input
+      <textarea
         {...props}
         ref={formContext.register}
         name={name}
-        type='text'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />
@@ -40,5 +39,5 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   );
 };
 
-export { RruTextInput };
+export { RruTextareaInput };
 

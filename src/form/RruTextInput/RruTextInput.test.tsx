@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import { asyncFireChangeEvent, asyncFireClickEvent } from '../../test-utils';
-import { RruForm } from '../react-rich-ui-form';
+import { RruForm } from '../RruForm/RruForm';
 import { RruTextInput } from './RruTextInput';
 
 describe('RruTextInput', () => {

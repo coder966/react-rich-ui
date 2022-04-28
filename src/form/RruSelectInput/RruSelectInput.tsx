@@ -1,11 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import Select from 'react-select';
-import ErrorMessage from '../ErrorMessage';
-import Label from '../Label';
-import IReactSelectOption from './types/IReactSelectOption';
+import ErrorMessage from '../common/ErrorMessage';
+import Label from '../common/Label';
 
-export interface RruMultiSelectInputProps {
+/**
+ * For internal use only
+ */
+interface IReactSelectOption {
+  value: string;
+  label: React.ReactNode;
+}
+
+export interface RruSelectInputProps {
   /**  */
   name: string;
 
@@ -22,40 +29,41 @@ export interface RruMultiSelectInputProps {
   options: IReactSelectOption[];
 
   /**  */
-  defaultValue?: string[];
+  defaultValue: string;
 }
 
 /**
  * @author coder966
  */
-const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const { name, options, disabled, defaultValue } = props;
+const RruSelectInput: FC<RruSelectInputProps> = (props) => {
+  const { name, options, disabled } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<readonly IReactSelectOption[]>();
+  const [selectControlValue, setSelectControlValue] = useState<IReactSelectOption | null>(null);
   const formContext = useFormContext();
   formContext.register({ name });
 
-  const onSelectChange = (opt: readonly IReactSelectOption[] | null) => {
+  const onSelectChange = (opt: IReactSelectOption | null) => {
     // react-select option datatype
-    setSelectControlValue(opt || []);
-    formContext.setValue(name, opt ? opt.map((o) => o.value) : []);
+    setSelectControlValue({ value: opt ? opt.value : '', label: opt ? opt.label : '' });
+    formContext.setValue(name, opt ? opt.value : '');
   };
 
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   useEffect(() => {
-    let defaultOptions: IReactSelectOption[] = [];
-    if (defaultValue) {
-      defaultOptions = options.filter((o) => defaultValue.includes(o.value + ''));
+    let defaultOption;
+    if (props.defaultValue) {
+      defaultOption = options.find((o) => o.value + '' === props.defaultValue + '');
+    } else {
+      defaultOption = options[0];
     }
-    onSelectChange(defaultOptions);
+    defaultOption = defaultOption || { value: '', label: '' };
+    onSelectChange(defaultOption);
   }, []);
 
   useEffect(() => {
     const currentValue = formContext.getValues()[name];
-    if (currentValue) {
-      onSelectChange(
-        options.filter((o) => currentValue.includes(o.value + ''))
-      );
+    if (currentValue && !options.find((o) => o.value + '' === currentValue + '')) {
+      onSelectChange({ value: '', label: '' });
     }
   }, [options]);
 
@@ -65,7 +73,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       {selectControlValue ? (
         <Select
           name={name}
-          isMulti={true}
+          isMulti={false}
           isDisabled={disabled}
           value={selectControlValue}
           onChange={onSelectChange}
@@ -87,5 +95,5 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   );
 };
 
-export { RruMultiSelectInput };
+export { RruSelectInput };
 
