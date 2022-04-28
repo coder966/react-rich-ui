@@ -17,7 +17,7 @@ export interface RruFormProps {
   onSubmit: (form: FormValues) => void;
 
   /** An array of the filed names you want to watch for changes. */
-  watch?: string[] | ((watch: (fieldNames: string[]) => FormValues) => void);
+  watch?: string[];
 
   /** The method that gets called whenever a watched field changes. */
   watcher?: (form: FormValues) => void;
@@ -65,10 +65,7 @@ const RruForm: FC<RruFormProps> = ({
 
   useEffect(() => {
     if (watch) {
-      if (typeof watch === 'function') {
-        // TODO: remove deprecated
-        watch(form.watch);
-      } else if (Array.isArray(watch) && watcher) {
+      if (Array.isArray(watch) && watcher) {
         watcher(form.watch(watch));
       }
     }
