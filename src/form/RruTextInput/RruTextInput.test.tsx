@@ -146,7 +146,7 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const validationSchema = yup.object().shape({
-      email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email is incorrect'),
+      email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
     });
   
     // render
@@ -169,6 +169,7 @@ describe('RruTextInput', () => {
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
     expect(emailInput?.getAttribute('class')).toContain('is-invalid');
+    expect(screen.getByText('The email address is incorrect')).toBeTruthy();
 
 
     // delete the current value in the input element
