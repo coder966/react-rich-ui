@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
-import { asyncFireChangeEvent, asyncFireClickEvent } from '../../test-utils';
 import { RruForm } from '../RruForm/RruForm';
 import { RruTextInput } from './RruTextInput';
 
@@ -39,11 +39,12 @@ describe('RruTextInput', () => {
 
     // fill the form
     const emailInput = container.querySelector('input[name="email"]');
-    await asyncFireChangeEvent(emailInput, {target: {value: 'khalid@test.com'}});
+    emailInput && await userEvent.click(emailInput);
+    await userEvent.keyboard('khalid@test.com');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -66,7 +67,7 @@ describe('RruTextInput', () => {
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -95,7 +96,7 @@ describe('RruTextInput', () => {
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -121,11 +122,18 @@ describe('RruTextInput', () => {
 
     // fill the form
     const emailInput = container.querySelector('input[name="email"]');
-    await asyncFireChangeEvent(emailInput, {target: {value: 'mohammed@test.com'}});
+    if(emailInput){
+      // delete the current value in the input element
+      await userEvent.tripleClick(emailInput);
+      await userEvent.keyboard('{Backspace}');
+      // type in the new value
+      await userEvent.keyboard('mohammed@test.com');
+
+    }
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -151,22 +159,26 @@ describe('RruTextInput', () => {
 
     // fill the form with bad input
     const emailInput = container.querySelector('input[name="email"]');
-    await asyncFireChangeEvent(emailInput, {target: {value: 'test_bad_email'}});
+    emailInput && await userEvent.click(emailInput);
+    await userEvent.keyboard('test_bad_email');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
     expect(emailInput?.getAttribute('class')).toContain('is-invalid');
 
 
-    // fill the form with valid input
-    await asyncFireChangeEvent(emailInput, {target: {value: 'khalid@test.com'}});
+    // delete the current value in the input element
+    emailInput && await userEvent.tripleClick(emailInput);
+    await userEvent.keyboard('{Backspace}');
+    // type in the new value
+    await userEvent.keyboard('khalid@test.com');
 
     // submit the form
-    await asyncFireClickEvent(submitButton);
+    submitButton && await userEvent.click(submitButton);
 
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -197,18 +209,21 @@ describe('RruTextInput', () => {
       email: 'khalid@test.com'
     });
 
-    // fill the form with some input
     const emailInput = container.querySelector('input[name="email"]');
-    await asyncFireChangeEvent(emailInput, {target: {value: 'test@test.com'}});
 
-    // TODO: works in the browser but not in the test. Fix this.
+    // delete the current value in the input element
+    emailInput && await userEvent.tripleClick(emailInput);
+    await userEvent.keyboard('{Backspace}');
+    // type in the new value
+    await userEvent.keyboard('test@test.com');
+
     // validation for a new value
-    // await waitFor(() => {
-    //   expect(watcher).toHaveBeenCalledTimes(2);
-    //   return expect(watcher.mock.calls[0][1]).toEqual({
-    //     email: 'test@test.com'
-    //   });
-    // })
+    await waitFor(() => {
+      expect(watcher).toHaveBeenCalledTimes(15);
+      return expect(watcher.mock.calls[14][0]).toEqual({
+        email: 'test@test.com'
+      });
+    })
 
   });
 
