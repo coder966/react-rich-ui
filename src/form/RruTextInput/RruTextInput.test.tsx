@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -218,13 +218,10 @@ describe('RruTextInput', () => {
     await userEvent.keyboard('test@test.com');
 
     // validation for a new value
-    await waitFor(() => {
-      expect(watcher).toHaveBeenCalledTimes(15);
-      return expect(watcher.mock.calls[14][0]).toEqual({
-        email: 'test@test.com'
-      });
-    })
-
+    expect(watcher).toHaveBeenCalledTimes(15);
+    return expect(watcher.mock.calls[14][0]).toEqual({
+      email: 'test@test.com'
+    });
   });
 
 })
