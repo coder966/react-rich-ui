@@ -28,7 +28,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           {...props}
           id={'checkbox_' + name}
           name={name}
-          ref={formContext.register}
+          ref={(input) => {formContext.register(input)}}
           type='checkbox'
           className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')}
         />

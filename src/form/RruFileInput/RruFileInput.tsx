@@ -35,7 +35,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
         {...props}
         type='file'
         id={`file_${name}`}
-        ref={formContext.register}
+        ref={(input) => {formContext.register(input)}}
         name={name}
         onChange={(e) => {
           const filesList = e.target.files;

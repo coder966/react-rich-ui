@@ -30,7 +30,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         {...props}
-        ref={formContext.register}
+        ref={(input) => {formContext.register(input)}}
         name={name}
         type='text'
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
