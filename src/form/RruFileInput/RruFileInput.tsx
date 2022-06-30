@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
@@ -27,6 +27,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
 
   const [fileName, setFileName] = useState<string | null>(null);
   const formContext = useFormContext();
+  const ref = useRef<HTMLInputElement | null>();
 
   return (
     <div className='form-group'>
@@ -34,8 +35,10 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <input
         {...props}
         type='file'
-        id={`file_${name}`}
-        ref={(input) => {formContext.register(input)}}
+        ref={(input) => {
+          formContext.register(input);
+          ref.current = input;
+        }}
         name={name}
         onChange={(e) => {
           const filesList = e.target.files;
@@ -49,9 +52,8 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <div
         className={'form-control fileUpload ' + (formContext.errors[name] ? ' is-invalid' : '')}
         onClick={(e) => {
-          const fileInput = document.getElementById(`file_${name}`);
-          if (fileInput) {
-            fileInput.click();
+          if(ref.current){
+            ref.current.click();
           }
         }}
       >
