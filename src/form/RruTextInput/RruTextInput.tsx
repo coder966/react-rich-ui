@@ -15,6 +15,8 @@ export interface RruTextInputProps extends InputProps {
   /**  */
   requiredAsterisk?: boolean;
 
+  /**  */
+  isPassword?: boolean;
 }
 
 /**
@@ -32,7 +34,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         {...props}
         ref={(input) => {formContext.register(input)}}
         name={name}
-        type='text'
+        type={props.isPassword ? 'password' : 'text'}
         className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
       />
       <ErrorMessage inputName={name} />

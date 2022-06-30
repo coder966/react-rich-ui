@@ -8,9 +8,7 @@ import {
   RruFileInput,
   RruForm,
   RruMultiCheckboxInput,
-  RruMultiSelectInput,
-  RruPasswordInput,
-  RruRadioInput,
+  RruMultiSelectInput, RruRadioInput,
   RruSelectInput,
   RruTextareaInput,
   RruTextInput,
@@ -42,29 +40,7 @@ export const Text = (args) => {
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
       <RruTextInput name='name' label='Name' />
       <RruTextInput name='email' label='Email' requiredAsterisk />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const Password = (args) => {
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruPasswordInput name='password' label='Password' />
+      <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
       <button type='submit'>Submit</button>
     </RruForm>
   );

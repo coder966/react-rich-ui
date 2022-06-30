@@ -4,7 +4,6 @@ export { RruFileInput } from './form/RruFileInput/RruFileInput';
 export { RruForm } from './form/RruForm/RruForm';
 export { RruMultiCheckboxInput } from './form/RruMultiCheckboxInput/RruMultiCheckboxInput';
 export { RruMultiSelectInput } from './form/RruMultiSelectInput/RruMultiSelectInput';
-export { RruPasswordInput } from './form/RruPasswordInput/RruPasswordInput';
 export { RruRadioInput } from './form/RruRadioInput/RruRadioInput';
 export { RruSelectInput } from './form/RruSelectInput/RruSelectInput';
 export { RruTextareaInput } from './form/RruTextareaInput/RruTextareaInput';

@@ -18,7 +18,6 @@
 ### Text
 - [RruTextInput](/docs/v2/components/RruTextInput)
 - [RruTextareaInput](/docs/v2/components/RruTextareaInput)
-- [RruPasswordInput](/docs/v2/components/RruPasswordInput)
 
 ### Date and Time
 - [RruDateInput](/docs/v2/components/RruDateInput)

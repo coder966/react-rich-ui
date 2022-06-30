@@ -11,4 +11,5 @@ All `input` HTML element props are available as well.
 | name | Unique form element name | Yes |
 | label | The form element label | No |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No |
+| isPassword | Sets the type of the input to 'password' | No |
 
