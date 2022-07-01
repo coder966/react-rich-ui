@@ -1,7 +1,7 @@
-import Option from '../input/types/Option';
+import RruOption from "../../types/RruOption";
 
 interface FormInitialValues {
-  [key: string]: string | number | boolean | Option | string[] | number[] | Option[];
+  [key: string]: string | number | boolean | RruOption | string[] | number[] | RruOption[];
 }
 
 export default FormInitialValues;

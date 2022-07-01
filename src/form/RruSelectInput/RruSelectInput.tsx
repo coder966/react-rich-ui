@@ -3,14 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import Select from 'react-select';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-
-/**
- * For internal use only
- */
-interface IReactSelectOption {
-  value: string;
-  label: React.ReactNode;
-}
+import RruOption from '../types/RruOption';
 
 export interface RruSelectInputProps {
   /**  */
@@ -26,7 +19,7 @@ export interface RruSelectInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: IReactSelectOption[];
+  options: RruOption[];
 
   /**  */
   defaultValue: string;
@@ -38,11 +31,11 @@ export interface RruSelectInputProps {
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const { name, options, disabled } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<IReactSelectOption | null>(null);
+  const [selectControlValue, setSelectControlValue] = useState<RruOption | null>(null);
   const formContext = useFormContext();
   formContext.register({ name });
 
-  const onSelectChange = (opt: IReactSelectOption | null) => {
+  const onSelectChange = (opt: RruOption | null) => {
     // react-select option datatype
     setSelectControlValue({ value: opt ? opt.value : '', label: opt ? opt.label : '' });
     formContext.setValue(name, opt ? opt.value : '');

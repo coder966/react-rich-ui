@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-
-
-export interface RruMultiCheckboxInputOptions {
-  value: string;
-  label: React.ReactNode;
-}
+import RruOption from '../types/RruOption';
 
 type InputProps = JSX.IntrinsicElements['input'];
 
@@ -22,7 +17,7 @@ export interface RruMultiCheckboxInputProps extends InputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: RruMultiCheckboxInputOptions[];
+  options: RruOption[];
 }
 
 /**

@@ -3,15 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import Select from 'react-select';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-
-
-/**
- * For internal use only
- */
-interface IReactSelectOption {
-  value: string;
-  label: React.ReactNode;
-}
+import RruOption from '../types/RruOption';
 
 export interface RruMultiSelectInputProps {
   /**  */
@@ -27,7 +19,7 @@ export interface RruMultiSelectInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: IReactSelectOption[];
+  options: RruOption[];
 
   /**  */
   defaultValue?: string[];
@@ -39,11 +31,11 @@ export interface RruMultiSelectInputProps {
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const { name, options, disabled, defaultValue } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<readonly IReactSelectOption[]>();
+  const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[]>();
   const formContext = useFormContext();
   formContext.register({ name });
 
-  const onSelectChange = (opt: readonly IReactSelectOption[] | null) => {
+  const onSelectChange = (opt: readonly RruOption[] | null) => {
     // react-select option datatype
     setSelectControlValue(opt || []);
     formContext.setValue(name, opt ? opt.map((o) => o.value) : []);
@@ -51,7 +43,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   useEffect(() => {
-    let defaultOptions: IReactSelectOption[] = [];
+    let defaultOptions: RruOption[] = [];
     if (defaultValue) {
       defaultOptions = options.filter((o) => defaultValue.includes(o.value + ''));
     }
