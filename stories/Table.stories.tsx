@@ -90,7 +90,6 @@ export const TableExample = (args) => {
         defaultSortDir='desc'
         search={searchParams1}
         retainTableState={true}
-        {...args}
       />
 
       <form onSubmit={onSearch2}>
@@ -111,7 +110,6 @@ export const TableExample = (args) => {
         defaultSortDir='desc'
         search={searchParams2}
         retainTableState={true}
-        {...args}
       />
     </>
   );

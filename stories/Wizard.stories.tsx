@@ -41,12 +41,10 @@ export const WizardExample = (args) => {
   );
 
   return (
-    <>
-      <RruStepsWizard {...args}>
-        <FirstStep stepLabel='First Step' />
-        <SecondStep stepLabel='Second Step' />
-        <ThirdStep stepLabel='Third Step' />
-      </RruStepsWizard>
-    </>
+    <RruStepsWizard>
+      <FirstStep stepLabel='First Step' />
+      <SecondStep stepLabel='Second Step' />
+      <ThirdStep stepLabel='Third Step' />
+    </RruStepsWizard>
   );
 };

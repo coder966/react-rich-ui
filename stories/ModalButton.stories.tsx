@@ -36,9 +36,8 @@ export const Advanced = (args) => {
       }}
       >
 
-        <h1>Big Label</h1>
-
-      </RruModalButton>
+      <h1>Big Label</h1>
+    </RruModalButton>
   );
 
 };
