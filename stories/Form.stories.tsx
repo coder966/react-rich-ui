@@ -79,7 +79,7 @@ export const Select = (args) => {
   ];
 
   const initialValues = {
-
+    color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({
@@ -92,7 +92,7 @@ export const Select = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruSelectInput name='color' label='Color' options={colors} defaultValue='BLUE' />
+      <RruSelectInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
@@ -288,7 +288,7 @@ export const Watcher = (args) => {
   ];
 
   const initialValues = {
-
+    color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({
@@ -305,7 +305,7 @@ export const Watcher = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher}>
-      <RruSelectInput name='color' label='Color' options={colors} defaultValue='BLUE' />
+      <RruSelectInput name='color' label='Color' options={colors} />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit'>Submit</button>
     </RruForm>

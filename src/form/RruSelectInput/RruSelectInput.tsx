@@ -20,9 +20,6 @@ export interface RruSelectInputProps {
 
   /**  */
   options: RruOption[];
-
-  /**  */
-  defaultValue: string;
 }
 
 /**
@@ -44,8 +41,9 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   useEffect(() => {
     let defaultOption;
-    if (props.defaultValue) {
-      defaultOption = options.find((o) => o.value + '' === props.defaultValue + '');
+    const initialValue = formContext.getValues()[props.name];
+    if (initialValue) {
+      defaultOption = options.find((o) => o.value + '' === initialValue + '');
     } else {
       defaultOption = options[0];
     }
