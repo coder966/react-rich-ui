@@ -108,7 +108,7 @@ export const MultiSelect = (args) => {
   ];
 
   const initialValues = {
-
+    color: ['RED', 'GREEN']
   }
 
   const validationSchema = yup.object().shape({
@@ -121,7 +121,7 @@ export const MultiSelect = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruMultiSelectInput name='color' label='Color' options={colors} defaultValue={['RED', 'GREEN']} />
+      <RruMultiSelectInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );

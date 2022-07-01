@@ -20,16 +20,13 @@ export interface RruMultiSelectInputProps {
 
   /**  */
   options: RruOption[];
-
-  /**  */
-  defaultValue?: string[];
 }
 
 /**
  * @author coder966
  */
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const { name, options, disabled, defaultValue } = props;
+  const { name, options, disabled } = props;
 
   const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[]>();
   const formContext = useFormContext();
@@ -44,8 +41,9 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   useEffect(() => {
     let defaultOptions: RruOption[] = [];
-    if (defaultValue) {
-      defaultOptions = options.filter((o) => defaultValue.includes(o.value + ''));
+    const initialValue = formContext.getValues()[props.name];
+    if (initialValue) {
+      defaultOptions = options.filter((o) => initialValue.includes(o.value + ''));
     }
     onSelectChange(defaultOptions);
   }, []);
