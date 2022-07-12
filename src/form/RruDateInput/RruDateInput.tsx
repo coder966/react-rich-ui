@@ -56,6 +56,13 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     }
   }
 
+  const getDateStringIgnoringTime = (date: Date) : string => {
+    const y = date.getFullYear();
+    const m = date.getMonth() + 1;
+    const d = date.getDate();
+    return `${y}-${m > 9 ? m : '0'+m}-${d > 9 ? d : '0'+d}`;
+  }
+
   const generateSixWeeksCalendar = (year: number, month: number): Date[] => {
     const firstDayOfMonthDate = new Date(year, month - 1, 1);
     const firstDayOfTheVisibleCalendar = addOrSubtractDays(firstDayOfMonthDate, -firstDayOfMonthDate.getDay());
@@ -96,7 +103,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
   }, [year, month])
 
   useEffect(() => {
-    const newValue = date?.toISOString().substring(0, 10);
+    const newValue = date && getDateStringIgnoringTime(date);
     console.log('date changed date = , newValue = ', date, newValue);
     formContext.setValue(props.name, newValue);
   }, [date])
@@ -118,7 +125,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
         <input
           type='text'
           disabled={props.disabled}
-          value={date?.toISOString().substring(0, 10)}
+          value={date && getDateStringIgnoringTime(date)}
           onChange={e => {}}
           onClick={e => setIsPopupShown(true)} className='form-control'
         />
