@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import resolveObjectAttribute from '../utils/resolveObjectAttribute';
+import { resolveObjectAttribute } from '../utils/utils';
 import './style.css';
 import { getApiResultPromise } from './table-network';
 import { getFirstPersistedTableState, getPersistedTableState, persistTableState } from './table-state-persistence';

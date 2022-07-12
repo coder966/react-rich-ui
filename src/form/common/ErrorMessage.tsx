@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { isObjKey } from '../../utils/utilFunction';
+import { isObjKey } from '../../utils/utils';
 
 export interface ErrorMessageProps {
   /**  */
