@@ -127,7 +127,8 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
           disabled={props.disabled}
           value={date && getDateStringIgnoringTime(date)}
           onChange={e => {}}
-          onClick={e => setIsPopupShown(true)} className='form-control'
+          onClick={e => setIsPopupShown(true)}
+          className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         />
 
         <div className={`rru-date-input__popup ${isPopupShown ? 'rru-date-input__popup--shown' : 'rru-date-input__popup--hidden'}`}>

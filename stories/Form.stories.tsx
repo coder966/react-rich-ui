@@ -211,11 +211,14 @@ export const Radio = (args) => {
 export const Date = (args) => {
 
   const initialValues = {
-
+    birthDate: '2022-05-15'
   }
 
   const validationSchema = yup.object().shape({
-
+    birthDate: yup.date()
+                  .required('The date is required')
+                  .min('2020-01-05', 'The date is too old')
+                  .max('2030-01-01', 'The date is too new')
   });
 
   const onSubmit = form => {
