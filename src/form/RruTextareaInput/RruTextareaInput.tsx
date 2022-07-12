@@ -32,7 +32,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
         {...props}
         ref={(textarea) => {formContext.register(textarea)}}
         name={name}
-        className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
+        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />
       <ErrorMessage inputName={name} />
     </div>

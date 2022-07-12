@@ -104,7 +104,6 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
 
   useEffect(() => {
     const newValue = date && getDateStringIgnoringTime(date);
-    console.log('date changed date = , newValue = ', date, newValue);
     formContext.setValue(props.name, newValue);
   }, [date])
 

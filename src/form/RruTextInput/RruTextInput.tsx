@@ -35,7 +35,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         ref={(input) => {formContext.register(input)}}
         name={name}
         type={props.isPassword ? 'password' : 'text'}
-        className={'form-control ' + (formContext.errors[name] ? 'is-invalid' : '')}
+        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />
       <ErrorMessage inputName={name} />
     </div>
