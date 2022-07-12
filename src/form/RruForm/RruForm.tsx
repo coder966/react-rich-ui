@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
-import { isObjKey } from '../../utils/utils';
 import './style.css';
 import FormInitialValues from './types/FormInitialValues';
 import FormValues from './types/FormValues';
@@ -24,7 +23,6 @@ export interface RruFormProps {
 
   /**  */
   children: React.ReactNode | React.ReactNode[];
-
 }
 
 /**
@@ -33,48 +31,25 @@ export interface RruFormProps {
  *
  * @author coder966
  */
-const RruForm: FC<RruFormProps> = ({
-  initialValues,
-  validationSchema,
-  onSubmit,
-  watch,
-  watcher,
-  children,
-}) => {
-  // transform initialValues object to meet our requirements:
-  // 1- grouped-multi-checkbox and multi-checkbox elements needs initial value array to have string items not integers
-  if (initialValues) {
-    for (const [key, value] of Object.entries(initialValues)) {
-      if (value && Array.isArray(value) && isObjKey(initialValues, key)) {
-        initialValues[key] = (value as any[]).map((item) => {
-          if (typeof item === 'object' && item.id) {
-            return item.id + '';
-          } else {
-            return item + '';
-          }
-        });
-      }
-    }
-  }
-
+const RruForm: FC<RruFormProps> = (props) => {
   const form = useForm({
     mode: 'onChange',
-    defaultValues: initialValues as IRHFDefaultValues,
-    validationSchema: validationSchema,
+    defaultValues: props.initialValues as IRHFDefaultValues,
+    validationSchema: props.validationSchema,
   });
 
   useEffect(() => {
-    if (watch) {
-      if (Array.isArray(watch) && watcher) {
-        watcher(form.watch(watch));
+    if (props.watch) {
+      if (Array.isArray(props.watch) && props.watcher) {
+        props.watcher(form.watch(props.watch));
       }
     }
   });
 
   return (
     <FormContext {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        {children}
+      <form onSubmit={form.handleSubmit(props.onSubmit)}>
+        {props.children}
       </form>
     </FormContext>
   );

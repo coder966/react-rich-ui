@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import Select from 'react-select';
+import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import RruOption from '../types/RruOption';
@@ -43,7 +44,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     let defaultOptions: RruOption[] = [];
     const initialValue = formContext.getValues()[props.name];
     if (initialValue) {
-      defaultOptions = options.filter((o) => initialValue.includes(o.value + ''));
+      defaultOptions = retainAll(options, initialValue, (opt, val) => (opt.value + '' === val + ''));
     }
     onSelectChange(defaultOptions);
   }, []);
@@ -51,9 +52,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   useEffect(() => {
     const currentValue = formContext.getValues()[name];
     if (currentValue) {
-      onSelectChange(
-        options.filter((o) => currentValue.includes(o.value + ''))
-      );
+      onSelectChange(retainAll(options, currentValue, (opt, val) => (opt.value + '' === val + '')));
     }
   }, [options]);
 
