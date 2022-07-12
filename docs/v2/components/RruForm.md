@@ -21,7 +21,6 @@
 
 ### Date and Time
 - [RruDateInput](/docs/v2/components/RruDateInput)
-- [RruTimeInput](/docs/v2/components/RruTimeInput)
 
 ### Select
 - [RruSelectInput](/docs/v2/components/RruSelectInput)

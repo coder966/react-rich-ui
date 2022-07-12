@@ -11,8 +11,7 @@ import {
   RruMultiSelectInput, RruRadioInput,
   RruSelectInput,
   RruTextareaInput,
-  RruTextInput,
-  RruTimeInput
+  RruTextInput
 } from '../src/index';
 
 const storyMeta: Meta = {
@@ -226,29 +225,6 @@ export const Date = (args) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruDateInput name='birthDate' label='Birth Date' isPast isHijri />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const Time = (args) => {
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruTimeInput name='appointmentTime' label='Appointment Time' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
