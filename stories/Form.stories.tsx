@@ -224,7 +224,7 @@ export const Date = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruDateInput name='birthDate' label='Birth Date' isPast isHijri />
+      <RruDateInput name='birthDate' label='Birth Date' minYear={2001} maxYear={2050} isHijri />
       <button type='submit'>Submit</button>
     </RruForm>
   );

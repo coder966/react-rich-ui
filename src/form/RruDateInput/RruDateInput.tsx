@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { addOrSubtractDays, isValidDateObject, range } from '../../utils/utils';
+import { addOrSubtractDays, isValidDateObject, range, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
@@ -18,20 +18,14 @@ export interface RruDateInputProps {
   /**  */
   requiredAsterisk?: boolean;
 
+  /** The minium selectable year */
+  minYear?: number;
+
+  /** The maximum selectable year */
+  maxYear?: number;
+
   /**  */
   isHijri?: boolean;
-
-  /** Display only past years */
-  isPast?: boolean;
-
-  /** Display future past years */
-  isFuture?: boolean;
-
-  /** The maximum number of years +/- current year that will be available in the select menus */
-  maxYearLength?: number;
-
-  /** Reverse the render order of the date parts selectors */
-  reverseDisplayOrder?: boolean;
 }
 
 /**
@@ -45,6 +39,22 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
   const [year, setYear] = useState<number>(0);
   const [month, setMonth] = useState<number>(0);
   const [date, setDate] = useState<Date>();
+
+  const getValidMinYear = () => {
+    if(props.minYear && props.minYear > 1800 && props.minYear < 2200){
+      return props.minYear;
+    }else{
+      return 1900;
+    }
+  }
+
+  const getValidMaxYear = () => {
+    if(props.maxYear && props.maxYear > 1800 && props.maxYear < 2200 && props.maxYear > getValidMinYear()){
+      return props.maxYear;
+    }else{
+      return 2200;
+    }
+  }
 
   const generateSixWeeksCalendar = (year: number, month: number): Date[] => {
     const firstDayOfMonthDate = new Date(year, month - 1, 1);
@@ -87,7 +97,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
 
   useEffect(() => {
     const newValue = date?.toISOString().substring(0, 10);
-    console.log('date changed newValue = ', newValue);
+    console.log('date changed date = , newValue = ', date, newValue);
     formContext.setValue(props.name, newValue);
   }, [date])
 
@@ -118,19 +128,19 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
 
             <div className='rru-date-input__header'>
               <select value={year} onChange={e => setYear(parseInt(e.target.value))}>
-                {range(100, -50).map(i => <option key={`y${i}`}>{(new Date()).getFullYear() + i}</option>)}
+                {range(getValidMinYear(), getValidMaxYear()).map(y => <option key={`y${y}`}>{y}</option>)}
               </select>
               <select value={month} onChange={e => setMonth(parseInt(e.target.value))}>
-                {range(12, 1).map(i => <option key={`m${i}`}>{i}</option>)}
+                {range(1, 12).map(m => <option key={`m${m}`}>{m}</option>)}
               </select>
             </div>
 
             <div className='rru-date-input__body'>
               <table>
                 <tbody>
-                  {range(6).map(i => (
+                  {rangeOfSize(6).map(i => (
                     <tr key={`r${i}`}>
-                      {range(7).map(j => {
+                      {rangeOfSize(7).map(j => {
                         const index = ((i * 7) + j);
                         const date = calendar[index];
                         return <td key={`d${date.getTime()}`}>

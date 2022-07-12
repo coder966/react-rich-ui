@@ -1,4 +1,8 @@
-const range = (size: number, startAt: number = 0) => {
+const range = (from: number, to: number) => {
+  return rangeOfSize(to-from+1, from);
+}
+
+const rangeOfSize = (size: number, startAt: number = 0) => {
   return Array.from({ length: size }, (x, i) => i + startAt);
 }
 
@@ -24,6 +28,7 @@ const addOrSubtractDays = (startingDate: Date, days: number): Date => {
 
 export {
   range,
+  rangeOfSize,
   isObjKey,
   resolveObjectAttribute,
   isValidDateObject,
