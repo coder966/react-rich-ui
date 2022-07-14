@@ -14,4 +14,5 @@
 | minYear | The minium selectable year | No |
 | maxYear | The maximum selectable year | No |
 | isHijri | For `Hijri` calendar. By default is it `Gregorian` | No |
+| filterDates | An optional function that determines whether a given date (yyyy-mm-dd) is allowed to be selected or not. | No |
 

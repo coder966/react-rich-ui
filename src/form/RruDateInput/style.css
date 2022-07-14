@@ -90,3 +90,13 @@
   background-color: #0067c0;
 }
 
+.rru-date-input__day--disabled {
+  color: #cbcbcb;
+}
+
+.rru-date-input__day--disabled:hover {
+  color: #cbcbcb;
+  background-color: initial;
+  cursor: default;
+}
+

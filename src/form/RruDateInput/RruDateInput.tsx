@@ -28,6 +28,9 @@ export interface RruDateInputProps {
 
   /**  */
   isHijri?: boolean;
+
+  /**  */
+  filterDates?: (date: string) => boolean;
 }
 
 /**
@@ -84,6 +87,14 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     return result;
   }
 
+  const isDateDisabled = (date: IntlDate) : boolean => {
+    if(props.filterDates){
+      return !props.filterDates(date.toString(getCalendarType()));
+    }else{
+      return false;
+    }
+  }
+
   const previousMonth = () => {
     if(month === 1){
       setYear(year-1);
@@ -99,6 +110,15 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
       setMonth(1);
     }else{
       setMonth(month+1);
+    }
+  }
+
+  const onSelectDate = (date: IntlDate) => {
+    if(isDateDisabled(date)){
+      return;
+    }else{
+      setIntlDate(date);
+      setIsPopupShown(false);  
     }
   }
 
@@ -148,6 +168,9 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     if (targetDate.toString(getCalendarType()) === intlDate?.toString(getCalendarType())){
       className += ' rru-date-input__day--selected'
     }
+    if (isDateDisabled(targetDate)){
+      className += ' rru-date-input__day--disabled'
+    }
     return className;
   }
 
@@ -193,10 +216,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
                         const index = ((i * 7) + j);
                         const date = calendar[index];
                         return <td key={`d${date.toString(getCalendarType())}`}>
-                          <div className={getDayClassName(date)} onClick={e => {
-                            setIntlDate(date);
-                            setIsPopupShown(false);
-                          }}>{date.getDay(getCalendarType())}</div>
+                          <div className={getDayClassName(date)} onClick={e => onSelectDate(date)}>{date.getDay(getCalendarType())}</div>
                         </td>
                       })}
                     </tr>
