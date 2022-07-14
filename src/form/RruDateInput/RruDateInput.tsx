@@ -38,6 +38,8 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
 
   const [calendar, setCalendar] = useState<IntlDate[]>();
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
+  const [todayIntlDate] = useState<IntlDate>(IntlDate.today());
+
   const [year, setYear] = useState<number>(0);
   const [month, setMonth] = useState<number>(0);
   const [intlDate, setIntlDate] = useState<IntlDate>();
@@ -117,8 +119,18 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     formContext.setValue(props.name, intlDate?.toString(getCalendarType()));
   }, [intlDate])
 
-  const getDayClassName = (intlDate: IntlDate): string => {
-    return `rru-date-input__day ${intlDate.getMonth(getCalendarType()) === month ? '' : 'rru-date-input__day--grey'}`;
+  const getDayClassName = (targetDate: IntlDate): string => {
+    let className = 'rru-date-input__day';
+    if (targetDate.getMonth(getCalendarType()) != month){
+      className += ' rru-date-input__day--not-same-month'
+    }
+    if (targetDate.toString(getCalendarType()) === todayIntlDate.toString(getCalendarType())){
+      className += ' rru-date-input__day--today'
+    }
+    if (targetDate.toString(getCalendarType()) === intlDate?.toString(getCalendarType())){
+      className += ' rru-date-input__day--selected'
+    }
+    return className;
   }
 
   if (!calendar) {

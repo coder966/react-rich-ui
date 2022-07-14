@@ -56,15 +56,25 @@
   width: 30px;
   line-height: 30px;
   text-align: center;
-}
-
-.rru-date-input__day--grey {
-  color: #8c8c8c;
+  border-radius: 30px;
 }
 
 .rru-date-input__day:hover {
-  border-radius: 30px;
   color: #ffffff;
   background-color: #0067c0;
   cursor: pointer;
 }
+
+.rru-date-input__day--not-same-month {
+  color: #8c8c8c;
+}
+
+.rru-date-input__day--today {
+  border: solid 1px #0067c0;
+}
+
+.rru-date-input__day--selected {
+  color: #ffffff;
+  background-color: #0067c0;
+}
+
