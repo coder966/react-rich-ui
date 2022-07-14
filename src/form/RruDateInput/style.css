@@ -1,0 +1,70 @@
+.rru-date-input__popup{
+  position: absolute;
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0px 3px 20px -5px rgba(0,0,0,0.33);
+}
+
+.rru-date-input__popup--shown{
+  max-height: 500px;
+  transition: max-height 0.4s 0s ease;
+}
+
+.rru-date-input__popup--hidden{
+  max-height: 0px;
+  transition: max-height 0.2s 0s ease;
+}
+
+.rru-date-input__container{
+  position: relative;
+  z-index: 55;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.rru-date-input__header{
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  border-bottom: solid 1px #dbdbdb;
+}
+
+.rru-date-input__header > select {
+  display: inline;
+  width: auto;
+  flex-grow: 1;
+  border-radius: 10px;
+  margin: 0px 5px;
+  text-align: center;
+}
+
+.rru-date-input__header > select:focus-visible {
+  outline: 0;
+}
+
+.rru-date-input__body {
+  background-color: #ffffff;
+  padding: 5px;
+}
+
+.rru-date-input__body > table > tr > td {
+  padding: 4px;
+}
+
+.rru-date-input__day {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.rru-date-input__day--grey {
+  color: #8c8c8c;
+}
+
+.rru-date-input__day:hover {
+  border-radius: 30px;
+  color: #ffffff;
+  background-color: #0067c0;
+  cursor: pointer;
+}

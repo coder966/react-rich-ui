@@ -3,9 +3,8 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   getRetainedTableSearchObject,
-  RruPageableTable,
-  RruPageableTableProps
-} from '../src/pageable-table/react-rich-ui-pageable-table';
+  RruPageableTable
+} from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Table',
@@ -14,7 +13,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const TableExample = (args: RruPageableTableProps) => {
+export const TableExample = (args) => {
   const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user1'));
   const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user2'));
 
@@ -62,28 +61,12 @@ export const TableExample = (args: RruPageableTableProps) => {
       value: (row) => row.address.city + ' - ' + row.address.street,
       sortKey: 'address.city',
     },
-  ];
-
-  const actions = [
     {
-      icon: 'view',
-      privileges: ['USER:VIEW'],
-      action: (user) => action('view user')(user),
-    },
-    {
-      icon: 'edit',
-      privileges: ['USER:EDIT'],
-      action: (user) => action('edit user')(user),
-      display: (user) => user.status === 'CONFIRMED',
-    },
-    {
-      icon: 'delete',
-      action: (user) => action('delete user')(user),
-      onConfirm: (user) => action('confirm delete user')(user),
-      confirmationTitle: 'Delete',
-      confirmationDesc: 'Are you sure you want to delete ?',
-      cancelLabel: 'Cancel',
-      confirmLabel: 'Confirm',
+      label: 'Actions',
+      value: (user) => <>
+        <button onClick={e => action('view user')(user)}>View</button>
+        {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
+      </>,
     },
   ];
 
@@ -103,13 +86,10 @@ export const TableExample = (args: RruPageableTableProps) => {
         endpoint='http://localhost:8080/api/user1'
         pageSize={5}
         columns={columns}
-        actions={actions}
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams1}
         retainTableState={true}
-        userPrivileges={['USER:VIEW']}
-        {...args}
       />
 
       <form onSubmit={onSearch2}>
@@ -126,13 +106,10 @@ export const TableExample = (args: RruPageableTableProps) => {
         endpoint='http://localhost:8080/api/user2'
         pageSize={5}
         columns={columns}
-        actions={actions}
         defaultSortBy='id'
         defaultSortDir='desc'
         search={searchParams2}
         retainTableState={true}
-        userPrivileges={['USER:VIEW']}
-        {...args}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { isObjKey } from '../utils/utilFunction';
+import { isObjKey } from '../utils/utils';
 import SpringPage from './types/SpringPage';
 
 // dynamically load Axios

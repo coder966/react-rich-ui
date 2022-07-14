@@ -2,7 +2,17 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { RruForm, RruFormElement, RruFormProps } from '../src/form/react-rich-ui-form';
+import {
+  RruCheckboxInput,
+  RruDateInput,
+  RruFileInput,
+  RruForm,
+  RruMultiCheckboxInput,
+  RruMultiSelectInput, RruRadioInput,
+  RruSelectInput,
+  RruTextareaInput,
+  RruTextInput
+} from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form',
@@ -11,7 +21,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const Text = (args: RruFormProps) => {
+export const Text = (args) => {
 
   const initialValues = {
     name: 'Khalid',
@@ -26,16 +36,17 @@ export const Text = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='text' name='name' label='Name' />
-      <RruFormElement type='text' name='email' label='Email' requiredAsterisk />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruTextInput name='name' label='Name' />
+      <RruTextInput name='email' label='Email' requiredAsterisk />
+      <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const Password = (args: RruFormProps) => {
+export const Textarea = (args) => {
 
   const initialValues = {
 
@@ -50,47 +61,24 @@ export const Password = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='password' name='password' label='Password' />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruTextareaInput name='content' label='Content' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const Textarea = (args: RruFormProps) => {
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='textarea' name='content' label='Content' />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const Select = (args: RruFormProps) => {
+export const Select = (args) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
-
+    color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({
@@ -102,24 +90,24 @@ export const Select = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='select' name='color' label='Color' options={colors} defaultValue='BLUE' />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruSelectInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const MultiSelect = (args: RruFormProps) => {
+export const MultiSelect = (args) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
-
+    color: ['RED', 'GREEN']
   }
 
   const validationSchema = yup.object().shape({
@@ -131,15 +119,15 @@ export const MultiSelect = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='multi-select' name='color' label='Color' options={colors} defaultValue={['RED', 'GREEN']} />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruMultiSelectInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const Checkbox = (args: RruFormProps) => {
+export const Checkbox = (args) => {
 
   const initialValues = {
     agreed: true,
@@ -154,20 +142,20 @@ export const Checkbox = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='checkbox' name='agreed' label='Agree' />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruCheckboxInput name='agreed' label='Agree' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const MultiCheckbox = (args: RruFormProps) => {
+export const MultiCheckbox = (args) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -183,62 +171,20 @@ export const MultiCheckbox = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='multi-checkbox' name='color' label='Color' options={colors} />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruMultiCheckboxInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const GroupedMultiCheckbox = (args: RruFormProps) => {
-
-  const groupedOptions = [
-    {
-      label: 'Colors',
-      items: [
-        { id: 'RED', label: 'Red' },
-        { id: 'BLUE', label: 'Blue' },
-        { id: 'GREEN', label: 'Green' },
-      ]
-    },
-    {
-      label: 'Fruits',
-      items: [
-        { id: 'apple', label: 'Apple' },
-        { id: 'banana', label: 'Banana' },
-        { id: 'orange', label: 'Orange' },
-      ]
-    },
-  ];
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='grouped-multi-checkbox' name='color' label='Color' options={groupedOptions} />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const Radio = (args: RruFormProps) => {
+export const Radio = (args) => {
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
@@ -254,15 +200,41 @@ export const Radio = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='radio' name='color' label='Color' options={colors} />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruRadioInput name='color' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const Date = (args: RruFormProps) => {
+export const Date = (args) => {
+
+  const initialValues = {
+    birthDate: '1443-04-15'
+  }
+
+  const validationSchema = yup.object().shape({
+    birthDate: yup.date()
+                  .required('The date is required')
+                  .min('1435-01-05', 'The date is too old')
+                  .max('1450-01-01', 'The date is too new')
+  });
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruDateInput name='birthDate' label='Birth Date' minYear={2001} maxYear={2050} isHijri />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+export const File = (args) => {
 
   const initialValues = {
 
@@ -277,71 +249,25 @@ export const Date = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='date' name='birthDate' label='Birth Date' isPast isHijri />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruFileInput name='attachment' label='Attachment' accept='.txt' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
 
 };
 
-export const Time = (args: RruFormProps) => {
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='time' name='appointmentTime' label='Appointment Time' />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const File = (args: RruFormProps) => {
-
-  const initialValues = {
-
-  }
-
-  const validationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
-    action('submitting the form')(form);
-  };
-
-  return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} {...args}>
-      <RruFormElement type='file' name='attachment' label='Attachment' />
-      <button type='submit'>Submit</button>
-    </RruForm>
-  );
-
-};
-
-export const Watcher = (args: RruFormProps) => {
+export const Watcher = (args) => {
   const [color, setColor] = useState();
 
   const colors = [
-    { id: 'RED', label: 'Red' },
-    { id: 'BLUE', label: 'Blue' },
-    { id: 'GREEN', label: 'Green' },
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
   ];
 
   const initialValues = {
-
+    color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({
@@ -357,8 +283,8 @@ export const Watcher = (args: RruFormProps) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher} {...args}>
-      <RruFormElement type='select' name='color' label='Color' options={colors} defaultValue='BLUE' />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher}>
+      <RruSelectInput name='color' label='Color' options={colors} />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit'>Submit</button>
     </RruForm>
@@ -366,7 +292,7 @@ export const Watcher = (args: RruFormProps) => {
 
 };
 
-export const TwoFormsInOnePage = (args: RruFormProps) => {
+export const TwoFormsInOnePage = (args) => {
 
   const initialValues1 = {
     name: 'Khalid',
@@ -394,13 +320,13 @@ export const TwoFormsInOnePage = (args: RruFormProps) => {
 
   return (
     <>
-      <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1} {...args}>
-        <RruFormElement type='text' name='name' label='Name' />
+      <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1}>
+        <RruTextInput name='name' label='Name' />
         <button type='submit'>Submit</button>
       </RruForm>
       <br></br>
-      <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2} {...args}>
-        <RruFormElement type='text' name='favoriteNumber' label='Favorite Number' />
+      <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2}>
+        <RruTextInput name='favoriteNumber' label='Favorite Number' />
         <button type='submit'>Submit</button>
       </RruForm>
     </>

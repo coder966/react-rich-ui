@@ -1,72 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { RruButton } from '../button/react-rich-ui-button';
-import resolveObjectAttribute from '../utils/resolveObjectAttribute';
+import { resolveObjectAttribute } from '../utils/utils';
 import './style.css';
 import { getApiResultPromise } from './table-network';
 import { getFirstPersistedTableState, getPersistedTableState, persistTableState } from './table-state-persistence';
+import RruPageableTableProps from './types/RruPageableTableProps';
 import SpringPage from './types/SpringPage';
-import TableAction from './types/TableAction';
 import TableColumn from './types/TableColumn';
 import TableDataRow from './types/TableDataRow';
-
-export interface RruPageableTableProps {
-  /** Spring Page api endpoint */
-  endpoint: string;
-
-  /** 
-   * Specify the HTTP method to be used when sending the API request.
-   * By default it uses GET.
-   * If GET is used, then the pagination object and the search object are merged and sent in the request query string.
-   * If POST is used, then the pagination is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
-   */
-  requestMethod?: 'GET' | 'POST',
-
-  /**  */
-  columns: TableColumn[];
-
-  /**  */
-  actions?: TableAction[];
-
-  /** The search params object. */
-  search?: object;
-
-  /** use `getRetainedTableSearchObject` to read the retained object */
-  retainTableState?: boolean;
-
-  /**  */
-  pageSize: number;
-
-  /**  */
-  disableSorting?: boolean;
-
-  /** */
-  defaultSortBy?: string,
-  
-  /** */
-  defaultSortDir?: 'asc' | 'desc',
-
-  /** A callback function in case you want to do anything with response of the api */
-  onResponse?: (body: object) => void;
-
-  /** The column label of the actions */
-  actionsLabel?: React.ReactNode;
-
-  /** The label of the previous page button */
-  previousLabel?: React.ReactNode;
-
-  /** The label of the next page button */
-  nextLabel?: React.ReactNode;
-
-  /** Rendered when no data has been returned from the api. */
-  noDataLabel?: React.ReactNode;
-
-  /** Rendered when no data has been returned from the api. */
-  apiErrorLabel?: React.ReactNode;
-
-  /**  */
-  userPrivileges?: string[];
-}
 
 /**
  * A table the features:
@@ -83,7 +24,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   endpoint,
   requestMethod = 'GET',
   columns,
-  actions,
   search,
   retainTableState = false,
   pageSize = 10,
@@ -91,12 +31,10 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   defaultSortBy,
   defaultSortDir,
   onResponse,
-  actionsLabel = 'Actions',
   previousLabel = 'Previous',
   nextLabel = 'Next',
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
-  userPrivileges,
 }) => {
   const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
 
@@ -231,11 +169,10 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                   </th>
                 )
             )}
-            {actions && <th className={isLoading ? ' rru-pageable-table-loading-upper-th' : ''}>{actionsLabel}</th>}
           </tr>
           {isLoading && (
             <tr>
-              <th colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-loading-th'>
+              <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
                 <div className='progressBar'>
                   <div className='indeterminate'></div>
                 </div>
@@ -246,14 +183,14 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         <tbody>
           {error && (
             <tr>
-              <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='rru-pageable-table-centered'>
                 {apiErrorLabel}
               </td>
             </tr>
           )}
           {data.length === 0 && !error && (
             <tr>
-              <td colSpan={columns.length + (actions ? 1 : 0)} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='rru-pageable-table-centered'>
                 {noDataLabel}
               </td>
             </tr>
@@ -272,37 +209,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                         : resolveObjectAttribute(col.value, row)}
                     </td>
                   )
-              )}
-              {actions && (
-                <td>
-                  {actions.map((a, k) => {
-                    const shouldDisplay = (typeof a.display === 'function' && a.display(row)) || !a.display;
-                    return shouldDisplay ? (
-                      <RruButton
-                        key={k}
-                        label={a.label}
-                        icon={typeof a.icon === 'function' ? a.icon(row) : a.icon}
-                        userPrivileges={userPrivileges}
-                        allowedPrivileges={a.privileges}
-                        confirmationTitle={a.confirmationTitle}
-                        confirmationDesc={a.confirmationDesc}
-                        cancelLabel={a.cancelLabel}
-                        confirmLabel={a.confirmLabel}
-                        onConfirm={
-                          a.onConfirm
-                            ? () => {
-                                if (a.onConfirm) {
-                                  a.onConfirm(row);
-                                }
-                                return true;
-                              }
-                            : undefined
-                        }
-                        onClick={() => a.action(row)}
-                      />
-                    ) : null;
-                  })}
-                </td>
               )}
             </tr>
           ))}
