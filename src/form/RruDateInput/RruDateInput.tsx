@@ -84,6 +84,24 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     return result;
   }
 
+  const previousMonth = () => {
+    if(month === 1){
+      setYear(year-1);
+      setMonth(12);
+    }else{
+      setMonth(month-1);
+    }
+  }
+
+  const nextMonth = () => {
+    if(month === 12){
+      setYear(year+1);
+      setMonth(1);
+    }else{
+      setMonth(month+1);
+    }
+  }
+
   /**
    * init
    */
@@ -156,12 +174,14 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
           <div className='rru-date-input__container'>
 
             <div className='rru-date-input__header'>
+              <div className='rru-date-input__month-button' onClick={previousMonth} >{'<'}</div>
               <select value={year} onChange={e => setYear(parseInt(e.target.value))}>
                 {range(getValidMinYear(), getValidMaxYear()).map(y => <option key={`y${y}`}>{y}</option>)}
               </select>
               <select value={month} onChange={e => setMonth(parseInt(e.target.value))}>
                 {range(1, 12).map(m => <option key={`m${m}`}>{m}</option>)}
               </select>
+              <div className='rru-date-input__month-button' onClick={nextMonth} >{'>'}</div>
             </div>
 
             <div className='rru-date-input__body'>

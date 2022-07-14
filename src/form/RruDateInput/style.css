@@ -42,6 +42,18 @@
   outline: 0;
 }
 
+.rru-date-input__month-button {
+  padding: 5px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 10px;
+}
+
+.rru-date-input__month-button:hover{
+  cursor: pointer;
+}
+
 .rru-date-input__body {
   background-color: #ffffff;
   padding: 5px;
