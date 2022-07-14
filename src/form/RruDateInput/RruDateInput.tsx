@@ -1,6 +1,8 @@
+import { IntlDate } from 'intl-date';
+import CalendarType from 'intl-date/dist/types/CalendarType';
 import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { addOrSubtractDays, isValidDateObject, range, rangeOfSize } from '../../utils/utils';
+import { range, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
@@ -34,42 +36,47 @@ export interface RruDateInputProps {
 const RruDateInput: FC<RruDateInputProps> = (props) => {
   const formContext = useFormContext();
 
-  const [calendar, setCalendar] = useState<Date[]>();
+  const [calendar, setCalendar] = useState<IntlDate[]>();
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
   const [year, setYear] = useState<number>(0);
   const [month, setMonth] = useState<number>(0);
-  const [date, setDate] = useState<Date>();
+  const [intlDate, setIntlDate] = useState<IntlDate>();
+
+  const getCalendarType = () : CalendarType => {
+    return props.isHijri ? 'islamic-umalqura' : 'gregorian';
+  }
+
+  const getMinLimit = () => {
+    return props.isHijri ? 1300 : 1800;
+  }
+
+  const getMaxLimit = () => {
+    return props.isHijri ? 1500 : 2200;
+  }
 
   const getValidMinYear = () => {
-    if(props.minYear && props.minYear > 1800 && props.minYear < 2200){
+    if(props.minYear && props.minYear > getMinLimit() && props.minYear < getMaxLimit()){
       return props.minYear;
     }else{
-      return 1900;
+      return getMinLimit();
     }
   }
 
   const getValidMaxYear = () => {
-    if(props.maxYear && props.maxYear > 1800 && props.maxYear < 2200 && props.maxYear > getValidMinYear()){
+    if(props.maxYear && props.maxYear > getMinLimit() && props.maxYear < getMaxLimit() && props.maxYear > getValidMinYear()){
       return props.maxYear;
     }else{
-      return 2200;
+      return getMaxLimit();
     }
   }
 
-  const getDateStringIgnoringTime = (date: Date) : string => {
-    const y = date.getFullYear();
-    const m = date.getMonth() + 1;
-    const d = date.getDate();
-    return `${y}-${m > 9 ? m : '0'+m}-${d > 9 ? d : '0'+d}`;
-  }
+  const generateSixWeeksCalendar = (year: number, month: number): IntlDate[] => {
+    const firstDayOfMonthDate = IntlDate.of(getCalendarType(), year, month, 1);
+    const firstDayOfTheVisibleCalendar = firstDayOfMonthDate.minusDays(firstDayOfMonthDate.getDayOfWeek()-1);
 
-  const generateSixWeeksCalendar = (year: number, month: number): Date[] => {
-    const firstDayOfMonthDate = new Date(year, month - 1, 1);
-    const firstDayOfTheVisibleCalendar = addOrSubtractDays(firstDayOfMonthDate, -firstDayOfMonthDate.getDay());
-
-    const result = [firstDayOfTheVisibleCalendar];
+    const result: IntlDate[] = [firstDayOfTheVisibleCalendar];
     for (let i = 1; i < 42; i++) { // 6 rows of 7 days each = 42 days
-      result.push(addOrSubtractDays(firstDayOfTheVisibleCalendar, i));
+      result.push(firstDayOfTheVisibleCalendar.plusDays(i));
     }
 
     return result;
@@ -82,33 +89,36 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     // read the initial value
     formContext.register({ name: props.name });
     const initialValue = formContext.getValues()[props.name];
-    const initialDateObject = new Date(initialValue);
 
     // determine the default date
-    let defaultSelectedDate;
-    if(isValidDateObject(initialDateObject)){
-      defaultSelectedDate = initialDateObject;
-    }else{
-      defaultSelectedDate = new Date();
+    let initialDateObject: IntlDate;
+    try{
+      initialDateObject = IntlDate.parse(getCalendarType(), initialValue);
+    }catch(e){
+      initialDateObject = IntlDate.today();
+      console.warn(`RruDateInput(${props.name}) failing to today = ${initialDateObject.toString(getCalendarType())} Original error = `, e);
     }
 
     // set state to the default date
-    setYear(defaultSelectedDate.getFullYear());
-    setMonth(defaultSelectedDate.getMonth() + 1);
-    setDate(defaultSelectedDate);
+    setYear(initialDateObject.getYear(getCalendarType()));
+    setMonth(initialDateObject.getMonth(getCalendarType()));
+    setIntlDate(initialDateObject);
   }, [])
 
   useEffect(() => {
-    setCalendar(generateSixWeeksCalendar(year, month));
+    if(year === 0 || month === 0){
+      return;
+    }else{
+      setCalendar(generateSixWeeksCalendar(year, month));
+    }
   }, [year, month])
 
   useEffect(() => {
-    const newValue = date && getDateStringIgnoringTime(date);
-    formContext.setValue(props.name, newValue);
-  }, [date])
+    formContext.setValue(props.name, intlDate?.toString(getCalendarType()));
+  }, [intlDate])
 
-  const getDayClassName = (date: Date): string => {
-    return `rru-date-input__day ${date.getMonth() + 1 === month ? '' : 'rru-date-input__day--grey'}`;
+  const getDayClassName = (intlDate: IntlDate): string => {
+    return `rru-date-input__day ${intlDate.getMonth(getCalendarType()) === month ? '' : 'rru-date-input__day--grey'}`;
   }
 
   if (!calendar) {
@@ -124,7 +134,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
         <input
           type='text'
           disabled={props.disabled}
-          value={date && getDateStringIgnoringTime(date)}
+          value={intlDate && intlDate.toString(getCalendarType())}
           onChange={e => {}}
           onClick={e => setIsPopupShown(true)}
           className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
@@ -150,11 +160,11 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
                       {rangeOfSize(7).map(j => {
                         const index = ((i * 7) + j);
                         const date = calendar[index];
-                        return <td key={`d${date.getTime()}`}>
+                        return <td key={`d${date.toString(getCalendarType())}`}>
                           <div className={getDayClassName(date)} onClick={e => {
-                            setDate(date);
+                            setIntlDate(date);
                             setIsPopupShown(false);
-                          }}>{date.getDate()}</div>
+                          }}>{date.getDay(getCalendarType())}</div>
                         </td>
                       })}
                     </tr>

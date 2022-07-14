@@ -34,15 +34,6 @@ const resolveObjectAttribute = (path: string, obj: object): any => {
     .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
 };
 
-const isValidDateObject = (date: any): boolean => {
-  return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
-}
-
-const addOrSubtractDays = (startingDate: Date, days: number): Date => {
-  const dateCopy = new Date(startingDate.getTime());
-  dateCopy.setDate(dateCopy.getDate() + days);
-  return dateCopy;
-}
 
 export {
   range,
@@ -50,7 +41,5 @@ export {
   retainAll,
   isObjKey,
   resolveObjectAttribute,
-  isValidDateObject,
-  addOrSubtractDays,
 };
 
