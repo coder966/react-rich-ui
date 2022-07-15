@@ -9,6 +9,6 @@ export { RruSelectInput } from './form/RruSelectInput/RruSelectInput';
 export { RruTextareaInput } from './form/RruTextareaInput/RruTextareaInput';
 export { RruTextInput } from './form/RruTextInput/RruTextInput';
 export { RruModalButton } from './modal-button/RruModalButton';
-export { getRetainedTableSearchObject, RruPageableTable } from './pageable-table/react-rich-ui-pageable-table';
-export { RruStepsWizard } from './steps-wizard/react-rich-ui-steps-wizard';
+export { getRetainedTableSearchObject, RruPageableTable } from './pageable-table/RruPageableTable';
+export { RruStepsWizard } from './steps-wizard/RruStepsWizard';
 
