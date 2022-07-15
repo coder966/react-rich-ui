@@ -30,7 +30,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <textarea
         {...props}
-        ref={(textarea) => {formContext.register(textarea)}}
+        ref={(textarea) => { formContext.register(textarea) }}
         name={name}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />

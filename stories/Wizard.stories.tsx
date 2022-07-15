@@ -23,19 +23,19 @@ export const WizardExample = (args) => {
     <div>
       <h1>This is the second step content</h1>
       <button onClick={props.previousStep}>back</button>
-      <button onClick={event => props.nextStep({name: 'Khalid', colour: 'Blue'})}>next</button>
+      <button onClick={event => props.nextStep({ name: 'Khalid', colour: 'Blue' })}>next</button>
     </div>
   );
 
   const ThirdStep = props => (
     <div>
       <h1>This is the third step content</h1>
-      {props.previousStepData ? 
+      {props.previousStepData ?
         <>
           <p>Name: {props.previousStepData.name}</p>
           <p>Colour: {props.previousStepData.colour}</p>
         </>
-      : null}
+        : null}
       <button onClick={props.firstStep}>first step</button>
     </div>
   );

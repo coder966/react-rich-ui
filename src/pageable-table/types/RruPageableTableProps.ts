@@ -30,7 +30,7 @@ interface RruPageableTableProps {
 
   /** */
   defaultSortBy?: string,
-  
+
   /** */
   defaultSortDir?: 'asc' | 'desc',
 

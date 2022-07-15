@@ -36,7 +36,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
 }) => {
-  const getSearchObject = () : object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
+  const getSearchObject = (): object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
 
   // fetched
   const [totalPages, setTotalPages] = useState(getPersistedTableState(endpoint)?.totalPages || 0);
@@ -72,16 +72,16 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setError(null);
         setTotalPages(data.totalPages);
         setData(data.content);
-        if(retainTableState){
+        if (retainTableState) {
           persistTableState(endpoint, {
-            search: search, 
-            totalPages: data.totalPages, 
-            currentPage: currentPage, 
-            sortBy: sortBy, 
+            search: search,
+            totalPages: data.totalPages,
+            currentPage: currentPage,
+            sortBy: sortBy,
             sortDir: sortDir,
-          });  
+          });
         }
-        if(!hasBeenInitialized){
+        if (!hasBeenInitialized) {
           setHasBeenInitialized(true);
         }
         if (onResponse) {
@@ -92,16 +92,16 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         setError(err);
         setTotalPages(0);
         setData([]);
-        if(retainTableState){
+        if (retainTableState) {
           persistTableState(endpoint, {
-            search: search, 
-            totalPages: 0, 
-            currentPage: 0, 
-            sortBy: sortBy, 
+            search: search,
+            totalPages: 0,
+            currentPage: 0,
+            sortBy: sortBy,
             sortDir: sortDir,
-          });  
+          });
         }
-        if(!hasBeenInitialized){
+        if (!hasBeenInitialized) {
           setHasBeenInitialized(true);
         }
       })
@@ -205,8 +205,8 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
                       {typeof col.value === 'function'
                         ? col.value(row)
                         : col.value === '#'
-                        ? getSerialNo(i)
-                        : resolveObjectAttribute(col.value, row)}
+                          ? getSerialNo(i)
+                          : resolveObjectAttribute(col.value, row)}
                     </td>
                   )
               )}
@@ -236,10 +236,10 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
 /**
  * If you don't specify the endpoint it will return the first table data in the current page.
  */
-const getRetainedTableSearchObject = (endpoint?: string) : {[key: string]: any;} | undefined => {
-  if(endpoint){
+const getRetainedTableSearchObject = (endpoint?: string): { [key: string]: any; } | undefined => {
+  if (endpoint) {
     return getPersistedTableState(endpoint)?.search;
-  }else{
+  } else {
     return getFirstPersistedTableState()?.search;
   }
 }

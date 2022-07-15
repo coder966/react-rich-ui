@@ -20,7 +20,7 @@ interface RruStepsWizardStepProps {
 
   /** The data sent by the caller step (normally previous step) */
   previousStepData: object | undefined;
-  
+
 }
 
 export default RruStepsWizardStepProps;

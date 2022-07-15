@@ -11,7 +11,7 @@ describe('RruFileInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
@@ -28,7 +28,7 @@ describe('RruFileInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>

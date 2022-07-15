@@ -1,28 +1,28 @@
-.rru-date-input__popup{
+.rru-date-input__popup {
   position: absolute;
   overflow: hidden;
   border-radius: 0 0 16px 16px;
-  box-shadow: 0px 3px 20px -5px rgba(0,0,0,0.33);
+  box-shadow: 0px 3px 20px -5px rgba(0, 0, 0, 0.33);
 }
 
-.rru-date-input__popup--shown{
+.rru-date-input__popup--shown {
   max-height: 500px;
   transition: max-height 0.4s 0s ease;
 }
 
-.rru-date-input__popup--hidden{
+.rru-date-input__popup--hidden {
   max-height: 0px;
   transition: max-height 0.2s 0s ease;
 }
 
-.rru-date-input__container{
+.rru-date-input__container {
   position: relative;
   z-index: 55;
   overflow: hidden;
   background-color: #ffffff;
 }
 
-.rru-date-input__header{
+.rru-date-input__header {
   background-color: #ffffff;
   padding: 10px;
   display: flex;
@@ -51,7 +51,7 @@
   color: #8c8c8c;
 }
 
-.rru-date-input__month-button:hover{
+.rru-date-input__month-button:hover {
   color: #000000;
   cursor: pointer;
 }
@@ -101,4 +101,3 @@
   background-color: initial;
   cursor: default;
 }
-

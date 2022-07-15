@@ -12,7 +12,7 @@ describe('RruTextareaInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' dir='rtl' />
         <button type='submit'>Submit</button>
@@ -30,7 +30,7 @@ describe('RruTextareaInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
@@ -58,7 +58,7 @@ describe('RruTextareaInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
@@ -84,7 +84,7 @@ describe('RruTextareaInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
@@ -113,7 +113,7 @@ describe('RruTextareaInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
@@ -122,7 +122,7 @@ describe('RruTextareaInput', () => {
 
     // fill the form
     const myTextInput = container.querySelector('textarea[name="myText"]');
-    if(myTextInput){
+    if (myTextInput) {
       // delete the current value in the input element
       await userEvent.tripleClick(myTextInput);
       await userEvent.keyboard('{Backspace}');
@@ -148,9 +148,9 @@ describe('RruTextareaInput', () => {
     const validationSchema = yup.object().shape({
       myText: yup.string().min(20, 'The text you entered is too short.'),
     });
-  
+
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} validationSchema={validationSchema}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
@@ -197,7 +197,7 @@ describe('RruTextareaInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['myText']} watcher={watcher}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>

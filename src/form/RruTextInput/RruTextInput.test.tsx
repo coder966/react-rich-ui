@@ -12,7 +12,7 @@ describe('RruTextInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' dir='rtl' />
         <button type='submit'>Submit</button>
@@ -30,7 +30,7 @@ describe('RruTextInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
@@ -58,7 +58,7 @@ describe('RruTextInput', () => {
     const onSubmit = jest.fn();
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
@@ -84,7 +84,7 @@ describe('RruTextInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
@@ -113,7 +113,7 @@ describe('RruTextInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
@@ -122,7 +122,7 @@ describe('RruTextInput', () => {
 
     // fill the form
     const emailInput = container.querySelector('input[name="email"]');
-    if(emailInput){
+    if (emailInput) {
       // delete the current value in the input element
       await userEvent.tripleClick(emailInput);
       await userEvent.keyboard('{Backspace}');
@@ -148,9 +148,9 @@ describe('RruTextInput', () => {
     const validationSchema = yup.object().shape({
       email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
     });
-  
+
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm onSubmit={onSubmit} validationSchema={validationSchema}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
@@ -197,7 +197,7 @@ describe('RruTextInput', () => {
     }
 
     // render
-    const {container} = render(
+    const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['email']} watcher={watcher}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>

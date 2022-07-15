@@ -1,228 +1,233 @@
-.table-striped thead tr{
-	background-color: #F2F2F2;
+.table-striped thead tr {
+  background-color: #f2f2f2;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .table-striped tbody tr:nth-of-type(even) {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 .rru-pageable-table-centered {
-    text-align: center !important;
+  text-align: center !important;
 }
 .rru-pageable-table-pagination {
-	justify-content: center;
-	padding: 0;
+  justify-content: center;
+  padding: 0;
 }
 
-.page-item:last-child .page-link{
-	border-radius: 0;
+.page-item:last-child .page-link {
+  border-radius: 0;
 }
-.page-item:first-child .page-link{
-	border-radius: 0;
+.page-item:first-child .page-link {
+  border-radius: 0;
 }
 
 .rru-pageable-table-loading-upper-th {
-	border-bottom: 0 !important;
+  border-bottom: 0 !important;
 }
 
 .rru-pageable-table-loading-th {
-	padding: 0 !important;
-	border-top: 0 !important;
-	border-bottom: 0 !important;
+  padding: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
 }
 
-.sortable{
-	cursor: pointer;
+.sortable {
+  cursor: pointer;
 }
 .sortable::before {
-	font-family: 'fontAwesome';
-	font-size: 0.9rem;
-	content: '\f0dc';
-	margin-inline-end: 0.3rem;
+  font-family: 'fontAwesome';
+  font-size: 0.9rem;
+  content: '\f0dc';
+  margin-inline-end: 0.3rem;
 }
 .sortable.asc::before {
-	content: '\f0de ';
+  content: '\f0de ';
 }
 .sortable.desc::before {
-	content: '\f0dd ';
+  content: '\f0dd ';
 }
 
 .progressBar {
-	position: relative;
-	height: 4px;
-	display: block;
-	width: 100%;
-	background-color: #13213541;
-	background-clip: padding-box;
-	overflow: hidden;
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #13213541;
+  background-clip: padding-box;
+  overflow: hidden;
 }
 
 .progressBarBar .determinate {
-	position: absolute;
-	background-color: inherit;
-	top: 0;
-	bottom: 0;
-	background-color: #26a69a;
-	transition: width .3s linear;
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  bottom: 0;
+  background-color: #26a69a;
+  transition: width 0.3s linear;
 }
 
 .progressBar .indeterminate {
-	background-color: #2a7fc2;
+  background-color: #2a7fc2;
 }
 
 .progressBar .indeterminate:before {
-	content: '';
-	position: absolute;
-	background-color: inherit;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	will-change: left, right;
-	animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 
 .progressBar .indeterminate:after {
-	content: '';
-	position: absolute;
-	background-color: inherit;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	will-change: left, right;
-	animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-	animation-delay: 1.15s;
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation-delay: 1.15s;
 }
 
 @-webkit-keyframes indeterminate {
-	0% {
-		left: -35%;
-		right: 100%;
-	}
-	60% {
-		left: 100%;
-		right: -90%;
-	}
-	100% {
-		left: 100%;
-		right: -90%;
-	}
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
 }
 
 @keyframes indeterminate {
-	0% {
-		left: -35%;
-		right: 100%;
-	}
-	60% {
-		left: 100%;
-		right: -90%;
-	}
-	100% {
-		left: 100%;
-		right: -90%;
-	}
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
 }
 
 @-webkit-keyframes indeterminate-short {
-	0% {
-		left: -200%;
-		right: 100%;
-	}
-	60% {
-		left: 107%;
-		right: -8%;
-	}
-	100% {
-		left: 107%;
-		right: -8%;
-	}
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
 }
 
 @keyframes indeterminate-short {
-	0% {
-		left: -200%;
-		right: 100%;
-	}
-	60% {
-		left: 107%;
-		right: -8%;
-	}
-	100% {
-		left: 107%;
-		right: -8%;
-	}
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
 }
 
 .pagination {
-    justify-content: center;
+  justify-content: center;
 }
 
 .pagination > li > a:focus {
-	outline: none;
+  outline: none;
 }
 
 .pageLink,
 .next,
 .previous,
 .pageItem {
-    display: block;
-    padding: 0.5rem 0.8rem;
-    line-height: 1.25rem;
-    color: #007942;
-    background-color: #fff;
-    border: 1px solid #ddd;
+  display: block;
+  padding: 0.5rem 0.8rem;
+  line-height: 1.25rem;
+  color: #007942;
+  background-color: #fff;
+  border: 1px solid #ddd;
 }
 
 .pageLink {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .pageLink:hover {
-    color: #007942;
-    text-decoration: none;
-    background-color: #eceeef;
-    border-color: #ddd;
+  color: #007942;
+  text-decoration: none;
+  background-color: #eceeef;
+  border-color: #ddd;
 }
 
 .break {
-    display: block;
-    padding: 8px 14px;
-    margin: -1px;
-    line-height: 1.25;
-    background-color: #fff;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+  display: block;
+  padding: 8px 14px;
+  margin: -1px;
+  line-height: 1.25;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 
-.next:hover, .previous:hover{
-	cursor: pointer;
+.next:hover,
+.previous:hover {
+  cursor: pointer;
 }
 
-.next:hover > a, .previous:hover > a{
-	text-decoration: none !important;
+.next:hover > a,
+.previous:hover > a {
+  text-decoration: none !important;
 }
 
-.disabled, .disabled:hover, .disabled > a{
-    color: #555;
-    background-color: #fff;
-    cursor: default;
+.disabled,
+.disabled:hover,
+.disabled > a {
+  color: #555;
+  background-color: #fff;
+  cursor: default;
 }
 
 .activePage {
-    z-index: 2;
-    color: #fff;
-    background-color: #007942;
-    border-color: #007942;
+  z-index: 2;
+  color: #fff;
+  background-color: #007942;
+  border-color: #007942;
 }
 
-.activePage > a, .activePage:hover > a {
-    cursor: default;
-    z-index: 2;
-    color: #fff;
-    background-color: #007942;
-    border-color: #007942;
+.activePage > a,
+.activePage:hover > a {
+  cursor: default;
+  z-index: 2;
+  color: #fff;
+  background-color: #007942;
+  border-color: #007942;
 }

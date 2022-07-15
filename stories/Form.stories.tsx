@@ -216,10 +216,17 @@ export const Date = (args) => {
 
   const validationSchema = yup.object().shape({
     birthDate: yup.date()
-                  .required('The date is required')
-                  .min('1435-01-05', 'The date is too old')
-                  .max('1450-01-01', 'The date is too new')
+      .required('The date is required')
+      .min('1435-01-05', 'The date is too old')
+      .max('1450-01-01', 'The date is too new')
   });
+
+  const filterDates = (date: string): boolean => {
+    if (date === '1443-04-14') {
+      return false;
+    }
+    return true;
+  }
 
   const onSubmit = form => {
     action('submitting the form')(form);
@@ -227,7 +234,14 @@ export const Date = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruDateInput name='birthDate' label='Birth Date' minYear={2001} maxYear={2050} isHijri />
+      <RruDateInput
+        name='birthDate'
+        label='Birth Date'
+        minYear={2001}
+        maxYear={2050}
+        isHijri={true}
+        filterDates={filterDates}
+      />
       <button type='submit'>Submit</button>
     </RruForm>
   );

@@ -17,7 +17,7 @@ export const Basic = (args) => {
       modalTitle='Modal Title'
       modalBody='Modal Body' />
   );
-  
+
 };
 
 export const Advanced = (args) => {
@@ -25,7 +25,7 @@ export const Advanced = (args) => {
   return (
     <RruModalButton
       className='btn btn-primary'
-      modalTitle={<span style={{color: 'red'}}>Red Title</span>}
+      modalTitle={<span style={{ color: 'red' }}>Red Title</span>}
       modalBody={(closeModal) => {
         return <div>
           <span>Hi, This is the modal content. I can programmatically close the modal</span>
@@ -34,7 +34,7 @@ export const Advanced = (args) => {
           <button onClick={closeModal}>Close Modal</button>
         </div>
       }}
-      >
+    >
 
       <h1>Big Label</h1>
     </RruModalButton>

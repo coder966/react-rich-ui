@@ -52,7 +52,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <div
         className={`form-control fileUpload ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         onClick={(e) => {
-          if(ref.current){
+          if (ref.current) {
             ref.current.click();
           }
         }}
