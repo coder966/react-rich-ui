@@ -255,7 +255,12 @@ export const File = (args) => {
   }
 
   const validationSchema = yup.object().shape({
-
+    attachment: yup.mixed()
+      .test('test is file present', 'Attachment is required', (value) => {
+        return value.length === 1;
+      }).test('test is file size too big', 'File size is too big', (value) => {
+        return value[0] && value[0].size < 100 * 1024; // 100 kB
+      }),
   });
 
   const onSubmit = form => {
@@ -264,7 +269,7 @@ export const File = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruFileInput name='attachment' label='Attachment' accept='.txt' />
+      <RruFileInput name='attachment' label='Attachment' />
       <button type='submit'>Submit</button>
     </RruForm>
   );
