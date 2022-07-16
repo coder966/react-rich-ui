@@ -38,6 +38,9 @@ export interface RruDateTimeInputProps {
   filterDates?: (date: string) => boolean;
 }
 
+const ISO8261_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
+const ISO8261_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
+
 /**
  * @author coder966
  */
@@ -187,28 +190,45 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
    * init
    */
   useEffect(() => {
-    // read the initial value
-    formContext.register({ name: props.name });
-    const initialValue = formContext.getValues()[props.name];
+    let date: IntlDate;
+    let h: number;
+    let m: number;
+    let s: number;
 
-    // determine the default date
-    let initialDateObject: IntlDate;
     try {
-      initialDateObject = IntlDate.parse(getCalendarType(), initialValue);
+      // read the initial value
+      formContext.register({ name: props.name });
+      const initialValue: string = formContext.getValues()[props.name];
+
+      // parse
+      let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8261_DATETIME : ISO8261_DATE);
+
+      // determine the default value
+      if (matches) {
+        date = IntlDate.of(getCalendarType(), parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
+        h = parseInt(matches[5]);
+        m = parseInt(matches[6]);
+        s = parseInt(matches[7]);
+      } else {
+        date = IntlDate.today();
+        h = 0;
+        m = 0;
+        s = 0;
+      }
     } catch (e) {
-      initialDateObject = IntlDate.today();
-      console.warn(
-        `RruDateTimeInput(${props.name}) failing to today = ${initialDateObject.toString(
-          getCalendarType()
-        )} Original error = `,
-        e
-      );
+      date = IntlDate.today();
+      h = 0;
+      m = 0;
+      s = 0;
     }
 
-    // set state to the default date
-    setYear(initialDateObject.getYear(getCalendarType()));
-    setMonth(initialDateObject.getMonth(getCalendarType()));
-    setIntlDate(initialDateObject);
+    // set state to the default value
+    setYear(date.getYear(getCalendarType()));
+    setMonth(date.getMonth(getCalendarType()));
+    setIntlDate(date);
+    setHour(h);
+    setMinute(m);
+    setSecond(s);
   }, []);
 
   useEffect(() => {
