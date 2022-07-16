@@ -18,7 +18,13 @@ const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0
  * @author coder966
  */
 const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
+  // init
+  const [today] = useState<IntlDate>(IntlDate.today());
   const formContext = useFormContext();
+
+  const getCalendarType = (): CalendarType => {
+    return props.isHijri ? 'islamic-umalqura' : 'gregorian';
+  }
 
   // handle popup click outside to dismiss
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,25 +36,26 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     }
   });
 
-  const [calendar, setCalendar] = useState<IntlDate[]>();
+  const [calendar, setCalendar] = useState<IntlDate[]>(
+    generateSixWeeksCalendar(
+      getCalendarType(),
+      today.getYear(getCalendarType()),
+      today.getMonth(getCalendarType())
+    )
+  );
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
-  const [todayIntlDate] = useState<IntlDate>(IntlDate.today());
 
   const [hour, setHour] = useState<number>(0);
   const [minute, setMinute] = useState<number>(0);
   const [second, setSecond] = useState<number>(0);
 
-  const [year, setYear] = useState<number>(0);
-  const [month, setMonth] = useState<number>(0);
+  const [year, setYear] = useState<number>(today.getYear(getCalendarType()));
+  const [month, setMonth] = useState<number>(today.getMonth(getCalendarType()));
   const [intlDate, setIntlDate] = useState<IntlDate>();
 
 
   const getMode = (): RruDateTimeInputMode => {
     return props.mode ? props.mode : 'datetime';
-  }
-
-  const getCalendarType = (): CalendarType => {
-    return props.isHijri ? 'islamic-umalqura' : 'gregorian';
   }
 
   const getMinLimit = () => {
@@ -150,53 +157,34 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
    * init
    */
   useEffect(() => {
-    let date: IntlDate;
-    let h: number;
-    let m: number;
-    let s: number;
-
     try {
       // read the initial value
       formContext.register({ name: props.name });
       const initialValue: string = formContext.getValues()[props.name];
 
-      // parse
-      let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
+      if (initialValue) {
+        // parse
+        let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
 
-      // determine the default value
-      if (matches) {
-        date = IntlDate.of(getCalendarType(), parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
-        h = parseInt(matches[5]);
-        m = parseInt(matches[6]);
-        s = parseInt(matches[7]);
-      } else {
-        date = IntlDate.today();
-        h = 0;
-        m = 0;
-        s = 0;
+        // determine the default value
+        if (matches) {
+          const date = IntlDate.of(getCalendarType(), parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
+          setYear(date.getYear(getCalendarType()));
+          setMonth(date.getMonth(getCalendarType()));
+          setIntlDate(date);
+          onChangeTimePart(matches[5], 23, setHour);
+          onChangeTimePart(matches[6], 59, setMinute);
+          onChangeTimePart(matches[7], 59, setSecond);
+        }
       }
     } catch (e) {
-      date = IntlDate.today();
-      h = 0;
-      m = 0;
-      s = 0;
+      console.error(e);
+      // noop
     }
-
-    // set state to the default value
-    setYear(date.getYear(getCalendarType()));
-    setMonth(date.getMonth(getCalendarType()));
-    setIntlDate(date);
-    onChangeTimePart(h.toString(), 23, setHour);
-    onChangeTimePart(m.toString(), 59, setMinute);
-    onChangeTimePart(s.toString(), 59, setSecond);
   }, []);
 
   useEffect(() => {
-    if (year === 0 || month === 0) {
-      return;
-    } else {
-      setCalendar(generateSixWeeksCalendar(getCalendarType(), year, month));
-    }
+    setCalendar(generateSixWeeksCalendar(getCalendarType(), year, month));
   }, [year, month]);
 
   useEffect(() => {
@@ -208,7 +196,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (targetDate.getMonth(getCalendarType()) != month) {
       className += ' rru-date-input__day--not-same-month';
     }
-    if (targetDate.toString(getCalendarType()) === todayIntlDate.toString(getCalendarType())) {
+    if (targetDate.toString(getCalendarType()) === today.toString(getCalendarType())) {
       className += ' rru-date-input__day--today';
     }
     if (targetDate.toString(getCalendarType()) === intlDate?.toString(getCalendarType())) {

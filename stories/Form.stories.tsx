@@ -209,12 +209,12 @@ export const Radio = (args) => {
 export const Date = (args) => {
 
   const initialValues = {
-    birthDate: '2020-07-01'
+    // birthDate: '2020-07-01'
   }
 
   const validationSchema = yup.object().shape({
-    birthDate: yup.date()
-      .required('The date is required')
+    birthDate: yup.date().nullable()
+      // .required('The date is required')
       .min('2020-01-01', 'The date is too old')
       .max('2024-01-01', 'The date is too new')
   });
@@ -249,12 +249,12 @@ export const Date = (args) => {
 export const DateTime = (args) => {
 
   const initialValues = {
-    birthDate: '2020-07-01 15:10:00'
+    // birthDate: '2020-07-01 15:10:00'
   }
 
   const validationSchema = yup.object().shape({
-    birthDate: yup.date()
-      .required('The date is required')
+    birthDate: yup.date().nullable()
+      // .required('The date is required')
       .min('2020-01-01', 'The date is too old')
       .max('2024-01-01', 'The date is too new')
   });
