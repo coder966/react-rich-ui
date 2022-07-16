@@ -22,7 +22,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
             <input
               {...props}
               type='radio'
-              ref={(input) => { formContext.register(input) }}
+              ref={formContext.register}
               name={name}
               value={o.value}
               id={`${name}_${o.value}`}

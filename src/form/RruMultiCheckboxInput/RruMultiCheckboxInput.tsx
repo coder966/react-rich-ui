@@ -20,7 +20,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
       <input
         id={`${name}_hidden1`}
         name={name}
-        ref={(input) => { formContext.register(input) }}
+        ref={formContext.register}
         value={'hidden1'}
         type='checkbox'
         disabled
@@ -29,7 +29,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
       <input
         id={`${name}_hidden2`}
         name={name}
-        ref={(input) => { formContext.register(input) }}
+        ref={formContext.register}
         value={'hidden2'}
         type='checkbox'
         disabled
@@ -43,7 +43,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
                 {...props}
                 id={`${name}_${o.value}`}
                 name={name}
-                ref={(input) => { formContext.register(input) }}
+                ref={formContext.register}
                 value={o.value}
                 type='checkbox'
                 className='custom-control-input'
