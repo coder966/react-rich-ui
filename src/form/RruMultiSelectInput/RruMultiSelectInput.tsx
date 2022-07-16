@@ -13,56 +13,44 @@ import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const { name, options, disabled } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[]>();
+  const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[] | null>();
   const formContext = useFormContext();
   formContext.register({ name });
 
   const onSelectChange = (opt: readonly RruOption[] | null) => {
-    // react-select option datatype
-    setSelectControlValue(opt || []);
+    setSelectControlValue(opt);
     formContext.setValue(name, opt ? opt.map((o) => o.value) : []);
   };
 
-  // because controlled fields (registered through formContext.register) need to call setValue for the initial value
   useEffect(() => {
-    let defaultOptions: RruOption[] = [];
-    const initialValue = formContext.getValues()[props.name];
-    if (initialValue) {
-      defaultOptions = retainAll(options, initialValue, (opt, val) => (opt.value + '' === val + ''));
-    }
-    onSelectChange(defaultOptions);
-  }, []);
-
-  useEffect(() => {
-    const currentValue = formContext.getValues()[name];
-    if (currentValue) {
-      onSelectChange(retainAll(options, currentValue, (opt, val) => (opt.value + '' === val + '')));
-    }
+    const allOptions = options || [];
+    const selectedOptionsValues = formContext.getValues()[props.name] || [];
+    const comparator = (opt: RruOption, val: any) => (opt.value + '' === val + '');
+    const intersection = retainAll(allOptions || [], selectedOptionsValues, comparator);
+    onSelectChange(intersection);
   }, [options]);
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      {selectControlValue ? (
-        <Select
-          name={name}
-          isMulti={true}
-          isDisabled={disabled}
-          value={selectControlValue}
-          onChange={onSelectChange}
-          options={options}
-          styles={{
-            container: (provided, state) => ({
-              ...provided,
-              width: '100%',
-            }),
-            control: (provided, state) => ({
-              ...provided,
-              [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
-            }),
-          }}
-        />
-      ) : null}
+      <Select
+        name={name}
+        isMulti={true}
+        isDisabled={disabled}
+        value={selectControlValue}
+        onChange={onSelectChange}
+        options={options}
+        styles={{
+          container: (provided, state) => ({
+            ...provided,
+            width: '100%',
+          }),
+          control: (provided, state) => ({
+            ...provided,
+            [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
+          }),
+        }}
+      />
       <ErrorMessage inputName={name} />
     </div>
   );
