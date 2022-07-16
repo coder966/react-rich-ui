@@ -160,8 +160,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     input.select();
   }
 
-  const onChangeTimePart = (e: React.ChangeEvent<HTMLInputElement>, max: number, changeStateFunction: (val: number) => void) => {
-    let value = parseInt(e.target.value);
+  const onChangeTimePart = (val: string, max: number, changeStateFunction: (val: number) => void) => {
+    let value = parseInt(val);
     if (isNaN(value) || value < 0) {
       value = 0;
     }
@@ -226,9 +226,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     setYear(date.getYear(getCalendarType()));
     setMonth(date.getMonth(getCalendarType()));
     setIntlDate(date);
-    setHour(h);
-    setMinute(m);
-    setSecond(s);
+    onChangeTimePart(h.toString(), 23, setHour);
+    onChangeTimePart(m.toString(), 59, setMinute);
+    onChangeTimePart(s.toString(), 59, setSecond);
   }, []);
 
   useEffect(() => {
@@ -334,21 +334,21 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   className='rru-date-input__time-input'
                   onClick={selectAllTextInInput}
                   value={hour.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e, 23, setHour)} />
+                  onChange={e => onChangeTimePart(e.target.value, 23, setHour)} />
                 {' : '}
                 <input
                   type='text'
                   className='rru-date-input__time-input'
                   onClick={selectAllTextInInput}
                   value={minute.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e, 59, setMinute)} />
+                  onChange={e => onChangeTimePart(e.target.value, 59, setMinute)} />
                 {' : '}
                 <input
                   type='text'
                   className='rru-date-input__time-input'
                   onClick={selectAllTextInInput}
                   value={second.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e, 59, setSecond)} />
+                  onChange={e => onChangeTimePart(e.target.value, 59, setSecond)} />
               </div>
             }
 
