@@ -7,6 +7,7 @@ import { range, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
+import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 
 export interface RruDateInputProps {
   /**  */
@@ -20,6 +21,9 @@ export interface RruDateInputProps {
 
   /**  */
   requiredAsterisk?: boolean;
+
+  /** The minium selectable year */
+  mode?: RruDateTimeInputMode;
 
   /** The minium selectable year */
   minYear?: number;
@@ -55,9 +59,18 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
   const [todayIntlDate] = useState<IntlDate>(IntlDate.today());
 
+  const [hour, setHour] = useState<number>(0);
+  const [minute, setMinute] = useState<number>(0);
+  const [second, setSecond] = useState<number>(0);
+
   const [year, setYear] = useState<number>(0);
   const [month, setMonth] = useState<number>(0);
   const [intlDate, setIntlDate] = useState<IntlDate>();
+
+
+  const getMode = (): RruDateTimeInputMode => {
+    return props.mode ? props.mode : 'datetime';
+  }
 
   const getCalendarType = (): CalendarType => {
     return props.isHijri ? 'islamic-umalqura' : 'gregorian';
@@ -140,6 +153,37 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     }
   }
 
+  const selectAllTextInInput = (e: React.MouseEvent) => {
+    const input = e.target as HTMLInputElement;
+    input.select();
+  }
+
+  const onChangeTimePart = (e: React.ChangeEvent<HTMLInputElement>, max: number, changeStateFunction: (val: number) => void) => {
+    let value = parseInt(e.target.value);
+    if (isNaN(value) || value < 0) {
+      value = 0;
+    }
+    if (value > max) {
+      value = max;
+    }
+    changeStateFunction(value);
+  }
+
+  const getValue = (): string | null => {
+    if (intlDate) {
+      let value = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
+      if (getMode() === 'datetime') {
+        const h = hour.toString().padStart(2, '0');
+        const m = minute.toString().padStart(2, '0');
+        const s = second.toString().padStart(2, '0');
+        value += ` ${h}:${m}:${s}`;
+      }
+      return value;
+    } else {
+      return null;
+    }
+  }
+
   /**
    * init
    */
@@ -177,8 +221,8 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
   }, [year, month]);
 
   useEffect(() => {
-    formContext.setValue(props.name, intlDate?.toString(getCalendarType()));
-  }, [intlDate]);
+    formContext.setValue(props.name, getValue());
+  }, [intlDate, hour, minute, second]);
 
   const getDayClassName = (targetDate: IntlDate): string => {
     let className = 'rru-date-input__day';
@@ -210,7 +254,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
           ref={inputRef}
           type='text'
           disabled={props.disabled}
-          value={intlDate && intlDate.toString(getCalendarType())}
+          value={getValue() || ''}
           onChange={(e) => { }}
           onClick={(e) => setIsPopupShown(true)}
           className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
@@ -222,6 +266,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
             }`}
         >
           <div className='rru-date-input__container'>
+
             <div className='rru-date-input__header'>
               <div className='rru-date-input__month-button' onClick={previousMonth}>
                 {'<'}
@@ -262,6 +307,32 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
                 </tbody>
               </table>
             </div>
+
+            {getMode() === 'datetime' &&
+              <div className='rru-date-input__footer'>
+                <input
+                  type='text'
+                  className='rru-date-input__time-input'
+                  onClick={selectAllTextInInput}
+                  value={hour.toString().padStart(2, '0')}
+                  onChange={e => onChangeTimePart(e, 23, setHour)} />
+                {' : '}
+                <input
+                  type='text'
+                  className='rru-date-input__time-input'
+                  onClick={selectAllTextInInput}
+                  value={minute.toString().padStart(2, '0')}
+                  onChange={e => onChangeTimePart(e, 59, setMinute)} />
+                {' : '}
+                <input
+                  type='text'
+                  className='rru-date-input__time-input'
+                  onClick={selectAllTextInInput}
+                  value={second.toString().padStart(2, '0')}
+                  onChange={e => onChangeTimePart(e, 59, setSecond)} />
+              </div>
+            }
+
           </div>
         </div>
       </div>

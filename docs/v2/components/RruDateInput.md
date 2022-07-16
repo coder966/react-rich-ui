@@ -10,6 +10,7 @@
 | label            | The form element label                                                                                   | No       |
 | requiredAsterisk | Display an asterisk to indicate the field is required                                                    | No       |
 | disabled         | Set to `true` to disable the editing of the form element                                                 | No       |
+| mode             | The mode of the input, can be either 'datetime' or 'date'. Default is 'datetime'.                        | No       |
 | minYear          | The minium selectable year                                                                               | No       |
 | maxYear          | The maximum selectable year                                                                              | No       |
 | isHijri          | For `Hijri` calendar. By default is it `Gregorian`                                                       | No       |

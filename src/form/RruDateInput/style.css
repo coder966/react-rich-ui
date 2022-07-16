@@ -101,3 +101,14 @@
   background-color: initial;
   cursor: default;
 }
+
+.rru-date-input__footer {
+  text-align: center;
+  border-top: solid 1px #dbdbdb;
+  padding: 10px;
+}
+
+.rru-date-input__time-input {
+  width: 2rem;
+  text-align: center;
+}
