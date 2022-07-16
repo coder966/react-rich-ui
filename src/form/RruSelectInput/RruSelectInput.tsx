@@ -19,7 +19,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   const onSelectChange = (opt: RruOption | null) => {
     // react-select option datatype
-    setSelectControlValue({ value: opt ? opt.value : '', label: opt ? opt.label : '' });
+    setSelectControlValue(opt);
     formContext.setValue(name, opt ? opt.value : '');
   };
 
