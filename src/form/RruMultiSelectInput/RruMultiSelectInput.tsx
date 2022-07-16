@@ -13,9 +13,13 @@ import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const { name, options, disabled } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[] | null>();
+  // register to RHF
   const formContext = useFormContext();
-  formContext.register({ name });
+  useEffect(() => {
+    formContext.register({ name: props.name });
+  }, []);
+
+  const [selectControlValue, setSelectControlValue] = useState<readonly RruOption[] | null>();
 
   const onSelectChange = (opt: readonly RruOption[] | null) => {
     setSelectControlValue(opt);

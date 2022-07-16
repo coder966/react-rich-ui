@@ -13,9 +13,13 @@ import RruSelectInputProps from './types/RruSelectInputProps';
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const { name, options, disabled } = props;
 
-  const [selectControlValue, setSelectControlValue] = useState<RruOption | null>(null);
+  // register to RHF
   const formContext = useFormContext();
-  formContext.register({ name });
+  useEffect(() => {
+    formContext.register({ name: props.name });
+  }, []);
+
+  const [selectControlValue, setSelectControlValue] = useState<RruOption | null>(null);
 
   const onSelectChange = (opt: RruOption | null) => {
     setSelectControlValue(opt);

@@ -157,16 +157,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
    * init
    */
   useEffect(() => {
+    formContext.register({ name: props.name });
     try {
-      // read the initial value
-      formContext.register({ name: props.name });
       const initialValue: string = formContext.getValues()[props.name];
-
       if (initialValue) {
-        // parse
         let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
-
-        // determine the default value
         if (matches) {
           const date = IntlDate.of(getCalendarType(), parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
           setYear(date.getYear(getCalendarType()));
@@ -177,10 +172,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           onChangeTimePart(matches[7], 59, setSecond);
         }
       }
-    } catch (e) {
-      console.error(e);
-      // noop
-    }
+    } catch (e) { }
   }, []);
 
   useEffect(() => {
