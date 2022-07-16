@@ -9,6 +9,7 @@ import Label from '../common/Label';
 import './style.css';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
+import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
 
 const ISO8261_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 const ISO8261_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
@@ -77,19 +78,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     } else {
       return getMaxLimit();
     }
-  }
-
-  const generateSixWeeksCalendar = (year: number, month: number): IntlDate[] => {
-    const firstDayOfMonthDate = IntlDate.of(getCalendarType(), year, month, 1);
-    const firstDayOfTheVisibleCalendar = firstDayOfMonthDate.minusDays(firstDayOfMonthDate.getDayOfWeek() - 1);
-
-    const result: IntlDate[] = [firstDayOfTheVisibleCalendar];
-    for (let i = 1; i < 42; i++) {
-      // 6 rows of 7 days each = 42 days
-      result.push(firstDayOfTheVisibleCalendar.plusDays(i));
-    }
-
-    return result;
   }
 
   const isDateDisabled = (date: IntlDate): boolean => {
@@ -207,7 +195,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (year === 0 || month === 0) {
       return;
     } else {
-      setCalendar(generateSixWeeksCalendar(year, month));
+      setCalendar(generateSixWeeksCalendar(getCalendarType(), year, month));
     }
   }, [year, month]);
 
