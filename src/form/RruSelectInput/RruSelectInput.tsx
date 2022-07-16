@@ -46,7 +46,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formContext.errors[name] ? 'borderColor' : 'dummy']: '#dc3545',
+            [formContext.errors[name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />
