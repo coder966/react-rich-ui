@@ -1,16 +1,7 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
-
-type InputProps = JSX.IntrinsicElements['input'];
-
-export interface RruCheckboxInputProps extends InputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-}
+import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
 /**
  * @author coder966

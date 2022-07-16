@@ -1,29 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import './style.css';
-import FormInitialValues from './types/FormInitialValues';
-import FormValues from './types/FormValues';
 import IRHFDefaultValues from './types/IRHFDefaultValues';
-
-export interface RruFormProps {
-  /**  */
-  initialValues?: FormInitialValues;
-
-  /**  */
-  validationSchema?: object;
-
-  /**  */
-  onSubmit: (form: FormValues) => void;
-
-  /** An array of the filed names you want to watch for changes. */
-  watch?: string[];
-
-  /** The method that gets called whenever a watched field changes. */
-  watcher?: (form: FormValues) => void;
-
-  /**  */
-  children: React.ReactNode | React.ReactNode[];
-}
+import RruFormProps from './types/RruFormProps';
 
 /**
  * A form that is capable of initializing and validating uncontrolled input elements as well as

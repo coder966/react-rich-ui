@@ -8,35 +8,7 @@ import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
-
-export interface RruDateTimeInputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-  /** The minium selectable year */
-  mode?: RruDateTimeInputMode;
-
-  /** The minium selectable year */
-  minYear?: number;
-
-  /** The maximum selectable year */
-  maxYear?: number;
-
-  /**  */
-  isHijri?: boolean;
-
-  /**  */
-  filterDates?: (date: string) => boolean;
-}
+import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 
 const ISO8261_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 const ISO8261_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;

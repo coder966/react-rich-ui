@@ -2,22 +2,7 @@ import React, { FC, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-
-type InputProps = JSX.IntrinsicElements['input'];
-
-export interface RruFileInputProps extends InputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /** A placeholder to be displayed in the place of the filename of the file selected. */
-  placeholder?: string;
-
-  /**  */
-  requiredAsterisk?: boolean;
-}
+import RruFileInputProps from './types/RruFileInputProps';
 
 /**
  * @author coder966

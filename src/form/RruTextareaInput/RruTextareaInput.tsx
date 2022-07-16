@@ -2,20 +2,7 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-
-type TextareaProps = JSX.IntrinsicElements['textarea'];
-
-export interface RruTextareaInputProps extends TextareaProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-}
+import RruTextareaInputProps from './types/RruTextareaInputProps';
 
 /**
  * @author coder966

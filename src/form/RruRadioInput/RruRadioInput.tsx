@@ -2,26 +2,8 @@ import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
-import RruOption from '../types/RruOption';
+import RruRadioInputProps from './types/RruRadioInputProps';
 
-type InputProps = JSX.IntrinsicElements['input'];
-
-export interface RruRadioInputProps extends InputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-  /**  */
-  options: RruOption[];
-
-  /** Display all radio buttons in the same line */
-  inline?: boolean;
-}
 
 /**
  * @author coder966

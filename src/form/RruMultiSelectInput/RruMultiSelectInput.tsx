@@ -5,23 +5,7 @@ import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import RruOption from '../types/RruOption';
-
-export interface RruMultiSelectInputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-  /**  */
-  options: RruOption[];
-}
+import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 /**
  * @author coder966

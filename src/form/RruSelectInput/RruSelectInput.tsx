@@ -4,23 +4,8 @@ import Select from 'react-select';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import RruOption from '../types/RruOption';
+import RruSelectInputProps from './types/RruSelectInputProps';
 
-export interface RruSelectInputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  disabled?: boolean;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-  /**  */
-  options: RruOption[];
-}
 
 /**
  * @author coder966
