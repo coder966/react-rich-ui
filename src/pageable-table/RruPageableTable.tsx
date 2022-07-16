@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { resolveObjectAttribute } from '../utils/utils';
 import './style.css';
 import { getApiResultPromise } from './table-network';
-import { getFirstPersistedTableState, getPersistedTableState, persistTableState } from './table-state-persistence';
+import { getPersistedTableState, persistTableState } from './table-state-persistence';
 import RruPageableTableProps from './types/RruPageableTableProps';
 import SpringPage from './types/SpringPage';
 import TableColumn from './types/TableColumn';
@@ -233,17 +233,5 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   );
 };
 
-/**
- * If you don't specify the endpoint it will return the first table data in the current page.
- */
-const getRetainedTableSearchObject = (endpoint?: string): { [key: string]: any; } | undefined => {
-  if (endpoint) {
-    return getPersistedTableState(endpoint)?.search;
-  } else {
-    return getFirstPersistedTableState()?.search;
-  }
-}
-
 export default RruPageableTable;
-export { getRetainedTableSearchObject };
 

@@ -9,7 +9,8 @@ import RruSelectInput from './form/RruSelectInput/RruSelectInput';
 import RruTextareaInput from './form/RruTextareaInput/RruTextareaInput';
 import RruTextInput from './form/RruTextInput/RruTextInput';
 import RruModalButton from './modal-button/RruModalButton';
-import RruPageableTable, { getRetainedTableSearchObject } from './pageable-table/RruPageableTable';
+import getRetainedTableSearchObject from './pageable-table/getRetainedTableSearchObject';
+import RruPageableTable from './pageable-table/RruPageableTable';
 import RruStepsWizard from './steps-wizard/RruStepsWizard';
 
 export {
@@ -24,6 +25,6 @@ export {
   RruTextareaInput,
   RruTextInput,
   RruModalButton,
-  RruPageableTable, getRetainedTableSearchObject,
   RruStepsWizard,
+  RruPageableTable, getRetainedTableSearchObject,
 };
