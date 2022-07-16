@@ -11,8 +11,8 @@ import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
 
-const ISO8261_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
-const ISO8261_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
+const ISO8601_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
+const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
 
 /**
  * @author coder966
@@ -161,7 +161,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       const initialValue: string = formContext.getValues()[props.name];
 
       // parse
-      let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8261_DATETIME : ISO8261_DATE);
+      let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
 
       // determine the default value
       if (matches) {
