@@ -51,7 +51,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   const [year, setYear] = useState<number>(today.getYear(getCalendarType()));
   const [month, setMonth] = useState<number>(today.getMonth(getCalendarType()));
-  const [intlDate, setIntlDate] = useState<IntlDate>();
+  const [intlDate, setIntlDate] = useState<IntlDate | null>();
 
 
   const getMode = (): RruDateTimeInputMode => {
@@ -196,10 +196,10 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (targetDate.getMonth(getCalendarType()) != month) {
       className += ' rru-date-input__day--not-same-month';
     }
-    if (targetDate.toString(getCalendarType()) === today.toString(getCalendarType())) {
+    if (intlDate && intlDate.isEqual(today)) {
       className += ' rru-date-input__day--today';
     }
-    if (targetDate.toString(getCalendarType()) === intlDate?.toString(getCalendarType())) {
+    if (intlDate && intlDate.isEqual(targetDate)) {
       className += ' rru-date-input__day--selected';
     }
     if (isDateDisabled(targetDate)) {
