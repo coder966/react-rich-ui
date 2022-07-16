@@ -38,5 +38,5 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   );
 };
 
-export { RruRadioInput };
+export default RruRadioInput;
 

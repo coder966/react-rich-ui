@@ -80,4 +80,4 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   );
 };
 
-export { RruStepsWizard };
+export default RruStepsWizard;

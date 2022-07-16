@@ -68,5 +68,5 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   );
 };
 
-export { RruMultiSelectInput };
+export default RruMultiSelectInput;
 

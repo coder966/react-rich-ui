@@ -27,5 +27,5 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   );
 };
 
-export { RruTextInput };
+export default RruTextInput;
 

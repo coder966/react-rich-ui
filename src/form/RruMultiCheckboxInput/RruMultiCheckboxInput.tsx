@@ -60,5 +60,5 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   );
 };
 
-export { RruMultiCheckboxInput };
+export default RruMultiCheckboxInput;
 

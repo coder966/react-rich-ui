@@ -244,5 +244,6 @@ const getRetainedTableSearchObject = (endpoint?: string): { [key: string]: any; 
   }
 }
 
-export { RruPageableTable, getRetainedTableSearchObject };
+export default RruPageableTable;
+export { getRetainedTableSearchObject };
 

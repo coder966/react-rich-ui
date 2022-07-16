@@ -33,4 +33,4 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   );
 };
 
-export { RruCheckboxInput };
+export default RruCheckboxInput;

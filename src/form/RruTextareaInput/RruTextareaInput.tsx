@@ -26,5 +26,5 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   );
 };
 
-export { RruTextareaInput };
+export default RruTextareaInput;
 

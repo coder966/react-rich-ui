@@ -49,5 +49,5 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   );
 };
 
-export { RruFileInput };
+export default RruFileInput;
 

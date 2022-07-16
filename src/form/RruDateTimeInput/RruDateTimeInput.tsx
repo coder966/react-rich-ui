@@ -332,4 +332,4 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   );
 }
 
-export { RruDateTimeInput };
+export default RruDateTimeInput;

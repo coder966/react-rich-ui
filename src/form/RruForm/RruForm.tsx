@@ -34,4 +34,4 @@ const RruForm: FC<RruFormProps> = (props) => {
   );
 };
 
-export { RruForm };
+export default RruForm;

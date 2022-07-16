@@ -49,5 +49,5 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
   );
 };
 
-export { RruModalButton };
+export default RruModalButton;
 

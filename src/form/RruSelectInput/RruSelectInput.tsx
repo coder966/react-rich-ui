@@ -71,5 +71,5 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   );
 };
 
-export { RruSelectInput };
+export default RruSelectInput;
 
