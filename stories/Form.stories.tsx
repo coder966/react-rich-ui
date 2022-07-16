@@ -209,18 +209,18 @@ export const Radio = (args) => {
 export const Date = (args) => {
 
   const initialValues = {
-    birthDate: '1443-04-15'
+    birthDate: '2020-07-01'
   }
 
   const validationSchema = yup.object().shape({
     birthDate: yup.date()
       .required('The date is required')
-      .min('1435-01-05', 'The date is too old')
-      .max('1450-01-01', 'The date is too new')
+      .min('2020-01-01', 'The date is too old')
+      .max('2024-01-01', 'The date is too new')
   });
 
   const filterDates = (date: string): boolean => {
-    if (date === '1443-04-14') {
+    if (date === '2022-07-12') {
       return false;
     }
     return true;
@@ -233,11 +233,11 @@ export const Date = (args) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruDateTimeInput
+        mode='date'
         name='birthDate'
         label='Birth Date'
         minYear={2001}
         maxYear={2050}
-        isHijri={true}
         filterDates={filterDates}
       />
       <button type='submit'>Submit</button>
@@ -245,6 +245,47 @@ export const Date = (args) => {
   );
 
 };
+
+export const DateTime = (args) => {
+
+  const initialValues = {
+    birthDate: '2020-07-01 15:10:00'
+  }
+
+  const validationSchema = yup.object().shape({
+    birthDate: yup.date()
+      .required('The date is required')
+      .min('2020-01-01', 'The date is too old')
+      .max('2024-01-01', 'The date is too new')
+  });
+
+  const filterDates = (date: string): boolean => {
+    if (date === '2022-07-12') {
+      return false;
+    }
+    return true;
+  }
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruDateTimeInput
+        mode='datetime'
+        name='birthDate'
+        label='Birth Date'
+        minYear={2001}
+        maxYear={2050}
+        filterDates={filterDates}
+      />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
 
 export const File = (args) => {
 
