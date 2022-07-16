@@ -1,6 +1,7 @@
 import { IntlDate } from 'intl-date';
 import CalendarType from 'intl-date/dist/types/CalendarType';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useFormContext } from 'react-hook-form';
 import { range, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
@@ -38,6 +39,17 @@ export interface RruDateInputProps {
  */
 const RruDateInput: FC<RruDateInputProps> = (props) => {
   const formContext = useFormContext();
+
+  // handle popup click outside to dismiss
+  const inputRef = useRef<HTMLInputElement>(null);
+  const popupRef = useDetectClickOutside({
+    onTriggered: (e) => {
+      console.log('click detected');
+      if (e.target != inputRef.current) {
+        setIsPopupShown(false);
+      }
+    }
+  });
 
   const [calendar, setCalendar] = useState<IntlDate[]>();
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
@@ -195,6 +207,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
 
       <div className='rru-date-input'>
         <input
+          ref={inputRef}
           type='text'
           disabled={props.disabled}
           value={intlDate && intlDate.toString(getCalendarType())}
@@ -204,6 +217,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
         />
 
         <div
+          ref={popupRef}
           className={`rru-date-input__popup ${isPopupShown ? 'rru-date-input__popup--shown' : 'rru-date-input__popup--hidden'
             }`}
         >

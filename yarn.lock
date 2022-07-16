@@ -9848,6 +9848,11 @@ raw-loader@^4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+react-detect-click-outside@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/react-detect-click-outside/-/react-detect-click-outside-1.1.7.tgz#8dd5766544475ab0d55084b3e2a35165e9a47854"
+  integrity sha512-dMrBZD7JW0Eh/uYNmMLTNwFj6afGYxAnc80fDSGJdjXjxJddH8ZazyMg2emyb8CAx9Hilr+r1fY+tm7O7m9eJg==
+
 react-docgen-typescript@^2.1.1:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz#4611055e569edc071204aadb20e1c93e1ab1659c"
