@@ -48,7 +48,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const popupRef = useDetectClickOutside({
     onTriggered: (e) => {
-      console.log('click detected');
       if (e.target != inputRef.current) {
         setIsPopupShown(false);
       }
