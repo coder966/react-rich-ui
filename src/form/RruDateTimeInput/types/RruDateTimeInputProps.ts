@@ -1,3 +1,4 @@
+import RruDateTimeInputCalendarType from "./RruDateTimeInputCalendarType";
 import RruDateTimeInputMode from "./RruDateTimeInputMode";
 
 export default interface RruDateTimeInputProps {
@@ -23,7 +24,7 @@ export default interface RruDateTimeInputProps {
   maxYear?: number;
 
   /**  */
-  isHijri?: boolean;
+  calendarType?: RruDateTimeInputCalendarType;
 
   /**  */
   filterDates?: (date: string) => boolean;

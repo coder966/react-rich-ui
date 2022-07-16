@@ -236,8 +236,6 @@ export const Date = (args) => {
         mode='date'
         name='birthDate'
         label='Birth Date'
-        minYear={2001}
-        maxYear={2050}
         filterDates={filterDates}
       />
       <button type='submit'>Submit</button>
@@ -276,8 +274,6 @@ export const DateTime = (args) => {
         mode='datetime'
         name='birthDate'
         label='Birth Date'
-        minYear={2001}
-        maxYear={2050}
         filterDates={filterDates}
       />
       <button type='submit'>Submit</button>

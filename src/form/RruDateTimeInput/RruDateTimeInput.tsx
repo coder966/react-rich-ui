@@ -1,5 +1,4 @@
 import { IntlDate } from 'intl-date';
-import CalendarType from 'intl-date/dist/types/CalendarType';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useFormContext } from 'react-hook-form';
@@ -7,6 +6,7 @@ import { range, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
+import RruDateTimeInputCalendarType from './types/RruDateTimeInputCalendarType';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
@@ -22,8 +22,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const [today] = useState<IntlDate>(IntlDate.today());
   const formContext = useFormContext();
 
-  const getCalendarType = (): CalendarType => {
-    return props.isHijri ? 'islamic-umalqura' : 'gregorian';
+  const getCalendarType = (): RruDateTimeInputCalendarType => {
+    return props.calendarType || 'gregorian';
   }
 
   // handle popup click outside to dismiss
@@ -59,11 +59,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }
 
   const getMinLimit = () => {
-    return props.isHijri ? 1300 : 1800;
+    return getCalendarType() === 'islamic-umalqura' ? 1300 : 1800;
   }
 
   const getMaxLimit = () => {
-    return props.isHijri ? 1500 : 2200;
+    return getCalendarType() === 'islamic-umalqura' ? 1500 : 2200;
   }
 
   const getValidMinYear = () => {
