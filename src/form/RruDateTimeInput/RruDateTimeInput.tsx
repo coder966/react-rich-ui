@@ -9,7 +9,7 @@ import Label from '../common/Label';
 import './style.css';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 
-export interface RruDateInputProps {
+export interface RruDateTimeInputProps {
   /**  */
   name: string;
 
@@ -41,7 +41,7 @@ export interface RruDateInputProps {
 /**
  * @author coder966
  */
-const RruDateInput: FC<RruDateInputProps> = (props) => {
+const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const formContext = useFormContext();
 
   // handle popup click outside to dismiss
@@ -199,7 +199,7 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
     } catch (e) {
       initialDateObject = IntlDate.today();
       console.warn(
-        `RruDateInput(${props.name}) failing to today = ${initialDateObject.toString(
+        `RruDateTimeInput(${props.name}) failing to today = ${initialDateObject.toString(
           getCalendarType()
         )} Original error = `,
         e
@@ -341,4 +341,4 @@ const RruDateInput: FC<RruDateInputProps> = (props) => {
   );
 }
 
-export { RruDateInput };
+export { RruDateTimeInput };

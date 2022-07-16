@@ -1,5 +1,5 @@
 export { RruCheckboxInput } from './form/RruCheckboxInput/RruCheckboxInput';
-export { RruDateInput } from './form/RruDateInput/RruDateInput';
+export { RruDateTimeInput } from './form/RruDateTimeInput/RruDateTimeInput';
 export { RruFileInput } from './form/RruFileInput/RruFileInput';
 export { RruForm } from './form/RruForm/RruForm';
 export { RruMultiCheckboxInput } from './form/RruMultiCheckboxInput/RruMultiCheckboxInput';

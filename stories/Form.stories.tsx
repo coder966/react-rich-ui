@@ -3,9 +3,7 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import {
-  RruCheckboxInput,
-  RruDateInput,
-  RruFileInput,
+  RruCheckboxInput, RruDateTimeInput, RruFileInput,
   RruForm,
   RruMultiCheckboxInput,
   RruMultiSelectInput, RruRadioInput,
@@ -234,7 +232,7 @@ export const Date = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruDateInput
+      <RruDateTimeInput
         name='birthDate'
         label='Birth Date'
         minYear={2001}

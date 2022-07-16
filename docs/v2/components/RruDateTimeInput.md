@@ -1,6 +1,6 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Forms](/docs/v2/components/RruForm) > [RruDateInput](/docs/v2/components/RruDateInput)
+[Docs](/) > [V2](/docs/v2/get-started) > [Forms](/docs/v2/components/RruForm) > [RruDateTimeInput](/docs/v2/components/RruDateTimeInput)
 
-# RruDateInput
+# RruDateTimeInput
 
 ## API
 
