@@ -74,10 +74,9 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "microbundle watch --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react",
+    "start": "yarn storybook",
     "build": "rimraf dist && microbundle --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react --format esm",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "prepare": "yarn build",
     "test": "jest"
   }
