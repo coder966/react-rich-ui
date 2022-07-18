@@ -12,7 +12,7 @@ import RruStepsWizardStepProps from './types/RruStepsWizardStepProps';
  */
 const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
-  const [previousStepData, setPreviousStepData] = useState<object | undefined>();
+  const [stepInputData, setStepInputData] = useState<object | undefined>();
 
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
@@ -32,7 +32,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
     }
 
     // call order is critical
-    setPreviousStepData(data);
+    setStepInputData(data);
     setCurrentStepNumber(stepNumber);
   };
 
@@ -78,7 +78,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
               lastStep,
               nextStep,
               previousStep,
-              previousStepData,
+              stepInputData,
             };
             return React.cloneElement(stepsComponents[index], stepProps);
           } else {

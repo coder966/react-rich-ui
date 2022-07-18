@@ -19,7 +19,7 @@ interface RruStepsWizardStepProps {
   previousStep: (data?: any) => void;
 
   /** The data sent by the caller step (normally previous step) */
-  previousStepData: any | undefined;
+  stepInputData: any | undefined;
 
 }
 

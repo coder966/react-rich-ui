@@ -49,10 +49,10 @@ const SecondStep = (props) => (
   <div>
     <h1>This is the second step</h1>
 
-    {props.previousStepData && <div>
-      <span>Name: {props.previousStepData.name}</span>
+    {props.stepInputData && <div>
+      <span>Name: {props.stepInputData.name}</span>
       <br></br>
-      <span>color: {props.previousStepData.color}</span>
+      <span>color: {props.stepInputData.color}</span>
     </div>}
 
     <button onClick={props.previousStep}>back</button>
@@ -64,10 +64,10 @@ const ThirdStep = (props) => (
   <div>
     <h1>This is the third step</h1>
 
-    {props.previousStepData && <div>
-      <span>Name: {props.previousStepData.name}</span>
+    {props.stepInputData && <div>
+      <span>Name: {props.stepInputData.name}</span>
       <br></br>
-      <span>color: {props.previousStepData.color}</span>
+      <span>color: {props.stepInputData.color}</span>
     </div>}
 
     <button onClick={props.firstStep}>first step</button>

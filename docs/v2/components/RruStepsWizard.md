@@ -17,11 +17,11 @@ You can provide these props to the steps nodes:
 
 These props will be injected into the steps nodes:
 
-| Prop             | Type                                      | Description                                                                                  |
-| ---------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------- |
-| goToStep         | (stepNumber: int, [data: object]) => void | A function used to set the desired step. You can pass data to the step which you're setting. |
-| firstStep        | ([data: object]) => void                  | A function used to go to the first step. You can pass data to the first step.                |
-| lastStep         | ([data: object]) => void                  | A function used to go to the last step. You can pass data to the last step.                  |
-| nextStep         | ([data: object]) => void                  | A function used to go to the next step. You can pass data to the next step.                  |
-| previousStep     | ([data: object]) => void                  | A function used to go to the previous step. You can pass data to the previous step.          |
-| previousStepData | object                                    | The data objected passed from the referring step.                                            |
+| Prop          | Type                                   | Description                                                                                  |
+| ------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
+| goToStep      | (stepNumber: int, [data: any]) => void | A function used to set the desired step. You can pass data to the step which you're setting. |
+| firstStep     | ([data: any]) => void                  | A function used to go to the first step. You can pass data to the first step.                |
+| lastStep      | ([data: any]) => void                  | A function used to go to the last step. You can pass data to the last step.                  |
+| nextStep      | ([data: any]) => void                  | A function used to go to the next step. You can pass data to the next step.                  |
+| previousStep  | ([data: any]) => void                  | A function used to go to the previous step. You can pass data to the previous step.          |
+| stepInputData | any                                    | The data passed from the referring step.                                                     |
