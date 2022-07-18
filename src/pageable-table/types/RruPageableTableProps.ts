@@ -37,12 +37,6 @@ interface RruPageableTableProps {
   /** A callback function in case you want to do anything with response of the api */
   onResponse?: (body: object) => void;
 
-  /** The label of the previous page button */
-  previousLabel?: React.ReactNode;
-
-  /** The label of the next page button */
-  nextLabel?: React.ReactNode;
-
   /** Rendered when no data has been returned from the api. */
   noDataLabel?: React.ReactNode;
 

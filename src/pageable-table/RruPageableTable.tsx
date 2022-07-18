@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import { resolveObjectAttribute } from '../utils/utils';
+import PaginationView from './Pagination/PaginationView';
 import './style.css';
 import { getApiResultPromise } from './table-network';
 import { getPersistedTableState, persistTableState } from './table-state-persistence';
@@ -31,8 +31,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   defaultSortBy,
   defaultSortDir,
   onResponse,
-  previousLabel = 'Previous',
-  nextLabel = 'Next',
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
 }) => {
@@ -71,6 +69,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .then((data: SpringPage) => {
         setError(null);
         setTotalPages(data.totalPages);
+        setCurrentPage(data.number);
         setData(data.content);
         if (retainTableState) {
           persistTableState(endpoint, {
@@ -91,6 +90,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .catch((err) => {
         setError(err);
         setTotalPages(0);
+        setCurrentPage(0);
         setData([]);
         if (retainTableState) {
           persistTableState(endpoint, {
@@ -150,7 +150,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   };
 
   return (
-    <>
+    <div>
       <table className='table table-striped'>
         <thead>
           <tr>
@@ -214,22 +214,8 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
           ))}
         </tbody>
       </table>
-      <ReactPaginate
-        previousLabel={previousLabel}
-        nextLabel={nextLabel}
-        pageCount={totalPages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
-        onPageChange={(event) => setCurrentPage(event.selected)}
-        forcePage={currentPage}
-        containerClassName='pagination'
-        pageLinkClassName='pageLink'
-        previousClassName='previous'
-        nextClassName='next'
-        disabledClassName='disabled'
-        activeClassName='activePage'
-      />
-    </>
+      <PaginationView base={0} totalPages={totalPages} currentPage={currentPage} onChangePage={setCurrentPage} />
+    </div>
   );
 };
 
