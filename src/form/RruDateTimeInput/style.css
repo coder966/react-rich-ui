@@ -29,25 +29,20 @@
   border-bottom: solid 1px #dbdbdb;
 }
 
-.rru-date-input__header > select {
-  display: inline;
-  width: auto;
-  flex-grow: 1;
-  border-radius: 10px;
-  margin: 0px 5px;
+.rru-date-input__date-part-input {
+  width: 4rem;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
   text-align: center;
-}
-
-.rru-date-input__header > select:focus-visible {
-  outline: 0;
 }
 
 .rru-date-input__month-button {
-  padding: 5px;
-  text-align: center;
+  height: 1.5rem;
+  line-height: 1.5rem;
   font-size: 1.5rem;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
   font-weight: 700;
-  line-height: 10px;
   color: #8c8c8c;
 }
 
@@ -108,7 +103,7 @@
   padding: 10px;
 }
 
-.rru-date-input__time-input {
+.rru-date-input__time-part-input {
   width: 2rem;
   text-align: center;
 }

@@ -12,6 +12,4 @@
 | disabled         | Set to `true` to disable the editing of the form element                                                 | No       |
 | mode             | The mode of the input, can be either 'datetime' or 'date'. Default is 'datetime'.                        | No       |
 | calendarType     | `gregorian` or `islamic-umalqura`. Default is `gregorian`                                                | No       |
-| minYear          | The minium selectable year                                                                               | No       |
-| maxYear          | The maximum selectable year                                                                              | No       |
 | filterDates      | An optional function that determines whether a given date (yyyy-mm-dd) is allowed to be selected or not. | No       |

@@ -17,12 +17,6 @@ export default interface RruDateTimeInputProps {
   /** The minium selectable year */
   mode?: RruDateTimeInputMode;
 
-  /** The minium selectable year */
-  minYear?: number;
-
-  /** The maximum selectable year */
-  maxYear?: number;
-
   /**  */
   calendarType?: RruDateTimeInputCalendarType;
 

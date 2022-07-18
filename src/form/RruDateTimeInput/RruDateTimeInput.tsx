@@ -2,7 +2,7 @@ import { IntlDate } from 'intl-date';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useFormContext } from 'react-hook-form';
-import { range, rangeOfSize } from '../../utils/utils';
+import { rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
@@ -58,35 +58,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     return props.mode ? props.mode : 'datetime';
   }
 
-  const getMinLimit = () => {
-    return getCalendarType() === 'islamic-umalqura' ? 1300 : 1800;
-  }
-
-  const getMaxLimit = () => {
-    return getCalendarType() === 'islamic-umalqura' ? 1500 : 2200;
-  }
-
-  const getValidMinYear = () => {
-    if (props.minYear && props.minYear > getMinLimit() && props.minYear < getMaxLimit()) {
-      return props.minYear;
-    } else {
-      return getMinLimit();
-    }
-  }
-
-  const getValidMaxYear = () => {
-    if (
-      props.maxYear &&
-      props.maxYear > getMinLimit() &&
-      props.maxYear < getMaxLimit() &&
-      props.maxYear > getValidMinYear()
-    ) {
-      return props.maxYear;
-    } else {
-      return getMaxLimit();
-    }
-  }
-
   const isDateDisabled = (date: IntlDate): boolean => {
     if (props.filterDates) {
       return !props.filterDates(date.toString(getCalendarType()));
@@ -127,7 +98,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     input.select();
   }
 
-  const onChangeTimePart = (val: string, max: number, changeStateFunction: (val: number) => void) => {
+  const onChangeInteger = (val: string, min: number, max: number, changeStateFunction: (val: number) => void) => {
     let value = parseInt(val);
     if (isNaN(value) || value < 0) {
       value = 0;
@@ -167,9 +138,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           setYear(date.getYear(getCalendarType()));
           setMonth(date.getMonth(getCalendarType()));
           setIntlDate(date);
-          onChangeTimePart(matches[5], 23, setHour);
-          onChangeTimePart(matches[6], 59, setMinute);
-          onChangeTimePart(matches[7], 59, setSecond);
+          onChangeInteger(matches[5], 0, 23, setHour);
+          onChangeInteger(matches[6], 0, 59, setMinute);
+          onChangeInteger(matches[7], 0, 59, setSecond);
         }
       }
     } catch (e) { }
@@ -227,22 +198,20 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           <div className='rru-date-input__container'>
 
             <div className='rru-date-input__header'>
-              <div className='rru-date-input__month-button' onClick={previousMonth}>
-                {'<'}
-              </div>
-              <select value={year} onChange={(e) => setYear(parseInt(e.target.value))}>
-                {range(getValidMinYear(), getValidMaxYear()).map((y) => (
-                  <option key={`y${y}`}>{y}</option>
-                ))}
-              </select>
-              <select value={month} onChange={(e) => setMonth(parseInt(e.target.value))}>
-                {range(1, 12).map((m) => (
-                  <option key={`m${m}`}>{m}</option>
-                ))}
-              </select>
-              <div className='rru-date-input__month-button' onClick={nextMonth}>
-                {'>'}
-              </div>
+              <div className='rru-date-input__month-button' onClick={previousMonth}>{'<'}</div>
+              <input
+                type='text'
+                className='rru-date-input__date-part-input'
+                onClick={selectAllTextInInput}
+                value={year}
+                onChange={e => onChangeInteger(e.target.value, 1300, 2300, setYear)} />
+              <input
+                type='text'
+                className='rru-date-input__date-part-input'
+                onClick={selectAllTextInInput}
+                value={month}
+                onChange={e => onChangeInteger(e.target.value, 1, 12, setMonth)} />
+              <div className='rru-date-input__month-button' onClick={nextMonth}>{'>'}</div>
             </div>
 
             <div className='rru-date-input__body'>
@@ -271,24 +240,24 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
               <div className='rru-date-input__footer'>
                 <input
                   type='text'
-                  className='rru-date-input__time-input'
+                  className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
                   value={hour.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e.target.value, 23, setHour)} />
+                  onChange={e => onChangeInteger(e.target.value, 0, 23, setHour)} />
                 {' : '}
                 <input
                   type='text'
-                  className='rru-date-input__time-input'
+                  className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
                   value={minute.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e.target.value, 59, setMinute)} />
+                  onChange={e => onChangeInteger(e.target.value, 0, 59, setMinute)} />
                 {' : '}
                 <input
                   type='text'
-                  className='rru-date-input__time-input'
+                  className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
                   value={second.toString().padStart(2, '0')}
-                  onChange={e => onChangeTimePart(e.target.value, 59, setSecond)} />
+                  onChange={e => onChangeInteger(e.target.value, 0, 59, setSecond)} />
               </div>
             }
 
