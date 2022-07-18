@@ -69,7 +69,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .then((data: SpringPage) => {
         setError(null);
         setTotalPages(data.totalPages);
-        setCurrentPage(data.number);
         setData(data.content);
         if (retainTableState) {
           persistTableState(endpoint, {
@@ -90,7 +89,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .catch((err) => {
         setError(err);
         setTotalPages(0);
-        setCurrentPage(0);
         setData([]);
         if (retainTableState) {
           persistTableState(endpoint, {
