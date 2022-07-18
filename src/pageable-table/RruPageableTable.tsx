@@ -73,25 +73,16 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-    getApiResultPromise(
-      requestMethod, endpoint,
-      currentPage, pageSize,
-      search,
-      sortBy, sortDir
-    )
+    let newTotalPage: number;
+    let newCurrentPage: number;
+
+    getApiResultPromise(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
       .then((data: SpringPage) => {
         setError(null);
         setTotalPages(data.totalPages);
         setData(data.content);
-        if (retainTableState) {
-          persistTableState(endpoint, {
-            search: search,
-            totalPages: data.totalPages,
-            currentPage: currentPage,
-            sortBy: sortBy,
-            sortDir: sortDir,
-          });
-        }
+        newTotalPage = data.totalPages;
+        newCurrentPage = currentPage;
         if (onResponse) {
           onResponse(data);
         }
@@ -99,18 +90,20 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .catch((err) => {
         setError(err);
         setTotalPages(0);
+        newTotalPage = 0;
+        newCurrentPage = 0;
         setData([]);
+      })
+      .finally(() => {
         if (retainTableState) {
           persistTableState(endpoint, {
             search: search,
-            totalPages: 0,
-            currentPage: 0,
+            totalPages: newTotalPage,
+            currentPage: newCurrentPage,
             sortBy: sortBy,
             sortDir: sortDir,
           });
         }
-      })
-      .finally(() => {
         setIsLoading(false);
       });
   }, [currentPage, forceReFetch]);
