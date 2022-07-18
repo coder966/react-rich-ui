@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { RruStepsWizard } from '../src/index';
 
 const storyMeta: Meta = {
@@ -8,30 +8,68 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-const FirstStep = props => (
-  <div>
+const FirstStep = (props) => {
+  const [name, setName] = useState('');
+  const [color, setColor] = useState('');
+
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
+  }
+
+  const onColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setColor(e.target.value)
+  }
+
+  const navigateToNextStep = () => {
+    const data = {
+      name: name,
+      color: color,
+    }
+    props.nextStep(data);
+  }
+
+  return <div>
     <h1>This is the first step</h1>
-    <button onClick={props.nextStep}>next</button>
+
+    <form>
+      <label>Name: </label>
+      <input type='text' value={name} onChange={onNameChange}></input>
+      <br></br>
+      <label>Color: </label>
+      <input type='text' value={color} onChange={onColorChange}></input>
+    </form>
+    <br></br>
+
+    <button onClick={navigateToNextStep}>next</button>
     <button onClick={props.lastStep}>last step</button>
   </div>
-);
+};
 
-const SecondStep = props => (
+const SecondStep = (props) => (
   <div>
     <h1>This is the second step</h1>
-    <button onClick={props.previousStep}>back</button>
-    <button onClick={e => props.nextStep({ name: 'Khalid', colour: 'Blue' })}>next</button>
-  </div>
-);
 
-const ThirdStep = props => (
-  <div>
-    <h1>This is the third step</h1>
     {props.previousStepData && <div>
       <span>Name: {props.previousStepData.name}</span>
       <br></br>
-      <span>Colour: {props.previousStepData.colour}</span>
+      <span>color: {props.previousStepData.color}</span>
     </div>}
+
+    <button onClick={props.previousStep}>back</button>
+    <button onClick={e => props.nextStep({ name: 'Khalid', color: 'Blue' })}>next</button>
+  </div>
+);
+
+const ThirdStep = (props) => (
+  <div>
+    <h1>This is the third step</h1>
+
+    {props.previousStepData && <div>
+      <span>Name: {props.previousStepData.name}</span>
+      <br></br>
+      <span>color: {props.previousStepData.color}</span>
+    </div>}
+
     <button onClick={props.firstStep}>first step</button>
   </div>
 );
