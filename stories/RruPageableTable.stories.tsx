@@ -12,6 +12,35 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
+const columns = [
+  {
+    label: 'No.',
+    value: '#',
+  },
+  {
+    label: 'Name',
+    value: 'name',
+  },
+  {
+    label: 'Email',
+    value: 'email',
+  },
+  {
+    label: 'Address',
+    value: (row) => row.address.city + ' - ' + row.address.street,
+    sortKey: 'address.city',
+  },
+  {
+    label: 'Actions',
+    value: (user) => <>
+      <button onClick={e => action('view user')(user)}>View</button>
+      {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
+    </>,
+  },
+];
+
+
+
 export const Basic = (args) => {
   const [searchParams, setSearchParams] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
 
@@ -28,32 +57,45 @@ export const Basic = (args) => {
     });
   };
 
-  const columns = [
-    {
-      label: 'No.',
-      value: '#',
-    },
-    {
-      label: 'Name',
-      value: 'name',
-    },
-    {
-      label: 'Email',
-      value: 'email',
-    },
-    {
-      label: 'Address',
-      value: (row) => row.address.city + ' - ' + row.address.street,
-      sortKey: 'address.city',
-    },
-    {
-      label: 'Actions',
-      value: (user) => <>
-        <button onClick={e => action('view user')(user)}>View</button>
-        {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
-      </>,
-    },
-  ];
+  return (
+    <>
+      <form onSubmit={onSearch}>
+        <label>Name</label>
+        <input name='name' defaultValue={searchParams?.name || ''} />
+        <label>Email</label>
+        <input name='email' defaultValue={searchParams?.email || ''} />
+        <button type='submit'>Search</button>
+      </form>
+
+      <br />
+
+      <RruPageableTable
+        endpoint='http://localhost:8080/api/user'
+        pageSize={5}
+        columns={columns}
+        defaultSortBy='id'
+        defaultSortDir='desc'
+        search={searchParams}
+      />
+    </>
+  );
+};
+
+export const RetainState = (args) => {
+  const [searchParams, setSearchParams] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
+
+  /**
+   * not the best way to get form data,
+   * this is just an example to show how you may want to implement search
+   */
+  const onSearch = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setSearchParams({
+      name: event.target.elements.name.value,
+      email: event.target.elements.email.value,
+    });
+  };
 
   return (
     <>
@@ -109,33 +151,6 @@ export const TwoTablesInTheSamePage = (args) => {
       email: event.target.elements.email.value,
     });
   };
-
-  const columns = [
-    {
-      label: 'No.',
-      value: '#',
-    },
-    {
-      label: 'Name',
-      value: 'name',
-    },
-    {
-      label: 'Email',
-      value: 'email',
-    },
-    {
-      label: 'Address',
-      value: (row) => row.address.city + ' - ' + row.address.street,
-      sortKey: 'address.city',
-    },
-    {
-      label: 'Actions',
-      value: (user) => <>
-        <button onClick={e => action('view user')(user)}>View</button>
-        {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
-      </>,
-    },
-  ];
 
   return (
     <>
