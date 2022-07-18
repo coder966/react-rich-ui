@@ -159,10 +159,10 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (targetDate.getMonth(getCalendarType()) != month) {
       className += ' rru-date-input__day--not-same-month';
     }
-    if (intlDate && intlDate.isEqual(today)) {
+    if (targetDate.isEqual(today)) {
       className += ' rru-date-input__day--today';
     }
-    if (intlDate && intlDate.isEqual(targetDate)) {
+    if (intlDate && targetDate.isEqual(intlDate)) {
       className += ' rru-date-input__day--selected';
     }
     if (isDateDisabled(targetDate)) {
