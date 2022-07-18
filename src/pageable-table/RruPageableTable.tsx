@@ -54,7 +54,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
    */
   useEffect(() => {
     const persisted = getPersistedTableState(endpoint);
-    if (persisted) {
+    if (retainTableState && persisted) {
       setTotalPages(persisted.totalPages);
       setCurrentPage(persisted.currentPage);
       setSortBy(persisted.sortBy);

@@ -42,7 +42,9 @@ const columns = [
 
 
 export const Basic = (args) => {
-  const [searchParams, setSearchParams] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
+  const [searchParams, setSearchParams] = useState({
+    name: '', email: ''
+  });
 
   /**
    * not the best way to get form data,
