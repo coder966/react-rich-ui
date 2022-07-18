@@ -3,8 +3,7 @@ import React from 'react';
 import { RruModalButton } from '../src/index';
 
 const storyMeta: Meta = {
-  title: 'ModalButton',
-  component: RruModalButton,
+  title: 'RruModalButton',
 };
 
 export default storyMeta;

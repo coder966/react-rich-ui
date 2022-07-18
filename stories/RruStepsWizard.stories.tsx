@@ -3,8 +3,7 @@ import React from 'react';
 import { RruStepsWizard } from '../src/index';
 
 const storyMeta: Meta = {
-  title: 'Wizard',
-  component: RruStepsWizard,
+  title: 'RruStepsWizard',
 };
 
 export default storyMeta;
