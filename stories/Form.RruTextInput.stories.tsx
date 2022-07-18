@@ -12,7 +12,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const Text = (args) => {
+export const Basic = (args) => {
 
   const initialValues = {
     name: 'Khalid',

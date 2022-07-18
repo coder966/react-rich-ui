@@ -12,7 +12,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const Textarea = (args) => {
+export const Basic = (args) => {
 
   const initialValues = {
 

@@ -12,7 +12,7 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
-export const MultiSelect = (args) => {
+export const Basic = (args) => {
 
   const colors = [
     { value: 'RED', label: 'Red' },

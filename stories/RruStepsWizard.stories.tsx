@@ -10,7 +10,7 @@ export default storyMeta;
 
 const FirstStep = props => (
   <div>
-    <h1>This is the first step content</h1>
+    <h1>This is the first step</h1>
     <button onClick={props.nextStep}>next</button>
     <button onClick={props.lastStep}>last step</button>
   </div>
@@ -18,26 +18,25 @@ const FirstStep = props => (
 
 const SecondStep = props => (
   <div>
-    <h1>This is the second step content</h1>
+    <h1>This is the second step</h1>
     <button onClick={props.previousStep}>back</button>
-    <button onClick={event => props.nextStep({ name: 'Khalid', colour: 'Blue' })}>next</button>
+    <button onClick={e => props.nextStep({ name: 'Khalid', colour: 'Blue' })}>next</button>
   </div>
 );
 
 const ThirdStep = props => (
   <div>
-    <h1>This is the third step content</h1>
-    {props.previousStepData ?
-      <>
-        <p>Name: {props.previousStepData.name}</p>
-        <p>Colour: {props.previousStepData.colour}</p>
-      </>
-      : null}
+    <h1>This is the third step</h1>
+    {props.previousStepData && <div>
+      <span>Name: {props.previousStepData.name}</span>
+      <br></br>
+      <span>Colour: {props.previousStepData.colour}</span>
+    </div>}
     <button onClick={props.firstStep}>first step</button>
   </div>
 );
 
-export const WizardExample = (args) => {
+export const Basic = (args) => {
   return (
     <RruStepsWizard>
       <FirstStep stepLabel='First Step' />
