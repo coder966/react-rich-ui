@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
@@ -8,11 +8,26 @@ import RruFileInputProps from './types/RruFileInputProps';
  * @author coder966
  */
 const RruFileInput: FC<RruFileInputProps> = (props) => {
-  const { name, placeholder } = props;
-
   const [fileName, setFileName] = useState<string | null>(null);
   const formContext = useFormContext();
-  const ref = useRef<HTMLInputElement | null>();
+  const ref = useRef<HTMLInputElement>(null);
+
+  // init
+  useEffect(() => {
+    formContext.register({ name: props.name });
+    formContext.setValue(props.name, null);
+  }, []);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filesList = e.target.files;
+    if (filesList && filesList[0]) {
+      setFileName(filesList[0].name);
+      formContext.setValue(props.name, filesList[0]);
+    } else {
+      setFileName(null);
+      formContext.setValue(props.name, null);
+    }
+  }
 
   return (
     <div className='form-group'>
@@ -20,19 +35,9 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <input
         {...props}
         type='file'
-        ref={(input) => {
-          formContext.register(input);
-          ref.current = input;
-        }}
-        name={name}
-        onChange={(e) => {
-          const filesList = e.target.files;
-          if (filesList && filesList[0]) {
-            setFileName(filesList[0].name);
-          } else {
-            setFileName(null);
-          }
-        }}
+        ref={ref}
+        name={props.name}
+        onChange={onChange}
       />
       <div
         className={`form-control fileUpload ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
@@ -42,9 +47,9 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
           }
         }}
       >
-        {fileName || placeholder}
+        {fileName || props.placeholder}
       </div>
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

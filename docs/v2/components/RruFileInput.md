@@ -4,7 +4,7 @@
 
 ## API
 
-All `input` HTML element props are available as well.
+All `input` HTML element props are available as well. For example `accept='image/*,.pdf'`
 
 | Prop             | Description                                           | Required |
 | ---------------- | ----------------------------------------------------- | -------- |
