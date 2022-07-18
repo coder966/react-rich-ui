@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
+import fetchDataSource from './network/fetchDataSource';
 import PaginationView from './Pagination/PaginationView';
 import './style.css';
-import { getApiResultPromise } from './table-network';
 import { getPersistedTableState, persistTableState } from './table-state-persistence';
 import RruPageableTableProps from './types/RruPageableTableProps';
 import SpringPage from './types/SpringPage';
@@ -76,7 +76,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     let newTotalPage: number;
     let newCurrentPage: number;
 
-    getApiResultPromise(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
+    fetchDataSource(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
       .then((data: SpringPage) => {
         setError(null);
         setTotalPages(data.totalPages);
