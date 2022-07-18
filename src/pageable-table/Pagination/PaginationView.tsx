@@ -24,9 +24,7 @@ const PaginationView = ({
       <li
         className={`page-item ${isFirstPage ? 'disabled' : ''}`}
         onClick={() => !isFirstPage && onChangePage(currentPage - 1)}>
-        <button className='page-link' aria-label='Previous'>
-          <span aria-hidden='true'>&laquo;</span>
-        </button>
+        <button className='page-link' aria-label='Previous'>&laquo;</button>
       </li>
 
       {pages.map((p, index) => {
@@ -34,16 +32,14 @@ const PaginationView = ({
           key={index}
           onClick={(e) => onClickPage(p)}
           className={`page-item ${p.isActive ? 'active' : ''} ${p.number === undefined ? 'disabled' : ''}`}>
-          <a className='page-link' href="#" >{p.render}</a>
+          <button className='page-link' >{p.render}</button>
         </li>
       })}
 
       <li
         className={`page-item ${isLastPage ? 'disabled' : ''}`}
         onClick={() => !isLastPage && onChangePage(currentPage + 1)}>
-        <button className='page-link' aria-label='Next'>
-          <span aria-hidden='true'>&raquo;</span>
-        </button>
+        <button className='page-link' aria-label='Next'>&raquo;</button>
       </li>
 
     </ul>
