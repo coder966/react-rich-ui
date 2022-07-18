@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import './style.css';
 import RruStepsWizardProps from './types/RruStepsWizardProps';
+import RruStepsWizardStep from './types/RruStepsWizardStep';
 import RruStepsWizardStepProps from './types/RruStepsWizardStepProps';
 
 
@@ -13,13 +14,21 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
   const [previousStepData, setPreviousStepData] = useState<object | undefined>();
 
-  const steps = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
+  const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
+
+  const getSteps = (): readonly RruStepsWizardStep[] => {
+    return stepsComponents.map((component, index) => ({
+      number: index + 1,
+      label: component.props.stepLabel,
+      component: component,
+    }));
+  }
 
   const goToStep = (stepNumber: number, data?: object) => {
     if (stepNumber < 1) {
       stepNumber = 1;
-    } else if (stepNumber > steps.length) {
-      stepNumber = steps.length;
+    } else if (stepNumber > getSteps().length) {
+      stepNumber = getSteps().length;
     }
 
     // call order is critical
@@ -29,39 +38,40 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
 
   const firstStep = (data?: object) => goToStep(1, data);
 
-  const lastStep = (data?: object) => goToStep(steps.length, data);
+  const lastStep = (data?: object) => goToStep(getSteps().length, data);
 
   const nextStep = (data?: object) => goToStep(currentStepNumber + 1, data);
 
   const previousStep = (data?: object) => goToStep(currentStepNumber - 1, data);
 
+  const header = () => {
+    if (props.renderHeader) {
+      return props.renderHeader(getSteps());
+    } else {
+      return <div className='header'>
+        {getSteps().map((step, index) => {
+          let className = 'step';
+          if (step.number < currentStepNumber) {
+            className += ' done';
+          }
+          if (step.number === currentStepNumber) {
+            className += ' current';
+          }
+          return <div key={index} className={className}>
+            <div className='step-number-container'>{step.number}</div>
+            <div className='step-label-container'>{step.label}</div>
+          </div>
+        })}
+      </div>
+    }
+  }
+
   return (
     <div className='rru-steps-wizard'>
-      {props.noHeader ? null : (
-        <div className='header'>
-          {steps.map((step, index) => {
-            const stepNumber = index + 1;
-            const stepLabel = step.props.stepLabel;
-            return (
-              <div
-                key={index}
-                className={
-                  'step ' +
-                  (stepNumber < currentStepNumber ? 'done' : '') +
-                  (stepNumber === currentStepNumber ? 'current' : '')
-                }
-              >
-                <div className='step-number-container'>{stepNumber}</div>
-                <div className='step-label-container'>{stepLabel}</div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
+      {header()}
       <div className='body'>
-        {steps.map((step, index) => {
-          if (index + 1 === currentStepNumber) {
+        {getSteps().map((step, index) => {
+          if (step.number === currentStepNumber) {
             const stepProps: RruStepsWizardStepProps = {
               goToStep,
               firstStep,
@@ -70,7 +80,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
               previousStep,
               previousStepData,
             };
-            return React.cloneElement(step, stepProps);
+            return React.cloneElement(stepsComponents[index], stepProps);
           } else {
             return null;
           }

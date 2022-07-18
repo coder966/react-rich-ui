@@ -4,10 +4,10 @@
 
 ## API
 
-| Prop     | Description                                           | Required |
-| -------- | ----------------------------------------------------- | -------- |
-| noHeader | Specifies if you don't want the header to be rendered | No       |
-| children | Steps `node`s                                         | Yes      |
+| Prop         | Description                                                 | Required |
+| ------------ | ----------------------------------------------------------- | -------- |
+| children     | Steps `node`s                                               | Yes      |
+| renderHeader | An optional function that is used to render a custom header | No       |
 
 You can provide these props to the steps nodes:
 

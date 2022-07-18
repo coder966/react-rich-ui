@@ -45,3 +45,19 @@ export const Basic = (args) => {
     </RruStepsWizard>
   );
 };
+
+export const CustomHeader = (args) => {
+  return (
+    <RruStepsWizard
+      renderHeader={(steps => {
+        return <div className='d-flex flex-row'>
+          {steps.map(step => <b className='flex-grow-1 text-center pt-4 pb-4'>{step.label}</b>)}
+        </div>
+      })}
+    >
+      <FirstStep stepLabel='First Step' />
+      <SecondStep stepLabel='Second Step' />
+      <ThirdStep stepLabel='Third Step' />
+    </RruStepsWizard>
+  );
+};
