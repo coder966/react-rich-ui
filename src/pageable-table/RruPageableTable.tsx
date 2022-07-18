@@ -45,17 +45,22 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   const [hasBeenInitialized, setHasBeenInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [forceReFetch, setForceReFetch] = useState<number>(0);
 
   // sort
   const [sortBy, setSortBy] = useState(getPersistedTableState(endpoint)?.sortBy || defaultSortBy);
   const [sortDir, setSortDir] = useState(getPersistedTableState(endpoint)?.sortDir || defaultSortDir);
 
-  // reset page to 0 when the search changes
+  // reset page to 0 when the search changes or when sort changes
   useEffect(() => {
-    if (currentPage !== 0 && hasBeenInitialized) {
+    if (hasBeenInitialized) {
       setCurrentPage(0);
+
+      // we need this because if the user searches or changes sort and is on page 0
+      // then setting setCurrentPage(0); will not cause the other userEffect to run
+      setForceReFetch(new Date().getTime());
     }
-  }, [search]);
+  }, [search, sortBy, sortDir]);
 
   // reload list when search, page, sort changes
   useEffect(() => {
@@ -106,7 +111,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [currentPage, search, sortBy, sortDir]);
+  }, [currentPage, forceReFetch]);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
