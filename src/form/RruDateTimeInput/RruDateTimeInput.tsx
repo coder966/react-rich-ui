@@ -99,14 +99,17 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }
 
   const onIntegerInputChange = (val: string, min: number, max: number, changeStateFunction: (val: number) => void) => {
-    let value = parseInt(val);
-    if (isNaN(value) || value < 0) {
-      value = 0;
-    }
-    if (value > max) {
+    let value: number | null = parseInt(val);
+    if (isNaN(value)) {
+      value = null;
+    } else if (value < min) {
+      value = min;
+    } else if (value > max) {
       value = max;
     }
-    changeStateFunction(value);
+    if (value) {
+      changeStateFunction(value);
+    }
   }
 
   const onIntegerInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, inputPartType: 'date' | 'time') => {
