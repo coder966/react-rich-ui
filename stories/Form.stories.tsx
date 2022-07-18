@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import {
-  RruCheckboxInput, RruDateTimeInput, RruFileInput,
+  RruCheckboxInput, RruDateTimeInput, RruDateTimeInputDateConfig, RruFileInput,
   RruForm,
   RruMultiCheckboxInput,
   RruMultiSelectInput, RruRadioInput,
@@ -219,11 +219,11 @@ export const Date = (args) => {
       .max('2024-01-01', 'The date is too new')
   });
 
-  const filterDates = (date: string): boolean => {
+  const getDateConfig = (date: string): RruDateTimeInputDateConfig | null => {
     if (date === '2022-07-12') {
-      return false;
+      return { isDisabled: true };
     }
-    return true;
+    return null;
   }
 
   const onSubmit = form => {
@@ -236,7 +236,7 @@ export const Date = (args) => {
         mode='date'
         name='birthDate'
         label='Birth Date'
-        filterDates={filterDates}
+        getDateConfig={getDateConfig}
       />
       <button type='submit'>Submit</button>
     </RruForm>
@@ -257,11 +257,11 @@ export const DateTime = (args) => {
       .max('2024-01-01', 'The date is too new')
   });
 
-  const filterDates = (date: string): boolean => {
+  const getDateConfig = (date: string): RruDateTimeInputDateConfig | null => {
     if (date === '2022-07-12') {
-      return false;
+      return { isDisabled: true };
     }
-    return true;
+    return null;
   }
 
   const onSubmit = form => {
@@ -274,7 +274,7 @@ export const DateTime = (args) => {
         mode='datetime'
         name='birthDate'
         label='Birth Date'
-        filterDates={filterDates}
+        getDateConfig={getDateConfig}
       />
       <button type='submit'>Submit</button>
     </RruForm>

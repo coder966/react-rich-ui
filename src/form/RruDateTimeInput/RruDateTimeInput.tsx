@@ -7,6 +7,7 @@ import ErrorMessage from '../common/ErrorMessage';
 import Label from '../common/Label';
 import './style.css';
 import RruDateTimeInputCalendarType from './types/RruDateTimeInputCalendarType';
+import RruDateTimeInputDateConfig from './types/RruDateTimeInputDateConfig';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
@@ -58,11 +59,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     return props.mode ? props.mode : 'datetime';
   }
 
-  const isDateDisabled = (date: IntlDate): boolean => {
-    if (props.filterDates) {
-      return !props.filterDates(date.toString(getCalendarType()));
-    } else {
-      return false;
+  const getDateConfig = (date: IntlDate): (RruDateTimeInputDateConfig | undefined | null | void) => {
+    if (props.getDateConfig) {
+      return props.getDateConfig(date.toString(getCalendarType()));
     }
   }
 
@@ -85,7 +84,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }
 
   const onSelectDate = (date: IntlDate) => {
-    if (isDateDisabled(date)) {
+    if (getDateConfig(date)?.isDisabled) {
       return;
     } else {
       setIntlDate(date);
@@ -177,7 +176,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (intlDate && targetDate.isEqual(intlDate)) {
       className += ' rru-date-input__day--selected';
     }
-    if (isDateDisabled(targetDate)) {
+    if (getDateConfig(targetDate)?.isDisabled) {
       className += ' rru-date-input__day--disabled';
     }
     return className;

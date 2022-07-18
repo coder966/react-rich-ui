@@ -1,4 +1,5 @@
 import RruDateTimeInputCalendarType from "./RruDateTimeInputCalendarType";
+import RruDateTimeInputDateConfig from "./RruDateTimeInputDateConfig";
 import RruDateTimeInputMode from "./RruDateTimeInputMode";
 
 export default interface RruDateTimeInputProps {
@@ -21,5 +22,5 @@ export default interface RruDateTimeInputProps {
   calendarType?: RruDateTimeInputCalendarType;
 
   /**  */
-  filterDates?: (date: string) => boolean;
+  getDateConfig?: (date: string) => RruDateTimeInputDateConfig | undefined | null | void;
 }
