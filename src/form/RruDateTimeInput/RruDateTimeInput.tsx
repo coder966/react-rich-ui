@@ -166,6 +166,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }, [intlDate, hour, minute, second]);
 
   const getDayClassName = (targetDate: IntlDate): string => {
+    const dateConfig = getDateConfig(targetDate);
     let className = 'rru-date-input__day';
     if (targetDate.getMonth(getCalendarType()) != month) {
       className += ' rru-date-input__day--not-same-month';
@@ -176,8 +177,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (intlDate && targetDate.isEqual(intlDate)) {
       className += ' rru-date-input__day--selected';
     }
-    if (getDateConfig(targetDate)?.isDisabled) {
+    if (dateConfig?.isDisabled) {
       className += ' rru-date-input__day--disabled';
+    }
+    if (dateConfig?.className) {
+      className += ' ' + dateConfig.className;
     }
     return className;
   }
@@ -237,7 +241,10 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                         const date = calendar[index];
                         return (
                           <td key={`d${date.toString(getCalendarType())}`}>
-                            <div className={getDayClassName(date)} onClick={(e) => onSelectDate(date)}>
+                            <div
+                              className={getDayClassName(date)}
+                              style={getDateConfig(date)?.style}
+                              onClick={(e) => onSelectDate(date)}>
                               {date.getDay(getCalendarType())}
                             </div>
                           </td>

@@ -223,6 +223,12 @@ export const Date = (args) => {
     if (date === '2022-07-12') {
       return { isDisabled: true };
     }
+    if (date === '2022-07-13') {
+      return { style: { 'color': 'red' } };
+    }
+    if (date === '2022-07-14') {
+      return { className: 'my-custom-class-1' };
+    }
     return null;
   }
 

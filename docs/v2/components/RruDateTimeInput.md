@@ -19,3 +19,5 @@
 | Attribute  | Description           | Required |
 | ---------- | --------------------- | -------- |
 | isDisabled | Is the date disabled. | No       |
+| className  | Class name.           | No       |
+| style      | Custom style.         | No       |
