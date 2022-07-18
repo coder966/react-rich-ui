@@ -33,33 +33,41 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   onResponse,
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
-}) => {
-  const getSearchObject = (): object | undefined => hasBeenInitialized ? search : getPersistedTableState(endpoint)?.search;
+}: RruPageableTableProps) => {
 
   // fetched
-  const [totalPages, setTotalPages] = useState(getPersistedTableState(endpoint)?.totalPages || 0);
-  const [currentPage, setCurrentPage] = useState(getPersistedTableState(endpoint)?.currentPage || 0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState<TableDataRow[]>([]);
 
   // flags
-  const [hasBeenInitialized, setHasBeenInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [forceReFetch, setForceReFetch] = useState<number>(0);
 
   // sort
-  const [sortBy, setSortBy] = useState(getPersistedTableState(endpoint)?.sortBy || defaultSortBy);
-  const [sortDir, setSortDir] = useState(getPersistedTableState(endpoint)?.sortDir || defaultSortDir);
+  const [sortBy, setSortBy] = useState(defaultSortBy);
+  const [sortDir, setSortDir] = useState(defaultSortDir);
+
+  /**
+   * init
+   */
+  useEffect(() => {
+    const persisted = getPersistedTableState(endpoint);
+    if (persisted) {
+      setTotalPages(persisted.totalPages);
+      setCurrentPage(persisted.currentPage);
+      setSortBy(persisted.sortBy);
+      setSortDir(persisted.sortDir);
+    }
+  }, []);
 
   // reset page to 0 when the search changes or when sort changes
   useEffect(() => {
-    if (hasBeenInitialized) {
-      setCurrentPage(0);
-
-      // we need this because if the user searches or changes sort and is on page 0
-      // then setting setCurrentPage(0); will not cause the other userEffect to run
-      setForceReFetch(new Date().getTime());
-    }
+    setCurrentPage(0);
+    // we need this because if the user searches or changes sort and is on page 0
+    // then setting setCurrentPage(0); will not cause the other userEffect to run
+    setForceReFetch(new Date().getTime());
   }, [search, sortBy, sortDir]);
 
   // reload list when search, page, sort changes
@@ -68,7 +76,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     getApiResultPromise(
       requestMethod, endpoint,
       currentPage, pageSize,
-      getSearchObject(),
+      search,
       sortBy, sortDir
     )
       .then((data: SpringPage) => {
@@ -83,9 +91,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
             sortBy: sortBy,
             sortDir: sortDir,
           });
-        }
-        if (!hasBeenInitialized) {
-          setHasBeenInitialized(true);
         }
         if (onResponse) {
           onResponse(data);
@@ -103,9 +108,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
             sortBy: sortBy,
             sortDir: sortDir,
           });
-        }
-        if (!hasBeenInitialized) {
-          setHasBeenInitialized(true);
         }
       })
       .finally(() => {

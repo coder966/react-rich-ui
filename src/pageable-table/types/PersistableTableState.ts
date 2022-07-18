@@ -5,7 +5,7 @@ interface PersistableTableState {
   totalPages: number;
   currentPage: number;
   sortBy?: string;
-  sortDir?: string;
+  sortDir?: 'asc' | 'desc';
 }
 
 export default PersistableTableState;
