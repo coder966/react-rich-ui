@@ -109,6 +109,15 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     changeStateFunction(value);
   }
 
+  const onIntegerInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, inputPartType: 'date' | 'time') => {
+    const isEnter = e.key === 'Enter';
+    const shouldHidePopup = inputPartType === 'time' && intlDate;
+    if (isEnter && !shouldHidePopup) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }
+
   const getValue = (): string | null => {
     if (intlDate) {
       let value = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
@@ -203,12 +212,14 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                 type='text'
                 className='rru-date-input__date-part-input'
                 onClick={selectAllTextInInput}
+                onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
                 value={year}
                 onChange={e => onChangeInteger(e.target.value, 1300, 2300, setYear)} />
               <input
                 type='text'
                 className='rru-date-input__date-part-input'
                 onClick={selectAllTextInInput}
+                onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
                 value={month}
                 onChange={e => onChangeInteger(e.target.value, 1, 12, setMonth)} />
               <div className='rru-date-input__month-button' onClick={nextMonth}>{'>'}</div>
@@ -242,6 +253,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   type='text'
                   className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
+                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={hour.toString().padStart(2, '0')}
                   onChange={e => onChangeInteger(e.target.value, 0, 23, setHour)} />
                 {' : '}
@@ -249,6 +261,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   type='text'
                   className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
+                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={minute.toString().padStart(2, '0')}
                   onChange={e => onChangeInteger(e.target.value, 0, 59, setMinute)} />
                 {' : '}
@@ -256,6 +269,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   type='text'
                   className='rru-date-input__time-part-input'
                   onClick={selectAllTextInInput}
+                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={second.toString().padStart(2, '0')}
                   onChange={e => onChangeInteger(e.target.value, 0, 59, setSecond)} />
               </div>
