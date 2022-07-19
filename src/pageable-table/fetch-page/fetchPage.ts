@@ -1,8 +1,8 @@
 import SpringPage from "../types/SpringPage";
+import { RejectFunction, RequestMethod, ResolveFunction } from "./fetch-page-types";
+import fetchPageUsingAxios from "./fetchPageUsingAxios";
+import fetchPageUsingFetch from "./fetchPageUsingFetch";
 import loadAxios from "./loadAxios";
-import { RejectFunction, RequestMethod, ResolveFunction } from "./network-types";
-import callUsingAxios from "./resolveUsingAxios";
-import callUsingFetch from "./resolveUsingFetch";
 
 /**
  * Creates an abstract promise for different HTTP client libs
@@ -38,9 +38,9 @@ const fetchDataSource = (
 
   return new Promise((resolve: ResolveFunction, reject: RejectFunction) => {
     if (loadAxios()) {
-      callUsingAxios(requestMethod, endpoint, params, body, resolve, reject);
+      fetchPageUsingAxios(requestMethod, endpoint, params, body, resolve, reject);
     } else {
-      callUsingFetch(requestMethod, endpoint, params, body, resolve, reject);
+      fetchPageUsingFetch(requestMethod, endpoint, params, body, resolve, reject);
     }
   });
 };

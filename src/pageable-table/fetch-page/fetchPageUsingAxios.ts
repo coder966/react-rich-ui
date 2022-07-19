@@ -1,9 +1,9 @@
+import { RejectFunction, RequestMethod, ResolveFunction } from "./fetch-page-types";
 import loadAxios from "./loadAxios";
-import { RejectFunction, RequestMethod, ResolveFunction } from "./network-types";
 
 const axios = loadAxios();
 
-const callUsingAxios = (
+const fetchPageUsingAxios = (
   requestMethod: RequestMethod,
   url: string,
   params: any,
@@ -23,4 +23,4 @@ const callUsingAxios = (
 
 }
 
-export default callUsingAxios;
+export default fetchPageUsingAxios;

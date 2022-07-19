@@ -1,6 +1,6 @@
-import { RejectFunction, RequestMethod, ResolveFunction } from "./network-types";
+import { RejectFunction, RequestMethod, ResolveFunction } from "./fetch-page-types";
 
-const callUsingFetch = (
+const fetchPageUsingFetch = (
   requestMethod: RequestMethod,
   url: string,
   params: any,
@@ -24,4 +24,4 @@ const callUsingFetch = (
 
 }
 
-export default callUsingFetch;
+export default fetchPageUsingFetch;
