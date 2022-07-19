@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { RruForm } from '../RruForm/RruForm';
-import { RruFileInput } from './RruFileInput';
+import RruForm from '../RruForm/RruForm';
+import RruFileInput from './RruFileInput';
 
 describe('RruFileInput', () => {
 
