@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import fetchPage from './fetch-page/fetchPage';
+import RruPageableTablePage from './fetch-page/types/RruPageableTablePage';
 import PaginationView from './Pagination/PaginationView';
 import './style.css';
 import { getPersistedTableState, persistTableState } from './table-state-persistence';
 import RruPageableTableProps from './types/RruPageableTableProps';
-import SpringPage from './types/SpringPage';
 import TableColumn from './types/TableColumn';
-import TableDataRow from './types/TableDataRow';
 
 /**
  * A table the features:
@@ -38,7 +37,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   // fetched
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [data, setData] = useState<TableDataRow[]>([]);
+  const [data, setData] = useState<any[]>([]);
 
   // flags
   const [isLoading, setIsLoading] = useState(false);
@@ -77,11 +76,11 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     let newCurrentPage: number;
 
     fetchPage(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
-      .then((data: SpringPage) => {
+      .then((page: RruPageableTablePage) => {
         setError(null);
-        setTotalPages(data.totalPages);
-        setData(data.content);
-        newTotalPage = data.totalPages;
+        setTotalPages(page.totalPages);
+        setData(page.content);
+        newTotalPage = page.totalPages;
         newCurrentPage = currentPage;
         if (onResponse) {
           onResponse(data);

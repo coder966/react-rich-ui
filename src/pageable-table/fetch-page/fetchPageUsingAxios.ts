@@ -1,5 +1,7 @@
-import { RejectFunction, RequestMethod, ResolveFunction } from "./fetch-page-types";
 import loadAxios from "./loadAxios";
+import RejectFunction from "./types/RejectFunction";
+import RequestMethod from "./types/RequestMethod";
+import ResolveFunction from "./types/ResolveFunction";
 
 const axios = loadAxios();
 
@@ -10,7 +12,7 @@ const fetchPageUsingAxios = (
   body: any,
   resolve: ResolveFunction,
   reject: RejectFunction
-) => {
+): void => {
 
   axios({
     method: requestMethod,

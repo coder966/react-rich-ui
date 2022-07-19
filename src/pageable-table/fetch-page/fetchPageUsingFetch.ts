@@ -1,4 +1,6 @@
-import { RejectFunction, RequestMethod, ResolveFunction } from "./fetch-page-types";
+import RejectFunction from "./types/RejectFunction";
+import RequestMethod from "./types/RequestMethod";
+import ResolveFunction from "./types/ResolveFunction";
 
 const fetchPageUsingFetch = (
   requestMethod: RequestMethod,
@@ -7,7 +9,7 @@ const fetchPageUsingFetch = (
   body: any,
   resolve: ResolveFunction,
   reject: RejectFunction
-) => {
+): void => {
 
   const searchParams = new URLSearchParams();
   Object.keys(params).forEach((key) => searchParams.append(key, params[key] + ''));
