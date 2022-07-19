@@ -12,6 +12,38 @@ const storyMeta: Meta = {
 
 export default storyMeta;
 
+export const Basic = (args) => {
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm onSubmit={onSubmit}>
+      <RruTextInput name='firstName' label='First Name' />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+export const WithInitialValues = (args) => {
+  const initialValues = {
+    firstName: 'Khalid'
+  }
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruTextInput name='firstName' label='First Name' />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
 export const Watcher = (args) => {
   const [color, setColor] = useState();
 
