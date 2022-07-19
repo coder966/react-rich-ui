@@ -9,31 +9,29 @@ import RruRadioInputProps from './types/RruRadioInputProps';
  * @author coder966
  */
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
-  const { name, options } = props;
-
   const formContext = useFormContext();
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div className={props.inline ? 'form-check-inline' : undefined}>
-        {options.map((o) => (
-          <div key={`${name}_${o.value}`} className={'form-check' + props.disabled ? ' disabled' : undefined}>
+        {props.options.map((o) => (
+          <div key={`${props.name}_${o.value}`} className={'form-check' + props.disabled ? ' disabled' : undefined}>
             <input
               {...props}
               type='radio'
               ref={formContext.register}
-              name={name}
+              name={props.name}
               value={o.value}
-              id={`${name}_${o.value}`}
+              id={`${props.name}_${o.value}`}
             />
-            <label className='form-check-label' htmlFor={`${name}_${o.value}`}>
+            <label className='form-check-label' htmlFor={`${props.name}_${o.value}`}>
               {o.label}
             </label>
           </div>
         ))}
       </div>
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

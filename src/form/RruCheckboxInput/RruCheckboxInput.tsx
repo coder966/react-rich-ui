@@ -7,8 +7,6 @@ import RruCheckboxInputProps from './types/RruCheckboxInputProps';
  * @author coder966
  */
 const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
-  const { name, label } = props;
-
   const formContext = useFormContext();
 
   return (
@@ -16,17 +14,17 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
       <div className='custom-control custom-checkbox m-1'>
         <input
           {...props}
-          id={'checkbox_' + name}
-          name={name}
+          id={'checkbox_' + props.name}
+          name={props.name}
           ref={formContext.register}
           type='checkbox'
-          className={'custom-control-input ' + (formContext.errors[name] ? 'is-invalid' : '')}
+          className={'custom-control-input ' + (formContext.errors[props.name] ? 'is-invalid' : '')}
         />
-        <label htmlFor={'checkbox_' + name} className='custom-control-label'>
-          {label}
+        <label htmlFor={'checkbox_' + props.name} className='custom-control-label'>
+          {props.label}
         </label>
       </div>
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

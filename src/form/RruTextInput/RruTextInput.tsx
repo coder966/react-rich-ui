@@ -8,8 +8,6 @@ import RruTextInputProps from './types/RruTextInputProps';
  * @author coder966
  */
 const RruTextInput: FC<RruTextInputProps> = (props) => {
-  const { name } = props;
-
   const formContext = useFormContext();
 
   return (
@@ -18,11 +16,11 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <input
         {...props}
         ref={formContext.register}
-        name={name}
+        name={props.name}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

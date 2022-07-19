@@ -8,8 +8,6 @@ import RruTextareaInputProps from './types/RruTextareaInputProps';
  * @author coder966
  */
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
-  const { name } = props;
-
   const formContext = useFormContext();
 
   return (
@@ -18,10 +16,10 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       <textarea
         {...props}
         ref={formContext.register}
-        name={name}
+        name={props.name}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

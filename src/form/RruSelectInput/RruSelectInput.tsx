@@ -11,8 +11,6 @@ import RruSelectInputProps from './types/RruSelectInputProps';
  * @author coder966
  */
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
-  const { name, options, disabled } = props;
-
   // register to RHF
   const formContext = useFormContext();
   useEffect(() => {
@@ -23,26 +21,26 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   const onSelectChange = (opt: RruOption | null) => {
     setSelectControlValue(opt);
-    formContext.setValue(name, opt ? opt.value : null);
+    formContext.setValue(props.name, opt ? opt.value : null);
   };
 
   useEffect(() => {
-    const allOptions = options || [];
-    const selectedOptionValue = formContext.getValues()[name];
+    const allOptions = props.options || [];
+    const selectedOptionValue = formContext.getValues()[props.name];
     const searchResult = allOptions.find((o) => o.value + '' === selectedOptionValue + '') || null;
     onSelectChange(searchResult);
-  }, [options]);
+  }, [props.options]);
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <Select
-        name={name}
+        name={props.name}
         isMulti={false}
-        isDisabled={disabled}
+        isDisabled={props.disabled}
         value={selectControlValue}
         onChange={onSelectChange}
-        options={options}
+        options={props.options}
         styles={{
           container: (provided, state) => ({
             ...provided,
@@ -50,11 +48,11 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formContext.errors[name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [formContext.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };

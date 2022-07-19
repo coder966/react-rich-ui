@@ -11,8 +11,6 @@ import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
  * @author coder966
  */
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const { name, options, disabled } = props;
-
   // register to RHF
   const formContext = useFormContext();
   useEffect(() => {
@@ -23,27 +21,27 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   const onSelectChange = (opt: readonly RruOption[] | null) => {
     setSelectControlValue(opt);
-    formContext.setValue(name, opt ? opt.map((o) => o.value) : []);
+    formContext.setValue(props.name, opt ? opt.map((o) => o.value) : []);
   };
 
   useEffect(() => {
-    const allOptions = options || [];
+    const allOptions = props.options || [];
     const selectedOptionsValues = formContext.getValues()[props.name] || [];
     const comparator = (opt: RruOption, val: any) => (opt.value + '' === val + '');
     const intersection = retainAll(allOptions || [], selectedOptionsValues, comparator);
     onSelectChange(intersection);
-  }, [options]);
+  }, [props.options]);
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <Select
-        name={name}
+        name={props.name}
         isMulti={true}
-        isDisabled={disabled}
+        isDisabled={props.disabled}
         value={selectControlValue}
         onChange={onSelectChange}
-        options={options}
+        options={props.options}
         styles={{
           container: (provided, state) => ({
             ...provided,
@@ -51,11 +49,11 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formContext.errors[name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [formContext.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />
-      <ErrorMessage inputName={name} />
+      <ErrorMessage inputName={props.name} />
     </div>
   );
 };
