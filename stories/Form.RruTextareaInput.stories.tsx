@@ -19,7 +19,9 @@ export const Basic = (args) => {
   }
 
   const validationSchema = yup.object().shape({
-
+    content: yup.string().nullable()
+      .min(5, 'The text is too short')
+      .max(10, 'The text is too long'),
   });
 
   const onSubmit = form => {

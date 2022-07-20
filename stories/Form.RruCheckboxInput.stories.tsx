@@ -19,7 +19,7 @@ export const Basic = (args) => {
   }
 
   const validationSchema = yup.object().shape({
-
+    agreed: yup.bool().isTrue('You must agree')
   });
 
   const onSubmit = form => {

@@ -21,11 +21,13 @@ export const Basic = (args) => {
   ];
 
   const initialValues = {
-    color: ['RED', 'GREEN']
+    colors: ['RED', 'GREEN']
   }
 
   const validationSchema = yup.object().shape({
-
+    colors: yup.array()
+      .min(1, 'You must select at least one')
+      .max(2, 'You cannot select more than two')
   });
 
   const onSubmit = form => {
@@ -34,7 +36,7 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruMultiSelectInput name='color' label='Color' options={colors} />
+      <RruMultiSelectInput name='colors' label='Color' options={colors} />
       <button type='submit'>Submit</button>
     </RruForm>
   );

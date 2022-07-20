@@ -21,11 +21,11 @@ export const Basic = (args) => {
   ];
 
   const initialValues = {
-    color: 'BLUE'
+    // color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({
-
+    color: yup.string().nullable().required('You must select a color')
   });
 
   const onSubmit = form => {

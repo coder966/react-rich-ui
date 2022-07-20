@@ -25,7 +25,7 @@ export const Basic = (args) => {
   }
 
   const validationSchema = yup.object().shape({
-
+    color: yup.string().nullable().required('You must select one')
   });
 
   const onSubmit = form => {
