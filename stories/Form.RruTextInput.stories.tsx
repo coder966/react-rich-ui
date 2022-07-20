@@ -15,7 +15,7 @@ export default storyMeta;
 export const Basic = (args) => {
 
   const initialValues = {
-    name: 'Khalid',
+
   }
 
   const validationSchema = yup.object().shape({
@@ -28,8 +28,29 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruTextInput name='name' label='Name' />
       <RruTextInput name='email' label='Email' requiredAsterisk />
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+export const Password = (args) => {
+
+  const initialValues = {
+
+  }
+
+  const validationSchema = yup.object().shape({
+
+  });
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
       <button type='submit'>Submit</button>
     </RruForm>
