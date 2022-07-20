@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
 import './style.css';
-import IRHFDefaultValues from './types/IRHFDefaultValues';
 import RruFormProps from './types/RruFormProps';
 
 /**
@@ -13,7 +12,7 @@ import RruFormProps from './types/RruFormProps';
 const RruForm: FC<RruFormProps> = (props) => {
   const form = useForm({
     mode: 'onChange',
-    defaultValues: props.initialValues as IRHFDefaultValues,
+    defaultValues: props.initialValues,
     validationSchema: props.validationSchema,
   });
 
