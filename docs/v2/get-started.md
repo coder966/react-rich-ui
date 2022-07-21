@@ -4,37 +4,44 @@
 
 ## Installation
 
-### Install the NPM package:
-
 ```bash
 $ npm i --save react-rich-ui
 ```
 
-### Import the library stylesheet:
+## Import the library stylesheet
 
-1- Add the following to your React app index file:
+### From the npm package
+
+Add the following import to your React app index.js file:
 
 ```js
 import 'react-rich-ui/dist/index.css';
 ```
 
-2- You must have `bootstrap` stylesheet loaded as well. Either by importing it from the npm package (similar to the code above), or from a CDN. Example (CDN):
+### Or from a CDN
+
+Add the following tag to your index.html file:
 
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  href="https://cdn.jsdelivr.net/npm/react-rich-ui@1.6.3/dist/index.css"
+  integrity="sha384-CrKK9CcPYhApdIxMGxMZBvlXZ5Mf2fLIGbDmgbOOwtSVACYVWlYhaqxDbfNOMnPT"
   crossorigin="anonymous"
 />
 ```
 
-## Optional peer dependencies:
+## Import Bootstrap CSS + JS
+
+Please refer to Bootstrap official website on how to setup Bootstrap.
+For [Bootstrap v4.x](https://getbootstrap.com/docs/4.6/getting-started/introduction/) and for [Bootstrap v5.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
+
+## Optional peer dependencies
 
 - `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruPageableTable`.
 - `yup`: For form validation. See `RruForm` section for more details.
 
-## Components:
+## Components
 
 - [Forms](/docs/v2/components/RruForm)
 - [Tables](/docs/v2/components/RruPageableTable)
