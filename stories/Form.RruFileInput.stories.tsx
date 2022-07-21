@@ -52,7 +52,7 @@ export const Basic = (args) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruFileInput name='attachment' label='Attachment' accept='image/*,.pdf' />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 

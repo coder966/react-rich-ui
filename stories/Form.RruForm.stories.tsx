@@ -36,7 +36,7 @@ export const Basic = (args) => {
   return (
     <RruForm onSubmit={onSubmit}>
       <RruTextInput name='firstName' label='First Name' />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
@@ -54,7 +54,7 @@ export const WithInitialValues = (args) => {
   return (
     <RruForm initialValues={initialValues} onSubmit={onSubmit}>
       <RruTextInput name='firstName' label='First Name' />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
@@ -89,7 +89,7 @@ export const Watcher = (args) => {
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher}>
       <RruSelectInput name='color' label='Color' options={colors} />
       {color === 'GREEN' && <p>Great choice.</p>}
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
@@ -119,7 +119,7 @@ export const MultipleFieldsInOneForm = (args) => {
           <RruTextInput name='lastName' label='Last Name' />
         </div>
       </div>
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
@@ -157,12 +157,12 @@ export const MultipleFormsInOnePage = (args) => {
     <>
       <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1}>
         <RruTextInput name='name' label='Name' />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
       </RruForm>
       <br></br>
       <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2}>
         <RruTextInput name='favoriteNumber' label='Favorite Number' />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
       </RruForm>
     </>
   );

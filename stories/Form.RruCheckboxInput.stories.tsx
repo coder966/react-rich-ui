@@ -45,7 +45,7 @@ export const Basic = (args) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruCheckboxInput name='agreed' label='Agree' />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 

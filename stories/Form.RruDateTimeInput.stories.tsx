@@ -64,7 +64,7 @@ export const Date = (args) => {
         label='Birth Date'
         getDateConfig={getDateConfig}
       />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
@@ -102,7 +102,7 @@ export const DateTime = (args) => {
         label='Birth Date'
         getDateConfig={getDateConfig}
       />
-      <button type='submit'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );
 
