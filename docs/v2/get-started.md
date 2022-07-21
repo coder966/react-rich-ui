@@ -31,10 +31,9 @@ Add the following tag to your index.html file:
 />
 ```
 
-## Import Bootstrap CSS + JS
+## Import Bootstrap v5.x (CSS + JS)
 
-Please refer to Bootstrap official website on how to setup Bootstrap.
-For [Bootstrap v4.x](https://getbootstrap.com/docs/4.6/getting-started/introduction/) and for [Bootstrap v5.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
+Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
 
 ## Optional peer dependencies
 
