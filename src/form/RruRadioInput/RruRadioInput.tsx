@@ -14,32 +14,61 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
+import RruOption from '../types/RruOption';
 import RruRadioInputProps from './types/RruRadioInputProps';
 
 
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const formContext = useFormContext();
+  const [checkedOption, setCheckedOption] = useState<RruOption | undefined>(undefined);
+
+  const setNewValue = (option: RruOption | undefined) => {
+    setCheckedOption(option);
+    formContext.setValue(props.name, option?.value);
+  }
+
+  useEffect(() => {
+    formContext.register(props.name);
+    const initialValue = formContext.getValues()[props.name];
+
+    let selectedOption: RruOption | undefined;
+    if (initialValue) {
+      selectedOption = props.options.find(opt => opt.value === initialValue);
+    }
+
+    setNewValue(selectedOption);
+  }, []);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const option = props.options.find(opt => opt.value === e.target.value);
+    setNewValue(option);
+  }
+
+  const isChecked = (option: RruOption): boolean => {
+    return checkedOption ? checkedOption.value === option.value : false
+  }
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      <div className={props.inline ? 'form-check-inline' : undefined}>
-        {props.options.map((o) => (
-          <div key={`${props.name}_${o.value}`} className={'form-check' + props.disabled ? ' disabled' : undefined}>
+      <div>
+        {props.options.map((option) => (
+          <div key={`checkbox_${props.name}_${option.value}`} className='form-check'>
             <input
-              {...props}
-              type='radio'
-              ref={formContext.register}
+              id={`checkbox_${props.name}_${option.value}`}
               name={props.name}
-              value={o.value}
-              id={`${props.name}_${o.value}`}
+              value={option.value}
+              checked={isChecked(option)}
+              onChange={onChange}
+              type='radio'
+              className='form-check-input'
             />
-            <label className='form-check-label' htmlFor={`${props.name}_${o.value}`}>
-              {o.label}
+            <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
+              {option.label}
             </label>
           </div>
         ))}
