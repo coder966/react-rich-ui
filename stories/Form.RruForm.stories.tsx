@@ -95,7 +95,39 @@ export const Watcher = (args) => {
 
 };
 
-export const TwoFormsInOnePage = (args) => {
+export const MultipleFieldsInOneForm = (args) => {
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm onSubmit={onSubmit}>
+      <div className='row'>
+        <div className='col-6'>
+          <RruTextInput name='firstName' label='First Name' />
+        </div>
+        <div className='col-6'>
+          <RruTextInput name='secondName' label='Second Name' />
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col-6'>
+          <RruTextInput name='thirdName' label='Third Name' />
+        </div>
+        <div className='col-6'>
+          <RruTextInput name='lastName' label='Last Name' />
+        </div>
+      </div>
+      <button type='submit'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+
+
+export const MultipleFormsInOnePage = (args) => {
 
   const initialValues1 = {
     name: 'Khalid',
