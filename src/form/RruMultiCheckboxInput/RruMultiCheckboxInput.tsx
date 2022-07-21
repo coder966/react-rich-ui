@@ -65,7 +65,9 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div>
         {props.options.map((option) => (
-          <div key={`checkbox_${props.name}_${option.value}`} className='form-check'>
+          <div
+            key={`checkbox_${props.name}_${option.value}`}
+            className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
             <input
               id={`checkbox_${props.name}_${option.value}`}
               name={props.name}

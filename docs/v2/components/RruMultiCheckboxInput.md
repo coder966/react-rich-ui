@@ -12,3 +12,4 @@ All `input` HTML element props are available as well.
 | label            | The form element label                                                      | No       |
 | requiredAsterisk | Display an asterisk to indicate the field is required                       | No       |
 | options          | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes      |
+| inline           | Set to `true` to display the checkboxes in one line                         | No       |

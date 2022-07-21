@@ -29,5 +29,8 @@ export default interface RruMultiCheckboxInputProps extends HtmlInputElementProp
 
   /**  */
   options: RruOption[];
+
+  /** Display all checkboxes in the same line */
+  inline?: boolean;
 }
 
