@@ -14,38 +14,55 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
+import RruOption from '../types/RruOption';
 import RruMultiCheckboxInputProps from './types/RruMultiCheckboxInputProps';
 
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const formContext = useFormContext();
+  const [checkedOptions, setCheckedOptions] = useState<RruOption[]>([]);
+
+  const setNewValue = (options: RruOption[]) => {
+    setCheckedOptions(options);
+    formContext.setValue(props.name, options.map(opt => opt.value));
+  }
+
+  useEffect(() => {
+    formContext.register(props.name);
+    const initialValue = formContext.getValues()[props.name];
+
+    let resultArray: RruOption[] = [];
+    if (initialValue && Array.isArray(initialValue)) {
+      resultArray = retainAll(props.options, initialValue, (opt, val) => opt.value === val);
+    }
+
+    setNewValue(resultArray);
+  }, []);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const option = props.options.find(opt => opt.value === e.target.value);
+    if (option) {
+      let newCheckedOptions;
+      if (e.target.checked) {
+        newCheckedOptions = checkedOptions.concat([option]);
+      } else {
+        newCheckedOptions = checkedOptions.filter(opt => opt.value !== option.value);
+      }
+      setNewValue(newCheckedOptions);
+    }
+  }
+
+  const isChecked = (option: RruOption): boolean => {
+    return checkedOptions.find(opt => opt.value === option.value) !== undefined
+  }
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      {/* these hidden options are important because if options size is 1 then form submit result will be string instead of array with one item
-            and if options size is zero then will result in false instead of an empty array */}
-      <input
-        id={`${props.name}_hidden1`}
-        name={props.name}
-        ref={formContext.register}
-        value={'hidden1'}
-        type='checkbox'
-        disabled
-        style={{ display: 'none' }}
-      />
-      <input
-        id={`${props.name}_hidden2`}
-        name={props.name}
-        ref={formContext.register}
-        value={'hidden2'}
-        type='checkbox'
-        disabled
-        style={{ display: 'none' }}
-      />
       <div className='row'>
         {props.options.map((o) => (
           <div key={`${props.name}_${o.value}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
@@ -54,8 +71,9 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
                 {...props}
                 id={`${props.name}_${o.value}`}
                 name={props.name}
-                ref={formContext.register}
                 value={o.value}
+                checked={isChecked(o)}
+                onChange={onChange}
                 type='checkbox'
                 className='custom-control-input'
               />
