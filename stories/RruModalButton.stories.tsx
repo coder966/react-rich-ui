@@ -11,10 +11,9 @@ export default storyMeta;
 export const Basic = (args) => {
 
   return (
-    <RruModalButton
-      label='Basic Modal Button'
-      modalTitle='Modal Title'
-      modalBody='Modal Body' />
+    <RruModalButton modalTitle='Modal Title' modalBody='Modal Body'>
+      Basic Modal Button
+    </RruModalButton>
   );
 
 };

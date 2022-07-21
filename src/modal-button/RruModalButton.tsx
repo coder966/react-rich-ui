@@ -43,7 +43,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
         {...props}
         onClick={() => setShow(true)}
       >
-        {props.label ? props.label : props.children}
+        {props.children}
       </button>
     </>
   );

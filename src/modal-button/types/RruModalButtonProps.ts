@@ -5,11 +5,6 @@ type ButtonProps = JSX.IntrinsicElements['button'];
 interface RruModalButtonBaseProps {
 
   /**
-   * Button label.
-   */
-  label?: React.ReactNode;
-
-  /**
    * The modal title.
    */
   modalTitle?: React.ReactNode;

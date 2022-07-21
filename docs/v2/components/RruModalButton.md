@@ -8,6 +8,5 @@ A button that shows a modal when clicked.
 
 | Prop       | Description     | Required |
 | ---------- | --------------- | -------- |
-| label      | Button label.   | No       |
 | modalTitle | The modal title | No       |
 | modalBody  | The modal body  | No       |
