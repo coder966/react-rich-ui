@@ -42,8 +42,11 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
 
   return (
     <>
-      <div className={`rru-modal-button__container rru-modal-button__container--${show ? 'visible' : 'hidden'}`}>
-        <div className='rru-modal-button__box'>
+      <div
+        className={`rru-modal-button__container rru-modal-button__container--${show ? 'visible' : 'hidden'}`}
+        onClick={e => setShow(false)}
+      >
+        <div className='rru-modal-button__box' onClick={e => e.stopPropagation()}>
           <section className='rru-modal-button__section rru-modal-button__header'>
             <span className='rru-modal-button__title'>{props.modalTitle}</span>
             <span className='rru-modal-button__close-button' onClick={() => setShow(false)}></span>
