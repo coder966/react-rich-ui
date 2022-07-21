@@ -18,7 +18,6 @@ import React, { FC, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
-import './style.css';
 import RruFileInputProps from './types/RruFileInputProps';
 
 const RruFileInput: FC<RruFileInputProps> = (props) => {
@@ -46,7 +45,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
         aria-label='Upload'
         {...props}
         type='file'
-        className='form-control'
+        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         name={props.name}
         onChange={onChange}
       />

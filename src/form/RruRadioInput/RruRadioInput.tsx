@@ -67,7 +67,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
               checked={isChecked(option)}
               onChange={onChange}
               type='radio'
-              className='form-check-input'
+              className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
               {option.label}

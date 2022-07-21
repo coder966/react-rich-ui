@@ -18,7 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import { RruDateTimeInput, RruDateTimeInputDateConfig, RruForm } from '../src/index';
+import { RruDateTimeInput, RruForm } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruDateTimeInput',
@@ -34,12 +34,12 @@ export const Date = (args) => {
 
   const validationSchema = yup.object().shape({
     birthDate: yup.date().nullable()
-      // .required('The date is required')
+      .required('The date is required')
       .min('2020-01-01', 'The date is too old')
       .max('2024-01-01', 'The date is too new')
   });
 
-  const getDateConfig = (date: string): RruDateTimeInputDateConfig | null => {
+  const getDateConfig = (date: string) => {
     if (date === '2022-07-12') {
       return { isDisabled: true };
     }
@@ -78,12 +78,12 @@ export const DateTime = (args) => {
 
   const validationSchema = yup.object().shape({
     birthDate: yup.date().nullable()
-      // .required('The date is required')
+      .required('The date is required')
       .min('2020-01-01', 'The date is too old')
       .max('2024-01-01', 'The date is too new')
   });
 
-  const getDateConfig = (date: string): RruDateTimeInputDateConfig | null => {
+  const getDateConfig = (date: string) => {
     if (date === '2022-07-12') {
       return { isDisabled: true };
     }
