@@ -41,7 +41,7 @@ export const Basic = (args) => {
   }
 
   const validationSchema = yup.object().shape({
-    color: yup.string().nullable().required('You must select one')
+    // color: yup.string().nullable().required('You must select one')
   });
 
   const onSubmit = form => {
@@ -51,6 +51,35 @@ export const Basic = (args) => {
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <RruRadioInput name='color' label='Color' options={colors} />
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+    </RruForm>
+  );
+
+};
+
+export const Inline = (args) => {
+
+  const colors = [
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
+  ];
+
+  const initialValues = {
+
+  }
+
+  const validationSchema = yup.object().shape({
+    // color: yup.string().nullable().required('You must select one')
+  });
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruRadioInput name='color' label='Color' options={colors} inline={true} />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );

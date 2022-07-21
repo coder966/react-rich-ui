@@ -59,3 +59,34 @@ export const Basic = (args) => {
   );
 
 };
+
+export const Inline = (args) => {
+
+  const colors = [
+    { value: 'RED', label: 'Red' },
+    { value: 'BLUE', label: 'Blue' },
+    { value: 'GREEN', label: 'Green' },
+  ];
+
+  const initialValues = {
+
+  }
+
+  const validationSchema = yup.object().shape({
+    colors: yup.array()
+      .min(1, 'You must select at least one')
+      .max(2, 'You cannot select more than two')
+  });
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruMultiCheckboxInput name='colors' label='Colors' options={colors} inline />
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+    </RruForm>
+  );
+
+};
