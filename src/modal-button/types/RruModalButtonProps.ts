@@ -2,7 +2,7 @@ import React from "react";
 
 type ButtonProps = JSX.IntrinsicElements['button'];
 
-interface RruModalButtonBaseProps {
+interface RruModalButtonProps extends ButtonProps {
 
   /**
    * The modal title.
@@ -15,7 +15,5 @@ interface RruModalButtonBaseProps {
   modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode);
 
 }
-
-type RruModalButtonProps = (RruModalButtonBaseProps & ButtonProps);
 
 export default RruModalButtonProps;

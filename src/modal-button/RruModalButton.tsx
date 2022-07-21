@@ -14,7 +14,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
     setShow(false);
   }
 
-  const renderModalSection = (modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
+  const renderModalBody = (modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
     if (modalBody) {
       if (typeof modalBody === 'function') {
         return modalBody(closeModal);
@@ -35,7 +35,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
             <span className='rru-modal-button__close-button' onClick={() => setShow(false)}></span>
           </section>
           <section className='rru-modal-button__section'>
-            {renderModalSection(props.modalBody)}
+            {renderModalBody(props.modalBody)}
           </section>
         </div>
       </div>
