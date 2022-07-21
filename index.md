@@ -14,7 +14,7 @@ A set of commonly-used React components with a declarative API
 
 ## Getting Started
 
-Please visit the documentations page for [V2](/docs/v2/get-started).
+Please visit the documentations page for [V1](/docs/v1/get-started).
 
 ## License
 
