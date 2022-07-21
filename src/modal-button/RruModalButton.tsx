@@ -15,17 +15,19 @@
  */
 
 import React, { FC, useState } from 'react';
-import './style.css';
 import RruModalButtonProps from './types/RruModalButtonProps';
 
 /**
  * A button that shows a modal when clicked.
  */
 const RruModalButton: FC<RruModalButtonProps> = (props) => {
-  const [show, setShow] = useState(false);
+  const [id] = useState(new Date().getTime());
 
   const closeModal = (): void => {
-    setShow(false);
+    const modal = document.getElementById(`modal-close-${id}`);
+    if (modal) {
+      modal.click();
+    }
   }
 
   const renderModalBody = (modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
@@ -42,26 +44,27 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
 
   return (
     <>
-      <div
-        className={`rru-modal-button__container rru-modal-button__container--${show ? 'visible' : 'hidden'}`}
-        onClick={e => setShow(false)}
-      >
-        <div className='rru-modal-button__box' onClick={e => e.stopPropagation()}>
-          <section className='rru-modal-button__section rru-modal-button__header'>
-            <span className='rru-modal-button__title'>{props.modalTitle}</span>
-            <span className='rru-modal-button__close-button' onClick={() => setShow(false)}></span>
-          </section>
-          <section className='rru-modal-button__section'>
-            {renderModalBody(props.modalBody)}
-          </section>
-        </div>
-      </div>
-      <button
+      <button type='button'
         {...props}
-        onClick={() => setShow(true)}
+        data-bs-toggle='modal'
+        data-bs-target={`#modal-${id}`}
       >
         {props.children}
       </button>
+
+      <div className='modal fade' id={`modal-${id}`} tabIndex={-1} aria-hidden='true'>
+        <div className='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h5 className='modal-title'>Modal title</h5>
+              <button id={`modal-close-${id}`} type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div className='modal-body'>
+              {renderModalBody(props.modalBody)}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
