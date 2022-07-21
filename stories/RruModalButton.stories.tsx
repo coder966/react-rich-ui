@@ -34,7 +34,7 @@ export const Basic = (args) => {
 
 };
 
-export const Advanced = (args) => {
+export const Customized = (args) => {
 
   return (
     <RruModalButton
@@ -52,6 +52,98 @@ export const Advanced = (args) => {
 
       <h1>Big Label</h1>
     </RruModalButton>
+  );
+
+};
+
+export const LongContent = (args) => {
+
+  return (
+    <div>
+
+      <RruModalButton
+        modalTitle='Modal Title'
+        modalBody={(closeModal) => {
+          return <div>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <p>This is a dummy text</p>
+            <button onClick={closeModal}>Close Modal</button>
+          </div>
+        }}
+      >
+        Click Me
+      </RruModalButton>
+
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+      <p>This is a dummy text</p>
+
+    </div>
   );
 
 };
