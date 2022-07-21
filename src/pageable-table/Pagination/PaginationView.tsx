@@ -19,11 +19,11 @@ const PaginationView = ({
   }
 
   return <nav>
-    <ul className='pagination'>
+    <ul className='pagination justify-content-center'>
 
       <li
-        className={`page-item ${isFirstPage ? 'disabled' : ''}`}
-        onClick={() => !isFirstPage && onChangePage(currentPage - 1)}>
+        className={`page-item ${isFirstPage || pages.length == 0 ? 'disabled' : ''}`}
+        onClick={() => !isFirstPage && pages.length > 0 && onChangePage(currentPage - 1)}>
         <button className='page-link' aria-label='Previous'>&laquo;</button>
       </li>
 
