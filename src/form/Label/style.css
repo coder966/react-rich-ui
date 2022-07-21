@@ -1,0 +1,4 @@
+label.required-asterisk:after {
+  content: ' *';
+  color: #dc3545;
+}

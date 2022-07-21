@@ -1,0 +1,8 @@
+input[type='file'] {
+  display: none;
+}
+
+.fileUpload {
+  cursor: pointer;
+  overflow: hidden;
+}

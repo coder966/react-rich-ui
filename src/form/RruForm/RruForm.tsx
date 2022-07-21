@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { FormContext, useForm } from 'react-hook-form';
-import './style.css';
 import RruFormProps from './types/RruFormProps';
 
 /**

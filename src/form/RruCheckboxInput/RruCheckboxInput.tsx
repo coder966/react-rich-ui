@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ErrorMessage from '../common/ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
 /**

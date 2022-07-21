@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ErrorMessage from '../common/ErrorMessage';
-import Label from '../common/Label';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Label from '../Label/Label';
+import './style.css';
 import RruFileInputProps from './types/RruFileInputProps';
 
 /**
