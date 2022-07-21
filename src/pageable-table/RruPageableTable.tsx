@@ -168,11 +168,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         <thead>
           <tr>
             {columns.map((col, index) =>
-              (col.display === undefined || col.display) && (
-                <th key={index} className={getThClassName(col)} onClick={() => onSort(col)}>
-                  {col.label}
-                </th>
-              )
+              <th key={index} className={getThClassName(col)} onClick={() => onSort(col)}>
+                {col.label}
+              </th>
             )}
           </tr>
         </thead>
@@ -202,15 +200,13 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
             <tr key={i}>
               {columns.map(
                 (col, j) =>
-                  (col.display === undefined || col.display) && (
-                    <td key={j}>
-                      {typeof col.value === 'function'
-                        ? col.value(row)
-                        : col.value === '#'
-                          ? getSerialNo(i)
-                          : resolveObjectAttribute(col.value, row)}
-                    </td>
-                  )
+                  <td key={j}>
+                    {typeof col.value === 'function'
+                      ? col.value(row)
+                      : col.value === '#'
+                        ? getSerialNo(i)
+                        : resolveObjectAttribute(col.value, row)}
+                  </td>
               )}
             </tr>
           ))}

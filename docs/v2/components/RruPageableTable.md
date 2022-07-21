@@ -29,7 +29,6 @@
 | value    | The value the should be displayed in each row.<br>This could be either a property path in row object<br>or a function which takes the row object and returns cell value | Yes      |
 | sortable | Set false to disable sorting for this column.                                                                                                                           | No       |
 | sortKey  | Property path in row object. By dafault same as `value` if it is also a property path.                                                                                  | No       |
-| display  | Set false to hide this column                                                                                                                                           | No       |
 
 ### getRetainedTableSearchObject
 
