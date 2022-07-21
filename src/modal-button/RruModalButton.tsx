@@ -14,12 +14,12 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
     setShow(false);
   }
 
-  const renderModalSection = (modalFooter?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
-    if (modalFooter) {
-      if (typeof modalFooter === 'function') {
-        return modalFooter(closeModal);
+  const renderModalSection = (modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
+    if (modalBody) {
+      if (typeof modalBody === 'function') {
+        return modalBody(closeModal);
       } else {
-        return modalFooter;
+        return modalBody;
       }
     } else {
       return undefined;

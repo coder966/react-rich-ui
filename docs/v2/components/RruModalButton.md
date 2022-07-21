@@ -6,9 +6,8 @@ A button that shows a modal when clicked.
 
 ## API
 
-| Prop       | Description                                                       | Required |
-| ---------- | ----------------------------------------------------------------- | -------- |
-| label      | Button label                                                      | No       |
-| onClick    | A function returns weather to to proceed showing the modal or not | No       |
-| modalTitle | The modal title                                                   | No       |
-| modalBody  | The modal body                                                    | No       |
+| Prop       | Description     | Required |
+| ---------- | --------------- | -------- |
+| label      | Button label.   | No       |
+| modalTitle | The modal title | No       |
+| modalBody  | The modal body  | No       |

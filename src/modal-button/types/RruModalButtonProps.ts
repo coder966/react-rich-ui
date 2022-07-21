@@ -10,11 +10,6 @@ interface RruModalButtonBaseProps {
   label?: React.ReactNode;
 
   /**
-   * Returns weather to to proceed showing the modal or not.
-   */
-  onClick?: (event: React.MouseEventHandler<HTMLButtonElement>) => boolean;
-
-  /**
    * The modal title.
    */
   modalTitle?: React.ReactNode;
