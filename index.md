@@ -16,10 +16,6 @@ A set of commonly-used React components with a declarative API
 
 Please visit the documentations page for [V2](/docs/v2/get-started).
 
-## Author
-
-This project is created and maintained by Khalid H. Alharisi. [coder966.net](https://coder966.net){:target="\_blank"}
-
 ## License
 
 ```txt
