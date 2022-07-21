@@ -63,24 +63,21 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
-      <div className='row'>
-        {props.options.map((o) => (
-          <div key={`${props.name}_${o.value}`} className='col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3'>
-            <div className='custom-control custom-checkbox m-1'>
-              <input
-                {...props}
-                id={`${props.name}_${o.value}`}
-                name={props.name}
-                value={o.value}
-                checked={isChecked(o)}
-                onChange={onChange}
-                type='checkbox'
-                className='custom-control-input'
-              />
-              <label htmlFor={`${props.name}_${o.value}`} className='custom-control-label'>
-                {o.label}
-              </label>
-            </div>
+      <div>
+        {props.options.map((option) => (
+          <div key={`checkbox_${props.name}_${option.value}`} className='form-check'>
+            <input
+              id={`checkbox_${props.name}_${option.value}`}
+              name={props.name}
+              value={option.value}
+              checked={isChecked(option)}
+              onChange={onChange}
+              type='checkbox'
+              className='form-check-input'
+            />
+            <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
+              {option.label}
+            </label>
           </div>
         ))}
       </div>

@@ -24,16 +24,16 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <div className='custom-control custom-checkbox m-1'>
+      <div className='form-check'>
         <input
           {...props}
           id={'checkbox_' + props.name}
           name={props.name}
           ref={formContext.register}
           type='checkbox'
-          className={'custom-control-input ' + (formContext.errors[props.name] ? 'is-invalid' : '')}
+          className={'form-check-input ' + (formContext.errors[props.name] ? 'is-invalid' : '')}
         />
-        <label htmlFor={'checkbox_' + props.name} className='custom-control-label'>
+        <label htmlFor={'checkbox_' + props.name} className='form-check-label'>
           {props.label}
         </label>
       </div>
