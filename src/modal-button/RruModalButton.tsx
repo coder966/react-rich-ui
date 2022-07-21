@@ -28,13 +28,13 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
 
   return (
     <>
-      <div className={show ? 'rru-button-modal__container rru-button-modal__container--visible' : 'rru-button-modal__container rru-button-modal__container--hidden'}>
-        <div className='rru-button-modal__box'>
-          <section className='rru-button-modal__section rru-button-modal__header'>
-            <span className='rru-button-modal__title'>{props.modalTitle}</span>
-            <span className='rru-button-modal__close-button' onClick={() => setShow(false)}></span>
+      <div className={`rru-modal-button__container rru-modal-button__container--${show ? 'visible' : 'hidden'}`}>
+        <div className='rru-modal-button__box'>
+          <section className='rru-modal-button__section rru-modal-button__header'>
+            <span className='rru-modal-button__title'>{props.modalTitle}</span>
+            <span className='rru-modal-button__close-button' onClick={() => setShow(false)}></span>
           </section>
-          <section className='rru-button-modal__section'>
+          <section className='rru-modal-button__section'>
             {renderModalSection(props.modalBody)}
           </section>
         </div>

@@ -1,80 +1,67 @@
-.table-striped thead tr {
+.rru-pageable-table thead tr {
   background-color: #f2f2f2;
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f9f9f9;
-}
-
-.table-striped tbody tr:nth-of-type(even) {
+.rru-pageable-table tbody tr:nth-of-type(odd) {
   background-color: #f7f7f7;
 }
 
-.rru-pageable-table-centered {
-  text-align: center !important;
-}
-.rru-pageable-table-pagination {
-  justify-content: center;
-  padding: 0;
+.rru-pageable-table tbody tr:nth-of-type(even) {
+  background-color: #f9f9f9;
 }
 
-.page-item:last-child .page-link {
-  border-radius: 0;
-}
-.page-item:first-child .page-link {
-  border-radius: 0;
+.rru-pageable-table tbody tr:last-child td {
+  border-bottom: 1px solid #dee2e6;
 }
 
-.rru-pageable-table-loading-upper-th {
-  border-bottom: 0 !important;
+/* th */
+
+.rru-pageable-table__th {
+  border-bottom: none !important;
 }
 
-.rru-pageable-table-loading-th {
-  padding: 0 !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-}
-
-.sortable {
+.rru-pageable-table__th--sortable {
   cursor: pointer;
 }
-.sortable::before {
+
+.rru-pageable-table__th--sortable::before {
   font-family: 'fontAwesome';
   font-size: 0.9rem;
   content: '\f0dc';
   margin-inline-end: 0.3rem;
 }
-.sortable.asc::before {
+
+.rru-pageable-table__th--sortable-asc::before {
   content: '\f0de ';
 }
-.sortable.desc::before {
+
+.rru-pageable-table__th--sortable-desc::before {
   content: '\f0dd ';
 }
 
-.progressBar {
+/* loading bar */
+
+.rru-pageable-table__loading-bar-tr--hidden {
+  display: none;
+}
+
+.rru-pageable-table__loading-bar-tr--visible + tr > td {
+  border-top: none !important;
+}
+
+.rru-pageable-table__loading-bar-td {
+  padding: 0 !important;
   position: relative;
   height: 4px;
-  display: block;
-  width: 100%;
   background-color: #13213541;
-  background-clip: padding-box;
   overflow: hidden;
 }
 
-.progressBarBar .determinate {
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  bottom: 0;
-  background-color: #26a69a;
-  transition: width 0.3s linear;
-}
-
-.progressBar .indeterminate {
+.rru-pageable-table__loading-bar {
   background-color: #2a7fc2;
 }
 
-.progressBar .indeterminate:before {
+.rru-pageable-table__loading-bar:before {
   content: '';
   position: absolute;
   background-color: inherit;
@@ -85,7 +72,7 @@
   animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 
-.progressBar .indeterminate:after {
+.rru-pageable-table__loading-bar:after {
   content: '';
   position: absolute;
   background-color: inherit;
@@ -95,21 +82,6 @@
   will-change: left, right;
   animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   animation-delay: 1.15s;
-}
-
-@-webkit-keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%;
-  }
-  60% {
-    left: 100%;
-    right: -90%;
-  }
-  100% {
-    left: 100%;
-    right: -90%;
-  }
 }
 
 @keyframes indeterminate {
@@ -127,21 +99,6 @@
   }
 }
 
-@-webkit-keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%;
-  }
-  60% {
-    left: 107%;
-    right: -8%;
-  }
-  100% {
-    left: 107%;
-    right: -8%;
-  }
-}
-
 @keyframes indeterminate-short {
   0% {
     left: -200%;
@@ -155,79 +112,4 @@
     left: 107%;
     right: -8%;
   }
-}
-
-.pagination {
-  justify-content: center;
-}
-
-.pagination > li > a:focus {
-  outline: none;
-}
-
-.pageLink,
-.next,
-.previous,
-.pageItem {
-  display: block;
-  padding: 0.5rem 0.8rem;
-  line-height: 1.25rem;
-  color: #007942;
-  background-color: #fff;
-  border: 1px solid #ddd;
-}
-
-.pageLink {
-  cursor: pointer;
-}
-
-.pageLink:hover {
-  color: #007942;
-  text-decoration: none;
-  background-color: #eceeef;
-  border-color: #ddd;
-}
-
-.break {
-  display: block;
-  padding: 8px 14px;
-  margin: -1px;
-  line-height: 1.25;
-  background-color: #fff;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-}
-
-.next:hover,
-.previous:hover {
-  cursor: pointer;
-}
-
-.next:hover > a,
-.previous:hover > a {
-  text-decoration: none !important;
-}
-
-.disabled,
-.disabled:hover,
-.disabled > a {
-  color: #555;
-  background-color: #fff;
-  cursor: default;
-}
-
-.activePage {
-  z-index: 2;
-  color: #fff;
-  background-color: #007942;
-  border-color: #007942;
-}
-
-.activePage > a,
-.activePage:hover > a {
-  cursor: default;
-  z-index: 2;
-  color: #fff;
-  background-color: #007942;
-  border-color: #007942;
 }

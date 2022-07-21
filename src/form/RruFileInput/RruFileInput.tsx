@@ -35,13 +35,14 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         {...props}
+        className='rru-file-input__input'
         type='file'
         ref={ref}
         name={props.name}
         onChange={onChange}
       />
       <div
-        className={`form-control fileUpload ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+        className={`form-control rru-file-input__visible-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         onClick={(e) => {
           if (ref.current) {
             ref.current.click();

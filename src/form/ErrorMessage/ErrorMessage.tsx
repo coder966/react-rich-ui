@@ -17,7 +17,7 @@ const ErrorMessage: FC<ErrorMessageProps> = (props) => {
   const messageKey = 'message';
   const message = error && isObjKey(error, messageKey) && error[messageKey];
 
-  return message ? <span className='rru-form-input-error-message'>{message}</span> : null;
+  return message ? <span className='rru-form-error-message'>{message}</span> : null;
 };
 
 export default ErrorMessage;

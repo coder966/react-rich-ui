@@ -123,17 +123,19 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     }
   };
 
-  const getSortClassName = (col: TableColumn) => {
-    const sortKey = getSortKey(col);
-    if (sortKey) {
-      if (sortKey === sortBy) {
-        return 'sortable ' + sortDir;
-      } else {
-        return 'sortable';
+  const getThClassName = (col: TableColumn) => {
+    let result = 'rru-pageable-table__th';
+    if (!disableSorting) {
+      const sortKey = getSortKey(col);
+      if (sortKey) {
+        if (sortKey === sortBy) {
+          result += ' rru-pageable-table__th--sortable rru-pageable-table__th--sortable-' + sortDir;
+        } else {
+          result += ' rru-pageable-table__th--sortable';
+        }
       }
-    } else {
-      return '';
     }
+    return result;
   };
 
   const onSort = (col: TableColumn) => {
@@ -148,46 +150,35 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
 
   return (
     <div>
-      <table className='table table-striped'>
+      <table className='table table-striped rru-pageable-table'>
         <thead>
           <tr>
-            {columns.map(
-              (col, index) =>
-                (col.display === undefined || col.display) && (
-                  <th
-                    key={index}
-                    className={
-                      (!disableSorting && getSortClassName(col)) +
-                      (isLoading ? ' rru-pageable-table-loading-upper-th' : '')
-                    }
-                    onClick={() => onSort(col)}
-                  >
-                    {col.label}
-                  </th>
-                )
+            {columns.map((col, index) =>
+              (col.display === undefined || col.display) && (
+                <th key={index} className={getThClassName(col)} onClick={() => onSort(col)}>
+                  {col.label}
+                </th>
+              )
             )}
           </tr>
-          {isLoading && (
-            <tr>
-              <th colSpan={columns.length} className='rru-pageable-table-loading-th'>
-                <div className='progressBar'>
-                  <div className='indeterminate'></div>
-                </div>
-              </th>
-            </tr>
-          )}
         </thead>
         <tbody>
+
+          <tr className={`rru-pageable-table__loading-bar-tr--${isLoading ? 'visible' : 'hidden'}`}>
+            <td colSpan={columns.length} className='rru-pageable-table__loading-bar-td'>
+              <div className='rru-pageable-table__loading-bar'></div>
+            </td>
+          </tr>
           {error && (
             <tr>
-              <td colSpan={columns.length} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='text-center'>
                 {apiErrorLabel}
               </td>
             </tr>
           )}
           {data.length === 0 && !error && (
             <tr>
-              <td colSpan={columns.length} className='rru-pageable-table-centered'>
+              <td colSpan={columns.length} className='text-center'>
                 {noDataLabel}
               </td>
             </tr>

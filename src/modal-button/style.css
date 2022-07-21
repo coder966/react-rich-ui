@@ -1,4 +1,4 @@
-.rru-button-modal__container {
+.rru-modal-button__container {
   z-index: 100;
   display: flex;
   align-content: center;
@@ -14,19 +14,19 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.rru-button-modal__container--visible {
+.rru-modal-button__container--visible {
   opacity: 1;
   transform: scale(1);
   transition: transform 0s, opacity 0.3s ease-in-out;
 }
 
-.rru-button-modal__container--hidden {
+.rru-modal-button__container--hidden {
   opacity: 0;
   transform: scale(0);
   transition: transform 0s linear 0.3s, opacity 0.3s ease-in-out;
 }
 
-.rru-button-modal__box {
+.rru-modal-button__box {
   min-width: 500px;
   background: white;
   overflow-y: auto;
@@ -35,28 +35,28 @@
 }
 
 @media (max-width: 530px) {
-  .rru-button-modal__box {
+  .rru-modal-button__box {
     min-width: 350px;
   }
 }
 
-.rru-button-modal__section {
+.rru-modal-button__section {
   padding: 0.75rem;
 }
 
-.rru-button-modal__header {
+.rru-modal-button__header {
   display: flex;
   padding: 1.25rem;
   border-bottom: 1px solid #dee2e6;
 }
 
-.rru-button-modal__title {
+.rru-modal-button__title {
   flex-grow: 1;
   font-size: 1.5rem;
   line-height: 1;
 }
 
-.rru-button-modal__close-button {
+.rru-modal-button__close-button {
   width: 1.5em;
   height: 1.5em;
   cursor: pointer;

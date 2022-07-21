@@ -207,8 +207,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
         <div
           ref={popupRef}
-          className={`rru-date-input__popup ${isPopupShown ? 'rru-date-input__popup--shown' : 'rru-date-input__popup--hidden'
-            }`}
+          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}
         >
           <div className='rru-date-input__container'>
 

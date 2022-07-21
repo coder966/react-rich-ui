@@ -19,7 +19,7 @@ const Label: FC<LabelProps> = (props) => {
   const { inputName, label, requiredAsterisk } = props;
 
   return label ? (
-    <label className={requiredAsterisk ? 'required-asterisk' : ''} htmlFor={inputName}>
+    <label className={requiredAsterisk ? 'rru-form-label--required-asterisk' : ''} htmlFor={inputName}>
       {label}
     </label>
   ) : null;
