@@ -125,7 +125,41 @@ export const MultipleFieldsInOneForm = (args) => {
 
 };
 
+export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
+  const [firstName, setFirstName] = useState();
 
+  const onFirstNameChange = (form) => {
+    setFirstName(form['firstName']);
+  }
+
+  const onSubmit = form => {
+    action('submitting the form')(form);
+  };
+
+  const shouldRenderLastName = () => {
+    return firstName !== 'khalid';
+  }
+
+  return (
+    <div>
+      <p>Type 'khalid' in the first name to hide the last name.</p>
+      <RruForm onSubmit={onSubmit} watch={['firstName']} watcher={onFirstNameChange}>
+        <div className='row'>
+          <div className='col-6'>
+            <RruTextInput name='firstName' label='First Name' />
+          </div>
+          {shouldRenderLastName() &&
+            <div className='col-6'>
+              <RruTextInput name='lastName' label='Last Name' />
+            </div>
+          }
+        </div>
+        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      </RruForm>
+    </div>
+  );
+
+};
 
 export const MultipleFormsInOnePage = (args) => {
 
