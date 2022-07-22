@@ -41,9 +41,6 @@ interface RruPageableTableProps {
   /**  */
   pageSize: number;
 
-  /**  */
-  disableSorting?: boolean;
-
   /** */
   defaultSortBy?: string,
 

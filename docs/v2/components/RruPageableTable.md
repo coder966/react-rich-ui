@@ -15,7 +15,6 @@
 | retainTableState | Whether or not to retain the table state (current page and current sort configuration and current search object). To read the retained search object use `getRetainedTableSearchObject`. | No       |
 | onResponse       | A callback function. `data => void`                                                                                                                                                      | No       |
 | pageSize         | The page size. The default value is `10`                                                                                                                                                 | No       |
-| disableSorting   | Set to false to disable sorting feature.                                                                                                                                                 | No       |
 | defaultSortBy    | Set the default sort key                                                                                                                                                                 | No       |
 | defaultSortDir   | Set to default sort direction                                                                                                                                                            | No       |
 | noDataLabel      | This is the label used when no data is available.                                                                                                                                        | No       |
@@ -23,12 +22,11 @@
 
 ### Columns
 
-| Prop     | Description                                                                                                                                                             | Required |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| label    | Header label                                                                                                                                                            | Yes      |
-| value    | The value the should be displayed in each row.<br>This could be either a property path in row object<br>or a function which takes the row object and returns cell value | Yes      |
-| sortable | Set false to disable sorting for this column.                                                                                                                           | No       |
-| sortKey  | Property path in row object. By dafault same as `value` if it is also a property path.                                                                                  | No       |
+| Prop    | Description                                                                                                                                                                                                                                                                                                          | Required |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| label   | Header label                                                                                                                                                                                                                                                                                                         | Yes      |
+| value   | The value the should be displayed in each row.<br>This could be either a property path in row object<br>or a function which takes the row object and returns cell value                                                                                                                                              | Yes      |
+| sortKey | Property path in row object. By default uses the path provided by `value` in case `value` was a string. If `value` is a function, then you need to provide the sorting key path, otherwise sorting will be disabled for this column. Similarly, if you want to disable sorting for a column, you can pass null here. | No       |
 
 ### getRetainedTableSearchObject
 

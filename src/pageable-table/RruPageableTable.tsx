@@ -40,7 +40,6 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   search,
   retainTableState = false,
   pageSize = 10,
-  disableSorting = false,
   defaultSortBy,
   defaultSortDir,
   onResponse,
@@ -124,29 +123,24 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
   const getSortKey = (col: TableColumn) => {
-    if (col.sortable === undefined || col.sortable) {
+    if (col.sortKey === undefined) {
       if (typeof col.value === 'function') {
         return col.sortKey;
       } else if (col.value !== '#') {
         return col.value;
-      } else {
-        return undefined;
       }
-    } else {
-      return undefined;
     }
+    return col.sortKey;
   };
 
   const getThClassName = (col: TableColumn) => {
     let result = 'rru-pageable-table__th';
-    if (!disableSorting) {
-      const sortKey = getSortKey(col);
-      if (sortKey) {
-        if (sortKey === sortBy) {
-          result += ' rru-pageable-table__th--sortable rru-pageable-table__th--sortable-' + sortDir;
-        } else {
-          result += ' rru-pageable-table__th--sortable';
-        }
+    const sortKey = getSortKey(col);
+    if (sortKey) {
+      if (sortKey === sortBy) {
+        result += ' rru-pageable-table__th--sortable rru-pageable-table__th--sortable-' + sortDir;
+      } else {
+        result += ' rru-pageable-table__th--sortable';
       }
     }
     return result;
@@ -154,7 +148,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
 
   const onSort = (col: TableColumn) => {
     const sortKey = getSortKey(col);
-    if (sortKey && !disableSorting) {
+    if (sortKey) {
       if (sortBy !== sortKey) {
         setSortBy(sortKey);
       }

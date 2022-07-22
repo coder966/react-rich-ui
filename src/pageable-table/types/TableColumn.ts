@@ -17,8 +17,7 @@
 interface TableColumn {
   label: React.ReactNode;
   value: string | ((row: object) => React.ReactNode);
-  sortable?: boolean;
-  sortKey?: string;
+  sortKey?: string | null;
 }
 
 export default TableColumn;

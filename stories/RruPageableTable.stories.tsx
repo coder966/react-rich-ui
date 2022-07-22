@@ -40,6 +40,7 @@ const columns = [
   {
     label: 'Email',
     value: 'email',
+    sortKey: null // to disable sorting for this column
   },
   {
     label: 'Address',
