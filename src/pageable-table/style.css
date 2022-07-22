@@ -17,18 +17,24 @@
 }
 
 .rru-pageable-table__th--sortable::before {
-  font-family: 'fontAwesome';
-  font-size: 0.9rem;
-  content: '\f0dc';
+  display: inline-block;
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='88.297 129.356 286.131 398.1'%3E%3Cpath d='M112.36248 360.406189h238c21.4 0 32.1 25.9 17 41l-119 119c-9.4 9.4-24.6 9.4-33.9 0l-119.1-119c-15.1-15.1-4.4-41 17-41zm255-105-119-119c-9.4-9.4-24.6-9.4-33.9 0l-119.1 119c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z'/%3E%3C/svg%3E");
+  background-size: 0.5364rem 0.7461rem;
+  width: 0.5364rem;
+  height: 0.7461rem;
   margin-inline-end: 0.3rem;
 }
 
 .rru-pageable-table__th--sortable-asc::before {
-  content: '\f0de ';
+  height: 0.37305rem;
+  margin-bottom: 0.186525rem;
 }
 
 .rru-pageable-table__th--sortable-desc::before {
-  content: '\f0dd ';
+  height: 0.37305rem;
+  margin-bottom: 0.186525rem;
+  transform: rotate(180deg);
 }
 
 /* loading bar */
