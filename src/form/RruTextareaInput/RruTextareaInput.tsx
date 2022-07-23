@@ -14,22 +14,35 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import RruTextareaInputProps from './types/RruTextareaInputProps';
 
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
+  const [value, setValue] = useState<string | undefined>(undefined);
   const formContext = useFormContext();
+
+  const setNewValue = (val: string | undefined) => {
+    formContext.setValue(props.name, val);
+    setValue(val);
+  }
+
+  useEffect(() => {
+    formContext.register(props.name);
+    const initialValue = formContext.getValues()[props.name];
+    setNewValue(initialValue);
+  }, []);
 
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <textarea
         {...props}
-        ref={formContext.register}
         name={props.name}
+        value={value}
+        onChange={e => setNewValue(e.target.value)}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
       />
       <ErrorMessage inputName={props.name} />
