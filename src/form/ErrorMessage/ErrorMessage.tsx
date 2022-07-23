@@ -27,7 +27,7 @@ const ErrorMessage: FC<ErrorMessageProps> = (props) => {
   const formContext = useFormContext();
   const error = formContext.errors[props.inputName];
   const messageKey = 'message';
-  const message = error && isObjKey(error, messageKey) && error[messageKey];
+  const message = error && isObjKey(error, messageKey) ? error[messageKey] : null;
 
   return message ? (
     <div className='invalid-feedback d-block'>{message}</div>
