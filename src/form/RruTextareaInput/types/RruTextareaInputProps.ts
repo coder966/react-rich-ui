@@ -48,4 +48,20 @@ export default interface RruTextareaInputProps {
    */
   autoComplete?: string;
 
+  /**
+   * Specifies the visible number of lines in the textarea
+   */
+  rows?: number;
+
+  /**
+   * Specifies the visible width of the textarea
+   */
+  cols?: number;
+
+  /**
+   * Specifies how the text is to be wrapped when submitted in a form.
+   * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap)
+   */
+  wrap?: string;
+
 }
