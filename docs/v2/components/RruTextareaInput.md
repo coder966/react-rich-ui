@@ -4,11 +4,12 @@
 
 ## Props
 
-| Name             | Description                                           | Required |
-| ---------------- | ----------------------------------------------------- | -------- |
-| name             | Unique form element name                              | Yes      |
-| label            | The form element label                                | No       |
-| requiredAsterisk | Display an asterisk to indicate the field is required | No       |
-| disabled         | Controls whether the input field is disabled or not   | No       |
-| placeholder      | A short hint that describes the expected value        | No       |
-| maxLength        | The maximum number of characters allowed              | No       |
+| Name             | Description                                                                                                                                                                                                                                                                              | Required |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| name             | Unique form element name                                                                                                                                                                                                                                                                 | Yes      |
+| label            | The form element label                                                                                                                                                                                                                                                                   | No       |
+| requiredAsterisk | Display an asterisk to indicate the field is required                                                                                                                                                                                                                                    | No       |
+| disabled         | Controls whether the input field is disabled or not                                                                                                                                                                                                                                      | No       |
+| placeholder      | A short hint that describes the expected value                                                                                                                                                                                                                                           | No       |
+| maxLength        | The maximum number of characters allowed                                                                                                                                                                                                                                                 | No       |
+| autoComplete     | Provides guidance to the browser as to the type of information expected in the field, this could allow the browser to provide automated assistance in filling out the form field. More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) | No       |

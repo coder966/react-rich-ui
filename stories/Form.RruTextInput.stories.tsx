@@ -46,7 +46,7 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <RruTextInput name='email' label='Email' requiredAsterisk />
+      <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
   );

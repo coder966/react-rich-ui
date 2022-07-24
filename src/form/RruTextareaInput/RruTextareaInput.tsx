@@ -48,6 +48,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
         disabled={props.disabled}
         placeholder={props.placeholder}
         maxLength={props.maxLength}
+        autoComplete={props.autoComplete}
       />
       <ErrorMessage inputName={props.name} />
     </div>

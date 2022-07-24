@@ -40,4 +40,12 @@ export default interface RruTextareaInputProps {
    * The maximum number of characters allowed
    */
   maxLength?: number;
+
+  /**
+   * Provides guidance to the browser as to the type of information expected in the field, 
+   * this could allow the browser to provide automated assistance in filling out the form field.
+   * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
+   */
+  autoComplete?: string;
+
 }
