@@ -93,12 +93,17 @@ export const OnChange = (args) => {
 
 export const MultipleFieldsInOneForm = (args) => {
 
+  const validationSchema = yup.object().shape({
+    firstName: yup.string().nullable().required('Required').min(3),
+    secondName: yup.string().nullable().required('Required').min(3),
+  });
+
   const onSubmit = form => {
     action('submitting the form')(form);
   };
 
   return (
-    <RruForm onSubmit={onSubmit}>
+    <RruForm validationSchema={validationSchema} onSubmit={onSubmit}>
       <div className='row'>
         <div className='col-6'>
           <RruTextInput name='firstName' label='First Name' />
