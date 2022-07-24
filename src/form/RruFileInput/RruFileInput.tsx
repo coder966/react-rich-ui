@@ -45,7 +45,6 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         aria-label='Upload'
-        {...props}
         type='file'
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         name={props.name}

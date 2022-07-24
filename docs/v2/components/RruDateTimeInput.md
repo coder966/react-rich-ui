@@ -2,9 +2,9 @@
 
 # RruDateTimeInput
 
-## API
+## Props
 
-| Prop             | Description                                                                                                                                                    | Required |
+| Name             | Description                                                                                                                                                    | Required |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | name             | Unique form element name                                                                                                                                       | Yes      |
 | label            | The form element label                                                                                                                                         | No       |
@@ -16,7 +16,7 @@
 
 ## RruDateTimeInputDateConfig
 
-| Attribute  | Description           | Required |
+| Name       | Description           | Required |
 | ---------- | --------------------- | -------- |
 | isDisabled | Is the date disabled. | No       |
 | className  | Class name.           | No       |

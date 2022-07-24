@@ -40,7 +40,6 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
     <div className='form-group'>
       <div className='form-check'>
         <input
-          {...props}
           id={'checkbox_' + props.name}
           name={props.name}
           checked={value}

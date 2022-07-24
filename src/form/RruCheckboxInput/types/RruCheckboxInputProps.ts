@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import HtmlInputElementProps from "../../types/HtmlInputElementProps";
 
-export default interface RruCheckboxInputProps extends HtmlInputElementProps {
+export default interface RruCheckboxInputProps {
   /**  */
   name: string;
 

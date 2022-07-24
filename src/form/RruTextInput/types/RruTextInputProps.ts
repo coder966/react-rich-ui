@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-import HtmlInputElementProps from "../../types/HtmlInputElementProps";
-
-export default interface RruTextInputProps extends HtmlInputElementProps {
+export default interface RruTextInputProps {
   /**  */
   name: string;
 

@@ -2,11 +2,11 @@
 
 # RruPageableTable
 
-## API
+## Props
 
 ### RruPageableTable
 
-| Prop             | Description                                                                                                                                                                              | Required |
+| Name             | Description                                                                                                                                                                              | Required |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | endpoint         | The endpoint which returns `org.springframework.data.domain.Page`                                                                                                                        | Yes      |
 | requestMethod    | Specify the HTTP method to be used when sending the API request.                                                                                                                         | No       |
@@ -22,7 +22,7 @@
 
 ### Columns
 
-| Prop    | Description                                                                                                                                                                                                                                                                                                          | Required |
+| Name    | Description                                                                                                                                                                                                                                                                                                          | Required |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | label   | Header label                                                                                                                                                                                                                                                                                                         | Yes      |
 | value   | The value the should be displayed in each row.<br>This could be either a property path in row object<br>or a function which takes the row object and returns cell value                                                                                                                                              | Yes      |

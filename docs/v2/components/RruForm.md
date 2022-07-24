@@ -2,9 +2,9 @@
 
 # RruForm
 
-## API
+## Props
 
-| Prop             | Description                                                                                                                       | Required |
+| Name             | Description                                                                                                                       | Required |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | onSubmit         | A function which takes the form data object.<br>Will be called when the user submits the form if there is no validation violation | Yes      |
 | initialValues    | An object containing the form default values.                                                                                     | No       |

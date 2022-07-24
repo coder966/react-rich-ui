@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-type HtmlTextareaElementProps = JSX.IntrinsicElements['textarea'];
-
-export default interface RruTextareaInputProps extends HtmlTextareaElementProps {
+export default interface RruTextareaInputProps {
   /**  */
   name: string;
 

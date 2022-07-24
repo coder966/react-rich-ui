@@ -2,22 +2,22 @@
 
 # RruStepsWizard
 
-## API
+## Props
 
-| Prop         | Description                                                 | Required |
+| Name         | Description                                                 | Required |
 | ------------ | ----------------------------------------------------------- | -------- |
 | children     | Steps `node`s                                               | Yes      |
 | renderHeader | An optional function that is used to render a custom header | No       |
 
 You can provide these props to the steps nodes:
 
-| Prop      | Description                                               | Required |
+| Name      | Description                                               | Required |
 | --------- | --------------------------------------------------------- | -------- |
 | stepLabel | Step label that will be shown in the header of the wizard | No       |
 
 These props will be injected into the steps nodes:
 
-| Prop          | Type                                   | Description                                                                                  |
+| Name          | Type                                   | Description                                                                                  |
 | ------------- | -------------------------------------- | -------------------------------------------------------------------------------------------- |
 | goToStep      | (stepNumber: int, [data: any]) => void | A function used to set the desired step. You can pass data to the step which you're setting. |
 | firstStep     | ([data: any]) => void                  | A function used to go to the first step. You can pass data to the first step.                |

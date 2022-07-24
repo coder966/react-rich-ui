@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import HtmlInputElementProps from "../../types/HtmlInputElementProps";
 import RruOption from "../../types/RruOption";
 
-export default interface RruRadioInputProps extends HtmlInputElementProps {
+export default interface RruRadioInputProps {
   /**  */
   name: string;
 

@@ -2,11 +2,9 @@
 
 # RruRadioInput
 
-## API
+## Props
 
-All `input` HTML element props are available as well.
-
-| Prop             | Description                                                                 | Required |
+| Name             | Description                                                                 | Required |
 | ---------------- | --------------------------------------------------------------------------- | -------- |
 | name             | Unique form element name                                                    | Yes      |
 | label            | The form element label                                                      | No       |

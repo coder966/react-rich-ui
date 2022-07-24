@@ -41,7 +41,6 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
-        {...props}
         name={props.name}
         value={value || undefined}
         onChange={e => setNewValue(e.target.value)}
