@@ -69,7 +69,7 @@ describe('RruTextareaInput', () => {
     });
   });
 
-  it('should submit empty string (not null) for when no data is entered', async () => {
+  it('should submit empty null for when no data is entered', async () => {
     // prepare
     const onSubmit = jest.fn();
 
@@ -88,7 +88,7 @@ describe('RruTextareaInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: ''
+      myText: null
     });
   });
 
@@ -207,24 +207,22 @@ describe('RruTextareaInput', () => {
   it('should watch the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const watcher = jest.fn();
+    const onMyTextChange = jest.fn();
     const initialValues = {
       myText: 'My awesome post'
     }
 
     // render
     const { container } = render(
-      <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['myText']} watcher={watcher}>
-        <RruTextareaInput name='myText' label='My Text' />
+      <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+        <RruTextareaInput name='myText' label='My Text' onChange={onMyTextChange} />
         <button type='submit'>Submit</button>
       </RruForm >
     );
 
     // validation for the initial value
-    expect(watcher).toHaveBeenCalledTimes(1);
-    expect(watcher.mock.calls[0][0]).toEqual({
-      myText: 'My awesome post'
-    });
+    expect(onMyTextChange).toHaveBeenCalledTimes(1);
+    expect(onMyTextChange.mock.calls[0][0]).toEqual('My awesome post');
 
     const myTextInput = container.querySelector('textarea[name="myText"]');
 
@@ -235,10 +233,8 @@ describe('RruTextareaInput', () => {
     await userEvent.keyboard('This is a long paragraph');
 
     // validation for a new value
-    expect(watcher).toHaveBeenCalledTimes(26);
-    return expect(watcher.mock.calls[25][0]).toEqual({
-      myText: 'This is a long paragraph'
-    });
+    expect(onMyTextChange).toHaveBeenCalledTimes(26);
+    return expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
   });
 
 })

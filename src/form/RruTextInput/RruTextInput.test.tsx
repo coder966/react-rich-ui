@@ -69,7 +69,7 @@ describe('RruTextInput', () => {
     });
   });
 
-  it('should submit empty string (not null) for when no data is entered', async () => {
+  it('should submit null for when no data is entered', async () => {
     // prepare
     const onSubmit = jest.fn();
 
@@ -88,7 +88,7 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: ''
+      email: null
     });
   });
 
@@ -207,24 +207,22 @@ describe('RruTextInput', () => {
   it('should watch the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const watcher = jest.fn();
+    const onEmailChange = jest.fn();
     const initialValues = {
       email: 'khalid@test.com'
     }
 
     // render
     const { container } = render(
-      <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['email']} watcher={watcher}>
-        <RruTextInput name='email' label='Email Address' />
+      <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+        <RruTextInput name='email' label='Email Address' onChange={onEmailChange} />
         <button type='submit'>Submit</button>
       </RruForm >
     );
 
     // validation for the initial value
-    expect(watcher).toHaveBeenCalledTimes(1);
-    expect(watcher.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com'
-    });
+    expect(onEmailChange).toHaveBeenCalledTimes(1);
+    expect(onEmailChange.mock.calls[0][0]).toEqual('khalid@test.com');
 
     const emailInput = container.querySelector('input[name="email"]');
 
@@ -235,10 +233,8 @@ describe('RruTextInput', () => {
     await userEvent.keyboard('test@test.com');
 
     // validation for a new value
-    expect(watcher).toHaveBeenCalledTimes(15);
-    return expect(watcher.mock.calls[14][0]).toEqual({
-      email: 'test@test.com'
-    });
+    expect(onEmailChange).toHaveBeenCalledTimes(15);
+    return expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
   });
 
 })

@@ -63,7 +63,7 @@ describe('RruFileInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toBeTruthy();
-    expect(onSubmit.mock.calls[0][0].attachment[0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
   });
 
 })
