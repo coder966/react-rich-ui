@@ -60,8 +60,8 @@ export const WithInitialValues = (args) => {
 
 };
 
-export const Watcher = (args) => {
-  const [color, setColor] = useState();
+export const OnChange = (args) => {
+  const [color, setColor] = useState<string | null>(null);
 
   const colors = [
     { value: 'RED', label: 'Red' },
@@ -77,17 +77,13 @@ export const Watcher = (args) => {
 
   });
 
-  const watcher = form => {
-    setColor(form.color);
-  };
-
   const onSubmit = form => {
     action('submitting the form')(form);
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit} watch={['color']} watcher={watcher}>
-      <RruSelectInput name='color' label='Color' options={colors} />
+    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <RruSelectInput name='color' label='Color' options={colors} onChange={setColor} />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
@@ -126,15 +122,11 @@ export const MultipleFieldsInOneForm = (args) => {
 };
 
 export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
-  const [firstName, setFirstName] = useState();
+  const [firstName, setFirstName] = useState<string | null>();
 
   const initialValues = {
     firstName: 'some first name',
     lastName: 'test default value'
-  }
-
-  const onFirstNameChange = (form) => {
-    setFirstName(form['firstName']);
   }
 
   const onSubmit = form => {
@@ -148,10 +140,10 @@ export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
   return (
     <div>
       <p>Type 'khalid' in the first name to hide the last name.</p>
-      <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['firstName']} watcher={onFirstNameChange}>
+      <RruForm initialValues={initialValues} onSubmit={onSubmit}>
         <div className='row'>
           <div className='col-6'>
-            <RruTextInput name='firstName' label='First Name' />
+            <RruTextInput name='firstName' label='First Name' onChange={setFirstName} />
           </div>
           {shouldRenderLastName() &&
             <div className='col-6'>

@@ -27,6 +27,11 @@ export default interface RruTextInputProps {
   /**  */
   isPassword?: boolean;
 
+  /**
+   * 
+   */
+  onChange?: (value: string | null) => void;
+
   // HTML props
 
   /**

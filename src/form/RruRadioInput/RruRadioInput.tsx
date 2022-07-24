@@ -33,6 +33,10 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
     formContext.setValue(props.name, option ? option.value : null);
+
+    if (props.onChange) {
+      props.onChange(option ? option.value : null);
+    }
   }
 
   useEffect(() => {

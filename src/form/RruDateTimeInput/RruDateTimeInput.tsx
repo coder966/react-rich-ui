@@ -177,7 +177,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }, [year, month]);
 
   useEffect(() => {
-    formContext.setValue(props.name, getValue());
+    const value = getValue();
+    formContext.setValue(props.name, value);
+    if (props.onChange) {
+      props.onChange(value);
+    }
   }, [intlDate, hour, minute, second]);
 
   const getDayClassName = (targetDate: IntlDate): string => {

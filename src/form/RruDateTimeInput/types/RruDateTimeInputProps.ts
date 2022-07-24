@@ -37,6 +37,11 @@ export default interface RruDateTimeInputProps {
   /**  */
   getDateConfig?: (date: string) => RruDateTimeInputDateConfig | undefined | null | void;
 
+  /**
+   * 
+   */
+  onChange?: (value: string | null) => void;
+
   // HTML props
 
   /**

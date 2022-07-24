@@ -29,6 +29,11 @@ export default interface RruSelectInputProps {
   /**  */
   options: RruOption[];
 
+  /**
+   * 
+   */
+  onChange?: (value: string | null) => void;
+
   // HTML props
 
   /**

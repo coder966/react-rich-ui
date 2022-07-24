@@ -32,6 +32,11 @@ export default interface RruRadioInputProps {
   /** Display all radio buttons in the same line */
   inline?: boolean;
 
+  /**
+   * 
+   */
+  onChange?: (value: string | null) => void;
+
   // HTML props
 
   /**

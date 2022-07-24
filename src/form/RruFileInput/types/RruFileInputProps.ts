@@ -24,6 +24,11 @@ export default interface RruFileInputProps {
   /**  */
   requiredAsterisk?: boolean;
 
+  /**
+   * 
+   */
+  onChange?: (value: File | null) => void;
+
   // HTML props
 
   /**

@@ -13,6 +13,7 @@
 | calendarType     | `gregorian` or `islamic-umalqura`. Default is `gregorian`                                                                                                      | No       |
 | getDateConfig    | An optional function that customizes the supplied date (in the format yyyy-mm-dd) by returning an optional config object of Type `RruDateTimeInputDateConfig`. | No       |
 | disabled         | Controls whether the input field is disabled or not                                                                                                            | No       |
+| onChange         | A callback function. This is useful if you need to watch the field value                                                                                       | No       |
 
 ## RruDateTimeInputDateConfig
 

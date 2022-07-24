@@ -12,3 +12,4 @@
 | options          | An array of objects of the form:<br>`{value: string, label: ReactNode}`<br> | Yes      |
 | inline           | Set to `true` to display the checkboxes in one line                         | No       |
 | disabled         | Controls whether the input field is disabled or not                         | No       |
+| onChange         | A callback function. This is useful if you need to watch the field value    | No       |

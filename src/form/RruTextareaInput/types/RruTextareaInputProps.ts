@@ -24,6 +24,11 @@ export default interface RruTextareaInputProps {
   /**  */
   requiredAsterisk?: boolean;
 
+  /**
+   * 
+   */
+  onChange?: (value: string | null) => void;
+
   // HTML props
 
   /**

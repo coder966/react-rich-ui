@@ -27,6 +27,10 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const setNewValue = (val: string | null) => {
     formContext.setValue(props.name, val);
     setValue(val);
+
+    if (props.onChange) {
+      props.onChange(val);
+    }
   }
 
   useEffect(() => {

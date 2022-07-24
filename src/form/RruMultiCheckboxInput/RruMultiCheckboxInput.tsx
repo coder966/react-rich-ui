@@ -34,6 +34,10 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
     formContext.setValue(props.name, options.map(opt => opt.value));
+
+    if (props.onChange) {
+      props.onChange(options.map(opt => opt.value));
+    }
   }
 
   useEffect(() => {

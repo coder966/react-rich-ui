@@ -29,6 +29,11 @@ export default interface RruMultiSelectInputProps {
   /**  */
   options: RruOption[];
 
+  /**
+   * 
+   */
+  onChange?: (value: string[]) => void;
+
   // HTML props
 
   /**

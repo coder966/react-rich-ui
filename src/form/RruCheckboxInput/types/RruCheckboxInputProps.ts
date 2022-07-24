@@ -22,6 +22,11 @@ export default interface RruCheckboxInputProps {
   /**  */
   label?: React.ReactNode;
 
+  /**
+   * 
+   */
+  onChange?: (value: boolean) => void;
+
   // HTML props
 
   /**

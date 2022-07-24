@@ -32,6 +32,11 @@ export default interface RruMultiCheckboxInputProps {
   /** Display all checkboxes in the same line */
   inline?: boolean;
 
+  /**
+   * 
+   */
+  onChange?: (value: string[]) => void;
+
   // HTML props
 
   /**

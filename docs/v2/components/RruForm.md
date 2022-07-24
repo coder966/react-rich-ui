@@ -9,8 +9,6 @@
 | onSubmit         | A function which takes the form data object.<br>Will be called when the user submits the form if there is no validation violation | Yes      |
 | initialValues    | An object containing the form default values.                                                                                     | No       |
 | validationSchema | `Yup` validation schema                                                                                                           | No       |
-| watch(array)     | An array of the field names you want to monitor                                                                                   | No       |
-| watcher          | A function which gets called when the watched fields get updated. Can be used only in combination with watch(array).              | No       |
 
 ## Input Components
 

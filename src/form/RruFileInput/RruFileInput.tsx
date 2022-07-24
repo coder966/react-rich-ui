@@ -33,10 +33,15 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filesList = e.target.files;
+    let file = null;
     if (filesList && filesList[0]) {
-      formContext.setValue(props.name, filesList[0]);
-    } else {
-      formContext.setValue(props.name, null);
+      file = filesList[0];
+    }
+
+    formContext.setValue(props.name, file);
+
+    if (props.onChange) {
+      props.onChange(file);
     }
   }
 
