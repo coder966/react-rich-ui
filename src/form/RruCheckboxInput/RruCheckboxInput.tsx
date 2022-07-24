@@ -46,6 +46,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           onChange={e => setNewValue(e.target.checked)}
           type='checkbox'
           className={'form-check-input ' + (formContext.errors[props.name] ? 'is-invalid' : '')}
+          disabled={props.disabled}
         />
         <label htmlFor={'checkbox_' + props.name} className='form-check-label'>
           {props.label}

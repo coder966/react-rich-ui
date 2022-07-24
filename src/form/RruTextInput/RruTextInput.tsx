@@ -46,6 +46,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         onChange={e => setNewValue(e.target.value)}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+        disabled={props.disabled}
       />
       <ErrorMessage inputName={props.name} />
     </div>

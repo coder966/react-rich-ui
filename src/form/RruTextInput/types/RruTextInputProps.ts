@@ -26,4 +26,11 @@ export default interface RruTextInputProps {
 
   /**  */
   isPassword?: boolean;
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }

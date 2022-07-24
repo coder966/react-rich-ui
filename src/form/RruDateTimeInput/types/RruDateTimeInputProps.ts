@@ -26,9 +26,6 @@ export default interface RruDateTimeInputProps {
   label?: React.ReactNode;
 
   /**  */
-  disabled?: boolean;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /** The minium selectable year */
@@ -39,4 +36,11 @@ export default interface RruDateTimeInputProps {
 
   /**  */
   getDateConfig?: (date: string) => RruDateTimeInputDateConfig | undefined | null | void;
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }

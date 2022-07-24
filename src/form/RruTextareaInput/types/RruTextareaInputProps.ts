@@ -23,4 +23,11 @@ export default interface RruTextareaInputProps {
 
   /**  */
   requiredAsterisk?: boolean;
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }

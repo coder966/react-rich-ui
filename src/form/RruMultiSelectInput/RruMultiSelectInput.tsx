@@ -60,10 +60,10 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       <Select
         name={props.name}
         isMulti={true}
-        isDisabled={props.disabled}
         value={selectedOptions}
         onChange={onSelectChange}
         options={props.options}
+        isDisabled={props.disabled}
         styles={{
           container: (provided, state) => ({
             ...provided,

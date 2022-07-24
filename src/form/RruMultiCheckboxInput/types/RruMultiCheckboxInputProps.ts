@@ -31,5 +31,12 @@ export default interface RruMultiCheckboxInputProps {
 
   /** Display all checkboxes in the same line */
   inline?: boolean;
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }
 

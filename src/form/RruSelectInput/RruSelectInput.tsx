@@ -59,10 +59,10 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       <Select
         name={props.name}
         isMulti={false}
-        isDisabled={props.disabled}
         value={selectedOption}
         onChange={onSelectChange}
         options={props.options}
+        isDisabled={props.disabled}
         styles={{
           container: (provided, state) => ({
             ...provided,

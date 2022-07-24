@@ -24,11 +24,15 @@ export default interface RruSelectInputProps {
   label?: React.ReactNode;
 
   /**  */
-  disabled?: boolean;
-
-  /**  */
   requiredAsterisk?: boolean;
 
   /**  */
   options: RruOption[];
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }

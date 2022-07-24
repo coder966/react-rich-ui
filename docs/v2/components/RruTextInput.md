@@ -10,3 +10,4 @@
 | label            | The form element label                                | No       |
 | requiredAsterisk | Display an asterisk to indicate the field is required | No       |
 | isPassword       | Sets the type of the input to 'password'              | No       |
+| disabled         | Controls whether the input field is disabled or not   | No       |

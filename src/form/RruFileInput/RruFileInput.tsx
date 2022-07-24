@@ -49,6 +49,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         name={props.name}
         onChange={onChange}
+        disabled={props.disabled}
       />
       <ErrorMessage inputName={props.name} />
     </div>

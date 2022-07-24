@@ -21,5 +21,12 @@ export default interface RruCheckboxInputProps {
 
   /**  */
   label?: React.ReactNode;
+
+  // HTML props
+
+  /**
+   * Controls whether the input field is disabled or not
+   */
+  disabled?: boolean;
 }
 

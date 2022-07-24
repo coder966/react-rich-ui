@@ -83,6 +83,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
               onChange={e => onChange(option, e.target.checked)}
               type='checkbox'
               className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+              disabled={props.disabled}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
               {option.label}
