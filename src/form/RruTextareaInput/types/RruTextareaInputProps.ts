@@ -36,4 +36,8 @@ export default interface RruTextareaInputProps {
    */
   placeholder?: string;
 
+  /**
+   * The maximum number of characters allowed
+   */
+  maxLength?: number;
 }

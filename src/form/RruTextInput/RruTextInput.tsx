@@ -48,6 +48,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         disabled={props.disabled}
         placeholder={props.placeholder}
+        maxLength={props.maxLength}
       />
       <ErrorMessage inputName={props.name} />
     </div>

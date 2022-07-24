@@ -11,3 +11,4 @@
 | requiredAsterisk | Display an asterisk to indicate the field is required | No       |
 | disabled         | Controls whether the input field is disabled or not   | No       |
 | placeholder      | A short hint that describes the expected value        | No       |
+| maxLength        | The maximum number of characters allowed              | No       |
