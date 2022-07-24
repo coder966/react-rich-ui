@@ -15,17 +15,18 @@
  */
 
 import React, { FC, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import RruFileInputProps from './types/RruFileInputProps';
 
 const RruFileInput: FC<RruFileInputProps> = (props) => {
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
 
   // init
   useEffect(() => {
-    formContext.register({ name: props.name });
+    formContext.register(props.name);
     formContext.setValue(props.name, null);
 
     return () => formContext.unregister(props.name);
@@ -38,7 +39,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       file = filesList[0];
     }
 
-    formContext.setValue(props.name, file);
+    formContext.setValue(props.name, file, { shouldValidate: true });
 
     if (props.onChange) {
       props.onChange(file);
@@ -51,7 +52,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       <input
         aria-label='Upload'
         type='file'
-        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+        className={`form-control ${formState.errors[props.name] ? 'is-invalid' : ''}`}
         name={props.name}
         onChange={onChange}
         disabled={props.disabled}

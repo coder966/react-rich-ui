@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import Select from 'react-select';
 import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -25,6 +25,7 @@ import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
@@ -32,9 +33,9 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     return retainAll(props.options, optionsValuesArray, (opt, val) => (opt.value + '' === val + ''));
   }
 
-  const onSelectChange = (options: readonly RruOption[]) => {
+  const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
     setSelectedOptions(options);
-    formContext.setValue(props.name, options.map(opt => opt.value));
+    formContext.setValue(props.name, options.map(opt => opt.value), { shouldValidate: touched });
 
     if (props.onChange) {
       props.onChange(options.map(opt => opt.value));
@@ -42,10 +43,10 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    formContext.register({ name: props.name });
+    formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name] || [];
     const options = findOptions(initialValue);
-    onSelectChange(options);
+    onSelectChange(options, false);
     setHasBeenInitialized(true);
 
     return () => formContext.unregister(props.name);
@@ -54,7 +55,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const options = findOptions(selectedOptions.map(opt => opt.value));
-      onSelectChange(options);
+      onSelectChange(options, true);
     }
   }, [props.options]);
 
@@ -65,7 +66,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
         name={props.name}
         isMulti={true}
         value={selectedOptions}
-        onChange={onSelectChange}
+        onChange={options => onSelectChange(options, true)}
         options={props.options}
         isDisabled={props.disabled}
         styles={{
@@ -75,7 +76,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formContext.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [formState.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />

@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
@@ -23,6 +23,7 @@ import RruRadioInputProps from './types/RruRadioInputProps';
 
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
@@ -30,9 +31,9 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     return props.options.find(opt => opt.value + '' === optionValue + '') || null;
   }
 
-  const onSelectChange = (option: RruOption | null) => {
+  const onSelectChange = (option: RruOption | null, touched: boolean) => {
     setSelectedOption(option);
-    formContext.setValue(props.name, option ? option.value : null);
+    formContext.setValue(props.name, option ? option.value : null, { shouldValidate: touched });
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -40,10 +41,10 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register({ name: props.name });
+    formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
     const option = findOption(initialValue);
-    onSelectChange(option);
+    onSelectChange(option, false);
     setHasBeenInitialized(true);
 
     return () => formContext.unregister(props.name);
@@ -52,7 +53,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const option = findOption(selectedOption?.value);
-      onSelectChange(option);
+      onSelectChange(option, true);
     }
   }, [props.options]);
 
@@ -73,9 +74,9 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
               name={props.name}
               value={option.value}
               checked={isChecked(option)}
-              onChange={e => onSelectChange(option)}
+              onChange={e => onSelectChange(option, true)}
               type='radio'
-              className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+              className={`form-check-input ${formState.errors[props.name] ? 'is-invalid' : ''}`}
               disabled={props.disabled}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>

@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import RruTextareaInputProps from './types/RruTextareaInputProps';
@@ -23,9 +23,10 @@ import RruTextareaInputProps from './types/RruTextareaInputProps';
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
 
-  const setNewValue = (val: string | null) => {
-    formContext.setValue(props.name, val);
+  const setNewValue = (val: string | null, touched: boolean) => {
+    formContext.setValue(props.name, val, { shouldValidate: touched });
     setValue(val);
 
     if (props.onChange) {
@@ -36,7 +37,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   useEffect(() => {
     formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
-    setNewValue(initialValue || null);
+    setNewValue(initialValue || null, false);
 
     return () => formContext.unregister(props.name);
   }, []);
@@ -47,8 +48,8 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       <textarea
         name={props.name}
         value={value || undefined}
-        onChange={e => setNewValue(e.target.value)}
-        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+        onChange={e => setNewValue(e.target.value, true)}
+        className={`form-control ${formState.errors[props.name] ? 'is-invalid' : ''}`}
         disabled={props.disabled}
         dir={props.dir || 'auto'}
         placeholder={props.placeholder}

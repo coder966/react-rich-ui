@@ -33,9 +33,10 @@
     "node": ">=10"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.6",
     "intl-date": "^0.3.0",
     "react-detect-click-outside": "^1.1.7",
-    "react-hook-form": "^4.10.2",
+    "react-hook-form": "7.33.1",
     "react-select": "^5.4.0"
   },
   "peerDependencies": {

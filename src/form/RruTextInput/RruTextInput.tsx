@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import RruTextInputProps from './types/RruTextInputProps';
@@ -23,9 +23,10 @@ import RruTextInputProps from './types/RruTextInputProps';
 const RruTextInput: FC<RruTextInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
 
-  const setNewValue = (val: string | null) => {
-    formContext.setValue(props.name, val);
+  const setNewValue = (val: string | null, touched: boolean) => {
+    formContext.setValue(props.name, val, { shouldValidate: touched });
     setValue(val);
 
     if (props.onChange) {
@@ -36,7 +37,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   useEffect(() => {
     formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
-    setNewValue(initialValue || null);
+    setNewValue(initialValue || null, false);
 
     return () => formContext.unregister(props.name);
   }, []);
@@ -47,9 +48,9 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <input
         name={props.name}
         value={value || undefined}
-        onChange={e => setNewValue(e.target.value)}
+        onChange={e => setNewValue(e.target.value, true)}
         type={props.isPassword ? 'password' : 'text'}
-        className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+        className={`form-control ${formState.errors[props.name] ? 'is-invalid' : ''}`}
         disabled={props.disabled}
         dir={props.dir || 'auto'}
         placeholder={props.placeholder}

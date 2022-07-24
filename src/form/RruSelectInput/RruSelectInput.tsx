@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import Select from 'react-select';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
@@ -24,6 +24,7 @@ import RruSelectInputProps from './types/RruSelectInputProps';
 
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
@@ -31,9 +32,9 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     return props.options.find(opt => opt.value + '' === optionValue + '') || null;
   }
 
-  const onSelectChange = (option: RruOption | null) => {
+  const onSelectChange = (option: RruOption | null, touched: boolean) => {
     setSelectedOption(option);
-    formContext.setValue(props.name, option ? option.value : null);
+    formContext.setValue(props.name, option ? option.value : null, { shouldValidate: touched });
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -41,10 +42,10 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    formContext.register({ name: props.name });
+    formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
     const option = findOption(initialValue);
-    onSelectChange(option);
+    onSelectChange(option, false);
     setHasBeenInitialized(true);
 
     return () => formContext.unregister(props.name);
@@ -53,7 +54,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const option = findOption(selectedOption?.value);
-      onSelectChange(option);
+      onSelectChange(option, true);
     }
   }, [props.options]);
 
@@ -64,7 +65,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         name={props.name}
         isMulti={false}
         value={selectedOption}
-        onChange={onSelectChange}
+        onChange={option => onSelectChange(option, true)}
         options={props.options}
         isDisabled={props.disabled}
         styles={{
@@ -74,7 +75,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formContext.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [formState.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />

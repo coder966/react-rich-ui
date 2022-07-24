@@ -19,7 +19,7 @@ export default interface RruFormProps {
   initialValues?: Record<string, any>;
 
   /**  */
-  validationSchema?: object;
+  validationSchema?: any;
 
   /**  */
   onSubmit: (form: Record<string, any>) => void;

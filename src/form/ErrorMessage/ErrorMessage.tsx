@@ -16,7 +16,6 @@
 
 import React, { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { isObjKey } from '../../utils/utils';
 
 export interface ErrorMessageProps {
   /**  */
@@ -25,12 +24,10 @@ export interface ErrorMessageProps {
 
 const ErrorMessage: FC<ErrorMessageProps> = (props) => {
   const formContext = useFormContext();
-  const error = formContext.errors[props.inputName];
-  const messageKey = 'message';
-  const message = error && isObjKey(error, messageKey) ? error[messageKey] : null;
+  const error = formContext.getFieldState(props.inputName).error;
 
-  return message ? (
-    <div className='invalid-feedback d-block'>{message}</div>
+  return error ? (
+    <div className='invalid-feedback d-block'>{error.message}</div>
   ) : null;
 };
 

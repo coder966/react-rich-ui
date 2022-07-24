@@ -14,23 +14,31 @@
  * limitations under the License.
  */
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
-import { FormContext, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import RruFormProps from './types/RruFormProps';
 
 const RruForm: FC<RruFormProps> = (props) => {
-  const form = useForm({
-    mode: 'onChange',
+  let config: any = {
     defaultValues: props.initialValues,
-    validationSchema: props.validationSchema,
-  });
+  };
+
+  if (props.validationSchema) {
+    config = {
+      ...config,
+      resolver: yupResolver(props.validationSchema),
+    }
+  }
+
+  const form = useForm(config);
 
   return (
-    <FormContext {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(props.onSubmit)}>
         {props.children}
       </form>
-    </FormContext>
+    </FormProvider>
   );
 };
 

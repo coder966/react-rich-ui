@@ -15,7 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
@@ -24,6 +24,7 @@ import RruMultiCheckboxInputProps from './types/RruMultiCheckboxInputProps';
 
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const formContext = useFormContext();
+  const formState = useFormState({ name: props.name });
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
@@ -31,9 +32,9 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     return retainAll(props.options, optionsValuesArray, (opt, val) => (opt.value + '' === val + ''));
   }
 
-  const onSelectChange = (options: readonly RruOption[]) => {
+  const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
     setSelectedOptions(options);
-    formContext.setValue(props.name, options.map(opt => opt.value));
+    formContext.setValue(props.name, options.map(opt => opt.value), { shouldValidate: touched });
 
     if (props.onChange) {
       props.onChange(options.map(opt => opt.value));
@@ -41,10 +42,10 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register({ name: props.name });
+    formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name] || [];
     const options = findOptions(initialValue);
-    onSelectChange(options);
+    onSelectChange(options, false);
     setHasBeenInitialized(true);
 
     return () => formContext.unregister(props.name);
@@ -53,7 +54,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const options = findOptions(selectedOptions.map(opt => opt.value));
-      onSelectChange(options);
+      onSelectChange(options, true);
     }
   }, [props.options]);
 
@@ -64,7 +65,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     } else {
       newSelectedOptions = selectedOptions.filter(opt => opt.value !== option.value);
     }
-    onSelectChange(newSelectedOptions);
+    onSelectChange(newSelectedOptions, true);
   }
 
   const isChecked = (option: RruOption): boolean => {
@@ -86,7 +87,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
               checked={isChecked(option)}
               onChange={e => onChange(option, e.target.checked)}
               type='checkbox'
-              className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
+              className={`form-check-input ${formState.errors[props.name] ? 'is-invalid' : ''}`}
               disabled={props.disabled}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
