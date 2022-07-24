@@ -50,6 +50,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         autoComplete={props.autoComplete}
+        list={props.list}
       />
       <ErrorMessage inputName={props.name} />
     </div>

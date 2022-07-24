@@ -50,4 +50,11 @@ export default interface RruTextInputProps {
    * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
    */
   autoComplete?: string;
+
+  /**
+   * The id of a <datalist> element located in the same document.
+   * The <datalist> provides a list of predefined values to suggest to the user for this input.
+   * The values provided are suggestions, not requirements: users can select from this predefined list or provide a different value. 
+   */
+  list?: string;
 }
