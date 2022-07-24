@@ -38,7 +38,7 @@ export const Basic = (args) => {
   ];
 
   const initialValues = {
-
+    colors: ['BLUE', 'GREEN']
   }
 
   const validationSchema = yup.object().shape({

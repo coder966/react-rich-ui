@@ -22,26 +22,33 @@ import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruSelectInputProps from './types/RruSelectInputProps';
 
-
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
-  // register to RHF
   const formContext = useFormContext();
-  useEffect(() => {
-    formContext.register({ name: props.name });
-  }, []);
+  const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
-  const [selectControlValue, setSelectControlValue] = useState<RruOption | null>(null);
+  const findOption = (optionValue: any): RruOption | null => {
+    return props.options.find(opt => opt.value + '' === optionValue + '') || null;
+  }
 
-  const onSelectChange = (opt: RruOption | null) => {
-    setSelectControlValue(opt);
-    formContext.setValue(props.name, opt ? opt.value : null);
+  const onSelectChange = (option: RruOption | null) => {
+    setSelectedOption(option);
+    formContext.setValue(props.name, option ? option.value : null);
   };
 
   useEffect(() => {
-    const allOptions = props.options || [];
-    const selectedOptionValue = formContext.getValues()[props.name];
-    const searchResult = allOptions.find((o) => o.value + '' === selectedOptionValue + '') || null;
-    onSelectChange(searchResult);
+    formContext.register({ name: props.name });
+    const initialValue = formContext.getValues()[props.name];
+    const option = findOption(initialValue);
+    onSelectChange(option);
+    setHasBeenInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (hasBeenInitialized) {
+      const option = findOption(selectedOption?.value);
+      onSelectChange(option);
+    }
   }, [props.options]);
 
   return (
@@ -51,7 +58,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         name={props.name}
         isMulti={false}
         isDisabled={props.disabled}
-        value={selectControlValue}
+        value={selectedOption}
         onChange={onSelectChange}
         options={props.options}
         styles={{

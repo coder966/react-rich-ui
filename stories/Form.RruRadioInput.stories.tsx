@@ -66,7 +66,7 @@ export const Inline = (args) => {
   ];
 
   const initialValues = {
-
+    color: 'BLUE'
   }
 
   const validationSchema = yup.object().shape({

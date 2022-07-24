@@ -21,35 +21,37 @@ import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruRadioInputProps from './types/RruRadioInputProps';
 
-
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const formContext = useFormContext();
-  const [checkedOption, setCheckedOption] = useState<RruOption | undefined>(undefined);
+  const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
-  const setNewValue = (option: RruOption | undefined) => {
-    setCheckedOption(option);
+  const findOption = (optionValue: any): RruOption | null => {
+    return props.options.find(opt => opt.value + '' === optionValue + '') || null;
+  }
+
+  const onSelectChange = (option: RruOption | null) => {
+    setSelectedOption(option);
     formContext.setValue(props.name, option ? option.value : null);
   }
 
   useEffect(() => {
-    formContext.register(props.name);
+    formContext.register({ name: props.name });
     const initialValue = formContext.getValues()[props.name];
-
-    let selectedOption: RruOption | undefined;
-    if (initialValue) {
-      selectedOption = props.options.find(opt => opt.value === initialValue);
-    }
-
-    setNewValue(selectedOption);
+    const option = findOption(initialValue);
+    onSelectChange(option);
+    setHasBeenInitialized(true);
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const option = props.options.find(opt => opt.value === e.target.value);
-    setNewValue(option);
-  }
+  useEffect(() => {
+    if (hasBeenInitialized) {
+      const option = findOption(selectedOption?.value);
+      onSelectChange(option);
+    }
+  }, [props.options]);
 
   const isChecked = (option: RruOption): boolean => {
-    return checkedOption ? checkedOption.value === option.value : false
+    return selectedOption ? selectedOption.value === option.value : false
   }
 
   return (
@@ -65,7 +67,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
               name={props.name}
               value={option.value}
               checked={isChecked(option)}
-              onChange={onChange}
+              onChange={e => onSelectChange(option)}
               type='radio'
               className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
             />

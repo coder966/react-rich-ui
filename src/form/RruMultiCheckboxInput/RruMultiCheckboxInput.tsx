@@ -24,40 +24,45 @@ import RruMultiCheckboxInputProps from './types/RruMultiCheckboxInputProps';
 
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const formContext = useFormContext();
-  const [checkedOptions, setCheckedOptions] = useState<RruOption[]>([]);
+  const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
+  const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
-  const setNewValue = (options: RruOption[]) => {
-    setCheckedOptions(options);
+  const findOptions = (optionsValuesArray: any): readonly RruOption[] => {
+    return retainAll(props.options, optionsValuesArray, (opt, val) => (opt.value + '' === val + ''));
+  }
+
+  const onSelectChange = (options: readonly RruOption[]) => {
+    setSelectedOptions(options);
     formContext.setValue(props.name, options.map(opt => opt.value));
   }
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name];
-
-    let resultArray: RruOption[] = [];
-    if (initialValue && Array.isArray(initialValue)) {
-      resultArray = retainAll(props.options, initialValue, (opt, val) => opt.value === val);
-    }
-
-    setNewValue(resultArray);
+    formContext.register({ name: props.name });
+    const initialValue = formContext.getValues()[props.name] || [];
+    const options = findOptions(initialValue);
+    onSelectChange(options);
+    setHasBeenInitialized(true);
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const option = props.options.find(opt => opt.value === e.target.value);
-    if (option) {
-      let newCheckedOptions;
-      if (e.target.checked) {
-        newCheckedOptions = checkedOptions.concat([option]);
-      } else {
-        newCheckedOptions = checkedOptions.filter(opt => opt.value !== option.value);
-      }
-      setNewValue(newCheckedOptions);
+  useEffect(() => {
+    if (hasBeenInitialized) {
+      const options = findOptions(selectedOptions.map(opt => opt.value));
+      onSelectChange(options);
     }
+  }, [props.options]);
+
+  const onChange = (option: RruOption, isChecked: boolean) => {
+    let newSelectedOptions;
+    if (isChecked) {
+      newSelectedOptions = selectedOptions.concat([option]);
+    } else {
+      newSelectedOptions = selectedOptions.filter(opt => opt.value !== option.value);
+    }
+    onSelectChange(newSelectedOptions);
   }
 
   const isChecked = (option: RruOption): boolean => {
-    return checkedOptions.find(opt => opt.value === option.value) !== undefined
+    return selectedOptions.includes(option);
   }
 
   return (
@@ -73,7 +78,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
               name={props.name}
               value={option.value}
               checked={isChecked(option)}
-              onChange={onChange}
+              onChange={e => onChange(option, e.target.checked)}
               type='checkbox'
               className={`form-check-input ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
             />
