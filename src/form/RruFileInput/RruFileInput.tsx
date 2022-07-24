@@ -57,7 +57,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
         disabled={props.disabled}
         accept={props.accept}
       />
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 };

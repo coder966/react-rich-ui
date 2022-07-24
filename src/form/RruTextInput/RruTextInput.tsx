@@ -57,7 +57,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
         autoComplete={props.autoComplete}
         list={props.list}
       />
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 };

@@ -15,19 +15,14 @@
  */
 
 import React, { FC } from 'react';
-import { useFormContext } from 'react-hook-form';
 
 export interface ErrorMessageProps {
-  /**  */
-  inputName: string;
+  error: any
 }
 
 const ErrorMessage: FC<ErrorMessageProps> = (props) => {
-  const formContext = useFormContext();
-  const error = formContext.getFieldState(props.inputName).error;
-
-  return error ? (
-    <div className='invalid-feedback d-block'>{error.message}</div>
+  return props.error ? (
+    <div className='invalid-feedback d-block'>{props.error.message}</div>
   ) : null;
 };
 

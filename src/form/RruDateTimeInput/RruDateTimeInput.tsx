@@ -307,7 +307,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           </div>
         </div>
       </div>
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 }

@@ -58,7 +58,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
         cols={props.cols}
         wrap={props.wrap}
       />
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 };

@@ -56,7 +56,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           {props.label}
         </label>
       </div>
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 };

@@ -78,7 +78,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           }),
         }}
       />
-      <ErrorMessage inputName={props.name} />
+      <ErrorMessage error={field.error} />
     </div>
   );
 };
