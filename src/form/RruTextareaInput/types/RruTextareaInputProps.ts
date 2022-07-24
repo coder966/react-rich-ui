@@ -30,4 +30,10 @@ export default interface RruTextareaInputProps {
    * Controls whether the input field is disabled or not
    */
   disabled?: boolean;
+
+  /**
+   * A short hint that describes the expected value
+   */
+  placeholder?: string;
+
 }
