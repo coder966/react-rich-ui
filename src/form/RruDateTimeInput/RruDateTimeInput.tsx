@@ -17,9 +17,9 @@
 import { IntlDate } from 'intl-date';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
-import { useFormContext, useFormState } from 'react-hook-form';
 import { rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import './style.css';
 import RruDateTimeInputCalendarType from './types/RruDateTimeInputCalendarType';
@@ -34,8 +34,7 @@ const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0
 const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   // init
   const [today] = useState<IntlDate>(IntlDate.today());
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
 
   const getCalendarType = (): RruDateTimeInputCalendarType => {
     return props.calendarType || 'gregorian';
@@ -154,9 +153,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
    * init
    */
   useEffect(() => {
-    formContext.register(props.name);
+    field.register();
     try {
-      const initialValue: string = formContext.getValues()[props.name];
+      const initialValue: string = field.getValue();
       if (initialValue) {
         let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
         if (matches) {
@@ -172,7 +171,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     } catch (e) { }
     setHasBeenInitialized(true);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   useEffect(() => {
@@ -181,7 +180,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   useEffect(() => {
     const value = getValue();
-    formContext.setValue(props.name, value, { shouldValidate: hasBeenInitialized });
+    field.setValue(value, hasBeenInitialized);
     if (props.onChange) {
       props.onChange(value);
     }
@@ -224,7 +223,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           value={getValue() || ''}
           onChange={(e) => { }}
           onClick={(e) => setIsPopupShown(true)}
-          className={`form-control ${formState.errors[props.name] ? 'is-invalid' : ''}`}
+          className={`form-control ${field.error ? 'is-invalid' : ''}`}
         />
 
         <div

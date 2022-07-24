@@ -15,17 +15,16 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
 const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   const [value, setValue] = useState<boolean>();
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
 
   const setNewValue = (val: boolean, touched: boolean) => {
-    formContext.setValue(props.name, val, { shouldValidate: touched });
+    field.setValue(val, touched);
     setValue(val);
 
     if (props.onChange) {
@@ -34,11 +33,11 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = Boolean(formContext.getValues()[props.name]);
+    field.register();
+    const initialValue = Boolean(field.getValue());
     setNewValue(initialValue, false);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   return (
@@ -50,7 +49,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           checked={value}
           onChange={e => setNewValue(e.target.checked, true)}
           type='checkbox'
-          className={'form-check-input ' + (formState.errors[props.name] ? 'is-invalid' : '')}
+          className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
           disabled={props.disabled}
         />
         <label htmlFor={'checkbox_' + props.name} className='form-check-label'>

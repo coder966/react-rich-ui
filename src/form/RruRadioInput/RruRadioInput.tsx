@@ -15,15 +15,14 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruRadioInputProps from './types/RruRadioInputProps';
 
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
@@ -33,7 +32,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
 
   const onSelectChange = (option: RruOption | null, touched: boolean) => {
     setSelectedOption(option);
-    formContext.setValue(props.name, option ? option.value : null, { shouldValidate: touched });
+    field.setValue(option ? option.value : null, touched);
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -41,13 +40,13 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name];
+    field.register();
+    const initialValue = field.getValue();
     const option = findOption(initialValue);
     onSelectChange(option, false);
     setHasBeenInitialized(true);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
               checked={isChecked(option)}
               onChange={e => onSelectChange(option, true)}
               type='radio'
-              className={`form-check-input ${formState.errors[props.name] ? 'is-invalid' : ''}`}
+              className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
               disabled={props.disabled}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>

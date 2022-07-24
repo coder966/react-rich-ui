@@ -15,18 +15,17 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruTextareaInputProps from './types/RruTextareaInputProps';
 
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
 
   const setNewValue = (val: string | null, touched: boolean) => {
-    formContext.setValue(props.name, val, { shouldValidate: touched });
+    field.setValue(val, touched);
     setValue(val);
 
     if (props.onChange) {
@@ -35,11 +34,11 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name];
+    field.register();
+    const initialValue = field.getValue();
     setNewValue(initialValue || null, false);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   return (
@@ -49,7 +48,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
         name={props.name}
         value={value || undefined}
         onChange={e => setNewValue(e.target.value, true)}
-        className={`form-control ${formState.errors[props.name] ? 'is-invalid' : ''}`}
+        className={`form-control ${field.error ? 'is-invalid' : ''}`}
         disabled={props.disabled}
         dir={props.dir || 'auto'}
         placeholder={props.placeholder}

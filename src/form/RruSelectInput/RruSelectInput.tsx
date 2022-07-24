@@ -15,16 +15,15 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import Select from 'react-select';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruSelectInputProps from './types/RruSelectInputProps';
 
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
@@ -34,7 +33,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   const onSelectChange = (option: RruOption | null, touched: boolean) => {
     setSelectedOption(option);
-    formContext.setValue(props.name, option ? option.value : null, { shouldValidate: touched });
+    field.setValue(option ? option.value : null, touched);
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -42,13 +41,13 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name];
+    field.register();
+    const initialValue = field.getValue();
     const option = findOption(initialValue);
     onSelectChange(option, false);
     setHasBeenInitialized(true);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   useEffect(() => {
@@ -75,7 +74,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formState.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [field.error ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />

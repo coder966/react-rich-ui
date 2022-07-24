@@ -15,16 +15,15 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruMultiCheckboxInputProps from './types/RruMultiCheckboxInputProps';
 
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
@@ -34,7 +33,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
 
   const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
     setSelectedOptions(options);
-    formContext.setValue(props.name, options.map(opt => opt.value), { shouldValidate: touched });
+    field.setValue(options.map(opt => opt.value), touched);
 
     if (props.onChange) {
       props.onChange(options.map(opt => opt.value));
@@ -42,13 +41,13 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   }
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name] || [];
+    field.register();
+    const initialValue = field.getValue() || [];
     const options = findOptions(initialValue);
     onSelectChange(options, false);
     setHasBeenInitialized(true);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   useEffect(() => {
@@ -87,7 +86,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
               checked={isChecked(option)}
               onChange={e => onChange(option, e.target.checked)}
               type='checkbox'
-              className={`form-check-input ${formState.errors[props.name] ? 'is-invalid' : ''}`}
+              className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
               disabled={props.disabled}
             />
             <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>

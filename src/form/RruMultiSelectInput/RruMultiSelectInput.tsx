@@ -15,17 +15,16 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
 import Select from 'react-select';
 import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
 import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const formContext = useFormContext();
-  const formState = useFormState({ name: props.name });
+  const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
@@ -35,7 +34,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
     setSelectedOptions(options);
-    formContext.setValue(props.name, options.map(opt => opt.value), { shouldValidate: touched });
+    field.setValue(options.map(opt => opt.value), touched);
 
     if (props.onChange) {
       props.onChange(options.map(opt => opt.value));
@@ -43,13 +42,13 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name] || [];
+    field.register();
+    const initialValue = field.getValue() || [];
     const options = findOptions(initialValue);
     onSelectChange(options, false);
     setHasBeenInitialized(true);
 
-    return () => formContext.unregister(props.name);
+    return () => field.unregister();
   }, []);
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
           }),
           control: (provided, state) => ({
             ...provided,
-            [formState.errors[props.name] ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
+            [field.error ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
           }),
         }}
       />
