@@ -38,7 +38,6 @@ export const Basic = (args) => {
   const yupValidationSchema = yup.object().shape({
     attachment: yup.mixed().nullable()
       .test('test is file present', 'Attachment is required', (file) => {
-        console.log(file)
         return file !== null;
       }).test('test is file size too big', 'File size is too big', (file) => {
         return file && file.size < 100 * 1024; // 100 kB
