@@ -26,7 +26,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   // init
   useEffect(() => {
     formContext.register({ name: props.name });
-    formContext.setValue(props.name, undefined);
+    formContext.setValue(props.name, null);
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
     if (filesList && filesList[0]) {
       formContext.setValue(props.name, filesList[0]);
     } else {
-      formContext.setValue(props.name, undefined);
+      formContext.setValue(props.name, null);
     }
   }
 

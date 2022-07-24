@@ -28,7 +28,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
 
   const setNewValue = (option: RruOption | undefined) => {
     setCheckedOption(option);
-    formContext.setValue(props.name, option?.value);
+    formContext.setValue(props.name, option ? option.value : null);
   }
 
   useEffect(() => {

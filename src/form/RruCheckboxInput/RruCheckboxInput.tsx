@@ -30,7 +30,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
 
   useEffect(() => {
     formContext.register(props.name);
-    const initialValue = formContext.getValues()[props.name];
+    const initialValue = Boolean(formContext.getValues()[props.name]);
     setNewValue(initialValue);
   }, []);
 

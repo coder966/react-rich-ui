@@ -21,10 +21,10 @@ import Label from '../Label/Label';
 import RruTextInputProps from './types/RruTextInputProps';
 
 const RruTextInput: FC<RruTextInputProps> = (props) => {
-  const [value, setValue] = useState<string | undefined>(undefined);
+  const [value, setValue] = useState<string | null>(null);
   const formContext = useFormContext();
 
-  const setNewValue = (val: string | undefined) => {
+  const setNewValue = (val: string | null) => {
     formContext.setValue(props.name, val);
     setValue(val);
   }
@@ -32,7 +32,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   useEffect(() => {
     formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
-    setNewValue(initialValue);
+    setNewValue(initialValue || null);
   }, []);
 
   return (
@@ -41,7 +41,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <input
         {...props}
         name={props.name}
-        value={value}
+        value={value || undefined}
         onChange={e => setNewValue(e.target.value)}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
