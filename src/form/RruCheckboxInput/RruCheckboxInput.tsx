@@ -20,7 +20,7 @@ import { useField } from '../hooks/useField';
 import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
 const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
-  const [value, setValue] = useState<boolean>();
+  const [value, setValue] = useState<boolean>(false);
   const field = useField(props.name);
 
   const setNewValue = (val: boolean, touched: boolean) => {

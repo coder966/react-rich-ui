@@ -46,7 +46,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <input
         name={props.name}
-        value={value || undefined}
+        value={value || ''}
         onChange={e => setNewValue(e.target.value, true)}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${field.error ? 'is-invalid' : ''}`}

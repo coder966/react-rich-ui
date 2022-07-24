@@ -46,7 +46,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <textarea
         name={props.name}
-        value={value || undefined}
+        value={value || ''}
         onChange={e => setNewValue(e.target.value, true)}
         className={`form-control ${field.error ? 'is-invalid' : ''}`}
         disabled={props.disabled}
