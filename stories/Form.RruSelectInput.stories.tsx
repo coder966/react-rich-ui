@@ -40,7 +40,7 @@ export const Basic = (args) => {
     color: 'BLUE'
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     color: yup.string().nullable().required('You must select a color')
   });
 
@@ -49,7 +49,7 @@ export const Basic = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruSelectInput name='color' label='Color' options={colors} />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>

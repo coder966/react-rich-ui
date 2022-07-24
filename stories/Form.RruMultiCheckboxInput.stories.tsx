@@ -41,7 +41,7 @@ export const Basic = (args) => {
     colors: ['BLUE', 'GREEN']
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     colors: yup.array()
       .min(1, 'You must select at least one')
       .max(2, 'You cannot select more than two')
@@ -52,7 +52,7 @@ export const Basic = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruMultiCheckboxInput name='colors' label='Colors' options={colors} />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
@@ -72,7 +72,7 @@ export const Inline = (args) => {
 
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     colors: yup.array()
       .min(1, 'You must select at least one')
       .max(2, 'You cannot select more than two')
@@ -83,7 +83,7 @@ export const Inline = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruMultiCheckboxInput name='colors' label='Colors' options={colors} inline />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>

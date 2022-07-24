@@ -161,13 +161,13 @@ describe('RruTextareaInput', () => {
   it('should validate the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const validationSchema = yup.object().shape({
+    const yupValidationSchema = yup.object().shape({
       myText: yup.string().min(20, 'The text you entered is too short.'),
     });
 
     // render
     const { container } = render(
-      <RruForm onSubmit={onSubmit} validationSchema={validationSchema}>
+      <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
       </RruForm >

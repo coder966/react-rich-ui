@@ -32,7 +32,7 @@ export const Date = (args) => {
     // birthDate: '2020-07-01'
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     birthDate: yup.date().nullable()
       .required('The date is required')
       .min('2020-01-01', 'The date is too old')
@@ -57,7 +57,7 @@ export const Date = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruDateTimeInput
         mode='date'
         name='birthDate'
@@ -76,7 +76,7 @@ export const DateTime = (args) => {
     // birthDate: '2020-07-01 15:10:00'
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     birthDate: yup.date().nullable()
       .required('The date is required')
       .min('2020-01-01', 'The date is too old')
@@ -95,7 +95,7 @@ export const DateTime = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruDateTimeInput
         mode='datetime'
         name='birthDate'

@@ -34,7 +34,7 @@ export const Basic = (args) => {
 
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     address: yup.string().nullable()
       .min(5, 'The address is too short')
       .max(25, 'The address is too long'),
@@ -45,7 +45,7 @@ export const Basic = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextareaInput name='Address' label='address' autoComplete='street-address' />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>

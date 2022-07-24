@@ -24,10 +24,10 @@ const RruForm: FC<RruFormProps> = (props) => {
     defaultValues: props.initialValues,
   };
 
-  if (props.validationSchema) {
+  if (props.yupValidationSchema) {
     config = {
       ...config,
-      resolver: yupResolver(props.validationSchema),
+      resolver: yupResolver(props.yupValidationSchema),
     }
   }
 

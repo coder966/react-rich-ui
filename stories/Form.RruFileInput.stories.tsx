@@ -35,7 +35,7 @@ export const Basic = (args) => {
 
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     attachment: yup.mixed().nullable()
       .test('test is file present', 'Attachment is required', (file) => {
         console.log(file)
@@ -50,7 +50,7 @@ export const Basic = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruFileInput name='attachment' label='Attachment' accept='image/*,.pdf' />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>

@@ -34,7 +34,7 @@ export const Basic = (args) => {
 
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     email: yup.string().nullable()
       .required('Email is required')
       .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
@@ -45,7 +45,7 @@ export const Basic = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>
@@ -59,7 +59,7 @@ export const Password = (args) => {
 
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
 
   });
 
@@ -68,7 +68,7 @@ export const Password = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
     </RruForm>

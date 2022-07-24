@@ -73,7 +73,7 @@ export const OnChange = (args) => {
     color: 'BLUE'
   }
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
 
   });
 
@@ -82,7 +82,7 @@ export const OnChange = (args) => {
   };
 
   return (
-    <RruForm initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruSelectInput name='color' label='Color' options={colors} onChange={setColor} />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit' className='btn btn-primary mt-4'>Submit</button>
@@ -93,7 +93,7 @@ export const OnChange = (args) => {
 
 export const MultipleFieldsInOneForm = (args) => {
 
-  const validationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({
     firstName: yup.string().nullable().required('Required').min(3),
     secondName: yup.string().nullable().required('Required').min(3),
   });
@@ -103,7 +103,7 @@ export const MultipleFieldsInOneForm = (args) => {
   };
 
   return (
-    <RruForm validationSchema={validationSchema} onSubmit={onSubmit}>
+    <RruForm yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <div className='row'>
         <div className='col-6'>
           <RruTextInput name='firstName' label='First Name' />
@@ -173,11 +173,11 @@ export const MultipleFormsInOnePage = (args) => {
     favoriteNumber: '10',
   }
 
-  const validationSchema1 = yup.object().shape({
+  const yupValidationSchema1 = yup.object().shape({
     name: yup.string().min(3).max(10),
   });
 
-  const validationSchema2 = yup.object().shape({
+  const yupValidationSchema2 = yup.object().shape({
     favoriteNumber: yup.number().min(0),
   });
 
@@ -191,12 +191,12 @@ export const MultipleFormsInOnePage = (args) => {
 
   return (
     <>
-      <RruForm initialValues={initialValues1} validationSchema={validationSchema1} onSubmit={onSubmit1}>
+      <RruForm initialValues={initialValues1} yupValidationSchema={yupValidationSchema1} onSubmit={onSubmit1}>
         <RruTextInput name='name' label='Name' />
         <button type='submit' className='btn btn-primary mt-4'>Submit</button>
       </RruForm>
       <br></br>
-      <RruForm initialValues={initialValues2} validationSchema={validationSchema2} onSubmit={onSubmit2}>
+      <RruForm initialValues={initialValues2} yupValidationSchema={yupValidationSchema2} onSubmit={onSubmit2}>
         <RruTextInput name='favoriteNumber' label='Favorite Number' />
         <button type='submit' className='btn btn-primary mt-4'>Submit</button>
       </RruForm>

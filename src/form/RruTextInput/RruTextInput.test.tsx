@@ -161,13 +161,13 @@ describe('RruTextInput', () => {
   it('should validate the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const validationSchema = yup.object().shape({
+    const yupValidationSchema = yup.object().shape({
       email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
     });
 
     // render
     const { container } = render(
-      <RruForm onSubmit={onSubmit} validationSchema={validationSchema}>
+      <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm >
