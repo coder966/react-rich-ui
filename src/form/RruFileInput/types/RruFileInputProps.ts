@@ -30,4 +30,10 @@ export default interface RruFileInputProps {
    * Controls whether the input field is disabled or not
    */
   disabled?: boolean;
+
+  /**
+   * Comma-separated list of one or more file types, or unique file type specifiers, describing which file types to allow.
+   * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept)
+   */
+  accept?: string;
 }
