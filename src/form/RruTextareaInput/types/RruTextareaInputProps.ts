@@ -42,6 +42,11 @@ export default interface RruTextareaInputProps {
   placeholder?: string;
 
   /**
+   * Text direction
+   */
+  dir?: 'ltr' | 'rtl' | 'auto';
+
+  /**
    * The maximum number of characters allowed
    */
   maxLength?: number;

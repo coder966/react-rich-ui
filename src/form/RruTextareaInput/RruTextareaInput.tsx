@@ -50,6 +50,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
         onChange={e => setNewValue(e.target.value)}
         className={`form-control ${formContext.errors[props.name] ? 'is-invalid' : ''}`}
         disabled={props.disabled}
+        dir={props.dir || 'auto'}
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         autoComplete={props.autoComplete}

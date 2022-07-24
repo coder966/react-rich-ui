@@ -40,6 +40,11 @@ export default interface RruTextInputProps {
   disabled?: boolean;
 
   /**
+   * Text direction
+   */
+  dir?: 'ltr' | 'rtl' | 'auto';
+
+  /**
    * A short hint that describes the expected value
    */
   placeholder?: string;
