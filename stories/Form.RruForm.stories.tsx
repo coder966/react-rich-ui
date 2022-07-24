@@ -128,6 +128,11 @@ export const MultipleFieldsInOneForm = (args) => {
 export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
   const [firstName, setFirstName] = useState();
 
+  const initialValues = {
+    firstName: 'some first name',
+    lastName: 'test default value'
+  }
+
   const onFirstNameChange = (form) => {
     setFirstName(form['firstName']);
   }
@@ -143,7 +148,7 @@ export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
   return (
     <div>
       <p>Type 'khalid' in the first name to hide the last name.</p>
-      <RruForm onSubmit={onSubmit} watch={['firstName']} watcher={onFirstNameChange}>
+      <RruForm initialValues={initialValues} onSubmit={onSubmit} watch={['firstName']} watcher={onFirstNameChange}>
         <div className='row'>
           <div className='col-6'>
             <RruTextInput name='firstName' label='First Name' />

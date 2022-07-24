@@ -27,6 +27,8 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   useEffect(() => {
     formContext.register({ name: props.name });
     formContext.setValue(props.name, null);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

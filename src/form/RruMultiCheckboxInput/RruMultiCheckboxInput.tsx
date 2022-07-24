@@ -42,6 +42,8 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     const options = findOptions(initialValue);
     onSelectChange(options);
     setHasBeenInitialized(true);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   useEffect(() => {

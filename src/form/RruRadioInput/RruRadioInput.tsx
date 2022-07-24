@@ -41,6 +41,8 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     const option = findOption(initialValue);
     onSelectChange(option);
     setHasBeenInitialized(true);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   useEffect(() => {

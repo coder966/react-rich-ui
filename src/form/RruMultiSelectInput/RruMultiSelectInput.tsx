@@ -43,6 +43,8 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     const options = findOptions(initialValue);
     onSelectChange(options);
     setHasBeenInitialized(true);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   useEffect(() => {

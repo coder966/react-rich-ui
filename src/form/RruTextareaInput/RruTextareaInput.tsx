@@ -33,6 +33,8 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
     formContext.register(props.name);
     const initialValue = formContext.getValues()[props.name];
     setNewValue(initialValue || null);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   return (

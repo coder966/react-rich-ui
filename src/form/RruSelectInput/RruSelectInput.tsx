@@ -42,6 +42,8 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     const option = findOption(initialValue);
     onSelectChange(option);
     setHasBeenInitialized(true);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   useEffect(() => {

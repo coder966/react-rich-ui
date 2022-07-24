@@ -32,6 +32,8 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
     formContext.register(props.name);
     const initialValue = Boolean(formContext.getValues()[props.name]);
     setNewValue(initialValue);
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   return (

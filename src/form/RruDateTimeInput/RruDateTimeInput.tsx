@@ -168,6 +168,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
         }
       }
     } catch (e) { }
+
+    return () => formContext.unregister(props.name);
   }, []);
 
   useEffect(() => {
