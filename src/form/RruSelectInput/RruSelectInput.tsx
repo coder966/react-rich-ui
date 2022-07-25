@@ -57,6 +57,17 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     }
   }, [props.options]);
 
+  const getReactSelectControlStyle = (provided: any, state: any) => {
+    if (field.error && !state.menuIsOpen) {
+      return {
+        ...provided,
+        borderColor: '#dc3545 !important',
+      }
+    } else {
+      return provided;
+    }
+  }
+
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
@@ -67,16 +78,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         onChange={option => onSelectChange(option, true)}
         options={props.options}
         isDisabled={props.disabled}
-        styles={{
-          container: (provided, state) => ({
-            ...provided,
-            width: '100%',
-          }),
-          control: (provided, state) => ({
-            ...provided,
-            [field.error ? 'borderColor' : 'not-valid-css-property']: '#dc3545',
-          }),
-        }}
+        styles={{ control: getReactSelectControlStyle }}
       />
       <ErrorMessage error={field.error} />
     </div>
