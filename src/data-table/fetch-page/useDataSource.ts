@@ -15,6 +15,10 @@
  */
 
 import { useEffect, useState } from "react";
+import ChangeCallback from "../types/ChangeCallback";
+import RequestMethod from "../types/RequestMethod";
+import ResponseCallback from "../types/ResponseCallback";
+import SortDir from "../types/SortDir";
 import fetchPageFromArray from "./fetchPageFromArray";
 import fetchPageUsingAxios from "./fetchPageUsingAxios";
 import fetchPageUsingFetch from "./fetchPageUsingFetch";
@@ -26,11 +30,11 @@ import RruDataTablePage from "./types/RruDataTablePage";
 
 const useDataSource = (
   dataSource: string | Record<string, any>[],
-  requestMethod: 'GET' | 'POST', onResponse: ((body: any) => void) | undefined,
+  requestMethod: RequestMethod, onResponse: ResponseCallback,
   pageSize: number, pageNumber: number,
-  sortKey: string | undefined, sortDir: 'asc' | 'desc' | undefined,
+  sortKey: string | undefined, sortDir: SortDir,
   search: any,
-  onChange?: (pageNumber: number, sortKey: string | undefined, sortDir: 'asc' | 'desc' | undefined) => void
+  onChange?: ChangeCallback
 ) => {
 
   const [isLoading, setIsLoading] = useState(false);

@@ -9,10 +9,10 @@
 | Name              | Description                                                                                     | Required |
 | ----------------- | ----------------------------------------------------------------------------------------------- | -------- |
 | endpoint          | The endpoint which returns a supported response JSON. For supported interface, see table below. | Yes      |
-| requestMethod     | Specify the HTTP method to be used when sending the API request.                                | No       |
+| requestMethod     | Specify the HTTP method to be used when sending the API request. `GET` or `POST`.               | No       |
 | columns           | An array of column objects                                                                      | Yes      |
 | search            | The search parameters the will be sent to the endpoint specified                                | No       |
-| onResponse        | A callback function. `data => void`                                                             | No       |
+| onResponse        | A callback function. `body => void`                                                             | No       |
 | pageSize          | The page size. The default value is `10`                                                        | No       |
 | noDataLabel       | Message rendered when there is no data available                                                | No       |
 | errorLabel        | Message rendered when there is an error                                                         | No       |

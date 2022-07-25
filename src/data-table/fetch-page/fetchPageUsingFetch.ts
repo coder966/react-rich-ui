@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import RequestMethod from "../types/RequestMethod";
 import RejectFunction from "./types/RejectFunction";
-import RequestMethod from "./types/RequestMethod";
 import ResolveFunction from "./types/ResolveFunction";
 
 const fetchPageUsingFetch = (

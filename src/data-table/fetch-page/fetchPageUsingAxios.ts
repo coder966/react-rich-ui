@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+import RequestMethod from "../types/RequestMethod";
 import loadAxios from "./loadAxios";
 import RejectFunction from "./types/RejectFunction";
-import RequestMethod from "./types/RequestMethod";
 import ResolveFunction from "./types/ResolveFunction";
 
 const axios = loadAxios();

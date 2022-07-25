@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import RequestMethod from "../types/RequestMethod";
+import RequestMethod from "../../types/RequestMethod";
+import SortDir from "../../types/SortDir";
+
 
 const createRequestParams = (
   requestMethod: RequestMethod,
@@ -22,7 +24,7 @@ const createRequestParams = (
   pageSize: number,
   search: any,
   sortKey: string | undefined,
-  sortDir: string | undefined
+  sortDir: SortDir
 ): object => {
 
   let params = {
@@ -44,7 +46,7 @@ const createRequestBody = (
   pageSize: number,
   search: any,
   sortKey: string | undefined,
-  sortDir: string | undefined
+  sortDir: SortDir
 ): object => {
 
   let body = {};

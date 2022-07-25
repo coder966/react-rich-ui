@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+import ChangeCallback from "./ChangeCallback";
+import RequestMethod from "./RequestMethod";
+import ResponseCallback from "./ResponseCallback";
+import SortDir from "./SortDir";
 import TableColumn from "./TableColumn";
 
 interface StateProps {
@@ -31,7 +35,7 @@ interface StateProps {
   /**
    * The default sort direction
    */
-  defaultSortDir?: 'asc' | 'desc',
+  defaultSortDir?: SortDir,
 
   /**
    * A callback for when one of these information gets updated:
@@ -39,7 +43,7 @@ interface StateProps {
    * - current sort key
    * - current sort direction 
    */
-  onChange?: (pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc') => void
+  onChange?: ChangeCallback
 
 }
 
@@ -53,12 +57,12 @@ interface ApiDataSourceProps {
   /** 
    * Specify the HTTP method to be used when sending the API request
    */
-  requestMethod?: 'GET' | 'POST',
+  requestMethod?: RequestMethod,
 
   /** 
    * A callback function in case you want to do anything with the API response
    */
-  onResponse?: (body: any) => void;
+  onResponse?: ResponseCallback;
 
 }
 

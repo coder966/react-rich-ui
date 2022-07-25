@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import SortDir from "../types/SortDir";
 import RejectFunction from "./types/RejectFunction";
 import ResolveFunction from "./types/ResolveFunction";
 
@@ -25,7 +26,7 @@ const fetchPageFromArray = (
 
   search: any,
   sortKey: string | undefined,
-  sortDir: string | undefined,
+  sortDir: SortDir,
 
   resolve: ResolveFunction,
   reject: RejectFunction

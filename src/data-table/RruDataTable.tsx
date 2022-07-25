@@ -20,6 +20,7 @@ import useDataSource from './fetch-page/useDataSource';
 import PaginationView from './pagination/PaginationView';
 import './style.css';
 import RruDataTableProps from './types/RruDataTableProps';
+import SortDir from './types/SortDir';
 import TableColumn from './types/TableColumn';
 
 const RruDataTable: FC<RruDataTableProps> = ({
@@ -41,7 +42,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
 
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
   const [sortKey, setSortKey] = useState(defaultSortKey);
-  const [sortDir, setSortDir] = useState(defaultSortDir);
+  const [sortDir, setSortDir] = useState<SortDir>(defaultSortDir);
 
   const {
     isLoading,
