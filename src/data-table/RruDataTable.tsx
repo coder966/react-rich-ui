@@ -31,7 +31,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
   pageSize = 10,
   onResponse,
   noDataLabel = 'No Data',
-  apiErrorLabel = 'API Error',
+  errorLabel = 'Error',
 
   // state props
   defaultPageNumber,
@@ -139,7 +139,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
           {error && (
             <tr>
               <td colSpan={columns.length} className='text-center'>
-                {apiErrorLabel}
+                {errorLabel}
               </td>
             </tr>
           )}

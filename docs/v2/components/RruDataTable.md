@@ -14,8 +14,8 @@
 | search            | The search parameters the will be sent to the endpoint specified                                | No       |
 | onResponse        | A callback function. `data => void`                                                             | No       |
 | pageSize          | The page size. The default value is `10`                                                        | No       |
-| noDataLabel       | This is the label used when no data is available.                                               | No       |
-| apiErrorLabel     | This is the label used when there has been an error in the API call to fetch the data.          | No       |
+| noDataLabel       | Message rendered when there is no data available                                                | No       |
+| errorLabel        | Message rendered when there is an error                                                         | No       |
 | defaultPageNumber | Set the initial page number                                                                     | No       |
 | defaultSortKey    | Set the initial sort key                                                                        | No       |
 | defaultSortDir    | Set the initial sort direction                                                                  | No       |

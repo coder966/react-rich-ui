@@ -60,11 +60,6 @@ interface ApiDataSourceProps {
    */
   onResponse?: (body: object) => void;
 
-  /** 
-   * A message rendered when the API call fails
-   */
-  apiErrorLabel?: React.ReactNode;
-
 }
 
 
@@ -85,6 +80,12 @@ interface RruDataTableProps extends StateProps, ApiDataSourceProps {
    * Message rendered when there is no data available
    */
   noDataLabel?: React.ReactNode;
+
+
+  /** 
+   * Message rendered when there is an error
+   */
+  errorLabel?: React.ReactNode;
 
 }
 
