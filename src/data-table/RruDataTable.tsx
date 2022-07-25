@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import useDataSource from './data-source/useDataSource';
 import PaginationView from './pagination/PaginationView';
@@ -43,13 +43,19 @@ const RruDataTable: FC<RruDataTableProps> = ({
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
   const [sortKey, setSortKey] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState<SortDir>(defaultSortDir);
+  const [searchParams, setSearchParams] = useState<any>(search);
+
+  useEffect(() => {
+    setSearchParams(search);
+    setCurrentPage(0);
+  }, [search])
 
   const {
     isLoading,
     error,
     totalPages,
     data
-  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortKey, sortDir, search, onChange);
+  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortKey, sortDir, searchParams, onChange);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
