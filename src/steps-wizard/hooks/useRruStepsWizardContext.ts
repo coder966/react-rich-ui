@@ -15,15 +15,7 @@
  */
 
 import { createContext, useContext } from "react";
-
-interface RruStepsWizardContextType {
-  stepInputData: any,
-  goToStep: (stepNumber: number, data?: any) => void,
-  nextStep: (data?: any) => void,
-  previousStep: (data?: any) => void,
-  firstStep: (data?: any) => void,
-  lastStep: (data?: any) => void,
-}
+import RruStepsWizardContextType from "../types/RruStepsWizardContextType";
 
 const noContextErrorMessage = 'Could not find the StepsWizardContext. Make sure your component is a descendant of a RruStepsWizard';
 const defaultContextValue: RruStepsWizardContextType = {
@@ -44,4 +36,4 @@ const useRruStepsWizardContext = (): RruStepsWizardContextType => {
 const RruStepsWizardContextProvider = context.Provider;
 
 export default useRruStepsWizardContext;
-export { RruStepsWizardContextType, RruStepsWizardContextProvider };
+export { RruStepsWizardContextProvider };

@@ -15,11 +15,11 @@
  */
 
 import React, { FC, useState } from 'react';
-import { RruStepsWizardContextProvider, RruStepsWizardContextType } from './hooks/useRruStepsWizardContext';
+import { RruStepsWizardContextProvider } from './hooks/useRruStepsWizardContext';
 import './style.css';
+import RruStepsWizardContextType from './types/RruStepsWizardContextType';
 import RruStepsWizardProps from './types/RruStepsWizardProps';
 import RruStepsWizardStep from './types/RruStepsWizardStep';
-
 
 /**
  * A steps wizard. Render any number of child components and they will be treated as steps of this wizard.
