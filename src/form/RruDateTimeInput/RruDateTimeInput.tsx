@@ -218,6 +218,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       <div className='rru-date-input'>
         <input
           ref={inputRef}
+          dir='ltr'
           type='text'
           disabled={props.disabled}
           value={getValue() || ''}
