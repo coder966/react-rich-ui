@@ -62,7 +62,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     if (field.error && !state.menuIsOpen) {
       return {
         ...provided,
-        borderColor: '#dc3545 !important',
+        borderColor: 'var(--bs-danger) !important',
       }
     } else {
       return provided;

@@ -70,7 +70,7 @@
 
 .rru-date-input__day:hover {
   color: #ffffff;
-  background-color: #0067c0;
+  background-color: var(--bs-primary);
   cursor: pointer;
 }
 
@@ -79,12 +79,12 @@
 }
 
 .rru-date-input__day--today {
-  border: solid 1px #0067c0;
+  border: solid 1px var(--bs-primary);
 }
 
 .rru-date-input__day--selected {
   color: #ffffff;
-  background-color: #0067c0;
+  background-color: var(--bs-primary);
 }
 
 .rru-date-input__day--disabled {

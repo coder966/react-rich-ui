@@ -6,7 +6,7 @@
 .rru-steps-wizard__step {
   flex: 1;
   border-bottom: 0.2rem solid;
-  border-color: #6c757d;
+  border-color: var(--bs-secondary);
 }
 
 .rru-steps-wizard__step-number {
@@ -17,11 +17,11 @@
   border-radius: 50%;
   margin: 0 auto 0.5rem auto;
   color: #ffffff;
-  background: #6c757d;
+  background: var(--bs-secondary);
 }
 
 .rru-steps-wizard__step-label {
-  color: #6c757d;
+  color: var(--bs-secondary);
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -30,25 +30,25 @@
 /* states */
 
 .rru-steps-wizard__step--done {
-  border-color: #28a745;
+  border-color: var(--bs-success);
 }
 
 .rru-steps-wizard__step--current {
-  border-color: #007bff;
+  border-color: var(--bs-primary);
 }
 
 .rru-steps-wizard__step-number--done {
-  background: #28a745;
+  background: var(--bs-success);
 }
 
 .rru-steps-wizard__step-number--current {
-  background: #007bff;
+  background: var(--bs-primary);
 }
 
 .rru-steps-wizard__step-label--done {
-  color: #28a745;
+  color: var(--bs-success);
 }
 
 .rru-steps-wizard__step-label--current {
-  color: #007bff;
+  color: var(--bs-primary);
 }

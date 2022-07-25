@@ -52,7 +52,7 @@
 }
 
 .rru-data-table__loading-bar {
-  background-color: #2a7fc2;
+  background-color: var(--bs-primary);
 }
 
 .rru-data-table__loading-bar:before {
