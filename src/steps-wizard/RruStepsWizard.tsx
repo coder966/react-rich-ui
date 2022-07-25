@@ -15,10 +15,10 @@
  */
 
 import React, { FC, useState } from 'react';
+import { RruStepsWizardContextProvider, RruStepsWizardContextType } from './hooks/useRruStepsWizardContext';
 import './style.css';
 import RruStepsWizardProps from './types/RruStepsWizardProps';
 import RruStepsWizardStep from './types/RruStepsWizardStep';
-import RruStepsWizardStepProps from './types/RruStepsWizardStepProps';
 
 
 /**
@@ -50,13 +50,14 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
     setCurrentStepNumber(stepNumber);
   };
 
-  const firstStep = (data?: object) => goToStep(1, data);
-
-  const lastStep = (data?: object) => goToStep(getSteps().length, data);
-
-  const nextStep = (data?: object) => goToStep(currentStepNumber + 1, data);
-
-  const previousStep = (data?: object) => goToStep(currentStepNumber - 1, data);
+  const RruStepsWizardContextValue: RruStepsWizardContextType = {
+    stepInputData: stepInputData,
+    goToStep: (stepNumber: number, data?: any) => goToStep(stepNumber, data),
+    nextStep: (data?: any) => goToStep(currentStepNumber + 1, data),
+    previousStep: (data?: any) => goToStep(currentStepNumber - 1, data),
+    firstStep: (data?: any) => goToStep(1, data),
+    lastStep: (data?: any) => goToStep(getSteps().length, data),
+  }
 
   const getClassName = (stepNumber: number, baseClassName: string): string => {
     let result = baseClassName;
@@ -67,6 +68,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
     }
     return result;
   }
+
   const header = () => {
     if (props.renderHeader) {
       return props.renderHeader(getSteps());
@@ -83,26 +85,20 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   }
 
   return (
-    <div className='rru-steps-wizard'>
-      {header()}
-      <div className='rru-steps-wizard__body'>
-        {getSteps().map((step, index) => {
-          if (step.number === currentStepNumber) {
-            const stepProps: RruStepsWizardStepProps = {
-              goToStep,
-              firstStep,
-              lastStep,
-              nextStep,
-              previousStep,
-              stepInputData,
-            };
-            return React.cloneElement(stepsComponents[index], stepProps);
-          } else {
-            return null;
-          }
-        })}
+    <RruStepsWizardContextProvider value={RruStepsWizardContextValue}>
+      <div className='rru-steps-wizard'>
+        {header()}
+        <div className='rru-steps-wizard__body'>
+          {getSteps().map((step, index) => {
+            if (step.number === currentStepNumber) {
+              return stepsComponents[index];
+            } else {
+              return null;
+            }
+          })}
+        </div>
       </div>
-    </div>
+    </RruStepsWizardContextProvider>
   );
 };
 

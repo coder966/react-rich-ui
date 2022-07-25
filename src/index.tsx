@@ -27,6 +27,7 @@ export { default as RruTextInput } from './form/RruTextInput/RruTextInput';
 export { default as RruModalButton } from './modal-button/RruModalButton';
 export { default as getRetainedTableSearchObject } from './pageable-table/getRetainedTableSearchObject';
 export { default as RruPageableTable } from './pageable-table/RruPageableTable';
+export { default as useRruStepsWizardContext } from './steps-wizard/hooks/useRruStepsWizardContext';
 export { default as RruStepsWizard } from './steps-wizard/RruStepsWizard';
 
 

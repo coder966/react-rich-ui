@@ -16,7 +16,7 @@
 
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
-import { RruStepsWizard } from '../src/index';
+import { RruStepsWizard, useRruStepsWizardContext } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'RruStepsWizard',
@@ -25,6 +25,7 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 const FirstStep = (props) => {
+  const wizardContext = useRruStepsWizardContext();
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
 
@@ -41,7 +42,7 @@ const FirstStep = (props) => {
       name: name,
       color: color,
     }
-    props.nextStep(data);
+    wizardContext.nextStep(data);
   }
 
   return <div>
@@ -57,38 +58,42 @@ const FirstStep = (props) => {
     <br></br>
 
     <button onClick={navigateToNextStep}>next</button>
-    <button onClick={props.lastStep}>last step</button>
+    <button onClick={wizardContext.lastStep}>last step</button>
   </div>
 };
 
-const SecondStep = (props) => (
-  <div>
+const SecondStep = (props) => {
+  const wizardContext = useRruStepsWizardContext();
+
+  return <div>
     <h1>This is the second step</h1>
 
-    {props.stepInputData && <div>
-      <span>Name: {props.stepInputData.name}</span>
+    {wizardContext.stepInputData && <div>
+      <span>Name: {wizardContext.stepInputData.name}</span>
       <br></br>
-      <span>color: {props.stepInputData.color}</span>
+      <span>color: {wizardContext.stepInputData.color}</span>
     </div>}
 
-    <button onClick={props.previousStep}>back</button>
-    <button onClick={e => props.nextStep({ name: 'Khalid', color: 'Blue' })}>next</button>
+    <button onClick={wizardContext.previousStep}>back</button>
+    <button onClick={e => wizardContext.nextStep({ name: 'Khalid', color: 'Blue' })}>next</button>
   </div>
-);
+};
 
-const ThirdStep = (props) => (
-  <div>
+const ThirdStep = (props) => {
+  const wizardContext = useRruStepsWizardContext();
+
+  return <div>
     <h1>This is the third step</h1>
 
-    {props.stepInputData && <div>
-      <span>Name: {props.stepInputData.name}</span>
+    {wizardContext.stepInputData && <div>
+      <span>Name: {wizardContext.stepInputData.name}</span>
       <br></br>
-      <span>color: {props.stepInputData.color}</span>
+      <span>color: {wizardContext.stepInputData.color}</span>
     </div>}
 
-    <button onClick={props.firstStep}>first step</button>
+    <button onClick={wizardContext.firstStep}>first step</button>
   </div>
-);
+};
 
 export const Basic = (args) => {
   return (
@@ -105,7 +110,7 @@ export const CustomHeader = (args) => {
     <RruStepsWizard
       renderHeader={(steps => {
         return <div className='d-flex flex-row'>
-          {steps.map(step => <b className='flex-grow-1 text-center pt-4 pb-4'>{step.label}</b>)}
+          {steps.map(step => <b key={step.number} className='flex-grow-1 text-center pt-4 pb-4'>{step.label}</b>)}
         </div>
       })}
     >
