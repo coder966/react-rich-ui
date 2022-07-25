@@ -31,7 +31,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
 
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
-  const getStepLabel = (number: number): string | undefined => {
+  const getStepLabel = (number: number): React.ReactNode | undefined => {
     return props.getLabel && typeof props.getLabel === 'function' ? props.getLabel(number) : undefined;
   }
 

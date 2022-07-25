@@ -16,7 +16,7 @@
 
 export default interface RruStepsWizardContextType {
   currentStepNumber: number,
-  currentStepLabel: string | undefined,
+  currentStepLabel: React.ReactNode | undefined,
   currentStepInputData: any,
   goToStep: (stepNumber: number, data?: any) => void,
   nextStep: (data?: any) => void,
