@@ -19,7 +19,9 @@ import RruStepsWizardContextType from "../types/RruStepsWizardContextType";
 
 const noContextErrorMessage = 'Could not find the StepsWizardContext. Make sure your component is a descendant of a RruStepsWizard';
 const defaultContextValue: RruStepsWizardContextType = {
-  stepInputData: undefined,
+  currentStepNumber: 0,
+  currentStepLabel: undefined,
+  currentStepInputData: undefined,
   goToStep: (stepNumber: number, data?: any) => { throw noContextErrorMessage },
   nextStep: (data?: any) => { throw noContextErrorMessage },
   previousStep: (data?: any) => { throw noContextErrorMessage },

@@ -28,12 +28,17 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
   const [stepInputData, setStepInputData] = useState<any>();
 
+
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
+
+  const getStepLabel = (number: number): string | undefined => {
+    return props.getLabel && typeof props.getLabel === 'function' ? props.getLabel(number) : undefined;
+  }
 
   const getSteps = (): readonly RruStepsWizardStep[] => {
     return stepsComponents.map((component, index) => ({
       number: index + 1,
-      label: props.getLabel && typeof props.getLabel === 'function' ? props.getLabel(index + 1) : undefined,
+      label: getStepLabel(index + 1),
       component: component,
     }));
   }
@@ -51,7 +56,9 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   };
 
   const RruStepsWizardContextValue: RruStepsWizardContextType = {
-    stepInputData: stepInputData,
+    currentStepNumber: currentStepNumber,
+    currentStepLabel: getStepLabel(currentStepNumber),
+    currentStepInputData: stepInputData,
     goToStep: (stepNumber: number, data?: any) => goToStep(stepNumber, data),
     nextStep: (data?: any) => goToStep(currentStepNumber + 1, data),
     previousStep: (data?: any) => goToStep(currentStepNumber - 1, data),

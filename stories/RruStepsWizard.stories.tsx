@@ -47,6 +47,8 @@ const FirstStep = (props) => {
 
   return <div>
     <h1>This is the first step</h1>
+    <h1>Step number read from the context: {wizardContext.currentStepNumber}</h1>
+    <h1>Step label read from the context: {wizardContext.currentStepLabel}</h1>
 
     <form>
       <label>Name: </label>
@@ -68,10 +70,10 @@ const SecondStep = (props) => {
   return <div>
     <h1>This is the second step</h1>
 
-    {wizardContext.stepInputData && <div>
-      <span>Name: {wizardContext.stepInputData.name}</span>
+    {wizardContext.currentStepInputData && <div>
+      <span>Name: {wizardContext.currentStepInputData.name}</span>
       <br></br>
-      <span>color: {wizardContext.stepInputData.color}</span>
+      <span>color: {wizardContext.currentStepInputData.color}</span>
     </div>}
 
     <button onClick={wizardContext.previousStep}>back</button>
@@ -85,10 +87,10 @@ const ThirdStep = (props) => {
   return <div>
     <h1>This is the third step</h1>
 
-    {wizardContext.stepInputData && <div>
-      <span>Name: {wizardContext.stepInputData.name}</span>
+    {wizardContext.currentStepInputData && <div>
+      <span>Name: {wizardContext.currentStepInputData.name}</span>
       <br></br>
-      <span>color: {wizardContext.stepInputData.color}</span>
+      <span>color: {wizardContext.currentStepInputData.color}</span>
     </div>}
 
     <button onClick={wizardContext.firstStep}>first step</button>

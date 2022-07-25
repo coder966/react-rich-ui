@@ -15,7 +15,9 @@
  */
 
 export default interface RruStepsWizardContextType {
-  stepInputData: any,
+  currentStepNumber: number,
+  currentStepLabel: string | undefined,
+  currentStepInputData: any,
   goToStep: (stepNumber: number, data?: any) => void,
   nextStep: (data?: any) => void,
   previousStep: (data?: any) => void,
