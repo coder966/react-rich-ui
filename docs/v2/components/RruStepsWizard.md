@@ -7,7 +7,7 @@
 | Name         | Description                                                            | Required |
 | ------------ | ---------------------------------------------------------------------- | -------- |
 | children     | Steps `node`s                                                          | Yes      |
-| getLabel     | An optional function that given a step number, returns the step label. | No       |
+| getStepLabel | An optional function that given a step number, returns the step label. | No       |
 | renderHeader | An optional function that is used to render a custom header            | No       |
 
 ## useRruStepsWizardContext

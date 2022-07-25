@@ -99,7 +99,7 @@ const ThirdStep = (props) => {
 
 export const Basic = (args) => {
 
-  const getLabel = (stepNumber: number) => {
+  const getStepLabel = (stepNumber: number) => {
     switch (stepNumber) {
       case 1: return 'First Step';
       case 2: return 'Second Step';
@@ -109,7 +109,7 @@ export const Basic = (args) => {
   }
 
   return (
-    <RruStepsWizard getLabel={getLabel}>
+    <RruStepsWizard getStepLabel={getStepLabel}>
       <FirstStep />
       <SecondStep />
       <ThirdStep />
@@ -119,7 +119,7 @@ export const Basic = (args) => {
 
 export const CustomHeader = (args) => {
 
-  const getLabel = (stepNumber: number) => {
+  const getStepLabel = (stepNumber: number) => {
     switch (stepNumber) {
       case 1: return 'First Step';
       case 2: return 'Second Step';
@@ -130,7 +130,7 @@ export const CustomHeader = (args) => {
 
   return (
     <RruStepsWizard
-      getLabel={getLabel}
+      getStepLabel={getStepLabel}
       renderHeader={(steps => {
         return <div className='d-flex flex-row'>
           {steps.map(step => <b key={step.number} className='flex-grow-1 text-center pt-4 pb-4'>{step.label}</b>)}

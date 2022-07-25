@@ -17,7 +17,7 @@
 import RruStepsWizardStep from "./RruStepsWizardStep";
 
 interface RruStepsWizardProps {
-  getLabel?: (number: number) => React.ReactNode;
+  getStepLabel?: (number: number) => React.ReactNode;
   renderHeader?: (stepsData: readonly RruStepsWizardStep[]) => React.ReactNode;
   children: React.ReactNode | React.ReactNode[];
 }
