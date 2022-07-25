@@ -4,16 +4,11 @@
 
 ## Props
 
-| Name         | Description                                                 | Required |
-| ------------ | ----------------------------------------------------------- | -------- |
-| children     | Steps `node`s                                               | Yes      |
-| renderHeader | An optional function that is used to render a custom header | No       |
-
-You can provide these props to the steps nodes:
-
-| Name      | Description                                               | Required |
-| --------- | --------------------------------------------------------- | -------- |
-| stepLabel | Step label that will be shown in the header of the wizard | No       |
+| Name         | Description                                                            | Required |
+| ------------ | ---------------------------------------------------------------------- | -------- |
+| children     | Steps `node`s                                                          | Yes      |
+| getLabel     | An optional function that given a step number, returns the step label. | No       |
+| renderHeader | An optional function that is used to render a custom header            | No       |
 
 ## useRruStepsWizardContext
 

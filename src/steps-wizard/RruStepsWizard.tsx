@@ -26,19 +26,19 @@ import RruStepsWizardStep from './types/RruStepsWizardStep';
  */
 const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
-  const [stepInputData, setStepInputData] = useState<object | undefined>();
+  const [stepInputData, setStepInputData] = useState<any>();
 
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
   const getSteps = (): readonly RruStepsWizardStep[] => {
     return stepsComponents.map((component, index) => ({
       number: index + 1,
-      label: component.props.stepLabel,
+      label: props.getLabel && typeof props.getLabel === 'function' ? props.getLabel(index + 1) : undefined,
       component: component,
     }));
   }
 
-  const goToStep = (stepNumber: number, data?: object) => {
+  const goToStep = (stepNumber: number, data?: any) => {
     if (stepNumber < 1) {
       stepNumber = 1;
     } else if (stepNumber > getSteps().length) {
