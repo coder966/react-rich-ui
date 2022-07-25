@@ -74,6 +74,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       <Select
         name={props.name}
         isMulti={false}
+        isClearable={true}
         value={selectedOption}
         onChange={option => onSelectChange(option, true)}
         options={props.options}
