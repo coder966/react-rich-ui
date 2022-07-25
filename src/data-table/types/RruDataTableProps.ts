@@ -58,7 +58,7 @@ interface ApiDataSourceProps {
   /** 
    * A callback function in case you want to do anything with the API response
    */
-  onResponse?: (body: object) => void;
+  onResponse?: (body: any) => void;
 
 }
 

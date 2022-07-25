@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
-import fetchPage from './fetch-page/fetchPage';
-import RruDataTablePage from './fetch-page/types/RruDataTablePage';
+import useDataSource from './fetch-page/useDataSource';
 import PaginationView from './pagination/PaginationView';
 import './style.css';
 import RruDataTableProps from './types/RruDataTableProps';
@@ -40,43 +39,16 @@ const RruDataTable: FC<RruDataTableProps> = ({
   onChange,
 }: RruDataTableProps) => {
 
-  // fetched
-  const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
-  const [data, setData] = useState<any[]>([]);
-
-  // flags
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  // sort
   const [sortBy, setSortBy] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState(defaultSortDir);
 
-  // reload list when search, page, sort changes
-  useEffect(() => {
-    setIsLoading(true);
-    fetchPage(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
-      .then((page: RruDataTablePage) => {
-        setError(null);
-        setTotalPages(page.totalPages);
-        setData(page.content);
-        if (onResponse) {
-          onResponse(data);
-        }
-      })
-      .catch((err) => {
-        setError(err);
-        setTotalPages(0);
-        setData([]);
-      })
-      .finally(() => {
-        if (onChange) {
-          onChange(currentPage, sortBy, sortDir);
-        }
-        setIsLoading(false);
-      });
-  }, [currentPage, sortBy, sortDir, search]);
+  const {
+    isLoading,
+    error,
+    totalPages,
+    data
+  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortBy, sortDir, search, onChange);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 

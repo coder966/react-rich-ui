@@ -17,15 +17,15 @@
 import RejectFunction from "./types/RejectFunction";
 import ResolveFunction from "./types/ResolveFunction";
 
-const fetchPageUsingAxios = (
+const fetchPageFromArray = (
   data: any[],
 
   currentPage: number,
   pageSize: number,
 
-  search: object,
-  sortBy: string,
-  sortDir: string,
+  search: any,
+  sortBy: string | undefined,
+  sortDir: string | undefined,
 
   resolve: ResolveFunction,
   reject: RejectFunction
@@ -49,4 +49,4 @@ const fetchPageUsingAxios = (
 
 }
 
-export default fetchPageUsingAxios;
+export default fetchPageFromArray;
