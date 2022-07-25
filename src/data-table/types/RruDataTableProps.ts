@@ -16,6 +16,32 @@
 
 import TableColumn from "./TableColumn";
 
+interface StateProps {
+
+  /**
+   * The default page number
+   */
+  defaultPageNumber?: number,
+
+  /**
+   * The default sort key
+   */
+  defaultSortBy?: string,
+
+  /**
+   * The default sort direction
+   */
+  defaultSortDir?: 'asc' | 'desc',
+
+  /**
+   * A callback for when one of these information gets updated:
+   * - current page number
+   * - current sort key
+   * - current sort direction 
+   */
+  onChange?: (pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc') => void
+
+}
 
 interface ApiDataSourceProps {
 
@@ -41,7 +67,8 @@ interface ApiDataSourceProps {
 
 }
 
-interface RruDataTableProps extends ApiDataSourceProps {
+
+interface RruDataTableProps extends StateProps, ApiDataSourceProps {
 
   /**  */
   columns: TableColumn[];
@@ -49,16 +76,10 @@ interface RruDataTableProps extends ApiDataSourceProps {
   /** 
    * The search params object
    */
-  search?: object;
+  search?: any;
 
   /**  */
   pageSize: number;
-
-  /** */
-  defaultSortBy?: string,
-
-  /** */
-  defaultSortDir?: 'asc' | 'desc',
 
   /** 
    * Message rendered when there is no data available

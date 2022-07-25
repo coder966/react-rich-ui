@@ -101,7 +101,28 @@ export const Basic = (args) => {
 };
 
 export const RetainState = (args) => {
-  const [searchParams, setSearchParams] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
+
+  const saveState = (search: any, pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc') => {
+    // example of retaining table state:
+    // you may want to use Redux or React Context
+    // use whatever storage you like, but here I will use session storage for simplicity
+    sessionStorage.setItem('my-page-state', JSON.stringify({
+      search, pageNumber, sortKey, sortDir
+    }));
+  }
+
+  const restoreState = () => {
+    const json = sessionStorage.getItem('my-page-state');
+    if (json) {
+      return JSON.parse(json);
+    } else {
+      return undefined
+    }
+  }
+
+  const [retainedState,] = useState<any>(restoreState());
+  const [searchParams, setSearchParams] = useState<any>(retainedState?.search);
+
 
   /**
    * not the best way to get form data,
@@ -115,6 +136,10 @@ export const RetainState = (args) => {
       email: event.target.elements.email.value,
     });
   };
+
+  const onTableChange = (pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc'): void => {
+    saveState(searchParams, pageNumber, sortKey, sortDir);
+  }
 
   return (
     <>
@@ -132,10 +157,12 @@ export const RetainState = (args) => {
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
-        defaultSortBy='id'
-        defaultSortDir='desc'
         search={searchParams}
-        retainTableState={true}
+
+        defaultPageNumber={retainedState?.pageNumber}
+        defaultSortBy={retainedState?.sortKey}
+        defaultSortDir={retainedState?.sortDir}
+        onChange={onTableChange}
       />
     </>
   );

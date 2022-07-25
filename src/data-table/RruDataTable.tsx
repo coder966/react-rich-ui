@@ -40,16 +40,20 @@ const RruDataTable: FC<RruDataTableProps> = ({
   search,
   retainTableState = false,
   pageSize = 10,
-  defaultSortBy,
-  defaultSortDir,
   onResponse,
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
+
+  // state props
+  defaultPageNumber,
+  defaultSortBy,
+  defaultSortDir,
+  onChange,
 }: RruDataTableProps) => {
 
   // fetched
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
   const [data, setData] = useState<any[]>([]);
 
   // flags
@@ -107,6 +111,9 @@ const RruDataTable: FC<RruDataTableProps> = ({
         setData([]);
       })
       .finally(() => {
+        if (onChange) {
+          onChange(currentPage, sortBy, sortDir);
+        }
         if (retainTableState) {
           persistTableState(endpoint, {
             search: search,
