@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-export default interface RruDataTablePage {
+export default interface DataSourcePage {
   totalPages: number,
-  currentPage: number,
   content: any[],
 }

@@ -21,7 +21,7 @@ import ResponseCallback from "../types/ResponseCallback";
 import SortDir from "../types/SortDir";
 import { fetchPageFromArray, fetchPageFromHttpApi } from "./fetch-page";
 import { createRequestBody, createRequestParams } from "./rest-api-datasource/spring-datasource";
-import RruDataTablePage from "./types/RruDataTablePage";
+import DataSourcePage from "./types/DataSourcePage";
 
 const useDataSource = (
   dataSource: string | Record<string, any>[],
@@ -41,7 +41,7 @@ const useDataSource = (
   useEffect(() => {
     setIsLoading(true);
 
-    let promise: Promise<RruDataTablePage>;
+    let promise: Promise<DataSourcePage>;
 
     if (typeof dataSource === 'string') {
       const params = createRequestParams(requestMethod, pageNumber, pageSize, search, sortKey, sortDir);
@@ -52,7 +52,7 @@ const useDataSource = (
     }
 
     promise
-      .then((body: RruDataTablePage) => {
+      .then((body: DataSourcePage) => {
         setError(null);
         setTotalPages(body.totalPages);
         setData(body.content);

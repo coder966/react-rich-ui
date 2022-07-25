@@ -16,7 +16,7 @@
 
 import RequestMethod from "../types/RequestMethod";
 import SortDir from "../types/SortDir";
-import RruDataTablePage from "./types/RruDataTablePage";
+import DataSourcePage from "./types/DataSourcePage";
 
 
 // dynamically load Axios
@@ -33,7 +33,7 @@ const fetchPageFromHttpApi = (
   url: string,
   params: any,
   body: any,
-): Promise<RruDataTablePage> => {
+): Promise<DataSourcePage> => {
 
   return new Promise((resolve, reject) => {
     if (axios) {
@@ -72,7 +72,7 @@ const fetchPageFromArray = (
   pageSize: number, pageNumber: number,
   sortKey: string | undefined, sortDir: SortDir,
   search: any,
-): Promise<RruDataTablePage> => {
+): Promise<DataSourcePage> => {
 
   return new Promise((resolve, reject) => {
     const filtered = data.filter(item => {
@@ -87,7 +87,6 @@ const fetchPageFromArray = (
 
     resolve({
       totalPages: 1,
-      currentPage: 0,
       content: requestedPage,
     });
 
