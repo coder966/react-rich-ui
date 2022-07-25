@@ -37,12 +37,12 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Optional peer dependencies
 
-- `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruPageableTable`.
+- `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruDataTable`.
 - `yup`: For form validation. See `RruForm` section for more details.
 
 ## Components
 
 - [Forms](/docs/v2/components/RruForm)
-- [Tables](/docs/v2/components/RruPageableTable)
+- [Tables](/docs/v2/components/RruDataTable)
 - [Wizards](/docs/v2/components/RruStepsWizard)
 - [ModalButton](/docs/v2/components/RruModalButton)

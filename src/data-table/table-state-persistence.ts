@@ -20,7 +20,7 @@ const getPersistenceKeyPrefix = (): string => {
   // even though we use sessionStorage, which is per-tab, the user may navigate between pages
   // in the same tab and those pages can have different tables but with the same requestMethod and endpoint
   // this is why we need to prepend the window location pathname
-  return `RruPageableTable_${window.location.pathname}_`;
+  return `RruDataTable_${window.location.pathname}_`;
 };
 
 const getPersistenceKey = (endpoint: string): string => {

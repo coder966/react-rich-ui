@@ -19,11 +19,11 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   getRetainedTableSearchObject,
-  RruPageableTable
+  RruDataTable
 } from '../src/index';
 
 const storyMeta: Meta = {
-  title: 'RruPageableTable',
+  title: 'RruDataTable',
 };
 
 export default storyMeta;
@@ -88,7 +88,7 @@ export const Basic = (args) => {
 
       <br />
 
-      <RruPageableTable
+      <RruDataTable
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
@@ -128,7 +128,7 @@ export const RetainState = (args) => {
 
       <br />
 
-      <RruPageableTable
+      <RruDataTable
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
@@ -183,7 +183,7 @@ export const TwoTablesInTheSamePage = (args) => {
 
       <br />
 
-      <RruPageableTable
+      <RruDataTable
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
@@ -205,7 +205,7 @@ export const TwoTablesInTheSamePage = (args) => {
 
       <br />
 
-      <RruPageableTable
+      <RruDataTable
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}

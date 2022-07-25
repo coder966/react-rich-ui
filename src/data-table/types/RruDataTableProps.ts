@@ -16,7 +16,7 @@
 
 import TableColumn from "./TableColumn";
 
-interface RruPageableTableProps {
+interface RruDataTableProps {
 
   /** Spring Page api endpoint */
   endpoint: string;
@@ -57,4 +57,4 @@ interface RruPageableTableProps {
   apiErrorLabel?: React.ReactNode;
 }
 
-export default RruPageableTableProps;
+export default RruDataTableProps;

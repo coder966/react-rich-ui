@@ -1,22 +1,22 @@
-.rru-pageable-table thead tr {
+.rru-data-table thead tr {
   background-color: #f2f2f2;
 }
 
-.rru-pageable-table tbody tr:nth-of-type(even) {
+.rru-data-table tbody tr:nth-of-type(even) {
   background-color: #f9f9f9;
 }
 
 /* th */
 
-.rru-pageable-table__th {
+.rru-data-table__th {
   border-top-width: 1px;
 }
 
-.rru-pageable-table__th--sortable {
+.rru-data-table__th--sortable {
   cursor: pointer;
 }
 
-.rru-pageable-table__th--sortable::before {
+.rru-data-table__th--sortable::before {
   display: inline-block;
   content: '';
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='88.297 129.356 286.131 398.1'%3E%3Cpath d='M112.36248 360.406189h238c21.4 0 32.1 25.9 17 41l-119 119c-9.4 9.4-24.6 9.4-33.9 0l-119.1-119c-15.1-15.1-4.4-41 17-41zm255-105-119-119c-9.4-9.4-24.6-9.4-33.9 0l-119.1 119c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z'/%3E%3C/svg%3E");
@@ -26,12 +26,12 @@
   margin-inline-end: 0.3rem;
 }
 
-.rru-pageable-table__th--sortable-asc::before {
+.rru-data-table__th--sortable-asc::before {
   height: 0.37305rem;
   margin-bottom: 0.186525rem;
 }
 
-.rru-pageable-table__th--sortable-desc::before {
+.rru-data-table__th--sortable-desc::before {
   height: 0.37305rem;
   margin-bottom: 0.186525rem;
   transform: rotate(180deg);
@@ -39,11 +39,11 @@
 
 /* loading bar */
 
-.rru-pageable-table__loading-bar-tr--hidden {
+.rru-data-table__loading-bar-tr--hidden {
   display: none;
 }
 
-.rru-pageable-table__loading-bar-td {
+.rru-data-table__loading-bar-td {
   padding: 0 !important;
   position: relative;
   height: 4px;
@@ -51,11 +51,11 @@
   overflow: hidden;
 }
 
-.rru-pageable-table__loading-bar {
+.rru-data-table__loading-bar {
   background-color: #2a7fc2;
 }
 
-.rru-pageable-table__loading-bar:before {
+.rru-data-table__loading-bar:before {
   content: '';
   position: absolute;
   background-color: inherit;
@@ -66,7 +66,7 @@
   animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 
-.rru-pageable-table__loading-bar:after {
+.rru-data-table__loading-bar:after {
   content: '';
   position: absolute;
   background-color: inherit;

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import RruPageableTablePage from "./RruPageableTablePage";
-
-type ResolveFunction = (data: RruPageableTablePage) => void;
-
-export default ResolveFunction;
+export default interface RruDataTablePage {
+  totalPages: number,
+  currentPage: number,
+  content: any[],
+}

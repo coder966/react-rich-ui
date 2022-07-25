@@ -21,7 +21,7 @@ import { createRequestBody, createRequestParams } from "./rest-api-datasource/sp
 import RejectFunction from "./types/RejectFunction";
 import RequestMethod from "./types/RequestMethod";
 import ResolveFunction from "./types/ResolveFunction";
-import RruPageableTablePage from "./types/RruPageableTablePage";
+import RruDataTablePage from "./types/RruDataTablePage";
 
 /**
  * Creates an abstract promise for different HTTP client libs
@@ -37,7 +37,7 @@ const fetchDataSource = (
   search?: any,
   sortBy?: string,
   sortDir?: string
-): Promise<RruPageableTablePage> => {
+): Promise<RruDataTablePage> => {
 
   // prepare request info
   const params = createRequestParams(requestMethod, currentPage, pageSize, search, sortBy, sortDir);

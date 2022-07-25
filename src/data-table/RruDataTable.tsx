@@ -17,11 +17,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import fetchPage from './fetch-page/fetchPage';
-import RruPageableTablePage from './fetch-page/types/RruPageableTablePage';
+import RruDataTablePage from './fetch-page/types/RruDataTablePage';
 import PaginationView from './Pagination/PaginationView';
 import './style.css';
 import { getPersistedTableState, persistTableState } from './table-state-persistence';
-import RruPageableTableProps from './types/RruPageableTableProps';
+import RruDataTableProps from './types/RruDataTableProps';
 import TableColumn from './types/TableColumn';
 
 /**
@@ -33,7 +33,7 @@ import TableColumn from './types/TableColumn';
  *  5- Compatible with Spring (Page+Pageable) interfaces.
  *  6- Capable of retaining its state (search params + sort + current page) after re-mounting.
  */
-const RruPageableTable: FC<RruPageableTableProps> = ({
+const RruDataTable: FC<RruDataTableProps> = ({
   endpoint,
   requestMethod = 'GET',
   columns,
@@ -45,7 +45,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   onResponse,
   noDataLabel = 'No Data',
   apiErrorLabel = 'API Error',
-}: RruPageableTableProps) => {
+}: RruDataTableProps) => {
 
   // fetched
   const [totalPages, setTotalPages] = useState(0);
@@ -89,7 +89,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
     let newCurrentPage: number;
 
     fetchPage(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
-      .then((page: RruPageableTablePage) => {
+      .then((page: RruDataTablePage) => {
         setError(null);
         setTotalPages(page.totalPages);
         setData(page.content);
@@ -134,13 +134,13 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   };
 
   const getThClassName = (col: TableColumn) => {
-    let result = 'rru-pageable-table__th';
+    let result = 'rru-data-table__th';
     const sortKey = getSortKey(col);
     if (sortKey) {
       if (sortKey === sortBy) {
-        result += ' rru-pageable-table__th--sortable rru-pageable-table__th--sortable-' + sortDir;
+        result += ' rru-data-table__th--sortable rru-data-table__th--sortable-' + sortDir;
       } else {
-        result += ' rru-pageable-table__th--sortable';
+        result += ' rru-data-table__th--sortable';
       }
     }
     return result;
@@ -158,7 +158,7 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
 
   return (
     <div>
-      <table className='table table-striped rru-pageable-table'>
+      <table className='table table-striped rru-data-table'>
         <thead>
           <tr>
             {columns.map((col, index) =>
@@ -170,9 +170,9 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
         </thead>
         <tbody>
 
-          <tr className={`rru-pageable-table__loading-bar-tr--${isLoading ? 'visible' : 'hidden'}`}>
-            <td colSpan={columns.length} className='rru-pageable-table__loading-bar-td'>
-              <div className='rru-pageable-table__loading-bar'></div>
+          <tr className={`rru-data-table__loading-bar-tr--${isLoading ? 'visible' : 'hidden'}`}>
+            <td colSpan={columns.length} className='rru-data-table__loading-bar-td'>
+              <div className='rru-data-table__loading-bar'></div>
             </td>
           </tr>
           {error && (
@@ -211,5 +211,5 @@ const RruPageableTable: FC<RruPageableTableProps> = ({
   );
 };
 
-export default RruPageableTable;
+export default RruDataTable;
 
