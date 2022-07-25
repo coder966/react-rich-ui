@@ -48,19 +48,10 @@ const RruDataTable: FC<RruDataTableProps> = ({
   // flags
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [forceReFetch, setForceReFetch] = useState<number>(0);
 
   // sort
   const [sortBy, setSortBy] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState(defaultSortDir);
-
-  // reset page to 0 when the search changes or when sort changes
-  useEffect(() => {
-    setCurrentPage(0);
-    // we need this because if the user searches or changes sort and is on page 0
-    // then setting setCurrentPage(0); will not cause the other userEffect to run
-    setForceReFetch(new Date().getTime());
-  }, [search, sortBy, sortDir]);
 
   // reload list when search, page, sort changes
   useEffect(() => {
@@ -85,7 +76,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
         }
         setIsLoading(false);
       });
-  }, [currentPage, forceReFetch]);
+  }, [currentPage, sortBy, sortDir, search]);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
@@ -118,8 +109,11 @@ const RruDataTable: FC<RruDataTableProps> = ({
     if (sortKey) {
       if (sortBy !== sortKey) {
         setSortBy(sortKey);
+        setSortDir('asc');
+      } else {
+        setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
       }
-      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+      setCurrentPage(0);
     }
   };
 
