@@ -19,13 +19,8 @@ import ChangeCallback from "../types/ChangeCallback";
 import RequestMethod from "../types/RequestMethod";
 import ResponseCallback from "../types/ResponseCallback";
 import SortDir from "../types/SortDir";
-import fetchPageFromArray from "./fetchPageFromArray";
-import fetchPageUsingAxios from "./fetchPageUsingAxios";
-import fetchPageUsingFetch from "./fetchPageUsingFetch";
-import loadAxios from "./loadAxios";
+import { fetchPageFromArray, fetchPageFromHttpApi } from "./fetch-page";
 import { createRequestBody, createRequestParams } from "./rest-api-datasource/spring-datasource";
-import RejectFunction from "./types/RejectFunction";
-import ResolveFunction from "./types/ResolveFunction";
 import RruDataTablePage from "./types/RruDataTablePage";
 
 const useDataSource = (
@@ -49,23 +44,11 @@ const useDataSource = (
     let promise: Promise<RruDataTablePage>;
 
     if (typeof dataSource === 'string') {
-      // prepare request info
       const params = createRequestParams(requestMethod, pageNumber, pageSize, search, sortKey, sortDir);
       const body = createRequestBody(requestMethod, pageNumber, pageSize, search, sortKey, sortDir);
-
-      promise = new Promise((resolve: ResolveFunction, reject: RejectFunction) => {
-        if (loadAxios()) {
-          fetchPageUsingAxios(requestMethod, dataSource, params, body, resolve, reject);
-        } else {
-          fetchPageUsingFetch(requestMethod, dataSource, params, body, resolve, reject);
-        }
-      });
+      promise = fetchPageFromHttpApi(requestMethod, dataSource, params, body);
     } else {
-
-      promise = new Promise((resolve: ResolveFunction, reject: RejectFunction) => {
-        fetchPageFromArray(dataSource, pageNumber, pageSize, search, sortKey, sortDir, resolve, reject);
-      });
-
+      promise = fetchPageFromArray(dataSource, pageSize, pageNumber, sortKey, sortDir, search);
     }
 
     promise

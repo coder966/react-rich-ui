@@ -16,7 +16,7 @@
 
 import React, { FC, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
-import useDataSource from './fetch-page/useDataSource';
+import useDataSource from './data-source/useDataSource';
 import PaginationView from './pagination/PaginationView';
 import './style.css';
 import RruDataTableProps from './types/RruDataTableProps';
