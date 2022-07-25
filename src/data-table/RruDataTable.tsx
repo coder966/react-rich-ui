@@ -35,7 +35,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
 
   // state props
   defaultPageNumber,
-  defaultSortBy,
+  defaultSortKey,
   defaultSortDir,
   onChange,
 }: RruDataTableProps) => {
@@ -51,7 +51,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
   const [forceReFetch, setForceReFetch] = useState<number>(0);
 
   // sort
-  const [sortBy, setSortBy] = useState(defaultSortBy);
+  const [sortBy, setSortBy] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState(defaultSortDir);
 
   // reset page to 0 when the search changes or when sort changes

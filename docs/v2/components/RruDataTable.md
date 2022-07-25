@@ -17,7 +17,7 @@
 | noDataLabel       | This is the label used when no data is available.                                               | No       |
 | apiErrorLabel     | This is the label used when there has been an error in the API call to fetch the data.          | No       |
 | defaultPageNumber | Set the initial page number                                                                     | No       |
-| defaultSortBy     | Set the initial sort key                                                                        | No       |
+| defaultSortKey    | Set the initial sort key                                                                        | No       |
 | defaultSortDir    | Set the initial sort direction                                                                  | No       |
 | onChange          | A callback for when one of these information gets updated (pageNumber, sortKey, sortDir)        | No       |
 

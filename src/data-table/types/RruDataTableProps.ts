@@ -26,7 +26,7 @@ interface StateProps {
   /**
    * The default sort key
    */
-  defaultSortBy?: string,
+  defaultSortKey?: string,
 
   /**
    * The default sort direction

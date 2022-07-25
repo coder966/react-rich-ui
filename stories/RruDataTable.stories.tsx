@@ -89,7 +89,7 @@ export const Basic = (args) => {
         endpoint='http://localhost:8080/api/user'
         pageSize={5}
         columns={columns}
-        defaultSortBy='id'
+        defaultSortKey='id'
         defaultSortDir='desc'
         search={searchParams}
       />
@@ -157,7 +157,7 @@ export const RetainState = (args) => {
         search={searchParams}
 
         defaultPageNumber={retainedState?.pageNumber}
-        defaultSortBy={retainedState?.sortKey}
+        defaultSortKey={retainedState?.sortKey}
         defaultSortDir={retainedState?.sortDir}
         onChange={onTableChange}
       />
