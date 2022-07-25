@@ -16,27 +16,40 @@
 
 import TableColumn from "./TableColumn";
 
-interface RruDataTableProps {
 
-  /** Spring Page api endpoint */
+interface ApiDataSourceProps {
+
+  /**
+   * API endpoint
+   */
   endpoint: string;
 
   /** 
-   * Specify the HTTP method to be used when sending the API request.
-   * By default it uses GET.
-   * If GET is used, then the pagination object and the search object are merged and sent in the request query string.
-   * If POST is used, then the pagination is sent in the request query string while the search object is sent in the body. (This is because Spring does not directly support reading Pageable from request body)
+   * Specify the HTTP method to be used when sending the API request
    */
   requestMethod?: 'GET' | 'POST',
+
+  /** 
+   * A callback function in case you want to do anything with the API response
+   */
+  onResponse?: (body: object) => void;
+
+  /** 
+   * A message rendered when the API call fails
+   */
+  apiErrorLabel?: React.ReactNode;
+
+}
+
+interface RruDataTableProps extends ApiDataSourceProps {
 
   /**  */
   columns: TableColumn[];
 
-  /** The search params object. */
+  /** 
+   * The search params object
+   */
   search?: object;
-
-  /** use `getRetainedTableSearchObject` to read the retained object */
-  retainTableState?: boolean;
 
   /**  */
   pageSize: number;
@@ -47,14 +60,16 @@ interface RruDataTableProps {
   /** */
   defaultSortDir?: 'asc' | 'desc',
 
-  /** A callback function in case you want to do anything with response of the api */
-  onResponse?: (body: object) => void;
-
-  /** Rendered when no data has been returned from the api. */
+  /** 
+   * Message rendered when there is no data available
+   */
   noDataLabel?: React.ReactNode;
 
-  /** Rendered when no data has been returned from the api. */
-  apiErrorLabel?: React.ReactNode;
+  /** 
+   * use `getRetainedTableSearchObject` to read the retained object
+   */
+  retainTableState?: boolean;
+
 }
 
 export default RruDataTableProps;
