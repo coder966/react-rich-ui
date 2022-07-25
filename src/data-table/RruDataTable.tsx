@@ -18,7 +18,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import fetchPage from './fetch-page/fetchPage';
 import RruDataTablePage from './fetch-page/types/RruDataTablePage';
-import PaginationView from './Pagination/PaginationView';
+import PaginationView from './pagination/PaginationView';
 import './style.css';
 import RruDataTableProps from './types/RruDataTableProps';
 import TableColumn from './types/TableColumn';
