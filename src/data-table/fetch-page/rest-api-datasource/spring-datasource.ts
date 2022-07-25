@@ -21,14 +21,14 @@ const createRequestParams = (
   currentPage: number,
   pageSize: number,
   search: any,
-  sortBy: string | undefined,
+  sortKey: string | undefined,
   sortDir: string | undefined
 ): object => {
 
   let params = {
     page: currentPage,
     size: pageSize,
-    sort: sortBy ? sortBy + ',' + (sortDir ? sortDir : '') : '',
+    sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
   };
 
   if (requestMethod === 'GET') {
@@ -43,7 +43,7 @@ const createRequestBody = (
   currentPage: number,
   pageSize: number,
   search: any,
-  sortBy: string | undefined,
+  sortKey: string | undefined,
   sortDir: string | undefined
 ): object => {
 

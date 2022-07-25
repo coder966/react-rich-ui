@@ -24,7 +24,7 @@ const fetchPageFromArray = (
   pageSize: number,
 
   search: any,
-  sortBy: string | undefined,
+  sortKey: string | undefined,
   sortDir: string | undefined,
 
   resolve: ResolveFunction,

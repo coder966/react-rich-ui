@@ -40,7 +40,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
 }: RruDataTableProps) => {
 
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
-  const [sortBy, setSortBy] = useState(defaultSortKey);
+  const [sortKey, setSortKey] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState(defaultSortDir);
 
   const {
@@ -48,7 +48,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
     error,
     totalPages,
     data
-  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortBy, sortDir, search, onChange);
+  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortKey, sortDir, search, onChange);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
@@ -65,9 +65,9 @@ const RruDataTable: FC<RruDataTableProps> = ({
 
   const getThClassName = (col: TableColumn) => {
     let result = 'rru-data-table__th';
-    const sortKey = getSortKey(col);
-    if (sortKey) {
-      if (sortKey === sortBy) {
+    const key = getSortKey(col);
+    if (key) {
+      if (key === sortKey) {
         result += ' rru-data-table__th--sortable rru-data-table__th--sortable-' + sortDir;
       } else {
         result += ' rru-data-table__th--sortable';
@@ -77,10 +77,10 @@ const RruDataTable: FC<RruDataTableProps> = ({
   };
 
   const onSort = (col: TableColumn) => {
-    const sortKey = getSortKey(col);
-    if (sortKey) {
-      if (sortBy !== sortKey) {
-        setSortBy(sortKey);
+    const key = getSortKey(col);
+    if (key) {
+      if (key !== sortKey) {
+        setSortKey(key);
         setSortDir('asc');
       } else {
         setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
