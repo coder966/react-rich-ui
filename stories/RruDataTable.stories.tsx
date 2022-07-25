@@ -18,7 +18,6 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
-  getRetainedTableSearchObject,
   RruDataTable
 } from '../src/index';
 
@@ -55,8 +54,6 @@ const columns = [
     </>,
   },
 ];
-
-
 
 export const Basic = (args) => {
   const [searchParams, setSearchParams] = useState({
@@ -163,83 +160,6 @@ export const RetainState = (args) => {
         defaultSortBy={retainedState?.sortKey}
         defaultSortDir={retainedState?.sortDir}
         onChange={onTableChange}
-      />
-    </>
-  );
-};
-
-export const TwoTablesInTheSamePage = (args) => {
-  const [searchParams1, setSearchParams1] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
-  const [searchParams2, setSearchParams2] = useState(getRetainedTableSearchObject('http://localhost:8080/api/user'));
-
-  /**
-   * not the best way to get form data,
-   * this is just an example to show how you may want to implement search
-   */
-  const onSearch1 = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setSearchParams1({
-      name: event.target.elements.name.value,
-      email: event.target.elements.email.value,
-    });
-  };
-
-  /**
-   * not the best way to get form data,
-   * this is just an example to show how you may want to implement search
-   */
-  const onSearch2 = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setSearchParams2({
-      name: event.target.elements.name.value,
-      email: event.target.elements.email.value,
-    });
-  };
-
-  return (
-    <>
-      <form onSubmit={onSearch1}>
-        <label>Name</label>
-        <input name='name' defaultValue={searchParams1?.name || ''} />
-        <label>Email</label>
-        <input name='email' defaultValue={searchParams1?.email || ''} />
-        <button type='submit'>Search</button>
-      </form>
-
-      <br />
-
-      <RruDataTable
-        endpoint='http://localhost:8080/api/user'
-        pageSize={5}
-        columns={columns}
-        defaultSortBy='id'
-        defaultSortDir='desc'
-        search={searchParams1}
-        retainTableState={true}
-      />
-
-      <br /><br />
-
-      <form onSubmit={onSearch2}>
-        <label>Name</label>
-        <input name='name' defaultValue={searchParams2?.name || ''} />
-        <label>Email</label>
-        <input name='email' defaultValue={searchParams2?.email || ''} />
-        <button type='submit'>Search</button>
-      </form>
-
-      <br />
-
-      <RruDataTable
-        endpoint='http://localhost:8080/api/user'
-        pageSize={5}
-        columns={columns}
-        defaultSortBy='id'
-        defaultSortDir='desc'
-        search={searchParams2}
-        retainTableState={true}
       />
     </>
   );

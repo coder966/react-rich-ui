@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-export { default as getRetainedTableSearchObject } from './data-table/getRetainedTableSearchObject';
 export { default as RruDataTable } from './data-table/RruDataTable';
 export { default as RruCheckboxInput } from './form/RruCheckboxInput/RruCheckboxInput';
 export { default as RruDateTimeInput } from './form/RruDateTimeInput/RruDateTimeInput';

@@ -6,21 +6,20 @@
 
 ### RruDataTable
 
-| Name              | Description                                                                                                                                                                              | Required |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| endpoint          | The endpoint which returns a supported response JSON. For supported interface, see table below.                                                                                          | Yes      |
-| requestMethod     | Specify the HTTP method to be used when sending the API request.                                                                                                                         | No       |
-| columns           | An array of column objects                                                                                                                                                               | Yes      |
-| search            | The search parameters the will be sent to the endpoint specified                                                                                                                         | No       |
-| retainTableState  | Whether or not to retain the table state (current page and current sort configuration and current search object). To read the retained search object use `getRetainedTableSearchObject`. | No       |
-| onResponse        | A callback function. `data => void`                                                                                                                                                      | No       |
-| pageSize          | The page size. The default value is `10`                                                                                                                                                 | No       |
-| noDataLabel       | This is the label used when no data is available.                                                                                                                                        | No       |
-| apiErrorLabel     | This is the label used when there has been an error in the API call to fetch the data.                                                                                                   | No       |
-| defaultPageNumber | Set the initial page number                                                                                                                                                              | No       |
-| defaultSortBy     | Set the initial sort key                                                                                                                                                                 | No       |
-| defaultSortDir    | Set the initial sort direction                                                                                                                                                           | No       |
-| onChange          | A callback for when one of these information gets updated (pageNumber, sortKey, sortDir)                                                                                                 | No       |
+| Name              | Description                                                                                     | Required |
+| ----------------- | ----------------------------------------------------------------------------------------------- | -------- |
+| endpoint          | The endpoint which returns a supported response JSON. For supported interface, see table below. | Yes      |
+| requestMethod     | Specify the HTTP method to be used when sending the API request.                                | No       |
+| columns           | An array of column objects                                                                      | Yes      |
+| search            | The search parameters the will be sent to the endpoint specified                                | No       |
+| onResponse        | A callback function. `data => void`                                                             | No       |
+| pageSize          | The page size. The default value is `10`                                                        | No       |
+| noDataLabel       | This is the label used when no data is available.                                               | No       |
+| apiErrorLabel     | This is the label used when there has been an error in the API call to fetch the data.          | No       |
+| defaultPageNumber | Set the initial page number                                                                     | No       |
+| defaultSortBy     | Set the initial sort key                                                                        | No       |
+| defaultSortDir    | Set the initial sort direction                                                                  | No       |
+| onChange          | A callback for when one of these information gets updated (pageNumber, sortKey, sortDir)        | No       |
 
 ### Column
 
@@ -33,9 +32,3 @@
 ### Supported endpoint response interfaces
 
 - `org.springframework.data.domain.Page`
-
-### getRetainedTableSearchObject
-
-This function allows you to read the table persisted search object even after the table has been de-mounted due to navigation or page refresh. This comes in handy when you want to re-initialize the search form with the same last values it was in before the table (alongside with the search form) is destroyed.
-
-In case you have multiple tables in the same page, just provide the function with the table endpoint. If you don't specify the endpoint, there is no guarantee on which table of which it will return the search object.

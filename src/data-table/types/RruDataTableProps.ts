@@ -86,11 +86,6 @@ interface RruDataTableProps extends StateProps, ApiDataSourceProps {
    */
   noDataLabel?: React.ReactNode;
 
-  /** 
-   * use `getRetainedTableSearchObject` to read the retained object
-   */
-  retainTableState?: boolean;
-
 }
 
 export default RruDataTableProps;

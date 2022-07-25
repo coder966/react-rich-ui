@@ -20,25 +20,14 @@ import fetchPage from './fetch-page/fetchPage';
 import RruDataTablePage from './fetch-page/types/RruDataTablePage';
 import PaginationView from './Pagination/PaginationView';
 import './style.css';
-import { getPersistedTableState, persistTableState } from './table-state-persistence';
 import RruDataTableProps from './types/RruDataTableProps';
 import TableColumn from './types/TableColumn';
 
-/**
- * A table the features:
- *  1- Declarative API.
- *  2- Handles API networking.
- *  3- Handles pagination.
- *  4- Allows search + sort.
- *  5- Compatible with Spring (Page+Pageable) interfaces.
- *  6- Capable of retaining its state (search params + sort + current page) after re-mounting.
- */
 const RruDataTable: FC<RruDataTableProps> = ({
   endpoint,
   requestMethod = 'GET',
   columns,
   search,
-  retainTableState = false,
   pageSize = 10,
   onResponse,
   noDataLabel = 'No Data',
@@ -65,19 +54,6 @@ const RruDataTable: FC<RruDataTableProps> = ({
   const [sortBy, setSortBy] = useState(defaultSortBy);
   const [sortDir, setSortDir] = useState(defaultSortDir);
 
-  /**
-   * init
-   */
-  useEffect(() => {
-    const persisted = getPersistedTableState(endpoint);
-    if (retainTableState && persisted) {
-      setTotalPages(persisted.totalPages);
-      setCurrentPage(persisted.currentPage);
-      setSortBy(persisted.sortBy);
-      setSortDir(persisted.sortDir);
-    }
-  }, []);
-
   // reset page to 0 when the search changes or when sort changes
   useEffect(() => {
     setCurrentPage(0);
@@ -89,16 +65,11 @@ const RruDataTable: FC<RruDataTableProps> = ({
   // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
-    let newTotalPage: number;
-    let newCurrentPage: number;
-
     fetchPage(requestMethod, endpoint, currentPage, pageSize, search, sortBy, sortDir)
       .then((page: RruDataTablePage) => {
         setError(null);
         setTotalPages(page.totalPages);
         setData(page.content);
-        newTotalPage = page.totalPages;
-        newCurrentPage = currentPage;
         if (onResponse) {
           onResponse(data);
         }
@@ -106,22 +77,11 @@ const RruDataTable: FC<RruDataTableProps> = ({
       .catch((err) => {
         setError(err);
         setTotalPages(0);
-        newTotalPage = 0;
-        newCurrentPage = 0;
         setData([]);
       })
       .finally(() => {
         if (onChange) {
           onChange(currentPage, sortBy, sortDir);
-        }
-        if (retainTableState) {
-          persistTableState(endpoint, {
-            search: search,
-            totalPages: newTotalPage,
-            currentPage: newCurrentPage,
-            sortBy: sortBy,
-            sortDir: sortDir,
-          });
         }
         setIsLoading(false);
       });
