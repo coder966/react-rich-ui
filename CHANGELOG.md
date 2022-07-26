@@ -2,6 +2,105 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.0.0] - 2022-07-26
+
+### Breaking Changes
+
+- `RruDataTable`: Renamed from `RruPageableTable`.
+- `RruDataTable`: Renamed `apiErrorLabel` to `errorLabel`.
+- `RruDataTable`: Renamed `defaultSortBy` to `defaultSortKey`.
+- `RruDataTable`: Removed `actions` and `actionsLabel`.
+- `RruDataTable`: Removed `userPrivileges` and `allowedPrivileges`.
+- `RruDataTable`: Removed `disableSorting`.
+- `RruDataTable`: Removed `retainTableState` and `getRetainedTableSearchObject`.
+- `RruDataTable`: Removed `display` from `columns`.
+- `RruDataTable`: Removed `sortable` from `columns`.
+
+- `RruStepsWizard`: Added `getStepLabel` to read step label, no longer requiring `stepLabel` to be injected into children.
+- `RruStepsWizard`: Added a hook `useRruStepsWizardContext` to access the current step info and access the navigation functions, no longer injecting these into children's props.
+- `RruStepsWizard`: Removed `noHeader`.
+
+- `RruButton`: This component has been dropped. Use `RruModalButton` instead.
+
+- `RruForm`: Renamed `validationSchema` to `yupValidationSchema`.
+- `RruForm`: Removed `watch` and `watcher`. Use the new callback `onChange` on the input component.
+
+- `RruFormElement`: Removed this component, each input type has its own dedicated component:
+
+  - `type='text'` becomes `RruTextInput`
+  - `type='password'` becomes `RruTextInput` with `isPassword={true}`
+  - `type='textarea'` becomes `RruTextareaInput`
+  - `type='date'` becomes `RruDateTimeInput` with `mode='date'`
+  - `type='time'` has no replacement
+  - `type='select'` becomes `RruSelectInput`
+  - `type='multi-select'` becomes `RruMultiSelectInput`
+  - `type='checkbox'` becomes `RruCheckboxInput`
+  - `type='multi-checkbox'` becomes `RruMultiCheckboxInput`
+  - `type='grouped-multi-checkbox'` has no replacement
+  - `type='radio'` becomes `RruRadioInput`
+  - `type='file'` becomes `RruFileInput`
+
+<!-- comment to force new line -->
+
+- `RruSelectInput`: Removed `defaultValue` and read the default value from the `initialValues` of the form.
+- `RruSelectInput`: Renamed `options`'s `id` attribute to `value`.
+- `RruMultiSelectInput`: Removed `defaultValue` and read the default value from the `initialValues` of the form.
+- `RruMultiSelectInput`: Renamed `options`'s `id` attribute to `value`.
+- `RruRadioInput`: Renamed `options`'s `id` attribute to `value`.
+- `RruMultiCheckboxInput`: Renamed `options`'s `id` attribute to `value`.
+- `RruDateTimeInput`: Removed `isHijri`. Use `calendarType` instead.
+- `RruFileInput`: Changed resultant value type from `FileList` to `File`.
+
+### Added
+
+- `RruModalButton`: New Component.
+
+- `RruDataTable`: Added `defaultPageNumber`.
+- `RruDataTable`: Added `onChange`.
+
+- `RruStepsWizard`: Added `renderHeader`.
+
+- `RruTextInput`: Added `autoComplete`.
+- `RruTextInput`: Added `dir`.
+- `RruTextInput`: Added `list`.
+- `RruTextInput`: Added `maxLength`.
+- `RruTextInput`: Added `placeholder`.
+- `RruTextareaInput`: Added `autoComplete`.
+- `RruTextareaInput`: Added `cols`.
+- `RruTextareaInput`: Added `dir`.
+- `RruTextareaInput`: Added `maxLength`.
+- `RruTextareaInput`: Added `placeholder`.
+- `RruTextareaInput`: Added `rows`.
+- `RruTextareaInput`: Added `wrap`.
+- `RruDateTimeInput`: Added new mode `datetime` which supports date and time selection.
+- `RruDateTimeInput`: Added `calendarType` which supports many calendar types (e.g. `gregorian`, `islamic-umalqura`, `islamic-rgsa`, `persian` and more).
+- `RruDateTimeInput`: Added `getDateConfig`.
+- `RruSelectInput`: Added button to clear selection.
+- `RruMultiCheckboxInput`: Added `inline`.
+- `RruFileInput`: Added `accept`.
+
+### Changed
+
+- You are no longer required to load `font-awesome` stylesheet.
+- `RruDataTable`: Use in-house developed pagination.
+- `RruDateTimeInput`: Renders a floating picker rather than 3 select elements.
+
+### Fixed
+
+- `RruForm`: Unmounted fields should not appear in form submit result.
+- `RruDataTable`: Avoid a redundant api call after search.
+
+### Other
+
+- Refactor to TypeScript.
+- Improved styles.
+- Adhere to BEM naming convention for CSS class names.
+- Migrate to `bootstrap` v5.
+- Removed dependency on `font-awesome`.
+- Removed dependency on `react-paginate`.
+- upgrade dependencies.
+- Internal enhancements.
+
 ## [1.6.3] - 2022-04-12
 
 ### Internal
