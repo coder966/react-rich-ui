@@ -44,7 +44,12 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
 
   return (
     <>
-      <button type='button'
+      <button
+        name={props.name}
+        disabled={props.disabled}
+        className={props.className}
+        style={props.style}
+        type='button'
         data-bs-toggle='modal'
         data-bs-target={`#modal-${id}`}
       >

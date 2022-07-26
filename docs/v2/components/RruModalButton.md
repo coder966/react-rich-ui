@@ -10,3 +10,7 @@ A button that shows a modal when clicked.
 | ---------- | ------------------------------------------------------------------------------------------------------------------------ | -------- |
 | modalTitle | The modal title                                                                                                          | No       |
 | modalBody  | The modal body. Could be either a valid JSX or a function that receives the closeModal function and returns a valid JSX. | No       |
+| name       | Button name                                                                                                              | No       |
+| disabled   | Is the button disabled                                                                                                   | No       |
+| className  | Button className                                                                                                         | No       |
+| style      | Button style                                                                                                             | No       |

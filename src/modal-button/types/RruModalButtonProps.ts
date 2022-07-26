@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React, { CSSProperties, ReactNode } from "react";
 
-type ButtonProps = JSX.IntrinsicElements['button'];
+interface RruModalButtonProps {
 
-interface RruModalButtonProps extends ButtonProps {
+  name?: string;
+
+  disabled?: boolean;
+
+  className?: string;
+
+  style?: CSSProperties;
+
+  children?: ReactNode
 
   /**
    * The modal title.
