@@ -17,8 +17,8 @@
 
 ## RruDateTimeInputDateConfig
 
-| Name       | Description           | Required |
-| ---------- | --------------------- | -------- |
-| isDisabled | Is the date disabled. | No       |
-| className  | Class name.           | No       |
-| style      | Custom style.         | No       |
+| Name      | Description           | Required |
+| --------- | --------------------- | -------- |
+| disabled  | Is the date disabled. | No       |
+| className | Class name.           | No       |
+| style     | Custom style.         | No       |

@@ -98,7 +98,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }
 
   const onSelectDate = (date: IntlDate) => {
-    if (getDateConfig(date)?.isDisabled) {
+    if (getDateConfig(date)?.disabled) {
       return;
     } else {
       setIntlDate(date);
@@ -198,7 +198,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (intlDate && targetDate.isEqual(intlDate)) {
       className += ' rru-date-input__day--selected';
     }
-    if (dateConfig?.isDisabled) {
+    if (dateConfig?.disabled) {
       className += ' rru-date-input__day--disabled';
     }
     if (dateConfig?.className) {

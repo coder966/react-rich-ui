@@ -41,7 +41,7 @@ export const Date = (args) => {
 
   const getDateConfig = (date: string) => {
     if (date === '2022-07-12') {
-      return { isDisabled: true };
+      return { disabled: true };
     }
     if (date === '2022-07-13') {
       return { style: { 'color': 'red' } };
@@ -85,7 +85,7 @@ export const DateTime = (args) => {
 
   const getDateConfig = (date: string) => {
     if (date === '2022-07-12') {
-      return { isDisabled: true };
+      return { disabled: true };
     }
     return null;
   }
