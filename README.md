@@ -1,6 +1,6 @@
 # React Rich UI
 
-A set of commonly-used React components with a declarative API
+React UI framework with lots of built-in UI components (forms, data table, steps wizards, etc...)
 
 ## Docs
 

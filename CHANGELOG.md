@@ -99,6 +99,7 @@ Pre-release versions will not be mentioned here.
 - Removed dependency on `react-paginate`.
 - upgrade dependencies.
 - Internal enhancements.
+- Reduce package size.
 
 ## [1.6.3] - 2022-04-12
 
