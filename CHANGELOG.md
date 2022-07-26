@@ -1,35 +1,39 @@
 # Changelog
+
 Pre-release versions will not be mentioned here.
 
 ## [1.6.3] - 2022-04-12
 
 ### Internal
-- Improvements.
 
+- Improvements.
 
 ## [1.6.2] - 2022-04-12
 
 ### Fixed
-- RruFormElement: revert adding autoComplete='new-password' to password type in v1.6.1 because this broke the login form auto completion.
 
+- RruFormElement: revert adding autoComplete='new-password' to password type in v1.6.1 because this broke the login form auto completion.
 
 ## [1.6.1] - 2022-04-12
 
 ### Added
+
 - RruForm: add typescript support for boolean type in initialValues prop.
 - RruFormElement: add autoComplete='new-password' to password type.
 
 ### Fixed
+
 - RruButton: The cancel button in the confirmation was submitting the form.
 
 ### Internal
+
 - Storybook stories improvements.
 - upgrade dev dependencies.
-
 
 ## [1.6.0] - 2022-04-02
 
 ### Added
+
 - RruFormElement: Added `dir` prop to `text`, `textarea`, and `password`.
 - RruFormElement: Added `accept` prop to `file`.
 - RruPageableTable: Added the ability to specify the default sort configuration using `defaultSortBy` and `defaultSortDir`.
@@ -38,14 +42,17 @@ Pre-release versions will not be mentioned here.
 - RruPageableTable: Added the ability to retain the table state (current page and current sort configuration and current search object) (through the use of `retainTableState` and `getRetainedTableSearchObject`). Please refer to the documentations for details.
 
 ### Changed
+
 - You must now explicitly import the library stylesheet `react-rich-ui/dist/index.css` in you react app (usually in `index.js`).
 - RruPageableTable: Reset to the first page after search params change.
 - RruButton: Confirmation dialogue now uses a custom-built modal instead of `react-bootstrap` `Modal`.
 
 ### Removed (Not Breaking)
+
 - RruPageableTable: Removed `id` prop. Now the component will generate a unique id which is used for persisting the table state.
 
 ### Internal
+
 - Rewrite components in Typescript.
 - Drop the example app and use Storybook instead.
 - Use Microbundle for building the library.
@@ -53,152 +60,175 @@ Pre-release versions will not be mentioned here.
 - Add `yup` to `peerDependencies`.
 - Upgrade Dependencies.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.5.3] - 2021-02-20
 
 ### Fixed
+
 - RruFormElement: fix `file` input not working
 
---------------------------------------------------------------------------------
+---
 
 ## [1.5.2] - 2021-02-20
 
 ### Changed
+
 - RruFormElement: remove unused props (`prepend`, `append`, `labelClassName`, `inputClassName`)
 - Add missing info to docs
 - Internal cleanup
 - CSS Improvements
 - Upgrade some deps
 
---------------------------------------------------------------------------------
+---
 
 ## [1.5.1] - 2021-02-03
 
 ### Fixed
+
 - RruFormElement: Fix default exports
 
---------------------------------------------------------------------------------
+---
 
 ## [1.5.0] - 2021-02-03
 
 ### Added
+
 - RruFormElement: add new prop `requiredAsterisk`
 
 ### Changed
+
 - Example App: update example rest api endpoint.
 - Internal refactor (RruFormElement).
 - Improved docs.
 
 ### Fixed
+
 - RruButton: add missing `watch`
 - RruButton: add missing `initialValues`
 
---------------------------------------------------------------------------------
+---
 
 ## [1.4.4] - 2020-11-23
 
 ### Added
+
 - Github Pages.
 
 ### Changed
+
 - RruFormElement: Improved `file` type.
 - Improved styles.
 - Improved docs.
 - Internal refactor.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.4.3] - 2020-11-16
 
 ### Fixed
+
 - RruFormElement: fix select if no default value and the options array is empty.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.4.2] - 2020-11-15
 
 ### Changed
+
 - Update API reference.
 
 ### Fixed
+
 - RruStepsWizard: fix step component gets mounted before previousStepData gets loaded.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.4.1] - 2020-11-15
 
 ### Fixed
+
 - RruFormElement: fix `select` and `multi-select` if option is no longer available in the options list after it gets updated.
 - Fix ESLint warnings and errors.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.4.0] - 2020-11-15
 
 ### Added
+
 - RruStepsWizard: New component
 
 ### Fixed
+
 - RruFormElement: fix unable to remove last item in `multi-select`
 - RruFormElement: fix disabled not working for `select` and `multi-select`
 
---------------------------------------------------------------------------------
+---
 
 ## [1.3.0] - 2020-11-10
 
 ### Added
+
 - RruFormElement: add new type `multi-select`
 - README: mention stylesheet dependencies.
 - Example App: more examples and improvements.
 
 ### Changed
+
 - RruFormElement: select: leave select option empty if the default value not found in the options list.
 - Update dependencies.
 
 ### Fixed
+
 - RruFormElement: select: Add red border to select if there is an error.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.2.1] - 2020-11-07
 
 ### Fixed
+
 - RruFormElement: Fix a crash when options array is empty for `select`
 
---------------------------------------------------------------------------------
+---
 
 ## [1.2.0] - 2020-11-07
 
 ### Added
+
 - For array-based elements (e.g. `multi-checkbox`), the `initialValues` can be a flat array of ids or an array of options, or even a mix of both.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.1.1] - 2020-11-04
+
 The NPM package has been moved from [@coder966/react-rich-ui](https://www.npmjs.com/package/@coder966/react-rich-ui) to [react-rich-ui](https://www.npmjs.com/package/react-rich-ui).
 
---------------------------------------------------------------------------------
+---
 
 ## [1.1.0] - 2020-11-03
 
 ### Added
+
 - RruForm: Add `watch(array)` and `watcher(func)`.
 - RruPageableTable: Fallback to `fetch` if `Axios` is not available.
 - RruPageableTable: Add `noDataLabel`.
 - Example App: add example for `RruPageableTable`.
 
 ### Changed
+
 - RruForm: Deprecate `watch(func)`.
 
 ### Fixed
+
 - RruForm: Fix a crash when `initialValues` is `undefined`.
 - RruFormElement: Fix `select` initial value.
 - RruFormElement: Fix `maxLength`.
 - RruFormElement: Fix duplicate key.
 
---------------------------------------------------------------------------------
+---
 
 ## [1.0.0] - 2020-11-03
-First GA release
 
+First GA release

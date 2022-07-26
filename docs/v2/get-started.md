@@ -42,7 +42,7 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Components
 
-- [Forms](/docs/v2/components/RruForm)
-- [Tables](/docs/v2/components/RruDataTable)
-- [Wizards](/docs/v2/components/RruStepsWizard)
+- [Form](/docs/v2/components/RruForm)
+- [DataTable](/docs/v2/components/RruDataTable)
+- [StepsWizard](/docs/v2/components/RruStepsWizard)
 - [ModalButton](/docs/v2/components/RruModalButton)
