@@ -11,8 +11,9 @@ Pre-release versions will not be mentioned here.
 - `RruDataTable`: Renamed `defaultSortBy` to `defaultSortKey`.
 - `RruDataTable`: Removed `actions` and `actionsLabel`.
 - `RruDataTable`: Removed `userPrivileges` and `allowedPrivileges`.
-- `RruDataTable`: Removed `disableSorting`.
 - `RruDataTable`: Removed `retainTableState` and `getRetainedTableSearchObject`.
+- `RruDataTable`: Removed `disableSorting`.
+- `RruDataTable`: Removed `nextLabel` and `previousLabel`.
 - `RruDataTable`: Removed `display` from `columns`.
 - `RruDataTable`: Removed `sortable` from `columns`.
 
@@ -42,13 +43,18 @@ Pre-release versions will not be mentioned here.
 
 <!-- comment to force new line -->
 
-- `RruSelectInput`: Removed `defaultValue` and read the default value from the `initialValues` of the form.
+- `RruSelectInput`: Removed `defaultValue`. Now reads the default value from the `initialValues` of the form.
 - `RruSelectInput`: Renamed `options`'s `id` attribute to `value`.
-- `RruMultiSelectInput`: Removed `defaultValue` and read the default value from the `initialValues` of the form.
+- `RruMultiSelectInput`: Removed `defaultValue`. Now reads the default value from the `initialValues` of the form.
 - `RruMultiSelectInput`: Renamed `options`'s `id` attribute to `value`.
 - `RruRadioInput`: Renamed `options`'s `id` attribute to `value`.
 - `RruMultiCheckboxInput`: Renamed `options`'s `id` attribute to `value`.
 - `RruDateTimeInput`: Removed `isHijri`. Use `calendarType` instead.
+- `RruDateTimeInput`: Removed `isFuture`. Use `getDateConfig` instead.
+- `RruDateTimeInput`: Removed `isPast`. Use `getDateConfig` instead.
+- `RruDateTimeInput`: Removed `maxYearLength`. Use `getDateConfig` instead.
+- `RruDateTimeInput`: Removed `reverseDisplayOrder`.
+- `RruFileInput`: Removed `placeholder`.
 - `RruFileInput`: Changed resultant value type from `FileList` to `File`.
 
 ### Added
@@ -61,15 +67,9 @@ Pre-release versions will not be mentioned here.
 - `RruStepsWizard`: Added `renderHeader`.
 
 - `RruTextInput`: Added `autoComplete`.
-- `RruTextInput`: Added `dir`.
 - `RruTextInput`: Added `list`.
-- `RruTextInput`: Added `maxLength`.
-- `RruTextInput`: Added `placeholder`.
 - `RruTextareaInput`: Added `autoComplete`.
 - `RruTextareaInput`: Added `cols`.
-- `RruTextareaInput`: Added `dir`.
-- `RruTextareaInput`: Added `maxLength`.
-- `RruTextareaInput`: Added `placeholder`.
 - `RruTextareaInput`: Added `rows`.
 - `RruTextareaInput`: Added `wrap`.
 - `RruDateTimeInput`: Added new mode `datetime` which supports date and time selection.
@@ -77,7 +77,6 @@ Pre-release versions will not be mentioned here.
 - `RruDateTimeInput`: Added `getDateConfig`.
 - `RruSelectInput`: Added button to clear selection.
 - `RruMultiCheckboxInput`: Added `inline`.
-- `RruFileInput`: Added `accept`.
 
 ### Changed
 
