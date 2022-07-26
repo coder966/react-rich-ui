@@ -1,6 +1,6 @@
 {
   "name": "react-rich-ui",
-  "version": "1.6.3",
+  "version": "2.0.0-rc.0",
   "description": "A set of commonly-used React components with a declarative API",
   "keywords": [
     "React",
@@ -8,8 +8,7 @@
     "form",
     "table",
     "button",
-    "confirmation",
-    "dialogue",
+    "modal",
     "date picker",
     "time picker",
     "from control",
@@ -18,7 +17,7 @@
   ],
   "author": "Khalid H. Alharisi",
   "license": "Apache-2.0",
-  "homepage": "https://react-rich-ui.coder966.net/",
+  "homepage": "https://react-rich-ui.coder966.net",
   "repository": {
     "type": "git",
     "url": "https://github.com/coder966/react-rich-ui"
