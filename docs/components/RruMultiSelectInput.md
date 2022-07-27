@@ -2,6 +2,9 @@
 
 # RruMultiSelectInput
 
+## Example
+Click "Open Sandbox" to see the example source code
+
 <iframe src="https://codesandbox.io/embed/rrumultiselectinput-ey1c52?autoresize=1&fontsize=14&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="RruMultiSelectInput"
