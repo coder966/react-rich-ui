@@ -33,13 +33,30 @@ const columns = [
     value: '#',
   },
   {
-    label: 'Name',
-    value: 'name',
+    label: 'First Name',
+    value: 'firstName',
   },
   {
     label: 'Email',
     value: 'email',
-    sortKey: null // to disable sorting for this column
+    sortKey: null, // to disable sorting for this column
+  },
+  {
+    label: 'Status',
+    value: (user) => (
+      <span
+        style={{
+          color: '#ffffff',
+          fontSize: '0.8rem',
+          background: user.status === 'ENABLED' ? 'green' : 'red',
+          padding: '4px',
+          borderRadius: '6px',
+        }}
+      >
+        {user.status}
+      </span>
+    ),
+    sortKey: 'status',
   },
   {
     label: 'Address',
@@ -48,31 +65,46 @@ const columns = [
   },
   {
     label: 'Actions',
-    value: (user) => <>
-      <button onClick={e => action('view user')(user)}>View</button>
-      {user.status === 'CONFIRMED' && <button onClick={e => action('edit user')(user)}>Edit</button>}
-    </>,
+    value: (user) => (
+      <>
+        <button className='btn btn-info m-1' onClick={(e) => action('view user')(user)}>
+          View
+        </button>
+        {user.status === 'ENABLED' && (
+          <button className='btn btn-warning m-1' onClick={(e) => action('edit user')(user)}>
+            Edit
+          </button>
+        )}
+      </>
+    ),
   },
 ];
 
-const springPageFetcher = async (pageSize: number, pageNumber: number, sortKey: string | undefined, sortDir: 'asc' | 'desc' | undefined, search: any) => {
-  const response = await fetch('http://localhost:8080/api/user?' + new URLSearchParams({
-    size: pageSize,
-    page: pageNumber,
-    sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
-    ...search
-  }));
+const springPageFetcher = async (
+  pageSize: number,
+  pageNumber: number,
+  sortKey: string | undefined,
+  sortDir: 'asc' | 'desc' | undefined,
+  search: any
+) => {
+  const response = await fetch(
+    'https://mock-data-api.vercel.app/users?' +
+      new URLSearchParams({
+        size: pageSize,
+        page: pageNumber,
+        sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
+        ...search,
+      })
+  );
   const json = await response.json();
   return {
     totalPages: json.totalPages,
     items: json.content,
-  }
-}
+  };
+};
 
 export const Basic = (args) => {
-  const [searchParams, setSearchParams] = useState({
-    name: '', email: ''
-  });
+  const [searchParams, setSearchParams] = useState<any>({});
 
   /**
    * not the best way to get form data,
@@ -82,7 +114,7 @@ export const Basic = (args) => {
     event.preventDefault();
     event.stopPropagation();
     setSearchParams({
-      name: event.target.elements.name.value,
+      firstName: event.target.elements.firstName.value,
       email: event.target.elements.email.value,
     });
   };
@@ -90,11 +122,13 @@ export const Basic = (args) => {
   return (
     <>
       <form onSubmit={onSearch}>
-        <label>Name</label>
-        <input name='name' defaultValue={searchParams?.name || ''} />
+        <label>First Name</label>
+        <input className='form-control w-auto d-inline m-1' name='firstName' defaultValue={searchParams.firstName} />
         <label>Email</label>
-        <input name='email' defaultValue={searchParams?.email || ''} />
-        <button type='submit'>Search</button>
+        <input className='form-control w-auto d-inline m-1' name='email' defaultValue={searchParams.email} />
+        <button className='btn btn-primary m-1' type='submit'>
+          Search
+        </button>
       </form>
 
       <br />
@@ -112,28 +146,32 @@ export const Basic = (args) => {
 };
 
 export const RetainState = (args) => {
-
   const saveState = (search: any, pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc') => {
     // example of retaining table state:
     // you may want to use Redux or React Context
     // use whatever storage you like, but here I will use session storage for simplicity
-    sessionStorage.setItem('my-page-state', JSON.stringify({
-      search, pageNumber, sortKey, sortDir
-    }));
-  }
+    sessionStorage.setItem(
+      'my-page-state',
+      JSON.stringify({
+        search,
+        pageNumber,
+        sortKey,
+        sortDir,
+      })
+    );
+  };
 
   const restoreState = () => {
     const json = sessionStorage.getItem('my-page-state');
     if (json) {
       return JSON.parse(json);
     } else {
-      return undefined
+      return undefined;
     }
-  }
+  };
 
-  const [retainedState,] = useState<any>(restoreState());
-  const [searchParams, setSearchParams] = useState<any>(retainedState?.search);
-
+  const [retainedState] = useState<any>(restoreState());
+  const [searchParams, setSearchParams] = useState<any>(retainedState?.search || {});
 
   /**
    * not the best way to get form data,
@@ -143,23 +181,25 @@ export const RetainState = (args) => {
     event.preventDefault();
     event.stopPropagation();
     setSearchParams({
-      name: event.target.elements.name.value,
+      firstName: event.target.elements.firstName.value,
       email: event.target.elements.email.value,
     });
   };
 
   const onTableChange = (pageNumber: number, sortKey?: string, sortDir?: 'asc' | 'desc'): void => {
     saveState(searchParams, pageNumber, sortKey, sortDir);
-  }
+  };
 
   return (
     <>
       <form onSubmit={onSearch}>
-        <label>Name</label>
-        <input name='name' defaultValue={searchParams?.name || ''} />
+        <label>First Name</label>
+        <input className='form-control w-auto d-inline m-1' name='firstName' defaultValue={searchParams.firstName} />
         <label>Email</label>
-        <input name='email' defaultValue={searchParams?.email || ''} />
-        <button type='submit'>Search</button>
+        <input className='form-control w-auto d-inline m-1' name='email' defaultValue={searchParams.email} />
+        <button className='btn btn-primary m-1' type='submit'>
+          Search
+        </button>
       </form>
 
       <br />
