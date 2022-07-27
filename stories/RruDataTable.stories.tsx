@@ -80,28 +80,31 @@ const columns = [
   },
 ];
 
-const springPageFetcher = async (
-  pageSize: number,
-  pageNumber: number,
-  sortKey: string | undefined,
-  sortDir: 'asc' | 'desc' | undefined,
-  search: any
-) => {
-  const response = await fetch(
-    'https://mock-data-api.vercel.app/users?' +
-      new URLSearchParams({
-        size: pageSize,
-        page: pageNumber,
-        sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
-        ...search,
-      })
-  );
-  const json = await response.json();
-  return {
-    totalPages: json.totalPages,
-    items: json.content,
+const myCustomPageFetcher =
+  (endpoint) =>
+  async (
+    pageSize: number,
+    pageNumber: number,
+    sortKey: string | undefined,
+    sortDir: 'asc' | 'desc' | undefined,
+    search: any
+  ) => {
+    const response = await fetch(
+      endpoint +
+        '?' +
+        new URLSearchParams({
+          size: pageSize,
+          page: pageNumber,
+          sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
+          ...search,
+        })
+    );
+    const json = await response.json();
+    return {
+      totalPages: json.totalPages,
+      items: json.content,
+    };
   };
-};
 
 export const Basic = (args) => {
   const [searchParams, setSearchParams] = useState<any>({});
@@ -134,7 +137,7 @@ export const Basic = (args) => {
       <br />
 
       <RruDataTable
-        pageFetcher={springPageFetcher}
+        pageFetcher={myCustomPageFetcher('https://mock-data-api.vercel.app/users')}
         pageSize={5}
         columns={columns}
         defaultSortKey='id'
@@ -205,7 +208,7 @@ export const RetainState = (args) => {
       <br />
 
       <RruDataTable
-        pageFetcher={springPageFetcher}
+        pageFetcher={myCustomPageFetcher('https://mock-data-api.vercel.app/users')}
         pageSize={5}
         columns={columns}
         search={searchParams}
