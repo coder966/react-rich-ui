@@ -78,7 +78,7 @@ interface RruDataTableProps extends StateProps, ApiDataSourceProps {
   search?: any;
 
   /**  */
-  pageSize: number;
+  pageSize?: number;
 
   /** 
    * Message rendered when there is no data available
