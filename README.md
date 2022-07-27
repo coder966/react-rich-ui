@@ -1,6 +1,8 @@
 # React Rich UI
 
-React UI framework with lots of built-in UI components (forms, data table, steps wizards, etc...)
+React UI framework with lots of built-in UI components (forms, data table, steps wizards, etc...).
+It is based on Bootstrap, and does /NOT/ intend to provide every single component you might need -like other UI frameworks-,
+but rather only provide implementations for the complex use-case components, and it does so with simple APIs.
 
 ## Docs
 

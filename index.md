@@ -1,11 +1,12 @@
 ## React Rich UI
 
-React UI framework with lots of built-in UI components (forms, data table, steps wizards, etc...)
+React UI framework with lots of built-in UI components (forms, data table, steps wizards, etc...).
+It is based on Bootstrap, and does /NOT/ intend to provide every single component you might need -like other UI frameworks-,
+but rather only provide implementations for the complex use-case components, and it does so with simple APIs.
 
 ## Why Use React Rich UI ?
 
-- Rich: We provide more than 15 different components.
-- Declarative: Lots of functionality you would normally implement yourself is available with declarative api.
+- Declarative: Lots of functionalities you would normally implement yourself is available with declarative APIs.
 - Tiny: 40kB (minified & gzipped).
 - Performant: Built with performance in mind from the first release.
 - Elegant: Components come with builtin styles.
