@@ -30,71 +30,99 @@ const FirstStep = (props) => {
   const [color, setColor] = useState('');
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value)
-  }
+    setName(e.target.value);
+  };
 
   const onColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setColor(e.target.value)
-  }
+    setColor(e.target.value);
+  };
 
   const navigateToNextStep = () => {
     const data = {
       name: name,
       color: color,
-    }
+    };
     wizardContext.nextStep(data);
-  }
+  };
 
-  return <div>
-    <h1>This is the first step</h1>
-    <h1>Step number read from the context: {wizardContext.currentStepNumber}</h1>
-    <h1>Step label read from the context: {wizardContext.currentStepLabel}</h1>
+  return (
+    <div>
+      <h1>This is the first step</h1>
+      <h1>Step number read from the context: {wizardContext.currentStepNumber}</h1>
+      <h1>Step label read from the context: {wizardContext.currentStepLabel}</h1>
 
-    <form>
-      <label>Name: </label>
-      <input type='text' value={name} onChange={onNameChange}></input>
-      <br></br>
-      <label>Color: </label>
-      <input type='text' value={color} onChange={onColorChange}></input>
-    </form>
-    <br></br>
+      <form>
+        <label>Name: </label>
+        <input className='form-control w-auto d-inline m-1' type='text' value={name} onChange={onNameChange}></input>
+        <div className='mt-2'></div>
+        <label>Color: </label>
+        <input className='form-control w-auto d-inline m-1' type='text' value={color} onChange={onColorChange}></input>
+      </form>
+      <div className='mt-2'></div>
 
-    <button onClick={navigateToNextStep}>next</button>
-    <button onClick={wizardContext.lastStep}>last step</button>
-  </div>
+      <button className='btn btn-primary m-2' onClick={navigateToNextStep}>
+        next
+      </button>
+    </div>
+  );
 };
 
 const SecondStep = (props) => {
   const wizardContext = useRruStepsWizardContext();
 
-  return <div>
-    <h1>This is the second step</h1>
+  const navigateToNextStep = () => {
+    const data = {
+      name: 'Fixed name from step #2',
+      color: 'Fixed color from step #2',
+    };
+    wizardContext.nextStep(data);
+  };
 
-    {wizardContext.currentStepInputData && <div>
-      <span>Name: {wizardContext.currentStepInputData.name}</span>
+  return (
+    <div>
+      <h1>This is the second step</h1>
+
+      {wizardContext.currentStepInputData && (
+        <div>
+          <span>Name: {wizardContext.currentStepInputData.name}</span>
+          <br></br>
+          <span>color: {wizardContext.currentStepInputData.color}</span>
+        </div>
+      )}
+
+      <button className='btn btn-primary m-2' onClick={navigateToNextStep}>
+        next
+      </button>
+
       <br></br>
-      <span>color: {wizardContext.currentStepInputData.color}</span>
-    </div>}
 
-    <button onClick={wizardContext.previousStep}>back</button>
-    <button onClick={e => wizardContext.nextStep({ name: 'Khalid', color: 'Blue' })}>next</button>
-  </div>
+      <button className='btn btn-primary m-2' onClick={wizardContext.previousStep}>
+        back
+      </button>
+    </div>
+  );
 };
 
 const ThirdStep = (props) => {
   const wizardContext = useRruStepsWizardContext();
 
-  return <div>
-    <h1>This is the third step</h1>
+  return (
+    <div>
+      <h1>This is the third step</h1>
 
-    {wizardContext.currentStepInputData && <div>
-      <span>Name: {wizardContext.currentStepInputData.name}</span>
-      <br></br>
-      <span>color: {wizardContext.currentStepInputData.color}</span>
-    </div>}
+      {wizardContext.currentStepInputData && (
+        <div>
+          <span>Name: {wizardContext.currentStepInputData.name}</span>
+          <br></br>
+          <span>color: {wizardContext.currentStepInputData.color}</span>
+        </div>
+      )}
 
-    <button onClick={wizardContext.firstStep}>first step</button>
-  </div>
+      <button className='btn btn-primary m-2' onClick={wizardContext.firstStep}>
+        first step
+      </button>
+    </div>
+  );
 };
 
 export const Basic = (args) => {
