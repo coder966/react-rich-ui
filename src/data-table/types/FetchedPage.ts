@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-type ResponseCallback = ((body: any) => void) | undefined;
+interface FetchedPage {
+  totalPages: number,
+  items: any[];
+}
 
-export default ResponseCallback;
+export default FetchedPage;

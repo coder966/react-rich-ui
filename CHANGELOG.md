@@ -2,7 +2,7 @@
 
 Pre-release versions will not be mentioned here.
 
-## [2.0.0] - 2022-07-26
+## [2.0.0] - 2022-07-27
 
 ### Breaking Changes
 
@@ -12,6 +12,7 @@ Pre-release versions will not be mentioned here.
 - `RruDataTable`: Removed `actions` and `actionsLabel`.
 - `RruDataTable`: Removed `userPrivileges` and `allowedPrivileges`.
 - `RruDataTable`: Removed `retainTableState` and `getRetainedTableSearchObject`.
+- `RruDataTable`: Removed `endpoint`, `requestMethod` and `onResponse`. Use `pageFetcher` instead.
 - `RruDataTable`: Removed `disableSorting`.
 - `RruDataTable`: Removed `nextLabel` and `previousLabel`.
 - `RruDataTable`: Removed `display` from `columns`.
@@ -61,6 +62,7 @@ Pre-release versions will not be mentioned here.
 
 - `RruModalButton`: New Component.
 
+- `RruDataTable`: Added `pageFetcher`.
 - `RruDataTable`: Added `defaultPageNumber`.
 - `RruDataTable`: Added `onChange`.
 
@@ -87,7 +89,7 @@ Pre-release versions will not be mentioned here.
 ### Fixed
 
 - `RruForm`: Unmounted fields should not appear in form submit result.
-- `RruDataTable`: Avoid a redundant api call after search.
+- `RruDataTable`: Avoid a redundant extra api call when search changes.
 
 ### Other
 
@@ -95,6 +97,7 @@ Pre-release versions will not be mentioned here.
 - Improved styles.
 - Adhere to BEM naming convention for CSS class names.
 - Migrate to `bootstrap` v5.
+- Removed the optional peer dependency `axios`.
 - Removed dependency on `font-awesome`.
 - Removed dependency on `react-paginate`.
 - upgrade dependencies.

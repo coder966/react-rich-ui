@@ -55,6 +55,20 @@ const columns = [
   },
 ];
 
+const springPageFetcher = async (pageSize: number, pageNumber: number, sortKey: string | undefined, sortDir: 'asc' | 'desc' | undefined, search: any) => {
+  const response = await fetch('http://localhost:8080/api/user?' + new URLSearchParams({
+    size: pageSize,
+    page: pageNumber,
+    sort: sortKey ? sortKey + ',' + (sortDir ? sortDir : '') : '',
+    ...search
+  }));
+  const json = await response.json();
+  return {
+    totalPages: json.totalPages,
+    items: json.content,
+  }
+}
+
 export const Basic = (args) => {
   const [searchParams, setSearchParams] = useState({
     name: '', email: ''
@@ -86,7 +100,7 @@ export const Basic = (args) => {
       <br />
 
       <RruDataTable
-        endpoint='http://localhost:8080/api/user'
+        pageFetcher={springPageFetcher}
         pageSize={5}
         columns={columns}
         defaultSortKey='id'
@@ -151,11 +165,10 @@ export const RetainState = (args) => {
       <br />
 
       <RruDataTable
-        endpoint='http://localhost:8080/api/user'
+        pageFetcher={springPageFetcher}
         pageSize={5}
         columns={columns}
         search={searchParams}
-
         defaultPageNumber={retainedState?.pageNumber}
         defaultSortKey={retainedState?.sortKey}
         defaultSortDir={retainedState?.sortDir}

@@ -15,8 +15,7 @@
  */
 
 import ChangeCallback from "./ChangeCallback";
-import RequestMethod from "./RequestMethod";
-import ResponseCallback from "./ResponseCallback";
+import PageFetcher from "./PageFetcher";
 import SortDir from "./SortDir";
 import TableColumn from "./TableColumn";
 
@@ -47,29 +46,12 @@ interface StateProps {
 
 }
 
-interface ApiDataSourceProps {
+interface RruDataTableProps extends StateProps {
 
   /**
-   * API endpoint
+   * A function that fetches a page from where-ever your data might be, usually from an HTTP API.
    */
-  endpoint: string;
-
-  /** 
-   * Specify the HTTP method to be used when sending the API request
-   */
-  requestMethod?: RequestMethod,
-
-  /** 
-   * A callback function in case you want to do anything with the API response
-   */
-  onResponse?: ResponseCallback;
-
-}
-
-
-interface RruDataTableProps extends StateProps, ApiDataSourceProps {
-
-
+  pageFetcher: PageFetcher;
 
   /**
    * An array of column objects that determine how to render columns in the table
@@ -88,7 +70,6 @@ interface RruDataTableProps extends StateProps, ApiDataSourceProps {
    * Message rendered when there is no data available
    */
   noDataLabel?: React.ReactNode;
-
 
   /** 
    * Message rendered when there is an error

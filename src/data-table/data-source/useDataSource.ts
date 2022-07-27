@@ -16,16 +16,12 @@
 
 import { useEffect, useState } from "react";
 import ChangeCallback from "../types/ChangeCallback";
-import RequestMethod from "../types/RequestMethod";
-import ResponseCallback from "../types/ResponseCallback";
+import FetchedPage from "../types/FetchedPage";
+import PageFetcher from "../types/PageFetcher";
 import SortDir from "../types/SortDir";
-import { fetchPageFromArray, fetchPageFromHttpApi } from "./fetch-page";
-import { createRequestBody, createRequestParams } from "./rest-api-datasource/spring-datasource";
-import DataSourcePage from "./types/DataSourcePage";
 
 const useDataSource = (
-  dataSource: string | Record<string, any>[],
-  requestMethod: RequestMethod, onResponse: ResponseCallback,
+  pageFetcher: PageFetcher,
   pageSize: number, pageNumber: number,
   sortKey: string | undefined, sortDir: SortDir,
   search: any,
@@ -37,28 +33,17 @@ const useDataSource = (
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState<any[]>([]);
 
-  // reload list when search, page, sort changes
   useEffect(() => {
     setIsLoading(true);
 
-    let promise: Promise<DataSourcePage>;
-
-    if (typeof dataSource === 'string') {
-      const params = createRequestParams(requestMethod, pageNumber, pageSize, search, sortKey, sortDir);
-      const body = createRequestBody(requestMethod, pageNumber, pageSize, search, sortKey, sortDir);
-      promise = fetchPageFromHttpApi(requestMethod, dataSource, params, body);
-    } else {
-      promise = fetchPageFromArray(dataSource, pageSize, pageNumber, sortKey, sortDir, search);
-    }
-
-    promise
-      .then((body: DataSourcePage) => {
+    pageFetcher(pageSize, pageNumber, sortKey, sortDir, search)
+      .then((body: FetchedPage) => {
+        if (!body.totalPages || !body.items || !Array.isArray(body.items)) {
+          throw 'Something went wrong in your page fetcher';
+        }
         setError(null);
         setTotalPages(body.totalPages);
-        setData(body.content);
-        if (onResponse) {
-          onResponse(body);
-        }
+        setData(body.items);
       })
       .catch((err) => {
         setError(err);
@@ -71,9 +56,7 @@ const useDataSource = (
         }
         setIsLoading(false);
       });
-
-  }, [dataSource, requestMethod, onResponse, pageSize, pageNumber, sortKey, sortDir, search]);
-
+  }, [pageFetcher, pageSize, pageNumber, sortKey, sortDir, search, onChange]);
 
   return {
     isLoading: isLoading,

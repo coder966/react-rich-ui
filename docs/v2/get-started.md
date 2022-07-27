@@ -37,7 +37,6 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Optional peer dependencies
 
-- `axios`: If you want to use it instead of `fetch`, which is the default HTTP Client used by `RruDataTable`.
 - `yup`: For form validation. See `RruForm` section for more details.
 
 ## Components

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-type RequestMethod = 'GET' | 'POST' | undefined;
+import FetchedPage from "./FetchedPage";
+import SortDir from "./SortDir";
 
-export default RequestMethod;
+type PageFetcher = (pageSize: number, pageNumber: number, sortKey: string | undefined, sortDir: SortDir, search: any) => Promise<FetchedPage>
+
+export default PageFetcher;

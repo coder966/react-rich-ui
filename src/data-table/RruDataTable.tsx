@@ -24,12 +24,10 @@ import SortDir from './types/SortDir';
 import TableColumn from './types/TableColumn';
 
 const RruDataTable: FC<RruDataTableProps> = ({
-  endpoint,
-  requestMethod = 'GET',
+  pageFetcher,
   columns,
   search,
   pageSize = 10,
-  onResponse,
   noDataLabel = 'No Data',
   errorLabel = 'Error',
 
@@ -55,7 +53,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
     error,
     totalPages,
     data
-  } = useDataSource(endpoint, requestMethod, onResponse, pageSize, currentPage, sortKey, sortDir, searchParams, onChange);
+  } = useDataSource(pageFetcher, pageSize, currentPage, sortKey, sortDir, searchParams, onChange);
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
