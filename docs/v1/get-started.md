@@ -1,5 +1,10 @@
 [Docs](/) > [v1](/docs/v1/get-started) > [Get Started](/docs/v1/get-started)
 
+<div class='warning-block'>
+Warning: You are viewing a legacy version documentation. Please visit <a href='/docs/v2'>this link</a> for the latest version.
+</div>
+
+
 # Getting Started
 
 ## Installation

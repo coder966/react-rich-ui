@@ -207,3 +207,21 @@ table th, table td {
     padding: 0.5rem 1rem;
     border: 1px solid #e9ebec
 }
+
+.warning-block{
+    margin-top: 6px;
+    margin-bottom: 6px;
+    color: #ff6100;
+    background-color: #fafaf3;
+    border-radius: 0.3rem;
+    overflow: auto;
+    overflow-wrap: normal;
+    font: 1rem Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f0e3dc;
+    border-image: initial;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    padding: 1rem 0.8rem;
+}
