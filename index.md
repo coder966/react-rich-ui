@@ -14,7 +14,7 @@ but rather only provide implementations for the complex use-case components, and
 
 ## Getting Started
 
-Please visit the documentations page for [V1](/docs/v1/get-started).
+Please visit the [documentations page](/docs).
 
 ## License
 

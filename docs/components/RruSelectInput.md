@@ -1,13 +1,10 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Forms](/docs/v2/components/RruForm) > [RruCheckboxInput](/docs/v2/components/RruCheckboxInput)
+[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruSelectInput](/docs/components/RruSelectInput)
 
-# RruCheckboxInput
+# RruSelectInput
 
-## Example
-Click "Open Sandbox" to see the example source code
-
-<iframe src="https://codesandbox.io/embed/rrucheckboxinput-vb4m82?autoresize=1&fontsize=14&theme=dark&view=preview"
+<iframe src="https://codesandbox.io/embed/rruselectinput-b6kjs7?autoresize=1&fontsize=14&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-  title="RruCheckboxInput"
+  title="RruSelectInput"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
@@ -19,5 +16,13 @@ Click "Open Sandbox" to see the example source code
 | name             | Unique form element name                                                 | Yes      |
 | label            | The form element label                                                   | No       |
 | requiredAsterisk | Display an asterisk to indicate the field is required                    | No       |
+| options          | An array of `RruOption` objects                                          | Yes      |
 | disabled         | Controls whether the input field is disabled or not                      | No       |
 | onChange         | A callback function. This is useful if you need to watch the field value | No       |
+
+## RruOption
+
+| Name  | Description                                           | Required |
+| ----- | ----------------------------------------------------- | -------- |
+| value | The option value                                      | Yes      |
+| label | The option label. Cloud be a string or any valid JSX. | Yes      |

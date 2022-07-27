@@ -1,4 +1,9 @@
-[Docs](/) > [v1](/docs/v1/get-started) > [Wizards](/docs/v1/components/RruStepsWizard)
+[Docs](/docs) > [v1](/docs/v1) > [Wizards](/docs/v1/components/RruStepsWizard)
+
+<div class='warning-block'>
+Warning: You are viewing a legacy version documentation. Please visit <a href='/docs'>this link</a> for the latest version.
+</div>
+
 
 # RruStepsWizard
 

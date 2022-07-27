@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Forms](/docs/v2/components/RruForm) > [RruTextInput](/docs/v2/components/RruTextInput)
+[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruTextInput](/docs/components/RruTextInput)
 
 # RruTextInput
 

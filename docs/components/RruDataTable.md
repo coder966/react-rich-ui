@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Tables](/docs/v2/components/RruDataTable)
+[Docs](/docs) > [Tables](/docs/components/RruDataTable)
 
 # RruDataTable
 

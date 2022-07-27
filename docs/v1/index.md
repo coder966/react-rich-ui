@@ -1,7 +1,7 @@
-[Docs](/) > [v1](/docs/v1/get-started) > [Get Started](/docs/v1/get-started)
+[Docs](/docs) > [v1](/docs/v1) > [Get Started](/docs/v1)
 
 <div class='warning-block'>
-Warning: You are viewing a legacy version documentation. Please visit <a href='/docs/v2'>this link</a> for the latest version.
+Warning: You are viewing a legacy version documentation. Please visit <a href='/docs'>this link</a> for the latest version.
 </div>
 
 

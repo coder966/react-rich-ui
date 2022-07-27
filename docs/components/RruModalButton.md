@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [RruModalButton](/docs/v2/components/RruModalButton)
+[Docs](/docs) > [RruModalButton](/docs/components/RruModalButton)
 
 # RruModalButton
 

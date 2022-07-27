@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Wizards](/docs/v2/components/RruStepsWizard)
+[Docs](/docs) > [Wizards](/docs/components/RruStepsWizard)
 
 # RruStepsWizard
 

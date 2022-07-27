@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Forms](/docs/v2/components/RruForm)
+[Docs](/docs) > [Forms](/docs/components/RruForm)
 
 # RruForm
 
@@ -18,27 +18,27 @@ Open one of the components page to see an example
 
 ### Text
 
-- [RruTextInput](/docs/v2/components/RruTextInput)
-- [RruTextareaInput](/docs/v2/components/RruTextareaInput)
+- [RruTextInput](/docs/components/RruTextInput)
+- [RruTextareaInput](/docs/components/RruTextareaInput)
 
 ### Date and Time
 
-- [RruDateTimeInput](/docs/v2/components/RruDateTimeInput)
+- [RruDateTimeInput](/docs/components/RruDateTimeInput)
 
 ### Select
 
-- [RruSelectInput](/docs/v2/components/RruSelectInput)
-- [RruMultiSelectInput](/docs/v2/components/RruMultiSelectInput)
+- [RruSelectInput](/docs/components/RruSelectInput)
+- [RruMultiSelectInput](/docs/components/RruMultiSelectInput)
 
 ### Checkbox
 
-- [RruCheckboxInput](/docs/v2/components/RruCheckboxInput)
-- [RruMultiCheckboxInput](/docs/v2/components/RruMultiCheckboxInput)
+- [RruCheckboxInput](/docs/components/RruCheckboxInput)
+- [RruMultiCheckboxInput](/docs/components/RruMultiCheckboxInput)
 
 ### Radio
 
-- [RruRadioInput](/docs/v2/components/RruRadioInput)
+- [RruRadioInput](/docs/components/RruRadioInput)
 
 ### Files
 
-- [RruFileInput](/docs/v2/components/RruFileInput)
+- [RruFileInput](/docs/components/RruFileInput)

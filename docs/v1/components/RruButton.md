@@ -1,4 +1,9 @@
-[Docs](/) > [v1](/docs/v1/get-started) > [Buttons](/docs/v1/components/RruButton)
+[Docs](/docs) > [v1](/docs/v1) > [Buttons](/docs/v1/components/RruButton)
+
+<div class='warning-block'>
+Warning: You are viewing a legacy version documentation. Please visit <a href='/docs'>this link</a> for the latest version.
+</div>
+
 
 # RruButton
 

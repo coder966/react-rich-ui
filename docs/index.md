@@ -1,4 +1,4 @@
-[Docs](/) > [V2](/docs/v2/get-started) > [Get Started](/docs/v2/get-started)
+[Docs](/docs) > [Get Started](/docs)
 
 # Getting Started
 
@@ -41,7 +41,7 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Components
 
-- [Form](/docs/v2/components/RruForm)
-- [DataTable](/docs/v2/components/RruDataTable)
-- [StepsWizard](/docs/v2/components/RruStepsWizard)
-- [ModalButton](/docs/v2/components/RruModalButton)
+- [Form](/docs/components/RruForm)
+- [DataTable](/docs/components/RruDataTable)
+- [StepsWizard](/docs/components/RruStepsWizard)
+- [ModalButton](/docs/components/RruModalButton)
