@@ -2,6 +2,10 @@
 
 # RruForm
 
+## Example
+Open one of the components page to see an example
+
+
 ## Props
 
 | Name                | Description                                                                                                                    | Required |
