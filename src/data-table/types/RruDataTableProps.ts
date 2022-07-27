@@ -69,7 +69,11 @@ interface ApiDataSourceProps {
 
 interface RruDataTableProps extends StateProps, ApiDataSourceProps {
 
-  /**  */
+
+
+  /**
+   * An array of column objects that determine how to render columns in the table
+   */
   columns: TableColumn[];
 
   /** 

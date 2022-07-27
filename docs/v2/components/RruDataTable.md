@@ -10,7 +10,7 @@
 | ----------------- | ----------------------------------------------------------------------------------------------- | -------- |
 | endpoint          | The endpoint which returns a supported response JSON. For supported interface, see table below. | Yes      |
 | requestMethod     | Specify the HTTP method to be used when sending the API request. `GET` or `POST`.               | No       |
-| columns           | An array of column objects                                                                      | Yes      |
+| columns           | An array of column objects that determine how to render columns in the table.                   | Yes      |
 | search            | The search parameters the will be sent to the endpoint specified                                | No       |
 | onResponse        | A callback function. `body => void`                                                             | No       |
 | pageSize          | The page size. The default value is `10`                                                        | No       |
