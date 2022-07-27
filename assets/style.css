@@ -47,15 +47,12 @@ a:hover {
 
 /* header */
 
-header .header {
-    padding: 1rem 2rem;
-    font-size: 2rem;
+.logo {
+    float: left;
+    width: 96px;
+    margin: 6px 6px 6px auto;
 }
 
-header .header a {
-    color: #0D3C72;
-    text-decoration: none;
-}
 
 /* navbar */
 
@@ -100,7 +97,7 @@ header nav .nav-item.icon {
     background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
     header nav > div {
         padding: 0 !important;
         max-width: 100% !important;
@@ -117,6 +114,9 @@ header nav .nav-item.icon {
     }
     #nav-checkbox:checked ~ nav {
         position: relative;
+    }
+    #nav-checkbox:checked ~ nav .logo {
+        float: none;
     }
     #nav-checkbox:checked ~ nav .nav-item {
         float: none;
