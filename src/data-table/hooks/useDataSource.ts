@@ -38,7 +38,7 @@ const useDataSource = (
 
     pageFetcher(pageSize, pageNumber, sortKey, sortDir, search)
       .then((body: FetchedPage) => {
-        if (!body.totalPages || !body.items || !Array.isArray(body.items)) {
+        if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
           throw 'Something went wrong in your page fetcher';
         }
         setError(null);
