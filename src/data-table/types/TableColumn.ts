@@ -15,9 +15,28 @@
  */
 
 interface TableColumn {
+
+  /**
+   * Table column label 
+   */
   label: React.ReactNode;
-  value: string | ((row: object) => React.ReactNode);
+
+  /**
+   * The value the should be displayed in each row.
+   * This could be either a string representing a property path in the item object
+   * or a function which takes the item object and returns a value
+   */
+  value: string | ((item: any) => React.ReactNode);
+
+  /**
+   * Property path in the item object.
+   * By default uses the path provided by `value` in case `value` was a string.
+   * If `value` is a function, then you need to provide the sorting key path,
+   * otherwise sorting will be disabled for this column.
+   * Similarly, if you want to disable sorting for a column, you can pass null here.
+   */
   sortKey?: string | null;
+
 }
 
 export default TableColumn;

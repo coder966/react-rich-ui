@@ -93,16 +93,15 @@ Pre-release versions will not be mentioned here.
 
 ### Other
 
-- Refactor to TypeScript.
+- Reduce package size.
+- Migrate to `bootstrap` v5.
 - Improved styles.
 - Adhere to BEM naming convention for CSS class names.
-- Migrate to `bootstrap` v5.
 - Removed the optional peer dependency `axios`.
 - Removed dependency on `font-awesome`.
 - Removed dependency on `react-paginate`.
 - upgrade dependencies.
 - Internal enhancements.
-- Reduce package size.
 
 ## [1.6.3] - 2022-04-12
 
