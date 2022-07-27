@@ -25,8 +25,8 @@ Add the following tag to your index.html file:
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/react-rich-ui@1.6.3/dist/index.css"
-  integrity="sha384-CrKK9CcPYhApdIxMGxMZBvlXZ5Mf2fLIGbDmgbOOwtSVACYVWlYhaqxDbfNOMnPT"
+  href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.0.0/dist/index.css"
+  integrity="sha384-5VVvy00iWm+zoH7Pm5sxyZW+mpa5lyg+uvJqTcSJHHrLr2nvjFeYTVjtX18SoUBg"
   crossorigin="anonymous"
 />
 ```
