@@ -1,4 +1,4 @@
-const isRTL = true;
+const isRTL = false;
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 import(`bootstrap/dist/css/bootstrap${isRTL ? '.rtl' : ''}.css`);
