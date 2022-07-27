@@ -31,8 +31,8 @@ export default storyMeta;
 export const Basic = (args) => {
 
   const initialValues = {
-
-  }
+    address: 'Sample address',
+  };
 
   const yupValidationSchema = yup.object().shape({
     address: yup.string().nullable()
@@ -46,8 +46,10 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruTextareaInput name='Address' label='address' autoComplete='street-address' />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <RruTextareaInput name='address' label='Address' autoComplete='street-address' />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
 

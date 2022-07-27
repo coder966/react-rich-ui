@@ -31,8 +31,8 @@ export default storyMeta;
 export const Basic = (args) => {
 
   const initialValues = {
-
-  }
+    email: 'sample@test.com',
+  };
 
   const yupValidationSchema = yup.object().shape({
     email: yup.string().nullable()

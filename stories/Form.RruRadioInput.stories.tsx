@@ -37,8 +37,8 @@ export const Basic = (args) => {
   ];
 
   const initialValues = {
-
-  }
+    color: 'BLUE',
+  };
 
   const yupValidationSchema = yup.object().shape({
     // color: yup.string().nullable().required('You must select one')
