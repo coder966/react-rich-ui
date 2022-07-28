@@ -37,7 +37,7 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Optional peer dependencies
 
-- `yup`: For form validation. See `RruForm` section for more details.
+- [`yup`](https://www.npmjs.com/package/yup){:target="_blank"}: For form validation. See `RruForm` section for more details.
 
 ## Components
 
