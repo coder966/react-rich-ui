@@ -50,6 +50,7 @@ Pre-release versions will not be mentioned here.
 - `RruMultiSelectInput`: Renamed `options`'s `id` attribute to `value`.
 - `RruRadioInput`: Renamed `options`'s `id` attribute to `value`.
 - `RruMultiCheckboxInput`: Renamed `options`'s `id` attribute to `value`.
+- `RruDateTimeInput`: Removed `defaultValue`. Now reads the default value from the `initialValues` of the form.
 - `RruDateTimeInput`: Removed `isHijri`. Use `calendarType` instead.
 - `RruDateTimeInput`: Removed `isFuture`. Use `getDateConfig` instead.
 - `RruDateTimeInput`: Removed `isPast`. Use `getDateConfig` instead.
