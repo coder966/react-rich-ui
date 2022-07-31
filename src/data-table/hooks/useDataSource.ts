@@ -56,7 +56,7 @@ const useDataSource = (
         }
         setIsLoading(false);
       });
-  }, [pageFetcher, pageSize, pageNumber, sortKey, sortDir, search, onChange]);
+  }, [pageSize, pageNumber, sortKey, sortDir, search]);
 
   return {
     isLoading: isLoading,
