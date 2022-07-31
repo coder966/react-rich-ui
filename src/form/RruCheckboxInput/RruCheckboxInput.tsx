@@ -42,7 +42,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <div className='form-check'>
+      <div className={`form-check ${props.isSwitch ? 'form-switch' : ''}`}>
         <input
           id={'checkbox_' + props.name}
           name={props.name}

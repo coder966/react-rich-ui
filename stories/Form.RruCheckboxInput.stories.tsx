@@ -48,3 +48,26 @@ export const Basic = (args) => {
     </RruForm>
   );
 };
+
+export const Switch = (args) => {
+  const initialValues = {
+    agreed: true,
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    agreed: yup.bool().isTrue('You must agree'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruCheckboxInput name='agreed' label='Agree' isSwitch />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};

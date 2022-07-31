@@ -21,4 +21,5 @@ Click "Open Sandbox" to see the example source code
 | label            | The form element label                                                   | No       |
 | requiredAsterisk | Display an asterisk to indicate the field is required                    | No       |
 | disabled         | Controls whether the input field is disabled or not                      | No       |
+| isSwitch         | Set true to render the checkbox as a switch                              | No       |
 | onChange         | A callback function. This is useful if you need to watch the field value | No       |

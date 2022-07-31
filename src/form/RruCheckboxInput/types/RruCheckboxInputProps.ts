@@ -32,4 +32,9 @@ export default interface RruCheckboxInputProps {
    * Controls whether the input field is disabled or not
    */
   disabled?: boolean;
+
+  /**
+   * Set true to render the checkbox as a switch
+   */
+  isSwitch?: boolean;
 }
