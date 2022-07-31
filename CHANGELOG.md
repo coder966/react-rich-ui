@@ -2,6 +2,28 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.1.0] - 2022-08-01
+
+### Added
+
+- `RruRadioInput`: support grouped options
+- `RruSelectInput`: support grouped options
+- `RruMultiSelectInput`: support grouped options
+- `RruMultiCheckboxInput`: support grouped options
+- `RruCheckboxInput`: add `isSwitch`
+
+### Changed
+
+- `RruForm`: defer initial onChange validations until input has lost focus
+- `RruDataTable`: improve style
+
+### Fixed
+
+- `RruModalButton`: fix `modalTitle` not working
+- `RruDateTimeInput`: fix unable to change year
+- `RruTextInput`: fix error message not showing properly when page `dir` is different from input `dir`
+- `RruTextareaInput`: fix error message not showing properly when page `dir` is different from input `dir`
+
 ## [2.0.0] - 2022-07-27
 
 ### Breaking Changes
