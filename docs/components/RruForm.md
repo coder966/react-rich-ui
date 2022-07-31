@@ -3,6 +3,7 @@
 # RruForm
 
 ## Example
+
 Click "Open Sandbox" to see the example source code
 
 <iframe src="https://codesandbox.io/embed/rrutextinput-jh0gse?autoresize=1&fontsize=14&theme=dark&view=preview"
@@ -18,7 +19,7 @@ Click "Open Sandbox" to see the example source code
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- |
 | onSubmit            | A function which takes the form data object. Will be called when the user submits the form if there is no validation violation | Yes      |
 | initialValues       | An object containing the form default values.                                                                                  | No       |
-| yupValidationSchema | [`yup`](https://www.npmjs.com/package/yup){:target="_blank"} validation schema                                                                                                        | No       |
+| yupValidationSchema | [`yup`](https://www.npmjs.com/package/yup){:target="\_blank"} validation schema                                                | No       |
 
 ## Input Components
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from "../../types/RruOption";
+import RruOption from '../../types/RruOption';
 
 export default interface RruMultiSelectInputProps {
   /**  */
@@ -30,7 +30,7 @@ export default interface RruMultiSelectInputProps {
   options: RruOption[];
 
   /**
-   * 
+   *
    */
   onChange?: (value: string[]) => void;
 
@@ -41,4 +41,3 @@ export default interface RruMultiSelectInputProps {
    */
   disabled?: boolean;
 }
-

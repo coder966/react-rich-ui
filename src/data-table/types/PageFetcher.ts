@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-import FetchedPage from "./FetchedPage";
-import SortDir from "./SortDir";
+import FetchedPage from './FetchedPage';
+import SortDir from './SortDir';
 
-type PageFetcher = (pageSize: number, pageNumber: number, sortKey: string | undefined, sortDir: SortDir, search: any) => Promise<FetchedPage>
+type PageFetcher = (
+  pageSize: number,
+  pageNumber: number,
+  sortKey: string | undefined,
+  sortDir: SortDir,
+  search: any
+) => Promise<FetchedPage>;
 
 export default PageFetcher;

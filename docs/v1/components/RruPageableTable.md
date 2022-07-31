@@ -4,7 +4,6 @@
 Warning: You are viewing a legacy version documentation. Please visit <a href='/docs'>this link</a> for the latest version.
 </div>
 
-
 # RruPageableTable
 
 ## API

@@ -28,12 +28,11 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
   const [currentStepNumber, setCurrentStepNumber] = useState(1);
   const [stepInputData, setStepInputData] = useState<any>();
 
-
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
   const getStepLabel = (number: number): React.ReactNode | undefined => {
     return props.getStepLabel && typeof props.getStepLabel === 'function' ? props.getStepLabel(number) : undefined;
-  }
+  };
 
   const getSteps = (): readonly RruStepsWizardStep[] => {
     return stepsComponents.map((component, index) => ({
@@ -41,7 +40,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
       label: getStepLabel(index + 1),
       component: component,
     }));
-  }
+  };
 
   const goToStep = (stepNumber: number, data?: any) => {
     if (stepNumber < 1) {
@@ -64,7 +63,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
     previousStep: (data?: any) => goToStep(currentStepNumber - 1, data),
     firstStep: (data?: any) => goToStep(1, data),
     lastStep: (data?: any) => goToStep(getSteps().length, data),
-  }
+  };
 
   const getClassName = (stepNumber: number, baseClassName: string): string => {
     let result = baseClassName;
@@ -74,22 +73,26 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
       result += ` ${baseClassName}--done`;
     }
     return result;
-  }
+  };
 
   const header = () => {
     if (props.renderHeader) {
       return props.renderHeader(getSteps());
     } else {
-      return <div className='rru-steps-wizard__header'>
-        {getSteps().map((step, index) => {
-          return <div key={index} className={getClassName(step.number, 'rru-steps-wizard__step')}>
-            <div className={getClassName(step.number, 'rru-steps-wizard__step-number')}>{step.number}</div>
-            <div className={getClassName(step.number, 'rru-steps-wizard__step-label')}>{step.label}</div>
-          </div>
-        })}
-      </div>
+      return (
+        <div className='rru-steps-wizard__header'>
+          {getSteps().map((step, index) => {
+            return (
+              <div key={index} className={getClassName(step.number, 'rru-steps-wizard__step')}>
+                <div className={getClassName(step.number, 'rru-steps-wizard__step-number')}>{step.number}</div>
+                <div className={getClassName(step.number, 'rru-steps-wizard__step-label')}>{step.label}</div>
+              </div>
+            );
+          })}
+        </div>
+      );
     }
-  }
+  };
 
   return (
     <RruStepsWizardContextProvider value={RruStepsWizardContextValue}>

@@ -22,7 +22,6 @@ import RruForm from '../RruForm/RruForm';
 import RruTextareaInput from './RruTextareaInput';
 
 describe('RruTextareaInput', () => {
-
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -32,7 +31,7 @@ describe('RruTextareaInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' dir='rtl' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     const myTextInput = container.querySelector('textarea[name="myText"]');
@@ -50,22 +49,22 @@ describe('RruTextareaInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form
     const myTextInput = container.querySelector('textarea[name="myText"]');
-    myTextInput && await userEvent.click(myTextInput);
+    myTextInput && (await userEvent.click(myTextInput));
     await userEvent.keyboard('My awesome post');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: 'My awesome post'
+      myText: 'My awesome post',
     });
   });
 
@@ -78,17 +77,17 @@ describe('RruTextareaInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: null
+      myText: null,
     });
   });
 
@@ -96,15 +95,15 @@ describe('RruTextareaInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      myText: 'My awesome post'
-    }
+      myText: 'My awesome post',
+    };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // validate initial value is rendered inside the input field
@@ -112,12 +111,12 @@ describe('RruTextareaInput', () => {
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: 'My awesome post'
+      myText: 'My awesome post',
     });
   });
 
@@ -125,15 +124,15 @@ describe('RruTextareaInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      myText: 'My awesome post'
-    }
+      myText: 'My awesome post',
+    };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form
@@ -144,17 +143,16 @@ describe('RruTextareaInput', () => {
       await userEvent.keyboard('{Backspace}');
       // type in the new value
       await userEvent.keyboard('This is a long paragraph');
-
     }
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: 'This is a long paragraph'
+      myText: 'This is a long paragraph',
     });
   });
 
@@ -170,37 +168,36 @@ describe('RruTextareaInput', () => {
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
         <RruTextareaInput name='myText' label='My Text' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form with bad input
     const myTextInput = container.querySelector('textarea[name="myText"]');
-    myTextInput && await userEvent.click(myTextInput);
+    myTextInput && (await userEvent.click(myTextInput));
     await userEvent.keyboard('Too short text');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
     expect(myTextInput?.getAttribute('class')).toContain('is-invalid');
     expect(screen.getByText('The text you entered is too short.')).toBeTruthy();
 
-
     // delete the current value in the input element
-    myTextInput && await userEvent.tripleClick(myTextInput);
+    myTextInput && (await userEvent.tripleClick(myTextInput));
     await userEvent.keyboard('{Backspace}');
     // type in the new value
     await userEvent.keyboard('This is a long paragraph');
 
     // submit the form
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: 'This is a long paragraph'
+      myText: 'This is a long paragraph',
     });
   });
 
@@ -209,15 +206,15 @@ describe('RruTextareaInput', () => {
     const onSubmit = jest.fn();
     const onMyTextChange = jest.fn();
     const initialValues = {
-      myText: 'My awesome post'
-    }
+      myText: 'My awesome post',
+    };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
         <RruTextareaInput name='myText' label='My Text' onChange={onMyTextChange} />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // validation for the initial value
@@ -227,7 +224,7 @@ describe('RruTextareaInput', () => {
     const myTextInput = container.querySelector('textarea[name="myText"]');
 
     // delete the current value in the input element
-    myTextInput && await userEvent.tripleClick(myTextInput);
+    myTextInput && (await userEvent.tripleClick(myTextInput));
     await userEvent.keyboard('{Backspace}');
     // type in the new value
     await userEvent.keyboard('This is a long paragraph');
@@ -236,5 +233,4 @@ describe('RruTextareaInput', () => {
     expect(onMyTextChange).toHaveBeenCalledTimes(26);
     return expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
   });
-
-})
+});

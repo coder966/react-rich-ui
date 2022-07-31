@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { CalendarType, IntlDate } from "intl-date";
+import { CalendarType, IntlDate } from 'intl-date';
 
 const generateSixWeeksCalendar = (calendarType: CalendarType, year: number, month: number): IntlDate[] => {
   const firstDayOfMonthDate = IntlDate.of(calendarType, year, month, 1);
@@ -27,6 +27,6 @@ const generateSixWeeksCalendar = (calendarType: CalendarType, year: number, mont
   }
 
   return result;
-}
+};
 
 export default generateSixWeeksCalendar;

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import Pagination from "./types/Pagination";
-import PaginationPage from "./types/PaginationPage";
+import Pagination from './types/Pagination';
+import PaginationPage from './types/PaginationPage';
 
 const MIN_PAGES_PER_BLOCK = 2;
 
@@ -29,15 +29,15 @@ const isPageIndexVisible = (array: readonly number[], index: number, currentPage
   const isInStartBlock = index < MIN_PAGES_PER_BLOCK;
   const isInEndBlock = index > array.length - 1 - MIN_PAGES_PER_BLOCK;
   const isInMiddleBlock =
-    (index > currentPageIndex - pagesOnEachSideOfTheActivePage - 1) &&
-    (index < currentPageIndex + pagesOnEachSideOfTheActivePage + 1);
+    index > currentPageIndex - pagesOnEachSideOfTheActivePage - 1 &&
+    index < currentPageIndex + pagesOnEachSideOfTheActivePage + 1;
 
   return isInStartBlock || isInEndBlock || isInMiddleBlock;
-}
+};
 
 const usePagination = (base: number, totalPages: number, currentPage: number): Pagination => {
   // validate base
-  const nBase = (base === 0 ? 1 : 0);
+  const nBase = base === 0 ? 1 : 0;
   if (base !== 0 && base !== 1) {
     base = 0;
   }
@@ -61,7 +61,7 @@ const usePagination = (base: number, totalPages: number, currentPage: number): P
   const filtered: number[] = numbers.filter((n, i) => isPageIndexVisible(numbers, i, currentPageIndex));
 
   // map to PaginationPage
-  const mapped: PaginationPage[] = filtered.map(n => ({
+  const mapped: PaginationPage[] = filtered.map((n) => ({
     number: n,
     isActive: n === currentPage,
     render: (base === 0 ? n + 1 : n) + '',
@@ -90,7 +90,7 @@ const usePagination = (base: number, totalPages: number, currentPage: number): P
     pages: pages,
     isFirstPage: currentPage === base,
     isLastPage: currentPage === totalPages - nBase,
-  }
-}
+  };
+};
 
 export default usePagination;

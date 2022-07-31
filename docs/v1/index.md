@@ -4,7 +4,6 @@
 Warning: You are viewing a legacy version documentation. Please visit <a href='/docs'>this link</a> for the latest version.
 </div>
 
-
 # Getting Started
 
 ## Installation
@@ -32,8 +31,7 @@ Add the following tag to your index.html file:
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/react-rich-ui@1.6.3/dist/index.css"
   integrity="sha384-CrKK9CcPYhApdIxMGxMZBvlXZ5Mf2fLIGbDmgbOOwtSVACYVWlYhaqxDbfNOMnPT"
-  crossorigin="anonymous"
-/>
+  crossorigin="anonymous" />
 ```
 
 ## Import Bootstrap v4.x CSS

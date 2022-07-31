@@ -21,7 +21,6 @@ import RruForm from '../RruForm/RruForm';
 import RruFileInput from './RruFileInput';
 
 describe('RruFileInput', () => {
-
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -31,7 +30,7 @@ describe('RruFileInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     const fileInput = container.querySelector('input[name="attachment"]');
@@ -48,22 +47,21 @@ describe('RruFileInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form
-    const file = new File(["cat"], "cat.png", { type: "image/png" });
+    const file = new File(['cat'], 'cat.png', { type: 'image/png' });
     const fileInput = container.querySelector('input[name="attachment"]') as HTMLElement;
-    fileInput && await userEvent.upload(fileInput, file);
+    fileInput && (await userEvent.upload(fileInput, file));
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toBeTruthy();
     expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
   });
-
-})
+});

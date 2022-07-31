@@ -17,13 +17,11 @@
 import React, { FC } from 'react';
 
 export interface ErrorMessageProps {
-  error: any
+  error: any;
 }
 
 const ErrorMessage: FC<ErrorMessageProps> = (props) => {
-  return props.error ? (
-    <div className='invalid-feedback d-block'>{props.error.message}</div>
-  ) : null;
+  return props.error ? <div className='invalid-feedback d-block'>{props.error.message}</div> : null;
 };
 
 export default ErrorMessage;

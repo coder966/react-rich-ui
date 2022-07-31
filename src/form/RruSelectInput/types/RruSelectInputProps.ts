@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from "../../types/RruOption";
+import RruOption from '../../types/RruOption';
 
 export default interface RruSelectInputProps {
   /**  */
@@ -30,7 +30,7 @@ export default interface RruSelectInputProps {
   options: RruOption[];
 
   /**
-   * 
+   *
    */
   onChange?: (value: string | null) => void;
 

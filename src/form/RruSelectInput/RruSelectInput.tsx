@@ -28,8 +28,8 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
 
   const findOption = (optionValue: any): RruOption | null => {
-    return props.options.find(opt => opt.value + '' === optionValue + '') || null;
-  }
+    return props.options.find((opt) => opt.value + '' === optionValue + '') || null;
+  };
 
   const onSelectChange = (option: RruOption | null, touched: boolean) => {
     setSelectedOption(option);
@@ -62,11 +62,11 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       return {
         ...provided,
         borderColor: 'var(--bs-danger) !important',
-      }
+      };
     } else {
       return provided;
     }
-  }
+  };
 
   return (
     <div className='form-group'>
@@ -76,7 +76,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         isMulti={false}
         isClearable={true}
         value={selectedOption}
-        onChange={option => onSelectChange(option, true)}
+        onChange={(option) => onSelectChange(option, true)}
         options={props.options}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}
@@ -87,4 +87,3 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 };
 
 export default RruSelectInput;
-

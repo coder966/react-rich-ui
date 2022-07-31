@@ -37,7 +37,6 @@ const RruDataTable: FC<RruDataTableProps> = ({
   defaultSortDir,
   onChange,
 }: RruDataTableProps) => {
-
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
   const [sortKey, setSortKey] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState<SortDir>(defaultSortDir);
@@ -46,14 +45,17 @@ const RruDataTable: FC<RruDataTableProps> = ({
   useEffect(() => {
     setSearchParams(search);
     setCurrentPage(0);
-  }, [search])
+  }, [search]);
 
-  const {
-    isLoading,
-    error,
-    totalPages,
-    data
-  } = useDataSource(pageFetcher, pageSize, currentPage, sortKey, sortDir, searchParams, onChange);
+  const { isLoading, error, totalPages, data } = useDataSource(
+    pageFetcher,
+    pageSize,
+    currentPage,
+    sortKey,
+    sortDir,
+    searchParams,
+    onChange
+  );
 
   const getSerialNo = (index: number) => currentPage * pageSize + (index + 1);
 
@@ -99,15 +101,14 @@ const RruDataTable: FC<RruDataTableProps> = ({
       <table className='table table-striped rru-data-table'>
         <thead>
           <tr>
-            {columns.map((col, index) =>
+            {columns.map((col, index) => (
               <th key={index} className={getThClassName(col)} onClick={() => onSort(col)}>
                 {col.label}
               </th>
-            )}
+            ))}
           </tr>
         </thead>
         <tbody>
-
           <tr className={`rru-data-table__loading-bar-tr--${isLoading ? 'visible' : 'hidden'}`}>
             <td colSpan={columns.length} className='rru-data-table__loading-bar-td'>
               <div className='rru-data-table__loading-bar'></div>
@@ -130,16 +131,15 @@ const RruDataTable: FC<RruDataTableProps> = ({
 
           {(data || []).map((row, i) => (
             <tr key={i}>
-              {columns.map(
-                (col, j) =>
-                  <td key={j}>
-                    {typeof col.value === 'function'
-                      ? col.value(row)
-                      : col.value === '#'
-                        ? getSerialNo(i)
-                        : resolveObjectAttribute(col.value, row)}
-                  </td>
-              )}
+              {columns.map((col, j) => (
+                <td key={j}>
+                  {typeof col.value === 'function'
+                    ? col.value(row)
+                    : col.value === '#'
+                    ? getSerialNo(i)
+                    : resolveObjectAttribute(col.value, row)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -150,4 +150,3 @@ const RruDataTable: FC<RruDataTableProps> = ({
 };
 
 export default RruDataTable;
-

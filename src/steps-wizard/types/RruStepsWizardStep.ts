@@ -15,6 +15,6 @@
  */
 
 export default interface RruStepsWizardStep {
-  number: number,
-  label?: React.ReactNode,
+  number: number;
+  label?: React.ReactNode;
 }

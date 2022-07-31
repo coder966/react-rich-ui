@@ -29,15 +29,18 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
   const findOptions = (optionsValuesArray: any): readonly RruOption[] => {
-    return retainAll(props.options, optionsValuesArray, (opt, val) => (opt.value + '' === val + ''));
-  }
+    return retainAll(props.options, optionsValuesArray, (opt, val) => opt.value + '' === val + '');
+  };
 
   const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
     setSelectedOptions(options);
-    field.setValue(options.map(opt => opt.value), touched);
+    field.setValue(
+      options.map((opt) => opt.value),
+      touched
+    );
 
     if (props.onChange) {
-      props.onChange(options.map(opt => opt.value));
+      props.onChange(options.map((opt) => opt.value));
     }
   };
 
@@ -53,7 +56,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   useEffect(() => {
     if (hasBeenInitialized) {
-      const options = findOptions(selectedOptions.map(opt => opt.value));
+      const options = findOptions(selectedOptions.map((opt) => opt.value));
       onSelectChange(options, true);
     }
   }, [props.options]);
@@ -63,11 +66,11 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       return {
         ...provided,
         borderColor: 'var(--bs-danger) !important',
-      }
+      };
     } else {
       return provided;
     }
-  }
+  };
 
   return (
     <div className='form-group'>
@@ -76,7 +79,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
         name={props.name}
         isMulti={true}
         value={selectedOptions}
-        onChange={options => onSelectChange(options, true)}
+        onChange={(options) => onSelectChange(options, true)}
         options={props.options}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}
@@ -87,4 +90,3 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 };
 
 export default RruMultiSelectInput;
-

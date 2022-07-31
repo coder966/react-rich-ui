@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8" />
     {% seo %}
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta name='theme-color' content='#0D3C72'>
-    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
-    <link rel='stylesheet' href='/assets/style.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0D3C72" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="stylesheet" href="/assets/style.css" />
   </head>
   <body>
     <header>
-      <input type='checkbox' id='nav-checkbox' />
+      <input type="checkbox" id="nav-checkbox" />
       <nav>
-        <div class='container'>
-          <a href='/'><img class='logo' src='/assets/logo.png' /></a>
-          <a class='nav-item' href='/docs/'>Docs</a>
-          <a class='nav-item' href='/CHANGELOG'>Releases</a>
-          <a class='nav-item' href='https://github.com/coder966/react-rich-ui' target='_blank'>Github</a>
-          <a class='nav-item' href='https://www.npmjs.com/package/react-rich-ui' target='_blank'>NPM</a>
-          <a class='nav-item' href='/docs/v1'>Legacy Docs</a>
-          <label class='nav-item icon' for='nav-checkbox' />
+        <div class="container">
+          <a href="/"><img class="logo" src="/assets/logo.png" /></a>
+          <a class="nav-item" href="/docs/">Docs</a>
+          <a class="nav-item" href="/CHANGELOG">Releases</a>
+          <a class="nav-item" href="https://github.com/coder966/react-rich-ui" target="_blank">Github</a>
+          <a class="nav-item" href="https://www.npmjs.com/package/react-rich-ui" target="_blank">NPM</a>
+          <a class="nav-item" href="/docs/v1">Legacy Docs</a>
+          <label class="nav-item icon" for="nav-checkbox" />
         </div>
-      </div>
+      </nav>
     </header>
-    <main class='container'>
-      {{ content }}
-    </main>
+    <main class="container">{{ content }}</main>
   </body>
   <footer></footer>
 </html>

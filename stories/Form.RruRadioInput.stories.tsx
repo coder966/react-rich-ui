@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import {
-  RruForm, RruRadioInput
-} from '../src/index';
+import { RruForm, RruRadioInput } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruRadioInput',
@@ -29,7 +27,6 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   const colors = [
     { value: 'RED', label: 'Red' },
     { value: 'BLUE', label: 'Blue' },
@@ -44,21 +41,21 @@ export const Basic = (args) => {
     // color: yup.string().nullable().required('You must select one')
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruRadioInput name='color' label='Color' options={colors} />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const Inline = (args) => {
-
   const colors = [
     { value: 'RED', label: 'Red' },
     { value: 'BLUE', label: 'Blue' },
@@ -66,22 +63,23 @@ export const Inline = (args) => {
   ];
 
   const initialValues = {
-    color: 'BLUE'
-  }
+    color: 'BLUE',
+  };
 
   const yupValidationSchema = yup.object().shape({
-    color: yup.string().nullable().required('You must select one')
+    color: yup.string().nullable().required('You must select one'),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruRadioInput name='color' label='Color' options={colors} inline={true} />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };

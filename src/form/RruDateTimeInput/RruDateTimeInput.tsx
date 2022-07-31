@@ -38,7 +38,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   const getCalendarType = (): RruDateTimeInputCalendarType => {
     return props.calendarType || 'gregorian';
-  }
+  };
 
   // handle popup click outside to dismiss
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,15 +47,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       if (e.target != inputRef.current) {
         setIsPopupShown(false);
       }
-    }
+    },
   });
 
   const [calendar, setCalendar] = useState<IntlDate[]>(
-    generateSixWeeksCalendar(
-      getCalendarType(),
-      today.getYear(getCalendarType()),
-      today.getMonth(getCalendarType())
-    )
+    generateSixWeeksCalendar(getCalendarType(), today.getYear(getCalendarType()), today.getMonth(getCalendarType()))
   );
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
@@ -68,16 +64,15 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const [month, setMonth] = useState<number>(today.getMonth(getCalendarType()));
   const [intlDate, setIntlDate] = useState<IntlDate | null>();
 
-
   const getMode = (): RruDateTimeInputMode => {
     return props.mode ? props.mode : 'datetime';
-  }
+  };
 
-  const getDateConfig = (date: IntlDate): (RruDateTimeInputDateConfig | undefined | null | void) => {
+  const getDateConfig = (date: IntlDate): RruDateTimeInputDateConfig | undefined | null | void => {
     if (props.getDateConfig) {
       return props.getDateConfig(date.toString(getCalendarType()));
     }
-  }
+  };
 
   const previousMonth = () => {
     if (month === 1) {
@@ -86,7 +81,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     } else {
       setMonth(month - 1);
     }
-  }
+  };
 
   const nextMonth = () => {
     if (month === 12) {
@@ -95,7 +90,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     } else {
       setMonth(month + 1);
     }
-  }
+  };
 
   const onSelectDate = (date: IntlDate) => {
     if (getDateConfig(date)?.disabled) {
@@ -104,12 +99,12 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       setIntlDate(date);
       setIsPopupShown(false);
     }
-  }
+  };
 
   const selectAllTextInInput = (e: React.MouseEvent) => {
     const input = e.target as HTMLInputElement;
     input.select();
-  }
+  };
 
   const onIntegerInputChange = (val: string, min: number, max: number, changeStateFunction: (val: number) => void) => {
     let value: number | null = parseInt(val);
@@ -123,7 +118,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (value) {
       changeStateFunction(value);
     }
-  }
+  };
 
   const onIntegerInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, inputPartType: 'date' | 'time') => {
     const isEnter = e.key === 'Enter';
@@ -132,7 +127,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       e.stopPropagation();
       e.preventDefault();
     }
-  }
+  };
 
   const getValue = (): string | null => {
     if (intlDate) {
@@ -147,7 +142,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     } else {
       return null;
     }
-  }
+  };
 
   /**
    * init
@@ -168,7 +163,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           onIntegerInputChange(matches[7], 0, 59, setSecond);
         }
       }
-    } catch (e) { }
+    } catch (e) {}
     setHasBeenInitialized(true);
 
     return () => field.unregister();
@@ -205,7 +200,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       className += ' ' + dateConfig.className;
     }
     return className;
-  }
+  };
 
   if (!calendar) {
     return null;
@@ -222,34 +217,38 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           type='text'
           disabled={props.disabled}
           value={getValue() || ''}
-          onChange={(e) => { }}
+          onChange={(e) => {}}
           onClick={(e) => setIsPopupShown(true)}
           className={`form-control ${field.error ? 'is-invalid' : ''}`}
         />
 
         <div
           ref={popupRef}
-          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}
-        >
+          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}>
           <div className='rru-date-input__container'>
-
             <div className='rru-date-input__header'>
-              <div className='rru-date-input__month-button' onClick={previousMonth}>{'<'}</div>
+              <div className='rru-date-input__month-button' onClick={previousMonth}>
+                {'<'}
+              </div>
               <input
                 type='text'
                 className='rru-date-input__date-part-input'
                 onClick={selectAllTextInInput}
                 onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
                 value={year}
-                onChange={e => onIntegerInputChange(e.target.value, 1300, 2300, setYear)} />
+                onChange={(e) => onIntegerInputChange(e.target.value, 1300, 2300, setYear)}
+              />
               <input
                 type='text'
                 className='rru-date-input__date-part-input'
                 onClick={selectAllTextInInput}
                 onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
                 value={month}
-                onChange={e => onIntegerInputChange(e.target.value, 1, 12, setMonth)} />
-              <div className='rru-date-input__month-button' onClick={nextMonth}>{'>'}</div>
+                onChange={(e) => onIntegerInputChange(e.target.value, 1, 12, setMonth)}
+              />
+              <div className='rru-date-input__month-button' onClick={nextMonth}>
+                {'>'}
+              </div>
             </div>
 
             <div className='rru-date-input__body'>
@@ -277,7 +276,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
               </table>
             </div>
 
-            {getMode() === 'datetime' &&
+            {getMode() === 'datetime' && (
               <div className='rru-date-input__footer'>
                 <input
                   type='text'
@@ -285,7 +284,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   onClick={selectAllTextInInput}
                   onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={hour.toString().padStart(2, '0')}
-                  onChange={e => onIntegerInputChange(e.target.value, 0, 23, setHour)} />
+                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 23, setHour)}
+                />
                 {' : '}
                 <input
                   type='text'
@@ -293,7 +293,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   onClick={selectAllTextInInput}
                   onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={minute.toString().padStart(2, '0')}
-                  onChange={e => onIntegerInputChange(e.target.value, 0, 59, setMinute)} />
+                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setMinute)}
+                />
                 {' : '}
                 <input
                   type='text'
@@ -301,16 +302,16 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   onClick={selectAllTextInInput}
                   onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
                   value={second.toString().padStart(2, '0')}
-                  onChange={e => onIntegerInputChange(e.target.value, 0, 59, setSecond)} />
+                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setSecond)}
+                />
               </div>
-            }
-
+            )}
           </div>
         </div>
       </div>
       <ErrorMessage error={field.error} />
     </div>
   );
-}
+};
 
 export default RruDateTimeInput;

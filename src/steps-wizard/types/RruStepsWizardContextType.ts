@@ -15,12 +15,12 @@
  */
 
 export default interface RruStepsWizardContextType {
-  currentStepNumber: number,
-  currentStepLabel: React.ReactNode | undefined,
-  currentStepInputData: any,
-  goToStep: (stepNumber: number, data?: any) => void,
-  nextStep: (data?: any) => void,
-  previousStep: (data?: any) => void,
-  firstStep: (data?: any) => void,
-  lastStep: (data?: any) => void,
+  currentStepNumber: number;
+  currentStepLabel: React.ReactNode | undefined;
+  currentStepInputData: any;
+  goToStep: (stepNumber: number, data?: any) => void;
+  nextStep: (data?: any) => void;
+  previousStep: (data?: any) => void;
+  firstStep: (data?: any) => void;
+  lastStep: (data?: any) => void;
 }

@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import React, { CSSProperties, ReactNode } from "react";
+import React, { CSSProperties, ReactNode } from 'react';
 
 interface RruModalButtonProps {
-
   name?: string;
 
   disabled?: boolean;
@@ -26,7 +25,7 @@ interface RruModalButtonProps {
 
   style?: CSSProperties;
 
-  children?: ReactNode
+  children?: ReactNode;
 
   /**
    * The modal title.
@@ -37,7 +36,6 @@ interface RruModalButtonProps {
    * The modal body.
    */
   modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode);
-
 }
 
 export default RruModalButtonProps;

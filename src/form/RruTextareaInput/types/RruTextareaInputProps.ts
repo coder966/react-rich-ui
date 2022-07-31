@@ -25,7 +25,7 @@ export default interface RruTextareaInputProps {
   requiredAsterisk?: boolean;
 
   /**
-   * 
+   *
    */
   onChange?: (value: string | null) => void;
 
@@ -52,7 +52,7 @@ export default interface RruTextareaInputProps {
   maxLength?: number;
 
   /**
-   * Provides guidance to the browser as to the type of information expected in the field, 
+   * Provides guidance to the browser as to the type of information expected in the field,
    * this could allow the browser to provide automated assistance in filling out the form field.
    * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
    */
@@ -73,5 +73,4 @@ export default interface RruTextareaInputProps {
    * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap)
    */
   wrap?: string;
-
 }

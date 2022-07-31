@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 
 export default interface RruDateTimeInputDateConfig {
   disabled?: boolean;

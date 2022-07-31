@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from "../../types/RruOption";
+import RruOption from '../../types/RruOption';
 
 export default interface RruRadioInputProps {
   /**  */
@@ -33,7 +33,7 @@ export default interface RruRadioInputProps {
   inline?: boolean;
 
   /**
-   * 
+   *
    */
   onChange?: (value: string | null) => void;
 

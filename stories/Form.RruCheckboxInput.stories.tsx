@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import {
-  RruCheckboxInput, RruForm
-} from '../src/index';
+import { RruCheckboxInput, RruForm } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruCheckboxInput',
@@ -29,24 +27,24 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   const initialValues = {
     agreed: true,
-  }
+  };
 
   const yupValidationSchema = yup.object().shape({
-    agreed: yup.bool().isTrue('You must agree')
+    agreed: yup.bool().isTrue('You must agree'),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruCheckboxInput name='agreed' label='Agree' />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };

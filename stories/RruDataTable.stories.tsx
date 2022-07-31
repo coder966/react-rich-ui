@@ -17,9 +17,7 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
-import {
-  RruDataTable
-} from '../src/index';
+import { RruDataTable } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'RruDataTable',
@@ -51,8 +49,7 @@ const columns = [
           background: user.status === 'ENABLED' ? 'green' : 'red',
           padding: '4px',
           borderRadius: '6px',
-        }}
-      >
+        }}>
         {user.status}
       </span>
     ),

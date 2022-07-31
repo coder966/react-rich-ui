@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useFormContext, useFormState } from "react-hook-form";
+import { useFormContext, useFormState } from 'react-hook-form';
 
 export const useField = (name: string) => {
   const formContext = useFormContext();
@@ -26,5 +26,5 @@ export const useField = (name: string) => {
     setValue: (value: any, touched: boolean) => formContext.setValue(name, value, { shouldValidate: touched }),
     getValue: () => formContext.getValues()[name],
     error: formState.errors[name],
-  }
-}
+  };
+};

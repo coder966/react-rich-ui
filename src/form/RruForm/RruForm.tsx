@@ -29,16 +29,14 @@ const RruForm: FC<RruFormProps> = (props) => {
     config = {
       ...config,
       resolver: yupResolver(props.yupValidationSchema),
-    }
+    };
   }
 
   const form = useForm(config);
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(props.onSubmit)}>
-        {props.children}
-      </form>
+      <form onSubmit={form.handleSubmit(props.onSubmit)}>{props.children}</form>
     </FormProvider>
   );
 };

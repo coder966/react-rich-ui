@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import PaginationPage from "./PaginationPage";
+import PaginationPage from './PaginationPage';
 
 export default interface Pagination {
-  pages: PaginationPage[],
-  isFirstPage: boolean,
-  isLastPage: boolean,
+  pages: PaginationPage[];
+  isFirstPage: boolean;
+  isLastPage: boolean;
 }

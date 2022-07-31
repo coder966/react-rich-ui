@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import RruDateTimeInputCalendarType from "./RruDateTimeInputCalendarType";
-import RruDateTimeInputDateConfig from "./RruDateTimeInputDateConfig";
-import RruDateTimeInputMode from "./RruDateTimeInputMode";
+import RruDateTimeInputCalendarType from './RruDateTimeInputCalendarType';
+import RruDateTimeInputDateConfig from './RruDateTimeInputDateConfig';
+import RruDateTimeInputMode from './RruDateTimeInputMode';
 
 export default interface RruDateTimeInputProps {
   /**  */
@@ -38,7 +38,7 @@ export default interface RruDateTimeInputProps {
   getDateConfig?: (date: string) => RruDateTimeInputDateConfig | undefined | null | void;
 
   /**
-   * 
+   *
    */
   onChange?: (value: string | null) => void;
 

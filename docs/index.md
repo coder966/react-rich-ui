@@ -27,8 +27,7 @@ Add the following tag to your index.html file:
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.0.0/dist/index.css"
   integrity="sha384-5VVvy00iWm+zoH7Pm5sxyZW+mpa5lyg+uvJqTcSJHHrLr2nvjFeYTVjtX18SoUBg"
-  crossorigin="anonymous"
-/>
+  crossorigin="anonymous" />
 ```
 
 ## Import Bootstrap v5.x (CSS + JS)
@@ -37,7 +36,7 @@ Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](http
 
 ## Optional peer dependencies
 
-- [`yup`](https://www.npmjs.com/package/yup){:target="_blank"}: For form validation. See `RruForm` section for more details.
+- [`yup`](https://www.npmjs.com/package/yup){:target="\_blank"}: For form validation. See `RruForm` section for more details.
 
 ## Components
 

@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-import { useEffect, useState } from "react";
-import ChangeCallback from "../types/ChangeCallback";
-import FetchedPage from "../types/FetchedPage";
-import PageFetcher from "../types/PageFetcher";
-import SortDir from "../types/SortDir";
+import { useEffect, useState } from 'react';
+import ChangeCallback from '../types/ChangeCallback';
+import FetchedPage from '../types/FetchedPage';
+import PageFetcher from '../types/PageFetcher';
+import SortDir from '../types/SortDir';
 
 const useDataSource = (
   pageFetcher: PageFetcher,
-  pageSize: number, pageNumber: number,
-  sortKey: string | undefined, sortDir: SortDir,
+  pageSize: number,
+  pageNumber: number,
+  sortKey: string | undefined,
+  sortDir: SortDir,
   search: any,
   onChange?: ChangeCallback
 ) => {
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
@@ -62,8 +63,8 @@ const useDataSource = (
     isLoading: isLoading,
     error: error,
     totalPages: totalPages,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export default useDataSource;

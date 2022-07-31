@@ -3,6 +3,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    "^.+\\.css$": "jest-transform-css"
+    '^.+\\.css$': 'jest-transform-css',
   },
 };

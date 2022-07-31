@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import {
-  RruForm, RruTextareaInput
-} from '../src/index';
+import { RruForm, RruTextareaInput } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruTextareaInput',
@@ -29,18 +27,15 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   const initialValues = {
     address: 'Sample address',
   };
 
   const yupValidationSchema = yup.object().shape({
-    address: yup.string().nullable()
-      .min(5, 'The address is too short')
-      .max(25, 'The address is too long'),
+    address: yup.string().nullable().min(5, 'The address is too short').max(25, 'The address is too long'),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
@@ -52,5 +47,4 @@ export const Basic = (args) => {
       </button>
     </RruForm>
   );
-
 };

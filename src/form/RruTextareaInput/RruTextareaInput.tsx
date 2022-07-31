@@ -31,7 +31,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
     if (props.onChange) {
       props.onChange(val);
     }
-  }
+  };
 
   useEffect(() => {
     field.register();
@@ -47,7 +47,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       <textarea
         name={props.name}
         value={value || ''}
-        onChange={e => setNewValue(e.target.value, true)}
+        onChange={(e) => setNewValue(e.target.value, true)}
         className={`form-control ${field.error ? 'is-invalid' : ''}`}
         disabled={props.disabled}
         dir={props.dir || 'auto'}
@@ -64,4 +64,3 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
 };
 
 export default RruTextareaInput;
-

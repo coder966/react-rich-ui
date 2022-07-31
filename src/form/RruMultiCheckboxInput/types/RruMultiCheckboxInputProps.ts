@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from "../../types/RruOption";
+import RruOption from '../../types/RruOption';
 
 export default interface RruMultiCheckboxInputProps {
   /**  */
@@ -33,7 +33,7 @@ export default interface RruMultiCheckboxInputProps {
   inline?: boolean;
 
   /**
-   * 
+   *
    */
   onChange?: (value: string[]) => void;
 
@@ -44,4 +44,3 @@ export default interface RruMultiCheckboxInputProps {
    */
   disabled?: boolean;
 }
-

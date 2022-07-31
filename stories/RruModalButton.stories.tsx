@@ -25,85 +25,80 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   return (
     <RruModalButton modalTitle='Modal Title' modalBody='Modal Body'>
       Basic Modal Button
     </RruModalButton>
   );
-
 };
 
 export const Customized = (args) => {
-
   return (
     <RruModalButton
       className='btn btn-primary'
       modalTitle={<span style={{ color: 'red' }}>Red Title</span>}
       modalBody={(closeModal) => {
-        return <div>
-          <span>Hi, This is the modal content. I can programmatically close the modal</span>
-          <br></br>
-          <br></br>
-          <button onClick={closeModal}>Close Modal</button>
-        </div>
-      }}
-    >
-
+        return (
+          <div>
+            <span>Hi, This is the modal content. I can programmatically close the modal</span>
+            <br></br>
+            <br></br>
+            <button onClick={closeModal}>Close Modal</button>
+          </div>
+        );
+      }}>
       <h1>Big Label</h1>
     </RruModalButton>
   );
-
 };
 
 export const LongContent = (args) => {
-
   return (
     <div>
-
       <RruModalButton
         modalTitle='Modal Title'
         modalBody={(closeModal) => {
-          return <div>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <p>This is a dummy text</p>
-            <button onClick={closeModal}>Close Modal</button>
-          </div>
-        }}
-      >
+          return (
+            <div>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <p>This is a dummy text</p>
+              <button onClick={closeModal}>Close Modal</button>
+            </div>
+          );
+        }}>
         Click Me
       </RruModalButton>
 
@@ -142,9 +137,6 @@ export const LongContent = (args) => {
       <p>This is a dummy text</p>
       <p>This is a dummy text</p>
       <p>This is a dummy text</p>
-
     </div>
   );
-
 };
-

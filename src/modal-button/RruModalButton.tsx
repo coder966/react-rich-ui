@@ -28,9 +28,11 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
     if (modal) {
       modal.click();
     }
-  }
+  };
 
-  const renderModalBody = (modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)): (React.ReactNode | undefined) => {
+  const renderModalBody = (
+    modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)
+  ): React.ReactNode | undefined => {
     if (modalBody) {
       if (typeof modalBody === 'function') {
         return modalBody(closeModal);
@@ -40,7 +42,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
     } else {
       return undefined;
     }
-  }
+  };
 
   return (
     <>
@@ -51,8 +53,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
         style={props.style}
         type='button'
         data-bs-toggle='modal'
-        data-bs-target={`#modal-${id}`}
-      >
+        data-bs-target={`#modal-${id}`}>
         {props.children}
       </button>
 
@@ -66,8 +67,7 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
                 type='button'
                 className='btn-close'
                 data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
+                aria-label='Close'></button>
             </div>
             <div className='modal-body'>{renderModalBody(props.modalBody)}</div>
           </div>
@@ -78,4 +78,3 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
 };
 
 export default RruModalButton;
-

@@ -43,7 +43,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
     if (props.onChange) {
       props.onChange(file);
     }
-  }
+  };
 
   return (
     <div className='form-group'>
@@ -63,4 +63,3 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
 };
 
 export default RruFileInput;
-

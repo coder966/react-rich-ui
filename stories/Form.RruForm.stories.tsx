@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import {
-  RruForm, RruSelectInput, RruTextInput
-} from '../src/index';
+import { RruForm, RruSelectInput, RruTextInput } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruForm',
@@ -29,35 +27,37 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm onSubmit={onSubmit}>
       <RruTextInput name='firstName' label='First Name' />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const WithInitialValues = (args) => {
   const initialValues = {
-    firstName: 'Khalid'
-  }
+    firstName: 'Khalid',
+  };
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} onSubmit={onSubmit}>
       <RruTextInput name='firstName' label='First Name' />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const OnChange = (args) => {
@@ -70,14 +70,12 @@ export const OnChange = (args) => {
   ];
 
   const initialValues = {
-    color: 'BLUE'
-  }
+    color: 'BLUE',
+  };
 
-  const yupValidationSchema = yup.object().shape({
+  const yupValidationSchema = yup.object().shape({});
 
-  });
-
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
@@ -85,20 +83,20 @@ export const OnChange = (args) => {
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruSelectInput name='color' label='Color' options={colors} onChange={setColor} />
       {color === 'GREEN' && <p>Great choice.</p>}
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const MultipleFieldsInOneForm = (args) => {
-
   const yupValidationSchema = yup.object().shape({
     firstName: yup.string().nullable().required('Required').min(3),
     secondName: yup.string().nullable().required('Required').min(3),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
@@ -120,10 +118,11 @@ export const MultipleFieldsInOneForm = (args) => {
           <RruTextInput name='lastName' label='Last Name' />
         </div>
       </div>
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
@@ -131,16 +130,16 @@ export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
 
   const initialValues = {
     firstName: 'some first name',
-    lastName: 'test default value'
-  }
+    lastName: 'test default value',
+  };
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   const shouldRenderLastName = () => {
     return firstName !== 'khalid';
-  }
+  };
 
   return (
     <div>
@@ -150,28 +149,28 @@ export const UnmountedFieldsShouldNotAppearInFormSubmit = (args) => {
           <div className='col-6'>
             <RruTextInput name='firstName' label='First Name' onChange={setFirstName} />
           </div>
-          {shouldRenderLastName() &&
+          {shouldRenderLastName() && (
             <div className='col-6'>
               <RruTextInput name='lastName' label='Last Name' />
             </div>
-          }
+          )}
         </div>
-        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+        <button type='submit' className='btn btn-primary mt-4'>
+          Submit
+        </button>
       </RruForm>
     </div>
   );
-
 };
 
 export const MultipleFormsInOnePage = (args) => {
-
   const initialValues1 = {
     name: 'Khalid',
-  }
+  };
 
   const initialValues2 = {
     favoriteNumber: '10',
-  }
+  };
 
   const yupValidationSchema1 = yup.object().shape({
     name: yup.string().min(3).max(10),
@@ -181,11 +180,11 @@ export const MultipleFormsInOnePage = (args) => {
     favoriteNumber: yup.number().min(0),
   });
 
-  const onSubmit1 = form => {
+  const onSubmit1 = (form) => {
     action('submitting the form 1')(form);
   };
 
-  const onSubmit2 = form => {
+  const onSubmit2 = (form) => {
     action('submitting the form 2')(form);
   };
 
@@ -193,14 +192,17 @@ export const MultipleFormsInOnePage = (args) => {
     <>
       <RruForm initialValues={initialValues1} yupValidationSchema={yupValidationSchema1} onSubmit={onSubmit1}>
         <RruTextInput name='name' label='Name' />
-        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+        <button type='submit' className='btn btn-primary mt-4'>
+          Submit
+        </button>
       </RruForm>
       <br></br>
       <RruForm initialValues={initialValues2} yupValidationSchema={yupValidationSchema2} onSubmit={onSubmit2}>
         <RruTextInput name='favoriteNumber' label='Favorite Number' />
-        <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+        <button type='submit' className='btn btn-primary mt-4'>
+          Submit
+        </button>
       </RruForm>
     </>
   );
-
 };

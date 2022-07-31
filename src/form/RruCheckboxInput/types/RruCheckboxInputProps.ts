@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 export default interface RruCheckboxInputProps {
   /**  */
   name: string;
@@ -23,7 +22,7 @@ export default interface RruCheckboxInputProps {
   label?: React.ReactNode;
 
   /**
-   * 
+   *
    */
   onChange?: (value: boolean) => void;
 
@@ -34,4 +33,3 @@ export default interface RruCheckboxInputProps {
    */
   disabled?: boolean;
 }
-

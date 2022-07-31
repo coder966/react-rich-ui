@@ -14,26 +14,37 @@
  * limitations under the License.
  */
 
-import { createContext, useContext } from "react";
-import RruStepsWizardContextType from "../types/RruStepsWizardContextType";
+import { createContext, useContext } from 'react';
+import RruStepsWizardContextType from '../types/RruStepsWizardContextType';
 
-const noContextErrorMessage = 'Could not find the StepsWizardContext. Make sure your component is a descendant of a RruStepsWizard';
+const noContextErrorMessage =
+  'Could not find the StepsWizardContext. Make sure your component is a descendant of a RruStepsWizard';
 const defaultContextValue: RruStepsWizardContextType = {
   currentStepNumber: 0,
   currentStepLabel: undefined,
   currentStepInputData: undefined,
-  goToStep: (stepNumber: number, data?: any) => { throw noContextErrorMessage },
-  nextStep: (data?: any) => { throw noContextErrorMessage },
-  previousStep: (data?: any) => { throw noContextErrorMessage },
-  firstStep: (data?: any) => { throw noContextErrorMessage },
-  lastStep: (data?: any) => { throw noContextErrorMessage },
-}
+  goToStep: (stepNumber: number, data?: any) => {
+    throw noContextErrorMessage;
+  },
+  nextStep: (data?: any) => {
+    throw noContextErrorMessage;
+  },
+  previousStep: (data?: any) => {
+    throw noContextErrorMessage;
+  },
+  firstStep: (data?: any) => {
+    throw noContextErrorMessage;
+  },
+  lastStep: (data?: any) => {
+    throw noContextErrorMessage;
+  },
+};
 
 const context = createContext<RruStepsWizardContextType>(defaultContextValue);
 
 const useRruStepsWizardContext = (): RruStepsWizardContextType => {
   return useContext(context);
-}
+};
 
 const RruStepsWizardContextProvider = context.Provider;
 

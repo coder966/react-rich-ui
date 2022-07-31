@@ -14,40 +14,37 @@
  * limitations under the License.
  */
 
-import ChangeCallback from "./ChangeCallback";
-import PageFetcher from "./PageFetcher";
-import SortDir from "./SortDir";
-import TableColumn from "./TableColumn";
+import ChangeCallback from './ChangeCallback';
+import PageFetcher from './PageFetcher';
+import SortDir from './SortDir';
+import TableColumn from './TableColumn';
 
 interface StateProps {
-
   /**
    * The default page number
    */
-  defaultPageNumber?: number,
+  defaultPageNumber?: number;
 
   /**
    * The default sort key
    */
-  defaultSortKey?: string,
+  defaultSortKey?: string;
 
   /**
    * The default sort direction
    */
-  defaultSortDir?: SortDir,
+  defaultSortDir?: SortDir;
 
   /**
    * A callback for when one of these information gets updated:
    * - current page number
    * - current sort key
-   * - current sort direction 
+   * - current sort direction
    */
-  onChange?: ChangeCallback
-
+  onChange?: ChangeCallback;
 }
 
 interface RruDataTableProps extends StateProps {
-
   /**
    * A function that fetches a page from where-ever your data might be, usually from an HTTP API.
    */
@@ -58,7 +55,7 @@ interface RruDataTableProps extends StateProps {
    */
   columns: TableColumn[];
 
-  /** 
+  /**
    * The search params object
    */
   search?: any;
@@ -66,16 +63,15 @@ interface RruDataTableProps extends StateProps {
   /**  */
   pageSize?: number;
 
-  /** 
+  /**
    * Message rendered when there is no data available
    */
   noDataLabel?: React.ReactNode;
 
-  /** 
+  /**
    * Message rendered when there is an error
    */
   errorLabel?: React.ReactNode;
-
 }
 
 export default RruDataTableProps;

@@ -28,7 +28,7 @@ export default interface RruTextInputProps {
   isPassword?: boolean;
 
   /**
-   * 
+   *
    */
   onChange?: (value: string | null) => void;
 
@@ -55,7 +55,7 @@ export default interface RruTextInputProps {
   maxLength?: number;
 
   /**
-   * Provides guidance to the browser as to the type of information expected in the field, 
+   * Provides guidance to the browser as to the type of information expected in the field,
    * this could allow the browser to provide automated assistance in filling out the form field.
    * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)
    */
@@ -64,7 +64,7 @@ export default interface RruTextInputProps {
   /**
    * The id of a <datalist> element located in the same document.
    * The <datalist> provides a list of predefined values to suggest to the user for this input.
-   * The values provided are suggestions, not requirements: users can select from this predefined list or provide a different value. 
+   * The values provided are suggestions, not requirements: users can select from this predefined list or provide a different value.
    */
   list?: string;
 }

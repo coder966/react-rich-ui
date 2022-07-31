@@ -3,6 +3,7 @@
 # RruDataTable
 
 ## Example
+
 Click "Open Sandbox" to see the example source code
 
 <iframe src="https://codesandbox.io/embed/rrudatatable-pd93eh?autoresize=1&fontsize=14&theme=dark&view=preview"

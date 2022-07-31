@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruStepsWizardStep from "./RruStepsWizardStep";
+import RruStepsWizardStep from './RruStepsWizardStep';
 
 interface RruStepsWizardProps {
   getStepLabel?: (number: number) => React.ReactNode;

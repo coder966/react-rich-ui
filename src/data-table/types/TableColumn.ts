@@ -15,9 +15,8 @@
  */
 
 interface TableColumn {
-
   /**
-   * Table column label 
+   * Table column label
    */
   label: React.ReactNode;
 
@@ -36,7 +35,6 @@ interface TableColumn {
    * Similarly, if you want to disable sorting for a column, you can pass null here.
    */
   sortKey?: string | null;
-
 }
 
 export default TableColumn;

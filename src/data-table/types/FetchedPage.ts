@@ -15,7 +15,7 @@
  */
 
 interface FetchedPage {
-  totalPages: number,
+  totalPages: number;
   items: any[];
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import SortDir from "./SortDir";
+import SortDir from './SortDir';
 
 type ChangeCallback = ((pageNumber: number, sortKey?: string | undefined, sortDir?: SortDir) => void) | undefined;
 

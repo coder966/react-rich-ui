@@ -31,7 +31,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
     if (props.onChange) {
       props.onChange(val);
     }
-  }
+  };
 
   useEffect(() => {
     field.register();
@@ -47,7 +47,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <input
         name={props.name}
         value={value || ''}
-        onChange={e => setNewValue(e.target.value, true)}
+        onChange={(e) => setNewValue(e.target.value, true)}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${field.error ? 'is-invalid' : ''}`}
         disabled={props.disabled}
@@ -63,4 +63,3 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
 };
 
 export default RruTextInput;
-

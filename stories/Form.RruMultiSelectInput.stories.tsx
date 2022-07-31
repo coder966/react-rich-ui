@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import {
-  RruForm, RruMultiSelectInput
-} from '../src/index';
+import { RruForm, RruMultiSelectInput } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruMultiSelectInput',
@@ -29,7 +27,6 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   const colors = [
     { value: 'RED', label: 'Red' },
     { value: 'BLUE', label: 'Blue' },
@@ -37,24 +34,23 @@ export const Basic = (args) => {
   ];
 
   const initialValues = {
-    colors: ['RED', 'GREEN']
-  }
+    colors: ['RED', 'GREEN'],
+  };
 
   const yupValidationSchema = yup.object().shape({
-    colors: yup.array()
-      .min(1, 'You must select at least one')
-      .max(2, 'You cannot select more than two')
+    colors: yup.array().min(1, 'You must select at least one').max(2, 'You cannot select more than two'),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruMultiSelectInput name='colors' label='Color' options={colors} />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };

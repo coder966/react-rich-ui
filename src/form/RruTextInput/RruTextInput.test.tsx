@@ -22,7 +22,6 @@ import RruForm from '../RruForm/RruForm';
 import RruTextInput from './RruTextInput';
 
 describe('RruTextInput', () => {
-
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -32,7 +31,7 @@ describe('RruTextInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' dir='rtl' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     const emailInput = container.querySelector('input[name="email"]');
@@ -50,22 +49,22 @@ describe('RruTextInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form
     const emailInput = container.querySelector('input[name="email"]');
-    emailInput && await userEvent.click(emailInput);
+    emailInput && (await userEvent.click(emailInput));
     await userEvent.keyboard('khalid@test.com');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com'
+      email: 'khalid@test.com',
     });
   });
 
@@ -78,17 +77,17 @@ describe('RruTextInput', () => {
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: null
+      email: null,
     });
   });
 
@@ -96,15 +95,15 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com'
-    }
+      email: 'khalid@test.com',
+    };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // validate initial value is rendered inside the input field
@@ -112,12 +111,12 @@ describe('RruTextInput', () => {
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com'
+      email: 'khalid@test.com',
     });
   });
 
@@ -125,15 +124,15 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com'
-    }
+      email: 'khalid@test.com',
+    };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form
@@ -144,17 +143,16 @@ describe('RruTextInput', () => {
       await userEvent.keyboard('{Backspace}');
       // type in the new value
       await userEvent.keyboard('mohammed@test.com');
-
     }
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'mohammed@test.com'
+      email: 'mohammed@test.com',
     });
   });
 
@@ -162,7 +160,9 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      email: yup.string().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
+      email: yup
+        .string()
+        .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
     });
 
     // render
@@ -170,37 +170,36 @@ describe('RruTextInput', () => {
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
         <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // fill the form with bad input
     const emailInput = container.querySelector('input[name="email"]');
-    emailInput && await userEvent.click(emailInput);
+    emailInput && (await userEvent.click(emailInput));
     await userEvent.keyboard('test_bad_email');
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
     expect(emailInput?.getAttribute('class')).toContain('is-invalid');
     expect(screen.getByText('The email address is incorrect')).toBeTruthy();
 
-
     // delete the current value in the input element
-    emailInput && await userEvent.tripleClick(emailInput);
+    emailInput && (await userEvent.tripleClick(emailInput));
     await userEvent.keyboard('{Backspace}');
     // type in the new value
     await userEvent.keyboard('khalid@test.com');
 
     // submit the form
-    submitButton && await userEvent.click(submitButton);
+    submitButton && (await userEvent.click(submitButton));
 
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com'
+      email: 'khalid@test.com',
     });
   });
 
@@ -209,15 +208,15 @@ describe('RruTextInput', () => {
     const onSubmit = jest.fn();
     const onEmailChange = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com'
-    }
+      email: 'khalid@test.com',
+    };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email Address' onChange={onEmailChange} />
         <button type='submit'>Submit</button>
-      </RruForm >
+      </RruForm>
     );
 
     // validation for the initial value
@@ -227,7 +226,7 @@ describe('RruTextInput', () => {
     const emailInput = container.querySelector('input[name="email"]');
 
     // delete the current value in the input element
-    emailInput && await userEvent.tripleClick(emailInput);
+    emailInput && (await userEvent.tripleClick(emailInput));
     await userEvent.keyboard('{Backspace}');
     // type in the new value
     await userEvent.keyboard('test@test.com');
@@ -236,5 +235,4 @@ describe('RruTextInput', () => {
     expect(onEmailChange).toHaveBeenCalledTimes(15);
     return expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
   });
-
-})
+});

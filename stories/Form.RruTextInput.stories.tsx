@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import {
-  RruForm, RruTextInput
-} from '../src/index';
+import { RruForm, RruTextInput } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruTextInput',
@@ -29,49 +27,47 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-
   const initialValues = {
     email: 'sample@test.com',
   };
 
   const yupValidationSchema = yup.object().shape({
-    email: yup.string().nullable()
+    email: yup
+      .string()
+      .nullable()
       .required('Email is required')
       .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
   });
 
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };
 
 export const Password = (args) => {
+  const initialValues = {};
 
-  const initialValues = {
+  const yupValidationSchema = yup.object().shape({});
 
-  }
-
-  const yupValidationSchema = yup.object().shape({
-
-  });
-
-  const onSubmit = form => {
+  const onSubmit = (form) => {
     action('submitting the form')(form);
   };
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
-      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
     </RruForm>
   );
-
 };

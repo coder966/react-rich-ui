@@ -30,7 +30,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
     if (props.onChange) {
       props.onChange(val);
     }
-  }
+  };
 
   useEffect(() => {
     field.register();
@@ -47,7 +47,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           id={'checkbox_' + props.name}
           name={props.name}
           checked={value}
-          onChange={e => setNewValue(e.target.checked, true)}
+          onChange={(e) => setNewValue(e.target.checked, true)}
           type='checkbox'
           className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
           disabled={props.disabled}
