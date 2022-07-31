@@ -19,6 +19,7 @@ import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { RruForm, RruSelectInput, RruTextInput } from '../src/index';
+import colorsOptions from './data/colorsOptions';
 
 const storyMeta: Meta = {
   title: 'Form: RruForm',
@@ -63,12 +64,6 @@ export const WithInitialValues = (args) => {
 export const OnChange = (args) => {
   const [color, setColor] = useState<string | null>(null);
 
-  const colors = [
-    { value: 'RED', label: 'Red' },
-    { value: 'BLUE', label: 'Blue' },
-    { value: 'GREEN', label: 'Green' },
-  ];
-
   const initialValues = {
     color: 'BLUE',
   };
@@ -81,7 +76,7 @@ export const OnChange = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruSelectInput name='color' label='Color' options={colors} onChange={setColor} />
+      <RruSelectInput name='color' label='Color' options={colorsOptions} onChange={setColor} />
       {color === 'GREEN' && <p>Great choice.</p>}
       <button type='submit' className='btn btn-primary mt-4'>
         Submit

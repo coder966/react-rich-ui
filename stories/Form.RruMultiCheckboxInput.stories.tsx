@@ -19,6 +19,7 @@ import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
 import { RruForm, RruMultiCheckboxInput } from '../src/index';
+import colorsOptions from './data/colorsOptions';
 
 const storyMeta: Meta = {
   title: 'Form: RruMultiCheckboxInput',
@@ -27,12 +28,6 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-  const colors = [
-    { value: 'RED', label: 'Red' },
-    { value: 'BLUE', label: 'Blue' },
-    { value: 'GREEN', label: 'Green' },
-  ];
-
   const initialValues = {
     colors: ['BLUE', 'GREEN'],
   };
@@ -47,7 +42,7 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruMultiCheckboxInput name='colors' label='Colors' options={colors} />
+      <RruMultiCheckboxInput name='colors' label='Colors' options={colorsOptions} />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
@@ -56,12 +51,6 @@ export const Basic = (args) => {
 };
 
 export const Inline = (args) => {
-  const colors = [
-    { value: 'RED', label: 'Red' },
-    { value: 'BLUE', label: 'Blue' },
-    { value: 'GREEN', label: 'Green' },
-  ];
-
   const initialValues = {};
 
   const yupValidationSchema = yup.object().shape({
@@ -74,7 +63,7 @@ export const Inline = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruMultiCheckboxInput name='colors' label='Colors' options={colors} inline />
+      <RruMultiCheckboxInput name='colors' label='Colors' options={colorsOptions} inline />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
