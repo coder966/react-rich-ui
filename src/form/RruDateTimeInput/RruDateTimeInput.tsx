@@ -129,6 +129,13 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     }
   };
 
+  const onYearBlur = () => {
+    const MIN_YEAR = getCalendarType() === 'gregorian' ? 1901 : 1318;
+    if (year < MIN_YEAR) {
+      setYear(MIN_YEAR);
+    }
+  };
+
   const getValue = (): string | null => {
     if (intlDate) {
       let value = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
@@ -236,7 +243,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                 onClick={selectAllTextInInput}
                 onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
                 value={year}
-                onChange={(e) => onIntegerInputChange(e.target.value, 1300, 2300, setYear)}
+                onChange={(e) => onIntegerInputChange(e.target.value, 1, 2300, setYear)}
+                onBlur={onYearBlur}
               />
               <input
                 type='text'
