@@ -1,0 +1,8 @@
+
+/* fix not working properly when page dir is different from input dir */
+
+.form-control.is-invalid {
+  background-image: unset !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
