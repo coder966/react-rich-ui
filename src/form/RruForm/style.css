@@ -5,3 +5,13 @@
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
 }
+
+.rru-form-grouped-options-container {
+  display: block;
+}
+
+.rru-form-grouped-options-label {
+  margin: 0.5rem 0;
+  width: 100%;
+  border-bottom: solid #dee2e6 1px;
+}

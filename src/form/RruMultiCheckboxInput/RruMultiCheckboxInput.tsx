@@ -15,21 +15,17 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
+import { findOptions, isOptionsGroup } from '../utils/options-utils';
 import RruMultiCheckboxInputProps from './types/RruMultiCheckboxInputProps';
 
 const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
-
-  const findOptions = (optionsValuesArray: any): readonly RruOption[] => {
-    return retainAll(props.options, optionsValuesArray, (opt, val) => opt.value + '' === val + '');
-  };
 
   const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
@@ -43,7 +39,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue() || [];
-    const options = findOptions(initialValue);
+    const options = findOptions(props.options, initialValue);
     onSelectChange(options);
     setHasBeenInitialized(true);
 
@@ -52,7 +48,10 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
 
   useEffect(() => {
     if (hasBeenInitialized) {
-      const options = findOptions(selectedOptions.map((opt) => opt.value));
+      const options = findOptions(
+        props.options,
+        selectedOptions.map((opt) => opt.value)
+      );
       onSelectChange(options);
     }
   }, [props.options]);
@@ -71,30 +70,44 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     return selectedOptions.includes(option);
   };
 
+  const renderCheckBox = (option: RruOption) => {
+    const key = `checkbox_${props.name}_${option.value}`;
+    return (
+      <div key={key} className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
+        <input
+          id={key}
+          name={props.name}
+          value={option.value}
+          checked={isChecked(option)}
+          onChange={(e) => onChange(option, e.target.checked)}
+          onBlur={field.onBlur}
+          type='checkbox'
+          className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
+          disabled={props.disabled}
+        />
+        <label htmlFor={key} className='form-check-label'>
+          {option.label}
+        </label>
+      </div>
+    );
+  };
+
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div>
-        {props.options.map((option) => (
-          <div
-            key={`checkbox_${props.name}_${option.value}`}
-            className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
-            <input
-              id={`checkbox_${props.name}_${option.value}`}
-              name={props.name}
-              value={option.value}
-              checked={isChecked(option)}
-              onChange={(e) => onChange(option, e.target.checked)}
-              onBlur={field.onBlur}
-              type='checkbox'
-              className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
-              disabled={props.disabled}
-            />
-            <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
-              {option.label}
-            </label>
-          </div>
-        ))}
+        {props.options.map((option) => {
+          if (isOptionsGroup(option)) {
+            return (
+              <div key={option.label} className='rru-form-grouped-options-container'>
+                <label className='rru-form-grouped-options-label'>{option.label}</label>
+                {option.options.map((opt) => renderCheckBox(opt))}
+              </div>
+            );
+          } else {
+            return renderCheckBox(option);
+          }
+        })}
       </div>
       <ErrorMessage error={field.error} />
     </div>

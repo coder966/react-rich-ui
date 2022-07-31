@@ -20,16 +20,13 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
+import { findOption } from '../utils/options-utils';
 import RruSelectInputProps from './types/RruSelectInputProps';
 
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
-
-  const findOption = (optionValue: any): RruOption | null => {
-    return props.options.find((opt) => opt.value + '' === optionValue + '') || null;
-  };
 
   const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
@@ -43,7 +40,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue();
-    const option = findOption(initialValue);
+    const option = findOption(props.options, initialValue);
     onSelectChange(option);
     setHasBeenInitialized(true);
 
@@ -52,7 +49,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   useEffect(() => {
     if (hasBeenInitialized) {
-      const option = findOption(selectedOption?.value);
+      const option = selectedOption ? findOption(props.options, selectedOption.value) : null;
       onSelectChange(option);
     }
   }, [props.options]);

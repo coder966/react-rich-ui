@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from '../../types/RruOption';
+import RruOptionsPropType from '../../types/RruOptionsPropType';
 
 export default interface RruRadioInputProps {
   /**  */
@@ -27,7 +27,7 @@ export default interface RruRadioInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: RruOption[];
+  options: RruOptionsPropType;
 
   /** Display all radio buttons in the same line */
   inline?: boolean;

@@ -16,21 +16,17 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import Select from 'react-select';
-import { retainAll } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
+import { findOptions } from '../utils/options-utils';
 import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
-
-  const findOptions = (optionsValuesArray: any): readonly RruOption[] => {
-    return retainAll(props.options, optionsValuesArray, (opt, val) => opt.value + '' === val + '');
-  };
 
   const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
@@ -44,7 +40,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue() || [];
-    const options = findOptions(initialValue);
+    const options = findOptions(props.options, initialValue);
     onSelectChange(options);
     setHasBeenInitialized(true);
 
@@ -53,7 +49,10 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   useEffect(() => {
     if (hasBeenInitialized) {
-      const options = findOptions(selectedOptions.map((opt) => opt.value));
+      const options = findOptions(
+        props.options,
+        selectedOptions.map((opt) => opt.value)
+      );
       onSelectChange(options);
     }
   }, [props.options]);

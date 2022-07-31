@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Khalid H. Alharisi
+ * Copyright 2022 Khalid H. Alharisi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +14,9 @@
  * limitations under the License.
  */
 
-import RruOptionsPropType from '../../types/RruOptionsPropType';
+import RruOption from './RruOption';
 
-export default interface RruMultiCheckboxInputProps {
-  /**  */
-  name: string;
-
-  /**  */
-  label?: React.ReactNode;
-
-  /**  */
-  requiredAsterisk?: boolean;
-
-  /**  */
-  options: RruOptionsPropType;
-
-  /** Display all checkboxes in the same line */
-  inline?: boolean;
-
-  /**
-   *
-   */
-  onChange?: (value: string[]) => void;
-
-  // HTML props
-
-  /**
-   * Controls whether the input field is disabled or not
-   */
-  disabled?: boolean;
+export default interface RruOptionsGroup {
+  label: string;
+  options: readonly RruOption[];
 }

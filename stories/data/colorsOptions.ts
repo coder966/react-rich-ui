@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-export default [
-  { value: 'RED', label: 'Red' },
-  { value: 'BLUE', label: 'Blue' },
-  { value: 'GREEN', label: 'Green' },
-  { value: 'ORANGE', label: 'Orange' },
-  { value: 'PURPLE', label: 'Purple' },
-  { value: 'WHITE', label: 'White' },
-  { value: 'BLACK', label: 'Black' },
+const colorsOptions = [
+  { label: 'Red', value: 'RED' },
+  { label: 'Blue', value: 'BLUE' },
+  { label: 'Green', value: 'GREEN' },
+  { label: 'Orange', value: 'ORANGE' },
+  { label: 'Purple', value: 'PURPLE' },
+  { label: 'White', value: 'WHITE' },
+  { label: 'Black', value: 'BLACK' },
 ];
+
+export default colorsOptions;

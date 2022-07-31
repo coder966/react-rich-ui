@@ -19,16 +19,13 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
 import RruOption from '../types/RruOption';
+import { findOption, isOptionsGroup } from '../utils/options-utils';
 import RruRadioInputProps from './types/RruRadioInputProps';
 
 const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   const field = useField(props.name);
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
-
-  const findOption = (optionValue: any): RruOption | null => {
-    return props.options.find((opt) => opt.value + '' === optionValue + '') || null;
-  };
 
   const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
@@ -42,7 +39,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue();
-    const option = findOption(initialValue);
+    const option = findOption(props.options, initialValue);
     onSelectChange(option);
     setHasBeenInitialized(true);
 
@@ -51,7 +48,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
 
   useEffect(() => {
     if (hasBeenInitialized) {
-      const option = findOption(selectedOption?.value);
+      const option = selectedOption ? findOption(props.options, selectedOption.value) : null;
       onSelectChange(option);
     }
   }, [props.options]);
@@ -60,30 +57,44 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     return selectedOption ? selectedOption.value === option.value : false;
   };
 
+  const renderRadio = (option: RruOption) => {
+    const key = `radio_${props.name}_${option.value}`;
+    return (
+      <div key={key} className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
+        <input
+          id={key}
+          name={props.name}
+          value={option.value}
+          checked={isChecked(option)}
+          onChange={(e) => onSelectChange(option)}
+          onBlur={field.onBlur}
+          type='radio'
+          className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
+          disabled={props.disabled}
+        />
+        <label htmlFor={key} className='form-check-label'>
+          {option.label}
+        </label>
+      </div>
+    );
+  };
+
   return (
     <div className='form-group'>
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
       <div>
-        {props.options.map((option) => (
-          <div
-            key={`checkbox_${props.name}_${option.value}`}
-            className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
-            <input
-              id={`checkbox_${props.name}_${option.value}`}
-              name={props.name}
-              value={option.value}
-              checked={isChecked(option)}
-              onChange={(e) => onSelectChange(option)}
-              onBlur={field.onBlur}
-              type='radio'
-              className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
-              disabled={props.disabled}
-            />
-            <label htmlFor={`checkbox_${props.name}_${option.value}`} className='form-check-label'>
-              {option.label}
-            </label>
-          </div>
-        ))}
+        {props.options.map((option) => {
+          if (isOptionsGroup(option)) {
+            return (
+              <div key={option.label} className='rru-form-grouped-options-container'>
+                <label className='rru-form-grouped-options-label'>{option.label}</label>
+                {option.options.map((opt) => renderRadio(opt))}
+              </div>
+            );
+          } else {
+            return renderRadio(option);
+          }
+        })}
       </div>
       <ErrorMessage error={field.error} />
     </div>

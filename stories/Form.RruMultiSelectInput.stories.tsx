@@ -20,6 +20,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { RruForm, RruMultiSelectInput } from '../src/index';
 import colorsOptions from './data/colorsOptions';
+import groupedAnimalsAndColorsOptions from './data/groupedAnimalsAndColorsOptions';
 
 const storyMeta: Meta = {
   title: 'Form: RruMultiSelectInput',
@@ -33,7 +34,7 @@ export const Basic = (args) => {
   };
 
   const yupValidationSchema = yup.object().shape({
-    colors: yup.array().min(1, 'You must select at least one').max(2, 'You cannot select more than two'),
+    colors: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
   });
 
   const onSubmit = (form) => {
@@ -43,6 +44,29 @@ export const Basic = (args) => {
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruMultiSelectInput name='colors' label='Color' options={colorsOptions} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const Grouped = (args) => {
+  const initialValues = {
+    myChoice: ['BLUE', 'LION'],
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    myChoice: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruMultiSelectInput name='myChoice' label='Choose your favourite' options={groupedAnimalsAndColorsOptions} />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>

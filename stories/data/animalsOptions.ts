@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-export default [
-  { value: 'CAT', label: 'Cat' },
-  { value: 'DOG', label: 'Dog' },
-  { value: 'TIGER', label: 'Tiger' },
-  { value: 'LION', label: 'Lion' },
-  { value: 'LEOPARD', label: 'Leopard' },
-  { value: 'CHEETAH', label: 'Cheetah' },
-  { value: 'JAGUAR', label: 'Jaguar' },
+const animalsOptions = [
+  { label: 'Cat', value: 'CAT' },
+  { label: 'Dog', value: 'DOG' },
+  { label: 'Tiger', value: 'TIGER' },
+  { label: 'Lion', value: 'LION' },
+  { label: 'Leopard', value: 'LEOPARD' },
+  { label: 'Cheetah', value: 'CHEETAH' },
+  { label: 'Jaguar', value: 'JAGUAR' },
 ];
+
+export default animalsOptions;

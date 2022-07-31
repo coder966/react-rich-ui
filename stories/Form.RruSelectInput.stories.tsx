@@ -20,6 +20,7 @@ import React from 'react';
 import * as yup from 'yup';
 import { RruForm, RruSelectInput } from '../src/index';
 import colorsOptions from './data/colorsOptions';
+import groupedAnimalsAndColorsOptions from './data/groupedAnimalsAndColorsOptions';
 
 const storyMeta: Meta = {
   title: 'Form: RruSelectInput',
@@ -43,6 +44,29 @@ export const Basic = (args) => {
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruSelectInput name='color' label='Color' options={colorsOptions} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const Grouped = (args) => {
+  const initialValues = {
+    myChoice: 'CAT',
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    myChoice: yup.string().nullable().required('You must select one'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruSelectInput name='myChoice' label='Choose your favourite' options={groupedAnimalsAndColorsOptions} />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>

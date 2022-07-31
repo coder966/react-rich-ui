@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RruOption from '../../types/RruOption';
+import RruOptionsPropType from '../../types/RruOptionsPropType';
 
 export default interface RruSelectInputProps {
   /**  */
@@ -27,7 +27,7 @@ export default interface RruSelectInputProps {
   requiredAsterisk?: boolean;
 
   /**  */
-  options: RruOption[];
+  options: RruOptionsPropType;
 
   /**
    *
