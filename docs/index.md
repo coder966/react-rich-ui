@@ -20,14 +20,10 @@ import 'react-rich-ui/dist/index.css';
 
 ### Or from a CDN
 
-Add the following tag to your index.html file:
+Add the following tag to your index.html file: (replace `2.1.0` in the URL with the version you are using)
 
 ```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.0.0/dist/index.css"
-  integrity="sha384-5VVvy00iWm+zoH7Pm5sxyZW+mpa5lyg+uvJqTcSJHHrLr2nvjFeYTVjtX18SoUBg"
-  crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.1.0/dist/index.css" />
 ```
 
 ## Import Bootstrap v5.x (CSS + JS)
