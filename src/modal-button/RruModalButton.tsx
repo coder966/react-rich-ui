@@ -60,12 +60,16 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
         <div className='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <h5 className='modal-title'>Modal title</h5>
-              <button id={`modal-close-${id}`} type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+              <h5 className='modal-title'>{props.modalTitle}</h5>
+              <button
+                id={`modal-close-${id}`}
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
             </div>
-            <div className='modal-body'>
-              {renderModalBody(props.modalBody)}
-            </div>
+            <div className='modal-body'>{renderModalBody(props.modalBody)}</div>
           </div>
         </div>
       </div>
