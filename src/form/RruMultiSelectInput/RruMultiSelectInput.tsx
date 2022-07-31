@@ -32,12 +32,9 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     return retainAll(props.options, optionsValuesArray, (opt, val) => opt.value + '' === val + '');
   };
 
-  const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
+  const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
-    field.setValue(
-      options.map((opt) => opt.value),
-      touched
-    );
+    field.setValue(options.map((opt) => opt.value));
 
     if (props.onChange) {
       props.onChange(options.map((opt) => opt.value));
@@ -48,7 +45,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     field.register();
     const initialValue = field.getValue() || [];
     const options = findOptions(initialValue);
-    onSelectChange(options, false);
+    onSelectChange(options);
     setHasBeenInitialized(true);
 
     return () => field.unregister();
@@ -57,7 +54,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const options = findOptions(selectedOptions.map((opt) => opt.value));
-      onSelectChange(options, true);
+      onSelectChange(options);
     }
   }, [props.options]);
 
@@ -79,7 +76,8 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
         name={props.name}
         isMulti={true}
         value={selectedOptions}
-        onChange={(options) => onSelectChange(options, true)}
+        onChange={(options) => onSelectChange(options)}
+        onBlur={field.onBlur}
         options={props.options}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}

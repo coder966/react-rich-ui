@@ -30,9 +30,9 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     return props.options.find((opt) => opt.value + '' === optionValue + '') || null;
   };
 
-  const onSelectChange = (option: RruOption | null, touched: boolean) => {
+  const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
-    field.setValue(option ? option.value : null, touched);
+    field.setValue(option ? option.value : null);
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -43,7 +43,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     field.register();
     const initialValue = field.getValue();
     const option = findOption(initialValue);
-    onSelectChange(option, false);
+    onSelectChange(option);
     setHasBeenInitialized(true);
 
     return () => field.unregister();
@@ -52,7 +52,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const option = findOption(selectedOption?.value);
-      onSelectChange(option, true);
+      onSelectChange(option);
     }
   }, [props.options]);
 
@@ -73,7 +73,8 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
               name={props.name}
               value={option.value}
               checked={isChecked(option)}
-              onChange={(e) => onSelectChange(option, true)}
+              onChange={(e) => onSelectChange(option)}
+              onBlur={field.onBlur}
               type='radio'
               className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
               disabled={props.disabled}

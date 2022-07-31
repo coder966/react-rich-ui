@@ -45,7 +45,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const popupRef = useDetectClickOutside({
     onTriggered: (e) => {
       if (e.target != inputRef.current) {
-        setIsPopupShown(false);
+        closePopup();
       }
     },
   });
@@ -53,7 +53,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const [calendar, setCalendar] = useState<IntlDate[]>(
     generateSixWeeksCalendar(getCalendarType(), today.getYear(getCalendarType()), today.getMonth(getCalendarType()))
   );
-  const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [isPopupShown, setIsPopupShown] = useState<boolean>(false);
 
   const [hour, setHour] = useState<number>(0);
@@ -72,6 +71,11 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     if (props.getDateConfig) {
       return props.getDateConfig(date.toString(getCalendarType()));
     }
+  };
+
+  const closePopup = () => {
+    setIsPopupShown(false);
+    field.onBlur();
   };
 
   const previousMonth = () => {
@@ -97,7 +101,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       return;
     } else {
       setIntlDate(date);
-      setIsPopupShown(false);
+      closePopup();
     }
   };
 
@@ -171,7 +175,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
         }
       }
     } catch (e) {}
-    setHasBeenInitialized(true);
 
     return () => field.unregister();
   }, []);
@@ -182,7 +185,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   useEffect(() => {
     const value = getValue();
-    field.setValue(value, hasBeenInitialized);
+    field.setValue(value);
     if (props.onChange) {
       props.onChange(value);
     }

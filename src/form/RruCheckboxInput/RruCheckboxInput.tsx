@@ -23,8 +23,8 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   const [value, setValue] = useState<boolean>(false);
   const field = useField(props.name);
 
-  const setNewValue = (val: boolean, touched: boolean) => {
-    field.setValue(val, touched);
+  const setNewValue = (val: boolean) => {
+    field.setValue(val);
     setValue(val);
 
     if (props.onChange) {
@@ -35,7 +35,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = Boolean(field.getValue());
-    setNewValue(initialValue, false);
+    setNewValue(initialValue);
 
     return () => field.unregister();
   }, []);
@@ -47,7 +47,8 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           id={'checkbox_' + props.name}
           name={props.name}
           checked={value}
-          onChange={(e) => setNewValue(e.target.checked, true)}
+          onChange={(e) => setNewValue(e.target.checked)}
+          onBlur={field.onBlur}
           type='checkbox'
           className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
           disabled={props.disabled}

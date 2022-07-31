@@ -24,8 +24,8 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
   const field = useField(props.name);
 
-  const setNewValue = (val: string | null, touched: boolean) => {
-    field.setValue(val, touched);
+  const setNewValue = (val: string | null) => {
+    field.setValue(val);
     setValue(val);
 
     if (props.onChange) {
@@ -36,7 +36,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue();
-    setNewValue(initialValue || null, false);
+    setNewValue(initialValue || null);
 
     return () => field.unregister();
   }, []);
@@ -47,7 +47,8 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       <input
         name={props.name}
         value={value || ''}
-        onChange={(e) => setNewValue(e.target.value, true)}
+        onChange={(e) => setNewValue(e.target.value)}
+        onBlur={field.onBlur}
         type={props.isPassword ? 'password' : 'text'}
         className={`form-control ${field.error ? 'is-invalid' : ''}`}
         disabled={props.disabled}

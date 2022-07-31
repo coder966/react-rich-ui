@@ -31,12 +31,9 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     return retainAll(props.options, optionsValuesArray, (opt, val) => opt.value + '' === val + '');
   };
 
-  const onSelectChange = (options: readonly RruOption[], touched: boolean) => {
+  const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
-    field.setValue(
-      options.map((opt) => opt.value),
-      touched
-    );
+    field.setValue(options.map((opt) => opt.value));
 
     if (props.onChange) {
       props.onChange(options.map((opt) => opt.value));
@@ -47,7 +44,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     field.register();
     const initialValue = field.getValue() || [];
     const options = findOptions(initialValue);
-    onSelectChange(options, false);
+    onSelectChange(options);
     setHasBeenInitialized(true);
 
     return () => field.unregister();
@@ -56,7 +53,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const options = findOptions(selectedOptions.map((opt) => opt.value));
-      onSelectChange(options, true);
+      onSelectChange(options);
     }
   }, [props.options]);
 
@@ -67,7 +64,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     } else {
       newSelectedOptions = selectedOptions.filter((opt) => opt.value !== option.value);
     }
-    onSelectChange(newSelectedOptions, true);
+    onSelectChange(newSelectedOptions);
   };
 
   const isChecked = (option: RruOption): boolean => {
@@ -88,6 +85,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
               value={option.value}
               checked={isChecked(option)}
               onChange={(e) => onChange(option, e.target.checked)}
+              onBlur={field.onBlur}
               type='checkbox'
               className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
               disabled={props.disabled}

@@ -31,9 +31,9 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     return props.options.find((opt) => opt.value + '' === optionValue + '') || null;
   };
 
-  const onSelectChange = (option: RruOption | null, touched: boolean) => {
+  const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
-    field.setValue(option ? option.value : null, touched);
+    field.setValue(option ? option.value : null);
 
     if (props.onChange) {
       props.onChange(option ? option.value : null);
@@ -44,7 +44,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     field.register();
     const initialValue = field.getValue();
     const option = findOption(initialValue);
-    onSelectChange(option, false);
+    onSelectChange(option);
     setHasBeenInitialized(true);
 
     return () => field.unregister();
@@ -53,7 +53,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   useEffect(() => {
     if (hasBeenInitialized) {
       const option = findOption(selectedOption?.value);
-      onSelectChange(option, true);
+      onSelectChange(option);
     }
   }, [props.options]);
 
@@ -76,7 +76,8 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         isMulti={false}
         isClearable={true}
         value={selectedOption}
-        onChange={(option) => onSelectChange(option, true)}
+        onChange={(option) => onSelectChange(option)}
+        onBlur={field.onBlur}
         options={props.options}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}

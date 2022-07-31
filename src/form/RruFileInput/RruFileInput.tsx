@@ -26,7 +26,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   // init
   useEffect(() => {
     field.register();
-    field.setValue(null, false);
+    field.setValue(null);
 
     return () => field.unregister();
   }, []);
@@ -38,7 +38,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       file = filesList[0];
     }
 
-    field.setValue(file, true);
+    field.setValue(file);
 
     if (props.onChange) {
       props.onChange(file);
@@ -54,6 +54,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
         className={`form-control ${field.error ? 'is-invalid' : ''}`}
         name={props.name}
         onChange={onChange}
+        onBlur={field.onBlur}
         disabled={props.disabled}
         accept={props.accept}
       />

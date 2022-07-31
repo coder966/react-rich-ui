@@ -14,17 +14,33 @@
  * limitations under the License.
  */
 
+import { useState } from 'react';
 import { useFormContext, useFormState } from 'react-hook-form';
 
 export const useField = (name: string) => {
   const formContext = useFormContext();
   const formState = useFormState({ name: name });
+  const [isTouched, setIsTouched] = useState<boolean>(false);
+
+  const markTouched = () => {
+    if (!isTouched) {
+      setIsTouched(true);
+      formContext.trigger(name);
+    }
+  };
+
+  const setValue = (value: any) => {
+    formContext.setValue(name, value, {
+      shouldValidate: isTouched,
+    });
+  };
 
   return {
     register: () => formContext.register(name),
     unregister: () => formContext.unregister(name),
-    setValue: (value: any, touched: boolean) => formContext.setValue(name, value, { shouldValidate: touched }),
+    setValue: setValue,
     getValue: () => formContext.getValues()[name],
     error: formState.errors[name],
+    onBlur: markTouched,
   };
 };
