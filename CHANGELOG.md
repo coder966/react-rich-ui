@@ -11,6 +11,7 @@ Pre-release versions will not be mentioned here.
 - `RruMultiSelectInput`: support grouped options
 - `RruMultiCheckboxInput`: support grouped options
 - `RruCheckboxInput`: add `isSwitch`
+- `RruForm`: add `id`
 
 ### Changed
 

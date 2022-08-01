@@ -36,7 +36,9 @@ const RruForm: FC<RruFormProps> = (props) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(props.onSubmit)}>{props.children}</form>
+      <form onSubmit={form.handleSubmit(props.onSubmit)} id={props.id}>
+        {props.children}
+      </form>
     </FormProvider>
   );
 };

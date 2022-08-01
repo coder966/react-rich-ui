@@ -26,4 +26,7 @@ export default interface RruFormProps {
 
   /**  */
   children: React.ReactNode | React.ReactNode[];
+
+  /** */
+  id?: string;
 }

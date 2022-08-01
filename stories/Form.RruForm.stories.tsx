@@ -201,3 +201,20 @@ export const MultipleFormsInOnePage = (args) => {
     </>
   );
 };
+
+export const SubmitButtonOutsideForm = (args) => {
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <div>
+      <RruForm onSubmit={onSubmit} id='myForm'>
+        <RruTextInput name='firstName' label='First Name' />
+      </RruForm>
+      <button type='submit' form='myForm' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </div>
+  );
+};
