@@ -22,7 +22,9 @@ Pre-release versions will not be mentioned here.
 
 - `RruModalButton`: fix `modalTitle` not working
 - `RruDateTimeInput`: fix unable to change year
+- `RruTextInput`: fix empty string initial value becomes `null`
 - `RruTextInput`: fix error message not showing properly when page `dir` is different from input `dir`
+- `RruTextareaInput`: fix empty string initial value becomes `null`
 - `RruTextareaInput`: fix error message not showing properly when page `dir` is different from input `dir`
 
 ## [2.0.0] - 2022-07-27
