@@ -36,7 +36,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   useEffect(() => {
     field.register();
     const initialValue = field.getValue();
-    setNewValue(initialValue || null);
+    setNewValue(initialValue === undefined ? null : initialValue);
 
     return () => field.unregister();
   }, []);
