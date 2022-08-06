@@ -2,7 +2,7 @@
 
 Pre-release versions will not be mentioned here.
 
-## [2.1.0] - 2022-08-01
+## [2.1.0] - 2022-08-06
 
 ### Added
 
