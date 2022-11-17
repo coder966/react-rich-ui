@@ -43,7 +43,7 @@ export const useField = (name: string) => {
 
   const setValue = (value: any) => {
     formContext.setValue(name, value, {
-      shouldValidate: isTouched,
+      shouldValidate: isTouched || error,
     });
   };
 
