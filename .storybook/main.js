@@ -5,4 +5,7 @@ module.exports = {
   typescript: {
     check: true, // type-check stories during Storybook build
   },
+  reactOptions: {
+    strictMode: true,
+  },
 };
