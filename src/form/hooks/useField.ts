@@ -16,6 +16,7 @@
 
 import { useState } from 'react';
 import { useFormContext, useFormState } from 'react-hook-form';
+import { resolveObjectAttribute } from '../../utils/utils';
 
 export const useField = (name: string) => {
   const formContext = useFormContext();
@@ -35,12 +36,22 @@ export const useField = (name: string) => {
     });
   };
 
+  const getValue = () => {
+    return resolveObjectAttribute(name, formContext.getValues());
+  };
+
+  /**
+   * don't use `formContext.getFieldState(name).error` as the error will not be updated until the next update;
+   * delaying the error message, also delaying the clearance of the error message
+   */
+  const error = resolveObjectAttribute(name, formState.errors);
+
   return {
     register: () => formContext.register(name),
     unregister: () => formContext.unregister(name),
     setValue: setValue,
-    getValue: () => formContext.getValues()[name],
-    error: formState.errors[name],
+    getValue: getValue,
+    error: error,
     onBlur: markTouched,
   };
 };

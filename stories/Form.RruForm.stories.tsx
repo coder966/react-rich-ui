@@ -218,3 +218,36 @@ export const SubmitButtonOutsideForm = (args) => {
     </div>
   );
 };
+
+export const NestedFields = (args) => {
+  const initialValues = {
+    name: 'Khalid',
+    address: {
+      city: 'Riyadh',
+      street: '',
+    },
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    name: yup.string().nullable().required().max(50),
+    address: yup.object().shape({
+      city: yup.string().nullable().required().max(50),
+      street: yup.string().nullable().required().max(50),
+    }),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruTextInput name='name' label='Name' />
+      <RruTextInput name='address.city' label='City' />
+      <RruTextInput name='address.street' label='Street' />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
