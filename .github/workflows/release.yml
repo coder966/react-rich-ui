@@ -1,0 +1,37 @@
+name: Version Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Yarn install
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+
+      - name: Run Tests
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: test
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Yarn install
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
