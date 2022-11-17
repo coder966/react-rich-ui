@@ -33,9 +33,9 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   };
 
   useEffect(() => {
-    field.register();
-    const initialValue = Boolean(field.getValue());
-    setNewValue(initialValue);
+    field.register((initialValue) => {
+      setNewValue(Boolean(initialValue));
+    });
 
     return () => field.unregister();
   }, []);

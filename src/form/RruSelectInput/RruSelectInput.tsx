@@ -38,11 +38,11 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    field.register();
-    const initialValue = field.getValue();
-    const option = findOption(props.options, initialValue);
-    onSelectChange(option);
-    setHasBeenInitialized(true);
+    field.register((initialValue) => {
+      const option = findOption(props.options, initialValue);
+      onSelectChange(option);
+      setHasBeenInitialized(true);
+    });
 
     return () => field.unregister();
   }, []);

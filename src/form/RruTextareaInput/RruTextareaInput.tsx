@@ -34,9 +34,9 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   };
 
   useEffect(() => {
-    field.register();
-    const initialValue = field.getValue();
-    setNewValue(initialValue === undefined ? null : initialValue);
+    field.register((initialValue) => {
+      setNewValue(initialValue === undefined ? null : initialValue);
+    });
 
     return () => field.unregister();
   }, []);

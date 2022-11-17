@@ -25,8 +25,9 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
 
   // init
   useEffect(() => {
-    field.register();
-    field.setValue(null);
+    field.register((initialValue) => {
+      field.setValue(null);
+    });
 
     return () => field.unregister();
   }, []);

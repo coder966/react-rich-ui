@@ -38,11 +38,11 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   };
 
   useEffect(() => {
-    field.register();
-    const initialValue = field.getValue() || [];
-    const options = findOptions(props.options, initialValue);
-    onSelectChange(options);
-    setHasBeenInitialized(true);
+    field.register((initialValue) => {
+      const options = findOptions(props.options, initialValue || []);
+      onSelectChange(options);
+      setHasBeenInitialized(true);
+    });
 
     return () => field.unregister();
   }, []);

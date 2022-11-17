@@ -23,6 +23,17 @@ export const useField = (name: string) => {
   const formState = useFormState({ name: name });
   const [isTouched, setIsTouched] = useState<boolean>(false);
 
+  const register = (onRegister: (initialValue: any) => void) => {
+    const initialValue = formContext.formState.defaultValues
+      ? resolveObjectAttribute(name, formContext.formState.defaultValues)
+      : undefined;
+    onRegister(initialValue);
+  };
+
+  const unregister = () => {
+    formContext.unregister(name);
+  };
+
   const markTouched = () => {
     if (!isTouched) {
       setIsTouched(true);
@@ -36,10 +47,6 @@ export const useField = (name: string) => {
     });
   };
 
-  const getValue = () => {
-    return resolveObjectAttribute(name, formContext.getValues());
-  };
-
   /**
    * don't use `formContext.getFieldState(name).error` as the error will not be updated until the next update;
    * delaying the error message, also delaying the clearance of the error message
@@ -47,10 +54,9 @@ export const useField = (name: string) => {
   const error = resolveObjectAttribute(name, formState.errors);
 
   return {
-    register: () => formContext.register(name),
-    unregister: () => formContext.unregister(name),
+    register: register,
+    unregister: unregister,
     setValue: setValue,
-    getValue: getValue,
     error: error,
     onBlur: markTouched,
   };

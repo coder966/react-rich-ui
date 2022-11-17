@@ -159,22 +159,27 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
    * init
    */
   useEffect(() => {
-    field.register();
-    try {
-      const initialValue: string = field.getValue();
-      if (initialValue) {
-        let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
-        if (matches) {
-          const date = IntlDate.of(getCalendarType(), parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
-          setYear(date.getYear(getCalendarType()));
-          setMonth(date.getMonth(getCalendarType()));
-          setIntlDate(date);
-          onIntegerInputChange(matches[5], 0, 23, setHour);
-          onIntegerInputChange(matches[6], 0, 59, setMinute);
-          onIntegerInputChange(matches[7], 0, 59, setSecond);
+    field.register((initialValue) => {
+      try {
+        if (initialValue) {
+          let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
+          if (matches) {
+            const date = IntlDate.of(
+              getCalendarType(),
+              parseInt(matches[1]),
+              parseInt(matches[2]),
+              parseInt(matches[3])
+            );
+            setYear(date.getYear(getCalendarType()));
+            setMonth(date.getMonth(getCalendarType()));
+            setIntlDate(date);
+            onIntegerInputChange(matches[5], 0, 23, setHour);
+            onIntegerInputChange(matches[6], 0, 59, setMinute);
+            onIntegerInputChange(matches[7], 0, 59, setSecond);
+          }
         }
-      }
-    } catch (e) {}
+      } catch (e) {}
+    });
 
     return () => field.unregister();
   }, []);
