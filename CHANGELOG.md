@@ -2,6 +2,27 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.2.0] - 2022-11-18
+
+### Added
+
+- `RruForm`: add support for nested fields.
+
+### Changed
+
+- `RruForm`: eagerly validate a field if it has an error even before losing focus; for a better UX error feedback.
+
+### Fixed
+
+- `RruForm`: fix initialValues not reflected in React 18 Strict mode.
+
+## Other
+
+- Upgrade Dependencies.
+- CI/CD pipeline for testing and publishing releases on tags.
+- Storybook: enable react strict mode.
+- Improve tests.
+
 ## [2.1.0] - 2022-08-06
 
 ### Added
