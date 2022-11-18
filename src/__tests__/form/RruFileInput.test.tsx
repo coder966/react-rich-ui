@@ -17,8 +17,8 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import RruForm from '../RruForm/RruForm';
-import RruFileInput from './RruFileInput';
+import RruFileInput from '../../form/RruFileInput/RruFileInput';
+import RruForm from '../../form/RruForm/RruForm';
 
 describe('RruFileInput', () => {
   it('should render correctly', async () => {

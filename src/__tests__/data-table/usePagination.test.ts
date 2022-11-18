@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import usePagination from './usePagination';
+import usePagination from '../../data-table/pagination/usePagination';
 
 describe('usePagination', () => {
   test('base=0: 0 pages', () => {

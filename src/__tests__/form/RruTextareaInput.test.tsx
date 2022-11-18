@@ -18,8 +18,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
-import RruForm from '../RruForm/RruForm';
-import RruTextareaInput from './RruTextareaInput';
+import RruForm from '../../form/RruForm/RruForm';
+import RruTextareaInput from '../../form/RruTextareaInput/RruTextareaInput';
 
 describe('RruTextareaInput', () => {
   it('should render correctly', async () => {
