@@ -3,35 +3,34 @@ name: Version Release
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Yarn install
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install
-
-      - name: Run Tests
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: test
-
   release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Yarn install
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Node commands
+        uses: actions/setup-node@v3
+
+      - run: yarn install
+
+      - run: yarn test
+
+      - run: yarn publish
+        if: steps.get_version.outputs.prerelease == ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: yarn publish --tag next
+        if: steps.get_version.outputs.prerelease != ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
