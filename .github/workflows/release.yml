@@ -25,12 +25,12 @@ jobs:
       - run: yarn publish
         if: steps.get_version.outputs.prerelease == ''
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - run: yarn publish --tag next
         if: steps.get_version.outputs.prerelease != ''
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
