@@ -178,6 +178,11 @@ describe('RruTextareaInput', () => {
 
     // submit the form
     const submitButton = container.querySelector('button[type="submit"]');
+    /**
+     * Click outside any focused field before submitting the form in order to allow async state to finish.
+     * This is only necessary in tests because here it behaves slightly differently from a typical browser.
+     */
+    submitButton?.parentElement && (await userEvent.click(submitButton?.parentElement));
     submitButton && (await userEvent.click(submitButton));
 
     // validation for bad input
