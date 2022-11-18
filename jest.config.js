@@ -5,4 +5,5 @@ module.exports = {
   transform: {
     '^.+\\.css$': 'jest-transform-css',
   },
+  modulePathIgnorePatterns: ['__utils__'],
 };

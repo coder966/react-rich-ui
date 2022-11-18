@@ -20,6 +20,7 @@ import React from 'react';
 import * as yup from 'yup';
 import RruForm from '../../form/RruForm/RruForm';
 import RruTextInput from '../../form/RruTextInput/RruTextInput';
+import submitForm from '../__utils__/submitForm';
 
 describe('RruTextInput', () => {
   it('should render correctly', async () => {
@@ -58,8 +59,7 @@ describe('RruTextInput', () => {
     await userEvent.keyboard('khalid@test.com');
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -81,8 +81,7 @@ describe('RruTextInput', () => {
     );
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -110,8 +109,7 @@ describe('RruTextInput', () => {
     expect(screen.getByDisplayValue('khalid@test.com')).toBeTruthy();
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -146,8 +144,7 @@ describe('RruTextInput', () => {
     }
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -179,13 +176,7 @@ describe('RruTextInput', () => {
     await userEvent.keyboard('test_bad_email');
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    /**
-     * Click outside any focused field before submitting the form in order to allow async state to finish.
-     * This is only necessary in tests because here it behaves slightly differently from a typical browser.
-     */
-    submitButton?.parentElement && (await userEvent.click(submitButton?.parentElement));
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
@@ -199,7 +190,7 @@ describe('RruTextInput', () => {
     await userEvent.keyboard('khalid@test.com');
 
     // submit the form
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);

@@ -20,6 +20,7 @@ import React from 'react';
 import * as yup from 'yup';
 import RruForm from '../../form/RruForm/RruForm';
 import RruTextareaInput from '../../form/RruTextareaInput/RruTextareaInput';
+import submitForm from '../__utils__/submitForm';
 
 describe('RruTextareaInput', () => {
   it('should render correctly', async () => {
@@ -58,8 +59,7 @@ describe('RruTextareaInput', () => {
     await userEvent.keyboard('My awesome post');
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -81,8 +81,7 @@ describe('RruTextareaInput', () => {
     );
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -110,8 +109,7 @@ describe('RruTextareaInput', () => {
     expect(screen.getByDisplayValue('My awesome post')).toBeTruthy();
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -146,8 +144,7 @@ describe('RruTextareaInput', () => {
     }
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -177,13 +174,7 @@ describe('RruTextareaInput', () => {
     await userEvent.keyboard('Too short text');
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    /**
-     * Click outside any focused field before submitting the form in order to allow async state to finish.
-     * This is only necessary in tests because here it behaves slightly differently from a typical browser.
-     */
-    submitButton?.parentElement && (await userEvent.click(submitButton?.parentElement));
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation for bad input
     expect(onSubmit).toHaveBeenCalledTimes(0);
@@ -197,7 +188,7 @@ describe('RruTextareaInput', () => {
     await userEvent.keyboard('This is a long paragraph');
 
     // submit the form
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);

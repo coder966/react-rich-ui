@@ -19,6 +19,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import RruFileInput from '../../form/RruFileInput/RruFileInput';
 import RruForm from '../../form/RruForm/RruForm';
+import submitForm from '../__utils__/submitForm';
 
 describe('RruFileInput', () => {
   it('should render correctly', async () => {
@@ -56,8 +57,7 @@ describe('RruFileInput', () => {
     fileInput && (await userEvent.upload(fileInput, file));
 
     // submit the form
-    const submitButton = container.querySelector('button[type="submit"]');
-    submitButton && (await userEvent.click(submitButton));
+    await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
