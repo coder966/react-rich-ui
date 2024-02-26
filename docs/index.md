@@ -15,7 +15,7 @@ $ npm i --save react-rich-ui
 Add the following import to your React app index.js file:
 
 ```js
-import 'react-rich-ui/dist/index.css';
+import 'react-rich-ui/dist/index.esm.css';
 ```
 
 ### Or from a CDN
