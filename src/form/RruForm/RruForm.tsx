@@ -40,7 +40,16 @@ const RruForm: FC<RruFormProps> = (props) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(props.onSubmit)} id={props.id}>
+      <form
+        onSubmit={form.handleSubmit((formValuesObject, event) => {
+          // @ts-ignore
+          // this fixes when buttons with type != submit would cause the form to submit,
+          // this appears to be a bug in react-hook-form, remove when fixed
+          if (event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit') {
+            props.onSubmit(formValuesObject);
+          }
+        })}
+        id={props.id}>
         {props.children}
       </form>
     </FormProvider>
