@@ -34,6 +34,10 @@ const RruForm: FC<RruFormProps> = (props) => {
 
   const form = useForm(config);
 
+  if (props.context) {
+    props.context.$(form);
+  }
+
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(props.onSubmit)} id={props.id}>

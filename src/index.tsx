@@ -23,8 +23,9 @@ export { default as RruMultiCheckboxInput } from './form/RruMultiCheckboxInput/R
 export { default as RruMultiSelectInput } from './form/RruMultiSelectInput/RruMultiSelectInput';
 export { default as RruRadioInput } from './form/RruRadioInput/RruRadioInput';
 export { default as RruSelectInput } from './form/RruSelectInput/RruSelectInput';
-export { default as RruTextareaInput } from './form/RruTextareaInput/RruTextareaInput';
 export { default as RruTextInput } from './form/RruTextInput/RruTextInput';
+export { default as RruTextareaInput } from './form/RruTextareaInput/RruTextareaInput';
+export { useRruForm } from './form/hooks/useRruForm';
 export { default as RruModalButton } from './modal-button/RruModalButton';
-export { default as useRruStepsWizardContext } from './steps-wizard/hooks/useRruStepsWizardContext';
 export { default as RruStepsWizard } from './steps-wizard/RruStepsWizard';
+export { default as useRruStepsWizardContext } from './steps-wizard/hooks/useRruStepsWizardContext';

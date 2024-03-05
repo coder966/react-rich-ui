@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
+import { UseRruFormReturn } from '../../hooks/useRruForm';
+
 export default interface RruFormProps {
+  context?: UseRruFormReturn;
+
   /**  */
   initialValues?: Record<string, any>;
 

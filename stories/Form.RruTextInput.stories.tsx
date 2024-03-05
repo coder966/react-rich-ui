@@ -18,7 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React from 'react';
 import * as yup from 'yup';
-import { RruForm, RruTextInput } from '../src/index';
+import { RruForm, RruTextInput, useRruForm } from '../src/index';
 
 const storyMeta: Meta = {
   title: 'Form: RruTextInput',
@@ -65,6 +65,51 @@ export const Password = (args) => {
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruTextInput name='password' label='Password' isPassword requiredAsterisk />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const SetValueProgrammatically = (args) => {
+  const rruFormContext = useRruForm();
+
+  const initialValues = {
+    email: 'sample@test.com',
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .nullable()
+      .required('Email is required')
+      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  const triggerManualAccess = () => {
+    console.log('trigger manual access');
+    console.log('reading', rruFormContext.getFieldValue('email'));
+    console.log('setting');
+    rruFormContext.setFieldValue('email', 'ss@fvd.df');
+  };
+
+  return (
+    <RruForm
+      context={rruFormContext}
+      initialValues={initialValues}
+      yupValidationSchema={yupValidationSchema}
+      onSubmit={onSubmit}>
+      <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
+
+      <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
+        Trigger manual access
+      </button>
+
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
