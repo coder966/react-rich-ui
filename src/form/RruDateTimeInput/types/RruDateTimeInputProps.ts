@@ -28,7 +28,7 @@ export default interface RruDateTimeInputProps {
   /**  */
   requiredAsterisk?: boolean;
 
-  /** The minium selectable year */
+  /** */
   mode?: RruDateTimeInputMode;
 
   /**  */

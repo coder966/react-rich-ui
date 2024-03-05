@@ -16,13 +16,18 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
+import { useField } from '../hooks/useField';
 import RruTextareaInputProps from './types/RruTextareaInputProps';
 
 const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
-  const field = useField(props.name);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (serializedValue !== value) {
+      setValue(serializedValue);
+    }
+  });
 
   const setNewValue = (val: string | null) => {
     field.setValue(val);
