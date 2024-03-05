@@ -44,9 +44,7 @@ export const useRruForm = (): UseRruFormReturn => {
       console.error('FormContext has not been set yet. Cannot set values.');
       return;
     }
-    formContext.setValue(fieldName, value, {
-      shouldValidate: true,
-    });
+    formContext.setValue(fieldName, value);
   };
 
   return {
