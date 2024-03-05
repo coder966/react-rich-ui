@@ -73,7 +73,8 @@ export const Password = (args) => {
 };
 
 export const SetValueProgrammatically = (args) => {
-  const rruFormContext = useRruForm();
+  const rruFormContext1 = useRruForm();
+  const rruFormContext2 = useRruForm();
 
   const initialValues = {
     email: 'sample@test.com',
@@ -87,32 +88,61 @@ export const SetValueProgrammatically = (args) => {
       .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
   });
 
-  const onSubmit = (form) => {
-    action('submitting the form')(form);
+  const onSubmit1 = (form) => {
+    action('submitting the form 1')(form);
   };
 
-  const triggerManualAccess = () => {
-    console.log('trigger manual access');
-    console.log('reading', rruFormContext.getFieldValue('email'));
-    console.log('setting');
-    rruFormContext.setFieldValue('email', 'ss@fvd.df');
+  const onSubmit2 = (form) => {
+    action('submitting the form 2')(form);
+  };
+
+  const triggerManualAccess1 = () => {
+    action('trigger manual access 1')();
+    action('>>> 1')(rruFormContext1.getFieldValue('email'));
+    action('<<< 1')('1111@form.test');
+    rruFormContext1.setFieldValue('email', '1111@form.test');
+  };
+
+  const triggerManualAccess2 = () => {
+    action('trigger manual access 2')();
+    action('>>> 2')(rruFormContext2.getFieldValue('email'));
+    action('<<< 2')('2222@form.test');
+    rruFormContext2.setFieldValue('email', '2222@form.test');
   };
 
   return (
-    <RruForm
-      context={rruFormContext}
-      initialValues={initialValues}
-      yupValidationSchema={yupValidationSchema}
-      onSubmit={onSubmit}>
-      <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
+    <div>
+      <RruForm
+        context={rruFormContext1}
+        initialValues={initialValues}
+        yupValidationSchema={yupValidationSchema}
+        onSubmit={onSubmit1}>
+        <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
 
-      <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
-        Trigger manual access
-      </button>
+        <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess1}>
+          Trigger manual access
+        </button>
 
-      <button type='submit' className='btn btn-primary mt-4'>
-        Submit
-      </button>
-    </RruForm>
+        <button type='submit' className='btn btn-primary mt-4'>
+          Submit
+        </button>
+      </RruForm>
+
+      <RruForm
+        context={rruFormContext2}
+        initialValues={initialValues}
+        yupValidationSchema={yupValidationSchema}
+        onSubmit={onSubmit2}>
+        <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
+
+        <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess2}>
+          Trigger manual access
+        </button>
+
+        <button type='submit' className='btn btn-primary mt-4'>
+          Submit
+        </button>
+      </RruForm>
+    </div>
   );
 };
