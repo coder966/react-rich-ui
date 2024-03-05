@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-import { useState } from 'react';
-import { useFormContext, useFormState } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import { resolveObjectAttribute } from '../../utils/utils';
 
-export const useField = (name: string) => {
+/**
+ * @param onProgrammaticValue Should check if the provided serialized value does not
+ * match the current deserialized value before updating the formContext, otherwise you would end up in an infinite re-render
+ */
+export const useField = (name: string, onProgrammaticValue?: (serializedValue: any) => void) => {
   const formContext = useFormContext();
   const formState = useFormState({ name: name });
   const [isTouched, setIsTouched] = useState<boolean>(false);
+  const watchResult = useWatch({ name: name });
+
+  useEffect(() => {
+    if (onProgrammaticValue) {
+      onProgrammaticValue(watchResult);
+    }
+  }, [watchResult, onProgrammaticValue]);
 
   const register = (onRegister: (initialValue: any) => void) => {
     const initialValue = formContext.formState.defaultValues
       ? resolveObjectAttribute(name, formContext.formState.defaultValues)
       : undefined;
+
     onRegister(initialValue);
   };
 
