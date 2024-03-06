@@ -16,8 +16,8 @@
 
 import React, { FC, useEffect } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
+import { useField } from '../hooks/useField';
 import RruFileInputProps from './types/RruFileInputProps';
 
 const RruFileInput: FC<RruFileInputProps> = (props) => {
@@ -48,7 +48,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <input
         aria-label='Upload'
         type='file'

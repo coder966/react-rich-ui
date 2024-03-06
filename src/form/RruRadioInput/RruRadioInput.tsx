@@ -61,25 +61,25 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     const key = `radio_${props.name}_${option.value}`;
     return (
       <div key={key} className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
-        <input
-          id={key}
-          name={props.name}
-          value={option.value}
-          checked={isChecked(option)}
-          onChange={(e) => onSelectChange(option)}
-          onBlur={field.onBlur}
-          type='radio'
-          className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
-          disabled={props.disabled}
-        />
-        <Label inputName={key} label={option.label} />
+        <Label label={option.label}>
+          <input
+            name={props.name}
+            value={option.value}
+            checked={isChecked(option)}
+            onChange={(e) => onSelectChange(option)}
+            onBlur={field.onBlur}
+            type='radio'
+            className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
+            disabled={props.disabled}
+          />
+        </Label>
       </div>
     );
   };
 
   return (
     <div className='form-group'>
-      <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <div>
         {props.options.map((option) => {
           if (isOptionsGroup(option)) {

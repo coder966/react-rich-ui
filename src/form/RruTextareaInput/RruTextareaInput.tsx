@@ -48,7 +48,7 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <textarea
         name={props.name}
         value={value || ''}

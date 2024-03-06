@@ -44,17 +44,17 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   return (
     <div className='form-group'>
       <div className={`form-check ${props.isSwitch ? 'form-switch' : ''}`}>
-        <input
-          id={'checkbox_' + props.name}
-          name={props.name}
-          checked={value}
-          onChange={(e) => setNewValue(e.target.checked)}
-          onBlur={field.onBlur}
-          type='checkbox'
-          className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
-          disabled={props.disabled}
-        />
-        <Label inputName={'checkbox_' + props.name} label={props.label} />
+        <Label label={props.label}>
+          <input
+            name={props.name}
+            checked={value}
+            onChange={(e) => setNewValue(e.target.checked)}
+            onBlur={field.onBlur}
+            type='checkbox'
+            className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
+            disabled={props.disabled}
+          />
+        </Label>
       </div>
       <ErrorMessage error={field.error} />
     </div>

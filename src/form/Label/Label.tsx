@@ -17,23 +17,24 @@
 import React, { FC } from 'react';
 import './style.css';
 
-export interface LabelProps {
-  /**  */
-  inputName: string;
-
+export type LabelProps = {
   /**  */
   label?: React.ReactNode;
 
   /**  */
   requiredAsterisk?: boolean;
-}
+
+  /**  */
+  children?: JSX.Element;
+};
 
 const Label: FC<LabelProps> = (props) => {
-  const { inputName, label, requiredAsterisk } = props;
+  const { label, requiredAsterisk, children } = props;
 
   return label ? (
-    <label className={`form-label ${requiredAsterisk ? 'rru-form-label--required-asterisk' : ''}`} htmlFor={inputName}>
+    <label className={`form-label ${requiredAsterisk ? 'rru-form-label--required-asterisk' : ''}`}>
       {label}
+      {children}
     </label>
   ) : null;
 };

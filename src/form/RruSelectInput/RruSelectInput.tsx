@@ -17,8 +17,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import Select from 'react-select';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
+import { useField } from '../hooks/useField';
 import RruOption from '../types/RruOption';
 import { findOption } from '../utils/options-utils';
 import RruSelectInputProps from './types/RruSelectInputProps';
@@ -67,7 +67,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <Select
         name={props.name}
         isMulti={false}

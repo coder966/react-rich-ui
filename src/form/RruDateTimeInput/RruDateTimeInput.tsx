@@ -223,7 +223,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   return (
     <div className='form-group'>
-      <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
 
       <div className='rru-date-input'>
         <div className='rru-date-input__input-wrapper'>
