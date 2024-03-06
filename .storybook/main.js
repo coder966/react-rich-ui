@@ -7,15 +7,11 @@ module.exports = {
     check: true, // type-check stories during Storybook build
   },
 
-  docs: {
-    autodocs: true
-  },
-
   framework: {
     name: '@storybook/react-webpack5',
 
     options: {
-      strictMode: true
-    }
-  }
+      strictMode: true,
+    },
+  },
 };
