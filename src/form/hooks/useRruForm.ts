@@ -19,6 +19,7 @@ import { UseFormReturn } from 'react-hook-form';
 
 export type UseRruFormReturn = {
   $: (context: UseFormReturn) => void;
+  getFieldsValues: () => Record<string, any>;
   getFieldValue: (fieldName: string) => any;
   setFieldValue: (fieldName: string, value: any) => void;
 };
@@ -31,12 +32,16 @@ export const useRruForm = (): UseRruFormReturn => {
     setFormContext(context);
   };
 
-  const getFieldValue = (fieldName: string) => {
+  const getFieldsValues = () => {
     if (formContext == null) {
-      console.error('FormContext has not been set yet. Cannot set values.');
-      return undefined;
+      console.error('FormContext has not been set yet. Cannot get values.');
+      return {};
     }
-    return formContext.getValues()[fieldName];
+    return formContext.getValues();
+  };
+
+  const getFieldValue = (fieldName: string) => {
+    return getFieldsValues()[fieldName];
   };
 
   const setFieldValue = (fieldName: string, value: any) => {
@@ -49,6 +54,7 @@ export const useRruForm = (): UseRruFormReturn => {
 
   return {
     $: $,
+    getFieldsValues: getFieldsValues,
     getFieldValue: getFieldValue,
     setFieldValue: setFieldValue,
   };
