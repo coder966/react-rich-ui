@@ -85,9 +85,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
           className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
           disabled={props.disabled}
         />
-        <label htmlFor={key}>
-          {option.label}
-        </label>
+        <Label inputName={key} label={option.label} />
       </div>
     );
   };

@@ -16,6 +16,7 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
 import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
@@ -53,9 +54,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
           className={'form-check-input ' + (field.error ? 'is-invalid' : '')}
           disabled={props.disabled}
         />
-        <label htmlFor={'checkbox_' + props.name}>
-          {props.label}
-        </label>
+        <Label inputName={'checkbox_' + props.name} label={props.label} />
       </div>
       <ErrorMessage error={field.error} />
     </div>
