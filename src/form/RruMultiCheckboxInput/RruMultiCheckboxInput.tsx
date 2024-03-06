@@ -73,7 +73,11 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const renderCheckBox = (option: RruOption) => {
     const key = `checkbox_${props.name}_${option.value}`;
     return (
-      <div key={key} className={`form-check ${props.inline ? 'form-check-inline' : ''}`}>
+      <div
+        key={key}
+        className={`form-check ${props.inline ? 'form-check-inline' : ''}`}
+        role='checkbox'
+        aria-checked={isChecked(option)}>
         <Label label={option.label}>
           <input
             name={props.name}
