@@ -16,8 +16,8 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
+import { useField } from '../hooks/useField';
 import RruOption from '../types/RruOption';
 import { findOption, isOptionsGroup } from '../utils/options-utils';
 import RruRadioInputProps from './types/RruRadioInputProps';
@@ -72,7 +72,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
           className={`form-check-input ${field.error ? 'is-invalid' : ''}`}
           disabled={props.disabled}
         />
-        <label htmlFor={key} className='form-check-label'>
+        <label htmlFor={key}>
           {option.label}
         </label>
       </div>
