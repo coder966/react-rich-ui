@@ -1,3 +1,32 @@
+.rru-date-input__input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.rru-date-input__clear-button {
+  position: absolute;
+  border: none;
+  background: none;
+  width: 25px;
+  height: 25px;
+  line-height: 0;
+  font-size: 30px;
+  font-weight: normal;
+  top: -5px;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  padding: 0;
+  outline: none;
+  cursor: pointer !important;
+  transition: 0.15s;
+  color: #D2D2D2;
+}
+
+.rru-date-input__clear-button:hover {
+  color: #999999;
+}
+
 .rru-date-input__popup {
   position: absolute;
   overflow: hidden;
@@ -56,7 +85,7 @@
   padding: 5px;
 }
 
-.rru-date-input__body > table > tr > td {
+.rru-date-input__body>table>tr>td {
   padding: 4px;
 }
 

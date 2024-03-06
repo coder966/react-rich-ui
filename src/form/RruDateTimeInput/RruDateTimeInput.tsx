@@ -19,8 +19,8 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useField } from '../hooks/useField';
 import Label from '../Label/Label';
+import { useField } from '../hooks/useField';
 import './style.css';
 import RruDateTimeInputCalendarType from './types/RruDateTimeInputCalendarType';
 import RruDateTimeInputDateConfig from './types/RruDateTimeInputDateConfig';
@@ -226,16 +226,24 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       <Label inputName={props.name} label={props.label} requiredAsterisk={props.requiredAsterisk} />
 
       <div className='rru-date-input'>
-        <input
-          ref={inputRef}
-          dir='ltr'
-          type='text'
-          disabled={props.disabled}
-          value={getValue() || ''}
-          onChange={(e) => {}}
-          onClick={(e) => setIsPopupShown(true)}
-          className={`form-control ${field.error ? 'is-invalid' : ''}`}
-        />
+        <div className='rru-date-input__input-wrapper'>
+          <input
+            ref={inputRef}
+            dir='ltr'
+            type='text'
+            disabled={props.disabled}
+            value={getValue() || ''}
+            onChange={(e) => {}}
+            onClick={(e) => setIsPopupShown(true)}
+            className={`form-control ${field.error ? 'is-invalid' : ''}`}
+          />
+
+          {!props.disabled && getValue() !== null && (
+            <button onClick={() => setIntlDate(null)} className='rru-date-input__clear-button'>
+              ⨯
+            </button>
+          )}
+        </div>
 
         <div
           ref={popupRef}
