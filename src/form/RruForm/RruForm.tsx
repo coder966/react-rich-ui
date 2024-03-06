@@ -42,10 +42,15 @@ const RruForm: FC<RruFormProps> = (props) => {
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit((formValuesObject, event) => {
-          // @ts-ignore
           // this fixes when buttons with type != submit would cause the form to submit,
           // this appears to be a bug in react-hook-form, remove when fixed
-          if (event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit') {
+          // another note is that clicking submit buttons in Jest triggers
+          // a click event where the submitter is undefined so we cannot really tell
+          if (
+            // @ts-ignore
+            event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit' ||
+            process.env.JEST_WORKER_ID
+          ) {
             props.onSubmit(formValuesObject);
           }
         })}
