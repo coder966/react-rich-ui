@@ -25,14 +25,15 @@ import { resolveObjectAttribute } from '../../utils/utils';
 export const useField = (name: string, onProgrammaticValue?: (serializedValue: any) => void) => {
   const formContext = useFormContext();
   const formState = useFormState({ name: name });
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const [isTouched, setIsTouched] = useState<boolean>(false);
   const watchResult = useWatch({ name: name });
 
   useEffect(() => {
-    if (onProgrammaticValue) {
+    if (isRegistered && onProgrammaticValue) {
       onProgrammaticValue(watchResult);
     }
-  }, [watchResult, onProgrammaticValue]);
+  }, [watchResult, onProgrammaticValue, isRegistered]);
 
   const register = (onRegister: (initialValue: any) => void) => {
     const initialValue = formContext.formState.defaultValues
@@ -40,6 +41,8 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
       : undefined;
 
     onRegister(initialValue);
+    setIsRegistered(true);
+    console.debug('registered', name, initialValue);
   };
 
   const unregister = () => {
@@ -54,6 +57,14 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
   };
 
   const setValue = (value: any) => {
+    if (!isRegistered) {
+      console.debug(
+        'Trying to set the value for a field that has not been registered yet. This will be ignored.',
+        name,
+        value
+      );
+      return;
+    }
     formContext.setValue(name, value, {
       shouldValidate: isTouched || error,
     });

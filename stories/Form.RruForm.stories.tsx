@@ -18,7 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { RruForm, RruSelectInput, RruTextInput, useRruForm } from '../src/index';
+import { RruForm, RruSelectInput, RruTextInput, RruTextareaInput, useRruForm } from '../src/index';
 import colorsOptions from './data/colorsOptions';
 
 const storyMeta: Meta = {
@@ -252,7 +252,7 @@ export const NestedFields = (args) => {
   );
 };
 
-export const SetValueProgrammatically = (args) => {
+export const SetValueProgrammaticallyTwoForms = (args) => {
   const rruFormContext1 = useRruForm();
   const rruFormContext2 = useRruForm();
 
@@ -324,5 +324,51 @@ export const SetValueProgrammatically = (args) => {
         </button>
       </RruForm>
     </div>
+  );
+};
+
+export const SetValueProgrammaticallyWithNulls = (args) => {
+  const rruFormContext = useRruForm();
+
+  const initialValues = {
+    notes: 'old notes',
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .nullable()
+      .required('Email is required')
+      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
+    notes: yup.string().nullable().required('This field is required'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  const triggerManualAccess = () => {
+    action('trigger manual access')();
+    rruFormContext.setFieldValue('email', 'new@form.test');
+    rruFormContext.setFieldValue('notes', null);
+  };
+
+  return (
+    <RruForm
+      context={rruFormContext}
+      initialValues={initialValues}
+      yupValidationSchema={yupValidationSchema}
+      onSubmit={onSubmit}>
+      <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
+      <RruTextareaInput name='notes' label='Notes' />
+
+      <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
+        Trigger manual access
+      </button>
+
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
   );
 };
