@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import { resolveObjectAttribute } from '../../utils/utils';
 
@@ -25,31 +25,53 @@ import { resolveObjectAttribute } from '../../utils/utils';
 export const useField = (name: string, onProgrammaticValue?: (serializedValue: any) => void) => {
   const formContext = useFormContext();
   const formState = useFormState({ name: name });
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const isRegistered = useRef<boolean>(false);
   const [isTouched, setIsTouched] = useState<boolean>(false);
   const watchResult = useWatch({ name: name });
 
   useEffect(() => {
-    if (isRegistered && onProgrammaticValue) {
+    if (isRegistered.current && onProgrammaticValue) {
       onProgrammaticValue(watchResult);
     }
   }, [watchResult, onProgrammaticValue, isRegistered]);
 
   const register = (onRegister: (initialValue: any) => void) => {
+    if (isRegistered.current) {
+      console.debug('Trying to register an already registered field. This will be ignored.', name);
+      return;
+    }
+
     const initialValue = formContext.formState.defaultValues
       ? resolveObjectAttribute(name, formContext.formState.defaultValues)
       : undefined;
 
+    // order here is very important, to allow the onRegister handler to be able to execute setValue.
+    // also this is why we used ref here instead of state
+    isRegistered.current = true;
     onRegister(initialValue);
-    setIsRegistered(true);
     console.debug('registered', name, initialValue);
   };
 
   const unregister = () => {
+    if (!isRegistered.current) {
+      console.debug('Trying to unregister an already unregistered field. This will be ignored.', name);
+      return;
+    }
+
     formContext.unregister(name);
+    isRegistered.current = false;
+    console.debug('unregistered', name);
   };
 
   const markTouched = () => {
+    if (!isRegistered.current) {
+      console.debug(
+        'Trying to mark a field as touched while the field has not been registered yet. This will be ignored.',
+        name
+      );
+      return;
+    }
+
     if (!isTouched) {
       setIsTouched(true);
       formContext.trigger(name);
@@ -57,7 +79,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
   };
 
   const setValue = (value: any) => {
-    if (!isRegistered) {
+    if (!isRegistered.current) {
       console.debug(
         'Trying to set the value for a field that has not been registered yet. This will be ignored.',
         name,
@@ -65,6 +87,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
       );
       return;
     }
+
     formContext.setValue(name, value, {
       shouldValidate: isTouched || error,
     });
