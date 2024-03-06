@@ -37,7 +37,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
 
   const register = (onRegister: (initialValue: any) => void) => {
     if (isRegistered.current) {
-      console.debug('Trying to register an already registered field. This will be ignored.', name);
+      console.error('Trying to register an already registered field. This will be ignored.', name);
       return;
     }
 
@@ -54,7 +54,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
 
   const unregister = () => {
     if (!isRegistered.current) {
-      console.debug('Trying to unregister an already unregistered field. This will be ignored.', name);
+      console.error('Trying to unregister an already unregistered field. This will be ignored.', name);
       return;
     }
 
@@ -65,7 +65,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
 
   const markTouched = () => {
     if (!isRegistered.current) {
-      console.debug(
+      console.error(
         'Trying to mark a field as touched while the field has not been registered yet. This will be ignored.',
         name
       );
@@ -80,7 +80,7 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
 
   const setValue = (value: any) => {
     if (!isRegistered.current) {
-      console.debug(
+      console.error(
         'Trying to set the value for a field that has not been registered yet. This will be ignored.',
         name,
         value
