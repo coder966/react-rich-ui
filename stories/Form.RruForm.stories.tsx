@@ -372,3 +372,53 @@ export const SetValueProgrammaticallyWithNulls = (args) => {
     </RruForm>
   );
 };
+
+export const SetValueProgrammaticallyNested = (args) => {
+  const rruFormContext = useRruForm();
+
+  const initialValues = {
+    notes: 'old notes',
+    address: {
+      city: 'Riyadh',
+      street: 'Olya',
+    },
+    hiddenSerial: {
+      foo: 3,
+      bar: 4,
+    },
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  const triggerManualAccess = () => {
+    action('trigger manual access')();
+    action('current form')(rruFormContext.getFieldsValues());
+    rruFormContext.setFieldValue('address.street', 'Tahliah St.');
+    rruFormContext.setFieldValue('hiddenSerial', {
+      month: 12,
+      sales: 100_550,
+    });
+  };
+
+  return (
+    <RruForm context={rruFormContext} initialValues={initialValues} onSubmit={onSubmit}>
+      <RruTextInput name='notes' label='Notes' />
+      <RruTextInput name='address.city' label='City' />
+      <RruTextInput name='address.street' label='Street' />
+
+      <div style={{ height: 0, width: 0, overflow: 'hidden' }}>
+        <RruTextInput name='hiddenSerial' />
+      </div>
+
+      <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
+        Trigger manual access
+      </button>
+
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
