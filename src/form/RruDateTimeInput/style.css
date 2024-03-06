@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+[dir="rtl"] .rru-date-input__input {
+  text-align: right;
+}
+
 .rru-date-input__clear-button {
   position: absolute;
   border: none;
@@ -15,12 +19,18 @@
   top: -5px;
   bottom: 0;
   right: 5px;
+  left: unset;
   margin: auto;
   padding: 0;
   outline: none;
   cursor: pointer !important;
   transition: 0.15s;
   color: #D2D2D2;
+}
+
+[dir="rtl"] .rru-date-input__clear-button {
+  right: unset;
+  left: 5px;
 }
 
 .rru-date-input__clear-button:hover {

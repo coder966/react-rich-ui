@@ -235,7 +235,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             value={getValue() || ''}
             onChange={(e) => {}}
             onClick={(e) => setIsPopupShown(true)}
-            className={`form-control ${field.error ? 'is-invalid' : ''}`}
+            className={`rru-date-input__input form-control ${field.error ? 'is-invalid' : ''}`}
           />
 
           {!props.disabled && getValue() !== null && (
