@@ -15,6 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
+import { deepEqual } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
@@ -26,7 +27,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
 
   const field = useField(props.name, (serializedValue) => {
-    if (serializedValue !== value) {
+    if (!deepEqual(serializedValue, value)) {
       setValue(serializedValue);
     }
   });

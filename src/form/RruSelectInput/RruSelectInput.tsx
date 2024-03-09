@@ -16,6 +16,7 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import Select from 'react-select';
+import { deepEqual } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
@@ -27,7 +28,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
 
   const field = useField(props.name, (serializedValue) => {
-    if (serializedValue !== value) {
+    if (!deepEqual(serializedValue, value)) {
       setValue(serializedValue);
     }
   });

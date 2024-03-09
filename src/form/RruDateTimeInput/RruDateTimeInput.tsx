@@ -17,7 +17,7 @@
 import { IntlDate } from 'intl-date';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDetectClickOutside } from 'react-detect-click-outside';
-import { rangeOfSize } from '../../utils/utils';
+import { deepEqual, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
@@ -32,10 +32,14 @@ const ISO8601_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
 
 const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
-  // init
-  const [value, setValue] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
-  const field = useField(props.name);
+  const [value, setValue] = useState<string | null>(null);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (!deepEqual(serializedValue, value)) {
+      setValue(serializedValue);
+    }
+  });
 
   const getCalendarType = (): RruDateTimeInputCalendarType => {
     return props.calendarType || 'gregorian';

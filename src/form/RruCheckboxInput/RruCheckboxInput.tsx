@@ -15,6 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
+import { deepEqual } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
@@ -22,7 +23,12 @@ import RruCheckboxInputProps from './types/RruCheckboxInputProps';
 
 const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
   const [value, setValue] = useState<boolean>(false);
-  const field = useField(props.name);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (!deepEqual(serializedValue, value)) {
+      setValue(serializedValue);
+    }
+  });
 
   const setNewValue = (val: boolean) => {
     field.setValue(val);

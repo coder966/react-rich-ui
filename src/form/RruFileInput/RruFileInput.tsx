@@ -15,6 +15,7 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
+import { deepEqual } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
@@ -25,7 +26,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   const [value, setValue] = useState<any>(null);
 
   const field = useField(props.name, (serializedValue) => {
-    if (serializedValue !== value) {
+    if (!deepEqual(serializedValue, value)) {
       setValue(serializedValue);
     }
   });

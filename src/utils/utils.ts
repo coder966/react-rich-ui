@@ -50,4 +50,14 @@ const resolveObjectAttribute = (path: string, obj: object): any => {
     .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
 };
 
-export { range, rangeOfSize, retainAll, isObjKey, resolveObjectAttribute };
+const deepEqual = (x: any, y: any): boolean => {
+  const ok = Object.keys,
+    tx = typeof x,
+    ty = typeof y;
+
+  return x && y && tx === 'object' && tx === ty
+    ? ok(x).length === ok(y).length && ok(x).every((key) => deepEqual(x[key], y[key]))
+    : x === y;
+};
+
+export { deepEqual, isObjKey, range, rangeOfSize, resolveObjectAttribute, retainAll };

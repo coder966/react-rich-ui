@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, prettyDOM, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruDateTimeInput from '../../form/RruDateTimeInput/RruDateTimeInput';
@@ -237,7 +237,6 @@ describe('RruDateTimeInput', () => {
         <button type='submit'>Submit</button>
       </RruForm>
     );
-    console.log(prettyDOM(container));
 
     expect(formContext.current.getFieldValue('birthDate')).toEqual('2024-01-03 09:07:05');
     await act(async () => formContext.current.setFieldValue('birthDate', '2019-01-10 03:01:18'));
