@@ -188,7 +188,9 @@ describe('RruDateTimeInput', () => {
     // validation for valid input
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2020-05-12',
+      // because using YUP validation schema causes the value to be casted to Date object
+      // TODO: This is a bug in react-hook-form, open PR
+      birthDate: new Date(new Date('2020-05-12').getTime() - 3 * 60 * 60 * 1000),
     });
   });
 
