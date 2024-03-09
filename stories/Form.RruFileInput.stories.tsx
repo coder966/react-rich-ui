@@ -37,7 +37,7 @@ export const Basic = (args) => {
         return file !== null;
       })
       .test('test is file size too big', 'File size is too big', (file) => {
-        return file && file.size < 100 * 1024; // 100 kB
+        return file !== null && (file as File).size < 100 * 1024; // 100 kB
       }),
   });
 
