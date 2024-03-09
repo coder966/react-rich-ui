@@ -85,6 +85,71 @@ describe('RruFileInput', () => {
     expect(onSubmit.mock.calls[0][0].attachment).toEqual(null);
   });
 
+  it('should render and submit the initial value', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      attachment: {
+        name: 'cat.png',
+      },
+    };
+
+    // render
+    const { container } = render(
+      <RruForm onSubmit={onSubmit} initialValues={initialValues}>
+        <RruFileInput name='attachment' label='Attachment' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+  });
+
+  it('should accept a new value after the initial value', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      attachment: {
+        name: 'cat.png',
+      },
+    };
+
+    // render
+    const { container } = render(
+      <RruForm onSubmit={onSubmit} initialValues={initialValues}>
+        <RruFileInput name='attachment' label='Attachment' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+
+    await selectFile(container, 'bee.png');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(2);
+    expect(onSubmit.mock.calls[1][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[1][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[1][0].attachment.name).toEqual('bee.png');
+  });
+
   it('should validate the input', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -125,5 +190,38 @@ describe('RruFileInput', () => {
     expect(onSubmit.mock.calls[0][0]).toBeTruthy();
     expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
     expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+  });
+
+  it('should watch the input', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const onInputChange = jest.fn();
+    const initialValues = {
+      attachment: {
+        name: 'cat.png',
+      },
+    };
+
+    // render
+    const { container } = render(
+      <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+        <RruFileInput name='attachment' label='Attachment' onChange={onInputChange} />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    // validation for the initial value
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange.mock.calls[0][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[0][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[0][0].name).toEqual('cat.png');
+
+    await selectFile(container, 'bee.png');
+
+    // validation for a new value
+    expect(onInputChange).toHaveBeenCalledTimes(2);
+    expect(onInputChange.mock.calls[1][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[1][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[1][0].name).toEqual('bee.png');
   });
 });

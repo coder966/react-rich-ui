@@ -33,7 +33,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   // init
   useEffect(() => {
     field.register((initialValue) => {
-      field.setValue(initialValue !== undefined ? initialValue : null);
+      setNewValue(initialValue !== undefined ? initialValue : null);
     });
 
     return () => field.unregister();
