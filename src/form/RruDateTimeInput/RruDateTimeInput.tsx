@@ -33,7 +33,8 @@ const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0
 
 const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   // init
-  const [today] = useState<IntlDate>(IntlDate.today());
+  const [value, setValue] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const field = useField(props.name);
 
   const getCalendarType = (): RruDateTimeInputCalendarType => {
@@ -50,6 +51,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     },
   });
 
+  const today = IntlDate.today();
   const [calendar, setCalendar] = useState<IntlDate[]>(
     generateSixWeeksCalendar(getCalendarType(), today.getYear(getCalendarType()), today.getMonth(getCalendarType()))
   );
@@ -61,7 +63,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
 
   const [year, setYear] = useState<number>(today.getYear(getCalendarType()));
   const [month, setMonth] = useState<number>(today.getMonth(getCalendarType()));
-  const [intlDate, setIntlDate] = useState<IntlDate | null>();
+  const [intlDate, setIntlDate] = useState<IntlDate | null>(null);
 
   const getMode = (): RruDateTimeInputMode => {
     return props.mode ? props.mode : 'datetime';
@@ -140,21 +142,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     }
   };
 
-  const getValue = (): string | null => {
-    if (intlDate) {
-      let value = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
-      if (getMode() === 'datetime') {
-        const h = hour.toString().padStart(2, '0');
-        const m = minute.toString().padStart(2, '0');
-        const s = second.toString().padStart(2, '0');
-        value += ` ${h}:${m}:${s}`;
-      }
-      return value;
-    } else {
-      return null;
-    }
-  };
-
   /**
    * init
    */
@@ -179,6 +166,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           }
         }
       } catch (e) {}
+      setIsInitialized(true);
     });
 
     return () => field.unregister();
@@ -189,12 +177,24 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }, [year, month]);
 
   useEffect(() => {
-    const value = getValue();
-    field.setValue(value);
-    if (props.onChange) {
-      props.onChange(value);
+    let newValue = null;
+    if (intlDate) {
+      newValue = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
+      if (getMode() === 'datetime') {
+        const h = hour.toString().padStart(2, '0');
+        const m = minute.toString().padStart(2, '0');
+        const s = second.toString().padStart(2, '0');
+        newValue += ` ${h}:${m}:${s}`;
+      }
     }
-  }, [intlDate, hour, minute, second]);
+
+    setValue(newValue);
+    field.setValue(newValue);
+
+    if (props.onChange && isInitialized && !isPopupShown) {
+      props.onChange(newValue);
+    }
+  }, [intlDate, hour, minute, second, isPopupShown]);
 
   const getDayClassName = (targetDate: IntlDate): string => {
     const dateConfig = getDateConfig(targetDate);
@@ -233,13 +233,13 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             type='text'
             name={props.name}
             disabled={props.disabled}
-            value={getValue() || ''}
+            value={value || ''}
             onChange={(e) => {}}
             onClick={(e) => setIsPopupShown(true)}
             className={`rru-date-input__input form-control ${field.error ? 'is-invalid' : ''}`}
           />
 
-          {!props.disabled && getValue() !== null && (
+          {!props.disabled && value !== null && (
             <button onClick={() => setIntlDate(null)} className='rru-date-input__clear-button'>
               ⨯
             </button>

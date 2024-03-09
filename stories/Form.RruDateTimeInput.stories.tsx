@@ -28,7 +28,7 @@ export default storyMeta;
 
 export const Date = (args) => {
   const initialValues = {
-    // birthDate: '2020-07-01'
+    birthDate: '2020-07-01',
   };
 
   const yupValidationSchema = yup.object().shape({
@@ -59,7 +59,13 @@ export const Date = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruDateTimeInput mode='date' name='birthDate' label='Birth Date' getDateConfig={getDateConfig} />
+      <RruDateTimeInput
+        mode='date'
+        name='birthDate'
+        label='Birth Date'
+        getDateConfig={getDateConfig}
+        onChange={console.log}
+      />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
@@ -69,7 +75,7 @@ export const Date = (args) => {
 
 export const DateTime = (args) => {
   const initialValues = {
-    // birthDate: '2020-07-01 15:10:00'
+    birthDate: '2020-07-01 15:10:00',
   };
 
   const yupValidationSchema = yup.object().shape({
@@ -94,7 +100,13 @@ export const DateTime = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruDateTimeInput mode='datetime' name='birthDate' label='Birth Date' getDateConfig={getDateConfig} />
+      <RruDateTimeInput
+        mode='datetime'
+        name='birthDate'
+        label='Birth Date'
+        getDateConfig={getDateConfig}
+        onChange={console.log}
+      />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
