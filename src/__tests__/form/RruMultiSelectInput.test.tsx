@@ -197,6 +197,6 @@ describe('RruMultiSelectInput', () => {
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
-    return expect(onInputChange.mock.calls[1][0]).toEqual(['ORANGE', 'BLUE']);
+    expect(onInputChange.mock.calls[1][0]).toEqual(['ORANGE', 'BLUE']);
   });
 });

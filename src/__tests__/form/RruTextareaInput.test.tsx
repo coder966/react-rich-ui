@@ -227,6 +227,6 @@ describe('RruTextareaInput', () => {
 
     // validation for a new value
     expect(onMyTextChange).toHaveBeenCalledTimes(26);
-    return expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
+    expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
   });
 });

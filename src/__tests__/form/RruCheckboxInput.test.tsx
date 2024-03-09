@@ -146,7 +146,7 @@ describe('RruCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      agree: yup.bool().isTrue('You must agree')
+      agree: yup.bool().isTrue('You must agree'),
     });
 
     // render
@@ -210,6 +210,6 @@ describe('RruCheckboxInput', () => {
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
-    return expect(onInputChange.mock.calls[1][0]).toEqual(false);
+    expect(onInputChange.mock.calls[1][0]).toEqual(false);
   });
 });

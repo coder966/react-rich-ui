@@ -197,6 +197,6 @@ describe('RruSelectInput', () => {
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
-    return expect(onInputChange.mock.calls[1][0]).toEqual('BLUE');
+    expect(onInputChange.mock.calls[1][0]).toEqual('BLUE');
   });
 });

@@ -229,6 +229,6 @@ describe('RruTextInput', () => {
 
     // validation for a new value
     expect(onEmailChange).toHaveBeenCalledTimes(15);
-    return expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
+    expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
   });
 });
