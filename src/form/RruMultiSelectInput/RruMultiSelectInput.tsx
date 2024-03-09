@@ -24,7 +24,14 @@ import { findOptions } from '../utils/options-utils';
 import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const field = useField(props.name);
+  const [value, setValue] = useState<string | null>(null);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (serializedValue !== value) {
+      setValue(serializedValue);
+    }
+  });
+
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
 
@@ -69,7 +76,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   };
 
   return (
-    <div className='form-group'>
+    <div className='form-group' data-field-name={props.name} data-field-value={value}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <Select
         name={props.name}

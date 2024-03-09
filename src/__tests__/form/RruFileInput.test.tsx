@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruFileInput from '../../form/RruFileInput/RruFileInput';
@@ -247,12 +247,15 @@ describe('RruFileInput', () => {
     expect(formContext.current.getFieldValue('attachment')).toEqual({
       name: 'cat.png',
     });
-    formContext.current.setFieldValue('attachment', {
-      name: 'bee.png',
-    });
+    await act(async () =>
+      formContext.current.setFieldValue('attachment', {
+        name: 'bee.png',
+      })
+    );
     expect(formContext.current.getFieldValue('attachment')).toEqual({
       name: 'bee.png',
     });
+    expect(container.querySelector('[data-field-value="[object Object]"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -231,8 +231,9 @@ describe('RruCheckboxInput', () => {
     );
 
     expect(formContext.current.getFieldValue('agree')).toEqual(true);
-    formContext.current.setFieldValue('agree', false);
+    await act(async () => formContext.current.setFieldValue('agree', false));
     expect(formContext.current.getFieldValue('agree')).toEqual(false);
+    expect(container.querySelector('[data-field-value="true"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);

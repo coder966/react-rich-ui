@@ -47,7 +47,7 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
   }, []);
 
   return (
-    <div className='form-group'>
+    <div className='form-group' data-field-name={props.name} data-field-value={value}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <input
         name={props.name}

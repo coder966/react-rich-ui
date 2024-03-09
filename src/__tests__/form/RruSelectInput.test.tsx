@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { screen } from '@testing-library/dom';
-import { render, renderHook } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import colorsOptions from '../../../stories/data/colorsOptions';
@@ -218,8 +217,9 @@ describe('RruSelectInput', () => {
     );
 
     expect(formContext.current.getFieldValue('color')).toEqual('ORANGE');
-    formContext.current.setFieldValue('color', 'BLUE');
+    await act(async () => formContext.current.setFieldValue('color', 'BLUE'));
     expect(formContext.current.getFieldValue('color')).toEqual('BLUE');
+    expect(container.querySelector('[data-field-value="BLUE"]')).toBeTruthy();
 
     await submitForm(container);
 

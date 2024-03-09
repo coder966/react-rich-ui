@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -248,8 +248,9 @@ describe('RruTextareaInput', () => {
     );
 
     expect(formContext.current.getFieldValue('myText')).toEqual('My awesome post');
-    formContext.current.setFieldValue('myText', 'This is a long paragraph');
+    await act(async () => formContext.current.setFieldValue('myText', 'This is a long paragraph'));
     expect(formContext.current.getFieldValue('myText')).toEqual('This is a long paragraph');
+    expect(container.querySelector('[data-field-value="This is a long paragraph"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);

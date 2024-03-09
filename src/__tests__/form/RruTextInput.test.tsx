@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -250,8 +250,9 @@ describe('RruTextInput', () => {
     );
 
     expect(formContext.current.getFieldValue('email')).toEqual('khalid@test.com');
-    formContext.current.setFieldValue('email', 'new@email.com');
+    await act(async () => formContext.current.setFieldValue('email', 'new@email.com'));
     expect(formContext.current.getFieldValue('email')).toEqual('new@email.com');
+    expect(container.querySelector('[data-field-value="new@email.com"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
