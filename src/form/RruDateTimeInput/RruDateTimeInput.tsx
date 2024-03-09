@@ -287,6 +287,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                         return (
                           <td key={`d${date.toString(getCalendarType())}`}>
                             <div
+                              data-date={date.toString(getCalendarType())}
                               className={getDayClassName(date)}
                               style={getDateConfig(date)?.style}
                               onClick={(e) => onSelectDate(date)}>
