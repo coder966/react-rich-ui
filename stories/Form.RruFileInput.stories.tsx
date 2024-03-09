@@ -27,7 +27,11 @@ const storyMeta: Meta = {
 export default storyMeta;
 
 export const Basic = (args) => {
-  const initialValues = {};
+  const initialValues = {
+    attachment: {
+      name: 'test-initial.png',
+    },
+  };
 
   const yupValidationSchema = yup.object().shape({
     attachment: yup
@@ -37,7 +41,7 @@ export const Basic = (args) => {
         return file !== null;
       })
       .test('test is file size too big', 'File size is too big', (file) => {
-        return file !== null && (file as File).size < 100 * 1024; // 100 kB
+        return file !== null && (file as File).size != null ? (file as File).size < 100 * 1024 : true; // 100 kB
       }),
   });
 
@@ -47,7 +51,7 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruFileInput name='attachment' label='Attachment' accept='image/*,.pdf' />
+      <RruFileInput name='attachment' label='Attachment' chooseFileLabel='Select' accept='image/*,.pdf' />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>

@@ -1,0 +1,26 @@
+.rru-file-input__actual-input,
+.rru-file-input__actual-input:focus {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
+  box-shadow: none !important;
+}
+
+.rru-file-input__file-name-label {
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.rru-file-input__file-name-label.is-invalid {
+  border: var(--bs-border-width) solid var(--bs-form-invalid-border-color);
+}

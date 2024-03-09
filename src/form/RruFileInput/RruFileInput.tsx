@@ -14,51 +14,62 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
+import './style.css';
 import RruFileInputProps from './types/RruFileInputProps';
 
 const RruFileInput: FC<RruFileInputProps> = (props) => {
-  const field = useField(props.name);
+  const [value, setValue] = useState<any>(null);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (serializedValue !== value) {
+      setValue(serializedValue);
+    }
+  });
 
   // init
   useEffect(() => {
     field.register((initialValue) => {
-      field.setValue(null);
+      field.setValue(initialValue !== undefined ? initialValue : null);
     });
 
     return () => field.unregister();
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filesList = e.target.files;
-    let file = null;
-    if (filesList && filesList[0]) {
-      file = filesList[0];
+  const setNewValue = (newValue: any) => {
+    if (newValue && newValue instanceof FileList) {
+      newValue = newValue[0];
     }
 
-    field.setValue(file);
+    field.setValue(newValue);
+    setValue(newValue);
 
     if (props.onChange) {
-      props.onChange(file);
+      props.onChange(newValue);
     }
   };
 
   return (
     <div className='form-group'>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
-      <input
-        aria-label='Upload'
-        type='file'
-        className={`form-control ${field.error ? 'is-invalid' : ''}`}
-        name={props.name}
-        onChange={onChange}
-        onBlur={field.onBlur}
-        disabled={props.disabled}
-        accept={props.accept}
-      />
+      <label style={{ display: 'block' }}>
+        <div className={`form-control rru-file-input__file-name-label ${field.error ? 'is-invalid' : ''}`}>
+          {value ? value.name : props.chooseFileLabel ?? 'Choose File'}
+        </div>
+        <input
+          aria-label='Upload'
+          type='file'
+          className={`form-control rru-file-input__actual-input ${field.error ? 'is-invalid' : ''}`}
+          name={props.name}
+          onChange={(e) => setNewValue(e.target.files)}
+          onBlur={field.onBlur}
+          disabled={props.disabled}
+          accept={props.accept}
+        />
+      </label>
       <ErrorMessage error={field.error} />
     </div>
   );

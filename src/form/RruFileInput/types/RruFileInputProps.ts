@@ -22,6 +22,9 @@ export default interface RruFileInputProps {
   label?: React.ReactNode;
 
   /**  */
+  chooseFileLabel?: string;
+
+  /**  */
   requiredAsterisk?: boolean;
 
   /**
