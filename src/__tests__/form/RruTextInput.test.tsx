@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
 import RruForm from '../../form/RruForm/RruForm';
 import RruTextInput from '../../form/RruTextInput/RruTextInput';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
 describe('RruTextInput', () => {
@@ -230,5 +231,35 @@ describe('RruTextInput', () => {
     // validation for a new value
     expect(onEmailChange).toHaveBeenCalledTimes(15);
     expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      email: 'khalid@test.com',
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruTextInput name='email' label='Email Address' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('email')).toEqual('khalid@test.com');
+    formContext.current.setFieldValue('email', 'new@email.com');
+    expect(formContext.current.getFieldValue('email')).toEqual('new@email.com');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      email: 'new@email.com',
+    });
   });
 });

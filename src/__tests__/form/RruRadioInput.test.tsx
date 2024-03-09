@@ -15,12 +15,13 @@
  */
 
 import { screen } from '@testing-library/dom';
-import { render } from '@testing-library/react';
+import { render, renderHook } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import colorsOptions from '../../../stories/data/colorsOptions';
 import RruForm from '../../form/RruForm/RruForm';
 import RruRadioInput from '../../form/RruRadioInput/RruRadioInput';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import checkOption from '../__utils__/checkOption';
 import submitForm from '../__utils__/submitForm';
 
@@ -198,5 +199,34 @@ describe('RruRadioInput', () => {
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
     expect(onInputChange.mock.calls[1][0]).toEqual('BLUE');
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      color: 'ORANGE',
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('color')).toEqual('ORANGE');
+    formContext.current.setFieldValue('color', 'BLUE');
+    expect(formContext.current.getFieldValue('color')).toEqual('BLUE');
+
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      color: 'BLUE',
+    });
   });
 });

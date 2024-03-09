@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruDateTimeInput from '../../form/RruDateTimeInput/RruDateTimeInput';
 import RruForm from '../../form/RruForm/RruForm';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import selectDate from '../__utils__/selectDate';
 import submitForm from '../__utils__/submitForm';
 
@@ -219,5 +220,35 @@ describe('RruDateTimeInput', () => {
     // validation for a new value
     expect(onBirthDateChange).toHaveBeenCalledTimes(2);
     expect(onBirthDateChange.mock.calls[1][0]).toEqual('2019-01-10 03:01:18');
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      birthDate: '2024-01-03 09:07:05',
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruDateTimeInput name='birthDate' label='Birth Date' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('birthDate')).toEqual('2024-01-03 09:07:05');
+    formContext.current.setFieldValue('birthDate', '2019-01-10 03:01:18');
+    expect(formContext.current.getFieldValue('birthDate')).toEqual('2019-01-10 03:01:18');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      birthDate: '2019-01-10 03:01:18',
+    });
   });
 });

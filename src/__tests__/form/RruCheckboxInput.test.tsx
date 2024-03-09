@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
 import RruCheckboxInput from '../../form/RruCheckboxInput/RruCheckboxInput';
 import RruForm from '../../form/RruForm/RruForm';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
 describe('RruCheckboxInput', () => {
@@ -211,5 +212,35 @@ describe('RruCheckboxInput', () => {
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
     expect(onInputChange.mock.calls[1][0]).toEqual(false);
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      agree: true,
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruCheckboxInput name='agree' label='Agree' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('agree')).toEqual(true);
+    formContext.current.setFieldValue('agree', false);
+    expect(formContext.current.getFieldValue('agree')).toEqual(false);
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      agree: false,
+    });
   });
 });

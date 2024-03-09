@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruFileInput from '../../form/RruFileInput/RruFileInput';
 import RruForm from '../../form/RruForm/RruForm';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import selectFile from '../__utils__/selectFile';
 import submitForm from '../__utils__/submitForm';
 
@@ -223,5 +224,43 @@ describe('RruFileInput', () => {
     expect(onInputChange.mock.calls[1][0]).toBeTruthy();
     expect(onInputChange.mock.calls[1][0]).toBeTruthy();
     expect(onInputChange.mock.calls[1][0].name).toEqual('bee.png');
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      attachment: {
+        name: 'cat.png',
+      },
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruFileInput name='attachment' label='Attachment' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('attachment')).toEqual({
+      name: 'cat.png',
+    });
+    formContext.current.setFieldValue('attachment', {
+      name: 'bee.png',
+    });
+    expect(formContext.current.getFieldValue('attachment')).toEqual({
+      name: 'bee.png',
+    });
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('bee.png');
   });
 });

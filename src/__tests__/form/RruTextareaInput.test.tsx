@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
 import RruForm from '../../form/RruForm/RruForm';
 import RruTextareaInput from '../../form/RruTextareaInput/RruTextareaInput';
+import { useRruForm } from '../../form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
 describe('RruTextareaInput', () => {
@@ -228,5 +229,35 @@ describe('RruTextareaInput', () => {
     // validation for a new value
     expect(onMyTextChange).toHaveBeenCalledTimes(26);
     expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
+  });
+
+  it('should reflect manual values set via the form context', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const initialValues = {
+      myText: 'My awesome post',
+    };
+
+    // render
+    const { result: formContext } = renderHook(useRruForm);
+    const { container } = render(
+      <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
+        <RruTextareaInput name='myText' label='My Text' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    expect(formContext.current.getFieldValue('myText')).toEqual('My awesome post');
+    formContext.current.setFieldValue('myText', 'This is a long paragraph');
+    expect(formContext.current.getFieldValue('myText')).toEqual('This is a long paragraph');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      myText: 'This is a long paragraph',
+    });
   });
 });
