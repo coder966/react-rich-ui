@@ -38,23 +38,22 @@ const RruForm: FC<RruFormProps> = (props) => {
     props.context.$(form);
   }
 
+  const onSubmit = (formValuesObject: any, event: any) => {
+    // this fixes when buttons with type != submit would cause the form to submit,
+    // this appears to be a bug in react-hook-form, remove when fixed
+    // another note is that clicking submit buttons in Jest triggers
+    // a click event where the submitter is undefined so we cannot really tell
+    const isTest = process.env.JEST_WORKER_ID !== undefined;
+    const isSubmitButton = isTest || event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit';
+
+    if (isSubmitButton) {
+      props.onSubmit(formValuesObject);
+    }
+  };
+
   return (
     <FormProvider {...form}>
-      <form
-        onSubmit={form.handleSubmit((formValuesObject, event) => {
-          // this fixes when buttons with type != submit would cause the form to submit,
-          // this appears to be a bug in react-hook-form, remove when fixed
-          // another note is that clicking submit buttons in Jest triggers
-          // a click event where the submitter is undefined so we cannot really tell
-          if (
-            // @ts-ignore
-            event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit' ||
-            process.env.JEST_WORKER_ID
-          ) {
-            props.onSubmit(formValuesObject);
-          }
-        })}
-        id={props.id}>
+      <form onSubmit={form.handleSubmit(onSubmit)} id={props.id}>
         {props.children}
       </form>
     </FormProvider>
