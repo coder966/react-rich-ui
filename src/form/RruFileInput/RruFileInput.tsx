@@ -53,12 +53,17 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
     }
   };
 
+  const getLabel = () => {
+    let label = value ? value.name : props.chooseFileLabel ?? 'Choose File';
+    return label === undefined || label === null || label.trim() === '' ? ' ' : label;
+  };
+
   return (
     <div className='form-group' data-field-name={props.name} data-field-value={value}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <label style={{ display: 'block' }}>
         <div className={`form-control rru-file-input__file-name-label ${field.error ? 'is-invalid' : ''}`}>
-          {value ? value.name : props.chooseFileLabel ?? 'Choose File'}
+          {getLabel()}
         </div>
         <input
           aria-label='Upload'
