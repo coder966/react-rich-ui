@@ -18,7 +18,20 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { RruForm, RruSelectInput, RruTextInput, RruTextareaInput, useRruForm } from '../src/index';
+import {
+  RruCheckboxInput,
+  RruDateTimeInput,
+  RruFileInput,
+  RruForm,
+  RruMultiCheckboxInput,
+  RruMultiSelectInput,
+  RruRadioInput,
+  RruSelectInput,
+  RruTextInput,
+  RruTextareaInput,
+  useRruForm,
+} from '../src/index';
+import animalsOptions from './data/animalsOptions';
 import colorsOptions from './data/colorsOptions';
 
 const storyMeta: Meta = {
@@ -411,6 +424,74 @@ export const SetValueProgrammaticallyNested = (args) => {
       <div style={{ height: 0, width: 0, overflow: 'hidden' }}>
         <RruTextInput name='hiddenSerial' />
       </div>
+
+      <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
+        Trigger manual access
+      </button>
+
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const SetValueProgrammaticallyAllTypes = (args) => {
+  const rruFormContext = useRruForm();
+
+  const initialValues = {
+    email: 'sample@test.com',
+    notes: 'old notes',
+    color: 'RED',
+    colors: ['RED'],
+    animal: 'LION',
+    animals: ['LION'],
+    agree: false,
+    birthDate: '1990-05-20',
+    image: { name: 'cat.png', foo: '111', bar: 'test' },
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .nullable()
+      .required('Email is required')
+      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'Email is incorrect'),
+    notes: yup.string().nullable().required('This field is required'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  const triggerManualAccess = () => {
+    action('trigger manual access')();
+    rruFormContext.setFieldValue('email', 'new@form.test');
+    rruFormContext.setFieldValue('notes', 'some new notes');
+    rruFormContext.setFieldValue('color', 'BLUE');
+    rruFormContext.setFieldValue('colors', ['BLUE', 'ORANGE']);
+    rruFormContext.setFieldValue('animal', 'CAT');
+    rruFormContext.setFieldValue('animals', ['CAT', 'DOG']);
+    rruFormContext.setFieldValue('agree', true);
+    rruFormContext.setFieldValue('birthDate', '2020-01-23');
+    rruFormContext.setFieldValue('image', { name: 'lion.png', conf: '222' });
+  };
+
+  return (
+    <RruForm
+      context={rruFormContext}
+      initialValues={initialValues}
+      yupValidationSchema={yupValidationSchema}
+      onSubmit={onSubmit}>
+      <RruTextInput name='email' label='Email' requiredAsterisk autoComplete='email' />
+      <RruTextareaInput name='notes' label='Notes' />
+      <RruSelectInput name='color' label='Color' options={colorsOptions} />
+      <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
+      <RruRadioInput name='animal' label='Animal' options={animalsOptions} />
+      <RruMultiCheckboxInput name='animals' label='Animals' options={animalsOptions} />
+      <RruCheckboxInput name='agree' label='Agree' />
+      <RruDateTimeInput mode='date' name='birthDate' label='Birth Date' />
+      <RruFileInput name='image' label='Image' />
 
       <button className='btn btn-primary mt-4 me-4' onClick={triggerManualAccess}>
         Trigger manual access
