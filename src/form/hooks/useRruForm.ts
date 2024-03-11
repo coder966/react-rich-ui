@@ -28,7 +28,7 @@ export const useRruForm = (): UseRruFormReturn => {
   const [formContext, setFormContext] = useState<UseFormReturn | null>(null);
 
   const $ = (context: UseFormReturn) => {
-    console.log('setting form context');
+    console.debug('setting form context');
     setFormContext(context);
   };
 
