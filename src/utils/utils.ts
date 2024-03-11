@@ -41,7 +41,10 @@ const retainAll = <T1, T2>(firstArray: T1[], secondArray: T2[], comparator: (obj
 };
 
 const isObjKey = <T extends object>(obj: T, key: any): key is keyof T => {
-  return key in obj;
+  if (typeof obj === 'object') {
+    return key in obj;
+  }
+  return false;
 };
 
 const resolveObjectAttribute = (path: string, obj: object): any => {
