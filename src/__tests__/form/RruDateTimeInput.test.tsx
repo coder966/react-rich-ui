@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruDateTimeInput from '../../form/RruDateTimeInput/RruDateTimeInput';
@@ -177,8 +177,10 @@ describe('RruDateTimeInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(screen.getByText('The date is too old')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(screen.getByText('The date is too old')).toBeTruthy();
+    });
 
     // delete the current value in the input element
     await selectDate(container, 'birthDate', '2020-05-12');
@@ -187,11 +189,13 @@ describe('RruDateTimeInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      // because using YUP validation schema causes the value to be casted to Date object
-      // TODO: This is a bug in react-hook-form, open PR
-      birthDate: new Date(new Date('2020-05-12').getTime() - 3 * 60 * 60 * 1000),
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toEqual({
+        // because using YUP validation schema causes the value to be casted to Date object
+        // TODO: This is a bug in react-hook-form, open PR
+        birthDate: new Date(new Date('2020-05-12').getTime() - 3 * 60 * 60 * 1000),
+      });
     });
   });
 

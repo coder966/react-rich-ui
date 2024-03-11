@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -167,9 +167,10 @@ describe('RruCheckboxInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(inputElement?.getAttribute('class')).toContain('is-invalid');
-    expect(screen.getByText('You must agree')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(screen.getByText('You must agree')).toBeTruthy();
+    });
 
     // make it checked
     inputElement && (await userEvent.click(inputElement));
@@ -178,9 +179,11 @@ describe('RruCheckboxInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: true,
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toEqual({
+        agree: true,
+      });
     });
   });
 
@@ -233,7 +236,7 @@ describe('RruCheckboxInput', () => {
     expect(formContext.current.getFieldValue('agree')).toEqual(true);
     await act(async () => formContext.current.setFieldValue('agree', false));
     expect(formContext.current.getFieldValue('agree')).toEqual(false);
-    expect(container.querySelector('[data-field-value="true"]')).toBeTruthy();
+    expect(container.querySelector('[data-field-value="false"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);

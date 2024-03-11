@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import colorsOptions from '../../../stories/data/colorsOptions';
@@ -157,8 +157,10 @@ describe('RruMultiCheckboxInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(screen.getByText('You must select at least one')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(screen.getByText('You must select at least one')).toBeTruthy();
+    });
 
     // change
     await checkOption(container, 'Orange');
@@ -167,9 +169,11 @@ describe('RruMultiCheckboxInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE'],
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toEqual({
+        color: ['ORANGE'],
+      });
     });
   });
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -180,9 +180,11 @@ describe('RruTextInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(emailInput?.getAttribute('class')).toContain('is-invalid');
-    expect(screen.getByText('The email address is incorrect')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(emailInput?.getAttribute('class')).toContain('is-invalid');
+      expect(screen.getByText('The email address is incorrect')).toBeTruthy();
+    });
 
     // delete the current value in the input element
     emailInput && (await userEvent.tripleClick(emailInput));
@@ -194,9 +196,11 @@ describe('RruTextInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com',
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toEqual({
+        email: 'khalid@test.com',
+      });
     });
   });
 

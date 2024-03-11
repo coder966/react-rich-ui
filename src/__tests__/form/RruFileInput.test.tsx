@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as yup from 'yup';
 import RruFileInput from '../../form/RruFileInput/RruFileInput';
@@ -178,8 +178,10 @@ describe('RruFileInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(screen.getByText('Attachment is required')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(screen.getByText('Attachment is required')).toBeTruthy();
+    });
 
     await selectFile(container, 'cat.png');
 
@@ -187,10 +189,12 @@ describe('RruFileInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
-    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
-    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+      expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+      expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+    });
   });
 
   it('should watch the input', async () => {

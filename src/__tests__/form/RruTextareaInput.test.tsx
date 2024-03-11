@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as yup from 'yup';
@@ -178,9 +178,11 @@ describe('RruTextareaInput', () => {
     await submitForm(container);
 
     // validation for bad input
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(myTextInput?.getAttribute('class')).toContain('is-invalid');
-    expect(screen.getByText('The text you entered is too short.')).toBeTruthy();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+      expect(myTextInput?.getAttribute('class')).toContain('is-invalid');
+      expect(screen.getByText('The text you entered is too short.')).toBeTruthy();
+    });
 
     // delete the current value in the input element
     myTextInput && (await userEvent.tripleClick(myTextInput));
@@ -192,9 +194,11 @@ describe('RruTextareaInput', () => {
     await submitForm(container);
 
     // validation for valid input
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      myText: 'This is a long paragraph',
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0]).toEqual({
+        myText: 'This is a long paragraph',
+      });
     });
   });
 
