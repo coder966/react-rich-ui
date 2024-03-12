@@ -256,6 +256,7 @@ export const NestedFields = (args) => {
     console.log('submitting the form', form);
     console.log('get preserve default', context.getFieldsValues());
     console.log('get preserve true', context.getFieldsValues(true));
+    console.log('get a single nested field', context.getFieldValue('address.city'));
   };
 
   return (

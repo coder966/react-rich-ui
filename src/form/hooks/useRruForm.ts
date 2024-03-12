@@ -16,7 +16,7 @@
 
 import { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { cloneObjectFixingBadArrays } from '../../utils/utils';
+import { cloneObjectFixingBadArrays, resolveObjectAttribute } from '../../utils/utils';
 
 export type UseRruFormReturn = {
   $: (context: UseFormReturn) => void;
@@ -45,7 +45,7 @@ export const useRruForm = (): UseRruFormReturn => {
   };
 
   const getFieldValue = (fieldName: string, preserveArrayKeys?: boolean) => {
-    return getFieldsValues(preserveArrayKeys)[fieldName];
+    return resolveObjectAttribute(fieldName, getFieldsValues(preserveArrayKeys));
   };
 
   const setFieldValue = (fieldName: string, value: any) => {
