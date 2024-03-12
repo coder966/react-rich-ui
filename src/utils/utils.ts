@@ -21,7 +21,9 @@ const isObject = (val: any): boolean => {
     !Array.isArray(val) &&
     !(val instanceof String) &&
     !(val instanceof Number) &&
-    !(val instanceof Boolean)
+    !(val instanceof Boolean) &&
+    !(val instanceof Date) &&
+    !(val instanceof File)
   );
 };
 
