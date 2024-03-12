@@ -16,11 +16,12 @@
 
 import { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import { cloneObjectFixingBadArrays } from '../../utils/utils';
 
 export type UseRruFormReturn = {
   $: (context: UseFormReturn) => void;
-  getFieldsValues: () => Record<string, any>;
-  getFieldValue: (fieldName: string) => any;
+  getFieldsValues: (preserveArrayKeys?: boolean) => Record<string, any>;
+  getFieldValue: (fieldName: string, preserveArrayKeys?: boolean) => any;
   setFieldValue: (fieldName: string, value: any) => void;
 };
 
@@ -32,16 +33,19 @@ export const useRruForm = (): UseRruFormReturn => {
     setFormContext(context);
   };
 
-  const getFieldsValues = () => {
+  const getFieldsValues = (preserveArrayKeys?: boolean) => {
     if (formContext == null) {
       console.error('FormContext has not been set yet. Cannot get values.');
       return {};
     }
-    return formContext.getValues();
+
+    const formValuesObject = formContext.getValues();
+    const fixedFormValuesObject = cloneObjectFixingBadArrays(formValuesObject);
+    return preserveArrayKeys ? formValuesObject : fixedFormValuesObject;
   };
 
-  const getFieldValue = (fieldName: string) => {
-    return getFieldsValues()[fieldName];
+  const getFieldValue = (fieldName: string, preserveArrayKeys?: boolean) => {
+    return getFieldsValues(preserveArrayKeys)[fieldName];
   };
 
   const setFieldValue = (fieldName: string, value: any) => {

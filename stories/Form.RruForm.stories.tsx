@@ -237,7 +237,7 @@ export const NestedFields = (args) => {
     name: 'Khalid',
     address: {
       city: 'Riyadh',
-      street: '',
+      street: 'Olya',
     },
   };
 
@@ -249,15 +249,34 @@ export const NestedFields = (args) => {
     }),
   });
 
+  const context = useRruForm();
+
   const onSubmit = (form) => {
     action('submitting the form')(form);
+    console.log('submitting the form', form);
+    console.log('get preserve default', context.getFieldsValues());
+    console.log('get preserve true', context.getFieldsValues(true));
   };
 
   return (
-    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+    <RruForm
+      context={context}
+      initialValues={initialValues}
+      yupValidationSchema={yupValidationSchema}
+      onSubmit={onSubmit}>
       <RruTextInput name='name' label='Name' />
+
       <RruTextInput name='address.city' label='City' />
       <RruTextInput name='address.street' label='Street' />
+
+      <h5>Owner 1</h5>
+      <RruTextInput name='owner.12.name' label='Name' />
+      <RruTextInput name='owner.12.age' label='Age' />
+
+      <h5>Owner 2</h5>
+      <RruTextInput name='owner.16.name' label='Name' />
+      <RruTextInput name='owner.16.age' label='Age' />
+
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>

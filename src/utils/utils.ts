@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
+const isObject = (val: any): boolean => {
+  return (
+    val != null &&
+    typeof val === 'object' &&
+    !Array.isArray(val) &&
+    !(val instanceof String) &&
+    !(val instanceof Number) &&
+    !(val instanceof Boolean)
+  );
+};
+
+const isArray = (val: any): boolean => {
+  return val != null && typeof val === 'object' && Array.isArray(val);
+};
+
 const range = (from: number, to: number) => {
   return rangeOfSize(to - from + 1, from);
 };
@@ -41,7 +56,7 @@ const retainAll = <T1, T2>(firstArray: T1[], secondArray: T2[], comparator: (obj
 };
 
 const isObjKey = <T extends object>(obj: T, key: any): key is keyof T => {
-  if (typeof obj === 'object') {
+  if (isObject(obj)) {
     return key in obj;
   }
   return false;
@@ -63,4 +78,52 @@ const deepEqual = (x: any, y: any): boolean => {
     : x === y;
 };
 
-export { deepEqual, isObjKey, range, rangeOfSize, resolveObjectAttribute, retainAll };
+const getFixedArray = (input: any): any[] => {
+  if (!isArray(input)) {
+    throw Error('unsupported operation for non array args' + input);
+  }
+
+  const output: any[] = [];
+
+  input.forEach((item: any) => {
+    if (item !== undefined) {
+      output.push(item);
+    }
+  });
+
+  return output;
+};
+
+const cloneObjectFixingBadArrays = (input: any): any => {
+  if (!isObject(input)) {
+    throw Error('unsupported operation for non object args ' + input);
+  }
+
+  const output: any = {};
+
+  Object.keys(input).map((key) => {
+    const val = input[key];
+
+    if (isObject(val)) {
+      output[key] = cloneObjectFixingBadArrays(val);
+    } else if (isArray(val)) {
+      output[key] = getFixedArray(val);
+    } else {
+      output[key] = val;
+    }
+  });
+
+  return output;
+};
+
+export {
+  cloneObjectFixingBadArrays,
+  deepEqual,
+  isArray,
+  isObjKey,
+  isObject,
+  range,
+  rangeOfSize,
+  resolveObjectAttribute,
+  retainAll,
+};

@@ -17,6 +17,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { cloneObjectFixingBadArrays } from '../../utils/utils';
 import './style.css';
 import RruFormProps from './types/RruFormProps';
 
@@ -47,7 +48,8 @@ const RruForm: FC<RruFormProps> = (props) => {
     const isSubmitButton = isTest || event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit';
 
     if (isSubmitButton) {
-      props.onSubmit(formValuesObject);
+      const fixedFormValuesObject = cloneObjectFixingBadArrays(formValuesObject);
+      props.onSubmit(fixedFormValuesObject);
     }
   };
 
