@@ -26,9 +26,9 @@ Add the following tag to your index.html file: (replace `2.2.0` in the URL with 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.2.0/dist/index.esm.css" />
 ```
 
-## Import Bootstrap v5.x (CSS + JS)
+## Import Bootstrap (CSS + JS)
 
-Please refer to Bootstrap official website on how to setup [Bootstrap v5.x](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
+Please refer to Bootstrap official website on how to setup [Bootstrap >= v5.3.x](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
 
 ## Optional peer dependencies
 
