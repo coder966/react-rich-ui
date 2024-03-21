@@ -70,7 +70,13 @@ const loadPageOptions = (allOptions: RruOptionsPropType) => {
       filteredOptions = allOptions;
     } else {
       const searchLower = search.toLowerCase();
-      filteredOptions = allOptions.filter(({ label }) => (label + '').toLowerCase().includes(searchLower));
+      filteredOptions = allOptions.filter((opt) => {
+        if ('options' in opt) {
+          return opt.options.filter((innerOpt) => (innerOpt.label + '').toLowerCase().includes(searchLower)).length > 0;
+        } else {
+          return (opt.label + '').toLowerCase().includes(searchLower);
+        }
+      });
     }
 
     const hasMore = Math.ceil(filteredOptions.length / PAGE_SIZE) > page;
