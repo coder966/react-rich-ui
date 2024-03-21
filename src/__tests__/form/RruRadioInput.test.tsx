@@ -15,7 +15,6 @@
  */
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
-import React from 'react';
 import * as yup from 'yup';
 import colorsOptions from '../../../stories/data/colorsOptions';
 import RruForm from '../../form/RruForm/RruForm';

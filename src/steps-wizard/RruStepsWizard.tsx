@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { RruStepsWizardContextProvider } from './hooks/useRruStepsWizardContext';
 import './style.css';
 import RruStepsWizardContextType from './types/RruStepsWizardContextType';

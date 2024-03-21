@@ -15,7 +15,7 @@
  */
 
 import { Meta } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { RruStepsWizard, useRruStepsWizardContext } from '../src/index';
 
 const storyMeta: Meta = {

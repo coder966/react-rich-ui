@@ -15,7 +15,6 @@
  */
 
 import { Meta } from '@storybook/react';
-import React from 'react';
 import { RruModalButton } from '../src/index';
 
 const storyMeta: Meta = {

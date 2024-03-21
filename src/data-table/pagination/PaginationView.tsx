@@ -1,4 +1,3 @@
-import React from 'react';
 import PaginationPage from './types/PaginationPage';
 /*
  * Copyright 2020 Khalid H. Alharisi

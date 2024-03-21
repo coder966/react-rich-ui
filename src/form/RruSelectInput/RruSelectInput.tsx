@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { createFilter } from 'react-select';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import { deepEqual } from '../../utils/utils';

@@ -16,7 +16,6 @@
 
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
-import React from 'react';
 import * as yup from 'yup';
 import { RruCheckboxInput, RruForm } from '../src/index';
 

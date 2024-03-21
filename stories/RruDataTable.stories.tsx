@@ -16,7 +16,7 @@
 
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { RruDataTable } from '../src/index';
 
 const storyMeta: Meta = {

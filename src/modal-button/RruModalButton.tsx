@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import RruModalButtonProps from './types/RruModalButtonProps';
 
 /**

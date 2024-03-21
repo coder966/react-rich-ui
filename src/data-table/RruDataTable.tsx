@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import useDataSource from './hooks/useDataSource';
 import PaginationView from './pagination/PaginationView';
@@ -136,8 +136,8 @@ const RruDataTable: FC<RruDataTableProps> = ({
                   {typeof col.value === 'function'
                     ? col.value(row)
                     : col.value === '#'
-                    ? getSerialNo(i)
-                    : resolveObjectAttribute(col.value, row)}
+                      ? getSerialNo(i)
+                      : resolveObjectAttribute(col.value, row)}
                 </td>
               ))}
             </tr>

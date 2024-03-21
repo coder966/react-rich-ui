@@ -16,11 +16,11 @@
 
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
-import React from 'react';
 import * as yup from 'yup';
 import { RruForm, RruRadioInput } from '../src/index';
 import colorsOptions from './data/colorsOptions';
 import groupedAnimalsAndColorsOptions from './data/groupedAnimalsAndColorsOptions';
+ React from 'react';
 
 const storyMeta: Meta = {
   title: 'Form: RruRadioInput',

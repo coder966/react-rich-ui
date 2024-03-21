@@ -16,7 +16,6 @@
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 import * as yup from 'yup';
 import RruForm from '../../form/RruForm/RruForm';
 import RruTextareaInput from '../../form/RruTextareaInput/RruTextareaInput';
