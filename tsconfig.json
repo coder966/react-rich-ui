@@ -21,6 +21,6 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "stories"],
+  "include": ["src", "tests", "stories"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or colord to in writing, software
+ * Unless required by applicable law or attachmentd to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -16,14 +16,13 @@
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
-import colorsOptions from '../../../stories/data/colorsOptions';
-import RruForm from '../../form/RruForm/RruForm';
-import RruSelectInput from '../../form/RruSelectInput/RruSelectInput';
-import { useRruForm } from '../../form/hooks/useRruForm';
-import selectOption from '../__utils__/selectOption';
+import RruFileInput from '../../src/form/RruFileInput/RruFileInput';
+import RruForm from '../../src/form/RruForm/RruForm';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
+import selectFile from '../__utils__/selectFile';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruSelectInput', () => {
+describe('RruFileInput', () => {
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -31,14 +30,14 @@ describe('RruSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    const inputElement = container.querySelector('input[name="color"]');
+    const fileInput = container.querySelector('input[name="attachment"]');
 
-    expect(inputElement).toBeTruthy();
+    expect(fileInput).toBeTruthy();
   });
 
   it('should submit the entered value', async () => {
@@ -48,20 +47,21 @@ describe('RruSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await selectOption(container, 'Orange');
+    await selectFile(container, 'cat.png');
 
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: 'ORANGE',
-    });
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
   });
 
   it('should submit null for when no data is entered', async () => {
@@ -71,7 +71,7 @@ describe('RruSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -81,22 +81,23 @@ describe('RruSelectInput', () => {
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: null,
-    });
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toEqual(null);
   });
 
   it('should render and submit the initial value', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: 'ORANGE',
+      attachment: {
+        name: 'cat.png',
+      },
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -106,48 +107,68 @@ describe('RruSelectInput', () => {
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: 'ORANGE',
-    });
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
   });
 
   it('should accept a new value after the initial value', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: 'ORANGE',
+      attachment: {
+        name: 'cat.png',
+      },
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await selectOption(container, 'Blue');
-
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: 'BLUE',
-    });
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
+
+    await selectFile(container, 'bee.png');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(2);
+    expect(onSubmit.mock.calls[1][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[1][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[1][0].attachment.name).toEqual('bee.png');
   });
 
   it('should validate the input', async () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      color: yup.string().nullable().required('You must select a color'),
+      attachment: yup
+        .mixed()
+        .nullable()
+        .test('test is file present', 'Attachment is required', (file) => {
+          return file !== null;
+        })
+        .test('test is file size too big', 'File size is too big', (file) => {
+          return file !== null && (file as File).size < 100 * 1024; // 100 kB
+        }),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -158,11 +179,10 @@ describe('RruSelectInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must select a color')).toBeTruthy();
+      expect(screen.getByText('Attachment is required')).toBeTruthy();
     });
 
-    // change
-    await selectOption(container, 'Orange');
+    await selectFile(container, 'cat.png');
 
     // submit the form
     await submitForm(container);
@@ -170,9 +190,9 @@ describe('RruSelectInput', () => {
     // validation for valid input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit.mock.calls[0][0]).toEqual({
-        color: 'ORANGE',
-      });
+      expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+      expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+      expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
     });
   });
 
@@ -181,55 +201,72 @@ describe('RruSelectInput', () => {
     const onSubmit = jest.fn();
     const onInputChange = jest.fn();
     const initialValues = {
-      color: 'ORANGE',
+      attachment: {
+        name: 'cat.png',
+      },
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
+        <RruFileInput name='attachment' label='Attachment' onChange={onInputChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validation for the initial value
-    expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
-    expect(onInputChange.mock.calls[0][0]).toEqual('ORANGE');
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange.mock.calls[0][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[0][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[0][0].name).toEqual('cat.png');
 
-    await selectOption(container, 'Blue');
+    await selectFile(container, 'bee.png');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
-    expect(onInputChange.mock.calls[1][0]).toEqual('BLUE');
+    expect(onInputChange.mock.calls[1][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[1][0]).toBeTruthy();
+    expect(onInputChange.mock.calls[1][0].name).toEqual('bee.png');
   });
 
   it('should reflect manual values set via the form context', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: 'ORANGE',
+      attachment: {
+        name: 'cat.png',
+      },
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruFileInput name='attachment' label='Attachment' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    expect(formContext.current.getFieldValue('color')).toEqual('ORANGE');
-    await act(async () => formContext.current.setFieldValue('color', 'BLUE'));
-    expect(formContext.current.getFieldValue('color')).toEqual('BLUE');
-    expect(container.querySelector('[data-field-value="BLUE"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('attachment')).toEqual({
+      name: 'cat.png',
+    });
+    await act(async () =>
+      formContext.current.setFieldValue('attachment', {
+        name: 'bee.png',
+      })
+    );
+    expect(formContext.current.getFieldValue('attachment')).toEqual({
+      name: 'bee.png',
+    });
+    expect(container.querySelector('[data-field-value="[object Object]"]')).toBeTruthy();
 
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: 'BLUE',
-    });
+    expect(onSubmit.mock.calls[0][0]).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
+    expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('bee.png');
   });
 });

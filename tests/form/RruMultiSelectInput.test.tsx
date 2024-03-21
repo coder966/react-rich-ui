@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unless required by applicable law or colord to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -15,14 +15,15 @@
  */
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import RruCheckboxInput from '../../form/RruCheckboxInput/RruCheckboxInput';
-import RruForm from '../../form/RruForm/RruForm';
-import { useRruForm } from '../../form/hooks/useRruForm';
+import colorsOptions from '../../src/../stories/data/colorsOptions';
+import RruForm from '../../src/form/RruForm/RruForm';
+import RruMultiSelectInput from '../../src/form/RruMultiSelectInput/RruMultiSelectInput';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
+import selectOption from '../__utils__/selectOption';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruCheckboxInput', () => {
+describe('RruMultiSelectInput', () => {
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -30,12 +31,12 @@ describe('RruCheckboxInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    const inputElement = container.querySelector('input[name="agree"]');
+    const inputElement = container.querySelector('input[name="color"]');
 
     expect(inputElement).toBeTruthy();
   });
@@ -47,33 +48,30 @@ describe('RruCheckboxInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    // fill the form
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement));
+    await selectOption(container, 'Orange');
 
-    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: true,
+      color: ['ORANGE'],
     });
   });
 
-  it('should submit false for when no data is entered', async () => {
+  it('should submit empty array for when no data is entered', async () => {
     // prepare
     const onSubmit = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -84,7 +82,7 @@ describe('RruCheckboxInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: false,
+      color: [],
     });
   });
 
@@ -92,13 +90,13 @@ describe('RruCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      agree: true,
+      color: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -109,7 +107,7 @@ describe('RruCheckboxInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: true,
+      color: ['ORANGE'],
     });
   });
 
@@ -117,28 +115,25 @@ describe('RruCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      agree: true,
+      color: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    // fill the form
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement));
+    await selectOption(container, 'Blue');
 
-    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: false,
+      color: ['ORANGE', 'BLUE'],
     });
   });
 
@@ -146,21 +141,16 @@ describe('RruCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      agree: yup.bool().isTrue('You must agree'),
+      color: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
-
-    // fill the form with bad input
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement)); // make it checked
-    inputElement && (await userEvent.click(inputElement)); // make it unchecked
 
     // submit the form
     await submitForm(container);
@@ -168,11 +158,11 @@ describe('RruCheckboxInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must agree')).toBeTruthy();
+      expect(screen.getByText('You must select at least one')).toBeTruthy();
     });
 
-    // make it checked
-    inputElement && (await userEvent.click(inputElement));
+    // change
+    await selectOption(container, 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -181,7 +171,7 @@ describe('RruCheckboxInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit.mock.calls[0][0]).toEqual({
-        agree: true,
+        color: ['ORANGE'],
       });
     });
   });
@@ -191,59 +181,55 @@ describe('RruCheckboxInput', () => {
     const onSubmit = jest.fn();
     const onInputChange = jest.fn();
     const initialValues = {
-      agree: true,
+      color: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruCheckboxInput name='agree' label='Agree' onChange={onInputChange} />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validation for the initial value
-    expect(onInputChange).toHaveBeenCalledTimes(1);
-    expect(onInputChange.mock.calls[0][0]).toEqual(true);
+    expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
+    expect(onInputChange.mock.calls[0][0]).toEqual(['ORANGE']);
 
-    const inputElement = container.querySelector('input[name="agree"]');
-
-    // change value
-    inputElement && (await userEvent.click(inputElement));
+    await selectOption(container, 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
-    expect(onInputChange.mock.calls[1][0]).toEqual(false);
+    expect(onInputChange.mock.calls[1][0]).toEqual(['ORANGE', 'BLUE']);
   });
 
   it('should reflect manual values set via the form context', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      agree: true,
+      color: ['ORANGE'],
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruCheckboxInput name='agree' label='Agree' />
+        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    expect(formContext.current.getFieldValue('agree')).toEqual(true);
-    await act(async () => formContext.current.setFieldValue('agree', false));
-    expect(formContext.current.getFieldValue('agree')).toEqual(false);
-    expect(container.querySelector('[data-field-value="false"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE']);
+    await act(async () => formContext.current.setFieldValue('color', ['ORANGE', 'BLUE']));
+    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE', 'BLUE']);
+    expect(container.querySelector('[data-field-value="ORANGE,BLUE"]')).toBeTruthy();
 
-    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      agree: false,
+      color: ['ORANGE', 'BLUE'],
     });
   });
 });

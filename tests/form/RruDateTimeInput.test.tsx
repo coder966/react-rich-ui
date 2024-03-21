@@ -15,48 +15,27 @@
  */
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import RruForm from '../../form/RruForm/RruForm';
-import RruTextInput from '../../form/RruTextInput/RruTextInput';
-import { useRruForm } from '../../form/hooks/useRruForm';
+import RruDateTimeInput from '../../src/form/RruDateTimeInput/RruDateTimeInput';
+import RruForm from '../../src/form/RruForm/RruForm';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
+import selectDate from '../__utils__/selectDate';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruTextInput', () => {
-  it('should render correctly', async () => {
+describe('RruDateTimeInput', () => {
+  it('should render and submit correctly (mode = date)', async () => {
     // prepare
     const onSubmit = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruTextInput name='email' label='Email Address' dir='rtl' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' mode='date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    const emailInput = container.querySelector('input[name="email"]');
-
-    expect(emailInput).toBeTruthy();
-    expect(emailInput?.getAttribute('dir')).toEqual('rtl');
-  });
-
-  it('should submit the entered value', async () => {
-    // prepare
-    const onSubmit = jest.fn();
-
-    // render
-    const { container } = render(
-      <RruForm onSubmit={onSubmit}>
-        <RruTextInput name='email' label='Email Address' />
-        <button type='submit'>Submit</button>
-      </RruForm>
-    );
-
-    // fill the form
-    const emailInput = container.querySelector('input[name="email"]');
-    emailInput && (await userEvent.click(emailInput));
-    await userEvent.keyboard('khalid@test.com');
+    await selectDate(container, 'birthDate', '2020-05-12');
 
     // submit the form
     await submitForm(container);
@@ -64,7 +43,31 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com',
+      birthDate: '2020-05-12',
+    });
+  });
+
+  it('should render and submit correctly (mode = datetime)', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+
+    // render
+    const { container } = render(
+      <RruForm onSubmit={onSubmit}>
+        <RruDateTimeInput name='birthDate' label='Birth Date' mode='datetime' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit.mock.calls[0][0]).toEqual({
+      birthDate: '2020-05-12 15:12:13',
     });
   });
 
@@ -75,7 +78,7 @@ describe('RruTextInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruTextInput name='email' label='Email Address' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -86,7 +89,7 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: null,
+      birthDate: null,
     });
   });
 
@@ -94,19 +97,19 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com',
+      birthDate: '2020-05-12 15:12:13',
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruTextInput name='email' label='Email Address' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validate initial value is rendered inside the input field
-    expect(screen.getByDisplayValue('khalid@test.com')).toBeTruthy();
+    expect(screen.getByDisplayValue('2020-05-12 15:12:13')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
@@ -114,7 +117,7 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'khalid@test.com',
+      birthDate: '2020-05-12 15:12:13',
     });
   });
 
@@ -122,26 +125,19 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com',
+      birthDate: '2024-01-03 09:07:05',
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruTextInput name='email' label='Email Address' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // fill the form
-    const emailInput = container.querySelector('input[name="email"]');
-    if (emailInput) {
-      // delete the current value in the input element
-      await userEvent.tripleClick(emailInput);
-      await userEvent.keyboard('{Backspace}');
-      // type in the new value
-      await userEvent.keyboard('mohammed@test.com');
-    }
+    await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
 
     // submit the form
     await submitForm(container);
@@ -149,7 +145,7 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'mohammed@test.com',
+      birthDate: '2020-05-12 15:12:13',
     });
   });
 
@@ -157,23 +153,24 @@ describe('RruTextInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      email: yup
-        .string()
-        .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
+      birthDate: yup
+        .date()
+        .nullable()
+        .required('The date is required')
+        .min('2020-01-01', 'The date is too old')
+        .max('2024-01-01', 'The date is too new'),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruTextInput name='email' label='Email Address' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' mode='date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // fill the form with bad input
-    const emailInput = container.querySelector('input[name="email"]');
-    emailInput && (await userEvent.click(emailInput));
-    await userEvent.keyboard('test_bad_email');
+    await selectDate(container, 'birthDate', '2019-05-12');
 
     // submit the form
     await submitForm(container);
@@ -181,15 +178,11 @@ describe('RruTextInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(emailInput?.getAttribute('class')).toContain('is-invalid');
-      expect(screen.getByText('The email address is incorrect')).toBeTruthy();
+      expect(screen.getByText('The date is too old')).toBeTruthy();
     });
 
     // delete the current value in the input element
-    emailInput && (await userEvent.tripleClick(emailInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('khalid@test.com');
+    await selectDate(container, 'birthDate', '2020-05-12');
 
     // submit the form
     await submitForm(container);
@@ -198,7 +191,9 @@ describe('RruTextInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit.mock.calls[0][0]).toEqual({
-        email: 'khalid@test.com',
+        // because using YUP validation schema causes the value to be casted to Date object
+        // TODO: This is a bug in react-hook-form, open PR
+        birthDate: new Date('2020-05-12T00:00:00'),
       });
     });
   });
@@ -206,56 +201,50 @@ describe('RruTextInput', () => {
   it('should watch the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const onEmailChange = jest.fn();
+    const onBirthDateChange = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com',
+      birthDate: '2020-05-12 15:12:13',
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruTextInput name='email' label='Email Address' onChange={onEmailChange} />
+        <RruDateTimeInput name='birthDate' label='Birth Date' onChange={onBirthDateChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validation for the initial value
-    expect(onEmailChange).toHaveBeenCalledTimes(1);
-    expect(onEmailChange.mock.calls[0][0]).toEqual('khalid@test.com');
+    expect(onBirthDateChange).toHaveBeenCalledTimes(1);
+    expect(onBirthDateChange.mock.calls[0][0]).toEqual('2020-05-12 15:12:13');
 
-    const emailInput = container.querySelector('input[name="email"]');
-
-    // delete the current value in the input element
-    emailInput && (await userEvent.tripleClick(emailInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('test@test.com');
+    await selectDate(container, 'birthDate', '2019-01-10', '03:01:18');
 
     // validation for a new value
-    expect(onEmailChange).toHaveBeenCalledTimes(15);
-    expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
+    expect(onBirthDateChange).toHaveBeenCalledTimes(2);
+    expect(onBirthDateChange.mock.calls[1][0]).toEqual('2019-01-10 03:01:18');
   });
 
   it('should reflect manual values set via the form context', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      email: 'khalid@test.com',
+      birthDate: '2024-01-03 09:07:05',
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruTextInput name='email' label='Email Address' />
+        <RruDateTimeInput name='birthDate' label='Birth Date' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    expect(formContext.current.getFieldValue('email')).toEqual('khalid@test.com');
-    await act(async () => formContext.current.setFieldValue('email', 'new@email.com'));
-    expect(formContext.current.getFieldValue('email')).toEqual('new@email.com');
-    expect(container.querySelector('[data-field-value="new@email.com"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('birthDate')).toEqual('2024-01-03 09:07:05');
+    await act(async () => formContext.current.setFieldValue('birthDate', '2019-01-10 03:01:18'));
+    expect(formContext.current.getFieldValue('birthDate')).toEqual('2019-01-10 03:01:18');
+    expect(container.querySelector('[data-field-value="2019-01-10 03:01:18"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
@@ -263,7 +252,7 @@ describe('RruTextInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      email: 'new@email.com',
+      birthDate: '2019-01-10 03:01:18',
     });
   });
 });

@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or colord to in writing, software
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
@@ -15,15 +15,14 @@
  */
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import colorsOptions from '../../../stories/data/colorsOptions';
-import RruForm from '../../form/RruForm/RruForm';
-import RruMultiCheckboxInput from '../../form/RruMultiCheckboxInput/RruMultiCheckboxInput';
-import { useRruForm } from '../../form/hooks/useRruForm';
-import checkOption from '../__utils__/checkOption';
+import RruForm from '../../src/form/RruForm/RruForm';
+import RruTextInput from '../../src/form/RruTextInput/RruTextInput';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruMultiCheckboxInput', () => {
+describe('RruTextInput', () => {
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -31,14 +30,15 @@ describe('RruMultiCheckboxInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' dir='rtl' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    const inputElement = container.querySelector('input[name="color"]');
+    const emailInput = container.querySelector('input[name="email"]');
 
-    expect(inputElement).toBeTruthy();
+    expect(emailInput).toBeTruthy();
+    expect(emailInput?.getAttribute('dir')).toEqual('rtl');
   });
 
   it('should submit the entered value', async () => {
@@ -48,30 +48,34 @@ describe('RruMultiCheckboxInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await checkOption(container, 'Orange');
+    // fill the form
+    const emailInput = container.querySelector('input[name="email"]');
+    emailInput && (await userEvent.click(emailInput));
+    await userEvent.keyboard('khalid@test.com');
 
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     });
   });
 
-  it('should submit empty array for when no data is entered', async () => {
+  it('should submit null for when no data is entered', async () => {
     // prepare
     const onSubmit = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -82,7 +86,7 @@ describe('RruMultiCheckboxInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: [],
+      email: null,
     });
   });
 
@@ -90,16 +94,19 @@ describe('RruMultiCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
+
+    // validate initial value is rendered inside the input field
+    expect(screen.getByDisplayValue('khalid@test.com')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
@@ -107,7 +114,7 @@ describe('RruMultiCheckboxInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     });
   });
 
@@ -115,25 +122,34 @@ describe('RruMultiCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await checkOption(container, 'Blue');
+    // fill the form
+    const emailInput = container.querySelector('input[name="email"]');
+    if (emailInput) {
+      // delete the current value in the input element
+      await userEvent.tripleClick(emailInput);
+      await userEvent.keyboard('{Backspace}');
+      // type in the new value
+      await userEvent.keyboard('mohammed@test.com');
+    }
 
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE', 'BLUE'],
+      email: 'mohammed@test.com',
     });
   });
 
@@ -141,16 +157,23 @@ describe('RruMultiCheckboxInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      color: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
+      email: yup
+        .string()
+        .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}$/, 'The email address is incorrect'),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
+
+    // fill the form with bad input
+    const emailInput = container.querySelector('input[name="email"]');
+    emailInput && (await userEvent.click(emailInput));
+    await userEvent.keyboard('test_bad_email');
 
     // submit the form
     await submitForm(container);
@@ -158,11 +181,15 @@ describe('RruMultiCheckboxInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must select at least one')).toBeTruthy();
+      expect(emailInput?.getAttribute('class')).toContain('is-invalid');
+      expect(screen.getByText('The email address is incorrect')).toBeTruthy();
     });
 
-    // change
-    await checkOption(container, 'Orange');
+    // delete the current value in the input element
+    emailInput && (await userEvent.tripleClick(emailInput));
+    await userEvent.keyboard('{Backspace}');
+    // type in the new value
+    await userEvent.keyboard('khalid@test.com');
 
     // submit the form
     await submitForm(container);
@@ -171,7 +198,7 @@ describe('RruMultiCheckboxInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit.mock.calls[0][0]).toEqual({
-        color: ['ORANGE'],
+        email: 'khalid@test.com',
       });
     });
   });
@@ -179,57 +206,64 @@ describe('RruMultiCheckboxInput', () => {
   it('should watch the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const onInputChange = jest.fn();
+    const onEmailChange = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
+        <RruTextInput name='email' label='Email Address' onChange={onEmailChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validation for the initial value
-    expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
-    expect(onInputChange.mock.calls[0][0]).toEqual(['ORANGE']);
+    expect(onEmailChange).toHaveBeenCalledTimes(1);
+    expect(onEmailChange.mock.calls[0][0]).toEqual('khalid@test.com');
 
-    await checkOption(container, 'Blue');
+    const emailInput = container.querySelector('input[name="email"]');
+
+    // delete the current value in the input element
+    emailInput && (await userEvent.tripleClick(emailInput));
+    await userEvent.keyboard('{Backspace}');
+    // type in the new value
+    await userEvent.keyboard('test@test.com');
 
     // validation for a new value
-    expect(onInputChange).toHaveBeenCalledTimes(2);
-    expect(onInputChange.mock.calls[1][0]).toEqual(['ORANGE', 'BLUE']);
+    expect(onEmailChange).toHaveBeenCalledTimes(15);
+    expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
   });
 
   it('should reflect manual values set via the form context', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      email: 'khalid@test.com',
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiCheckboxInput name='color' label='Color' options={colorsOptions} />
+        <RruTextInput name='email' label='Email Address' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE']);
-    await act(async () => formContext.current.setFieldValue('color', ['ORANGE', 'BLUE']));
-    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE', 'BLUE']);
-    expect(container.querySelector('[data-field-value="ORANGE,BLUE"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('email')).toEqual('khalid@test.com');
+    await act(async () => formContext.current.setFieldValue('email', 'new@email.com'));
+    expect(formContext.current.getFieldValue('email')).toEqual('new@email.com');
+    expect(container.querySelector('[data-field-value="new@email.com"]')).toBeTruthy();
 
+    // submit the form
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE', 'BLUE'],
+      email: 'new@email.com',
     });
   });
 });

@@ -15,27 +15,46 @@
  */
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import RruDateTimeInput from '../../form/RruDateTimeInput/RruDateTimeInput';
-import RruForm from '../../form/RruForm/RruForm';
-import { useRruForm } from '../../form/hooks/useRruForm';
-import selectDate from '../__utils__/selectDate';
+import RruCheckboxInput from '../../src/form/RruCheckboxInput/RruCheckboxInput';
+import RruForm from '../../src/form/RruForm/RruForm';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruDateTimeInput', () => {
-  it('should render and submit correctly (mode = date)', async () => {
+describe('RruCheckboxInput', () => {
+  it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' mode='date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await selectDate(container, 'birthDate', '2020-05-12');
+    const inputElement = container.querySelector('input[name="agree"]');
+
+    expect(inputElement).toBeTruthy();
+  });
+
+  it('should submit the entered value', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+
+    // render
+    const { container } = render(
+      <RruForm onSubmit={onSubmit}>
+        <RruCheckboxInput name='agree' label='Agree' />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    // fill the form
+    const inputElement = container.querySelector('input[name="agree"]');
+    inputElement && (await userEvent.click(inputElement));
 
     // submit the form
     await submitForm(container);
@@ -43,42 +62,18 @@ describe('RruDateTimeInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2020-05-12',
+      agree: true,
     });
   });
 
-  it('should render and submit correctly (mode = datetime)', async () => {
+  it('should submit false for when no data is entered', async () => {
     // prepare
     const onSubmit = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' mode='datetime' />
-        <button type='submit'>Submit</button>
-      </RruForm>
-    );
-
-    await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
-
-    // submit the form
-    await submitForm(container);
-
-    // validation
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2020-05-12 15:12:13',
-    });
-  });
-
-  it('should submit null for when no data is entered', async () => {
-    // prepare
-    const onSubmit = jest.fn();
-
-    // render
-    const { container } = render(
-      <RruForm onSubmit={onSubmit}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -89,7 +84,7 @@ describe('RruDateTimeInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: null,
+      agree: false,
     });
   });
 
@@ -97,19 +92,16 @@ describe('RruDateTimeInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      birthDate: '2020-05-12 15:12:13',
+      agree: true,
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
-
-    // validate initial value is rendered inside the input field
-    expect(screen.getByDisplayValue('2020-05-12 15:12:13')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
@@ -117,7 +109,7 @@ describe('RruDateTimeInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2020-05-12 15:12:13',
+      agree: true,
     });
   });
 
@@ -125,19 +117,20 @@ describe('RruDateTimeInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      birthDate: '2024-01-03 09:07:05',
+      agree: true,
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // fill the form
-    await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
+    const inputElement = container.querySelector('input[name="agree"]');
+    inputElement && (await userEvent.click(inputElement));
 
     // submit the form
     await submitForm(container);
@@ -145,7 +138,7 @@ describe('RruDateTimeInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2020-05-12 15:12:13',
+      agree: false,
     });
   });
 
@@ -153,24 +146,21 @@ describe('RruDateTimeInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      birthDate: yup
-        .date()
-        .nullable()
-        .required('The date is required')
-        .min('2020-01-01', 'The date is too old')
-        .max('2024-01-01', 'The date is too new'),
+      agree: yup.bool().isTrue('You must agree'),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' mode='date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // fill the form with bad input
-    await selectDate(container, 'birthDate', '2019-05-12');
+    const inputElement = container.querySelector('input[name="agree"]');
+    inputElement && (await userEvent.click(inputElement)); // make it checked
+    inputElement && (await userEvent.click(inputElement)); // make it unchecked
 
     // submit the form
     await submitForm(container);
@@ -178,11 +168,11 @@ describe('RruDateTimeInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('The date is too old')).toBeTruthy();
+      expect(screen.getByText('You must agree')).toBeTruthy();
     });
 
-    // delete the current value in the input element
-    await selectDate(container, 'birthDate', '2020-05-12');
+    // make it checked
+    inputElement && (await userEvent.click(inputElement));
 
     // submit the form
     await submitForm(container);
@@ -191,9 +181,7 @@ describe('RruDateTimeInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit.mock.calls[0][0]).toEqual({
-        // because using YUP validation schema causes the value to be casted to Date object
-        // TODO: This is a bug in react-hook-form, open PR
-        birthDate: new Date('2020-05-12T00:00:00'),
+        agree: true,
       });
     });
   });
@@ -201,50 +189,53 @@ describe('RruDateTimeInput', () => {
   it('should watch the input', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const onBirthDateChange = jest.fn();
+    const onInputChange = jest.fn();
     const initialValues = {
-      birthDate: '2020-05-12 15:12:13',
+      agree: true,
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' onChange={onBirthDateChange} />
+        <RruCheckboxInput name='agree' label='Agree' onChange={onInputChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // validation for the initial value
-    expect(onBirthDateChange).toHaveBeenCalledTimes(1);
-    expect(onBirthDateChange.mock.calls[0][0]).toEqual('2020-05-12 15:12:13');
+    expect(onInputChange).toHaveBeenCalledTimes(1);
+    expect(onInputChange.mock.calls[0][0]).toEqual(true);
 
-    await selectDate(container, 'birthDate', '2019-01-10', '03:01:18');
+    const inputElement = container.querySelector('input[name="agree"]');
+
+    // change value
+    inputElement && (await userEvent.click(inputElement));
 
     // validation for a new value
-    expect(onBirthDateChange).toHaveBeenCalledTimes(2);
-    expect(onBirthDateChange.mock.calls[1][0]).toEqual('2019-01-10 03:01:18');
+    expect(onInputChange).toHaveBeenCalledTimes(2);
+    expect(onInputChange.mock.calls[1][0]).toEqual(false);
   });
 
   it('should reflect manual values set via the form context', async () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      birthDate: '2024-01-03 09:07:05',
+      agree: true,
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruDateTimeInput name='birthDate' label='Birth Date' />
+        <RruCheckboxInput name='agree' label='Agree' />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    expect(formContext.current.getFieldValue('birthDate')).toEqual('2024-01-03 09:07:05');
-    await act(async () => formContext.current.setFieldValue('birthDate', '2019-01-10 03:01:18'));
-    expect(formContext.current.getFieldValue('birthDate')).toEqual('2019-01-10 03:01:18');
-    expect(container.querySelector('[data-field-value="2019-01-10 03:01:18"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('agree')).toEqual(true);
+    await act(async () => formContext.current.setFieldValue('agree', false));
+    expect(formContext.current.getFieldValue('agree')).toEqual(false);
+    expect(container.querySelector('[data-field-value="false"]')).toBeTruthy();
 
     // submit the form
     await submitForm(container);
@@ -252,7 +243,7 @@ describe('RruDateTimeInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      birthDate: '2019-01-10 03:01:18',
+      agree: false,
     });
   });
 });

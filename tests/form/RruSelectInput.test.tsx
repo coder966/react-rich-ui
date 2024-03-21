@@ -16,14 +16,14 @@
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
-import colorsOptions from '../../../stories/data/colorsOptions';
-import RruForm from '../../form/RruForm/RruForm';
-import RruRadioInput from '../../form/RruRadioInput/RruRadioInput';
-import { useRruForm } from '../../form/hooks/useRruForm';
-import checkOption from '../__utils__/checkOption';
+import colorsOptions from '../../src/../stories/data/colorsOptions';
+import RruForm from '../../src/form/RruForm/RruForm';
+import RruSelectInput from '../../src/form/RruSelectInput/RruSelectInput';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
+import selectOption from '../__utils__/selectOption';
 import submitForm from '../__utils__/submitForm';
 
-describe('RruRadioInput', () => {
+describe('RruSelectInput', () => {
   it('should render correctly', async () => {
     // prepare
     const onSubmit = jest.fn();
@@ -31,7 +31,7 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -48,12 +48,12 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await checkOption(container, 'Orange');
+    await selectOption(container, 'Orange');
 
     await submitForm(container);
 
@@ -71,7 +71,7 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -96,7 +96,7 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -121,12 +121,12 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await checkOption(container, 'Blue');
+    await selectOption(container, 'Blue');
 
     await submitForm(container);
 
@@ -147,7 +147,7 @@ describe('RruRadioInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -162,7 +162,7 @@ describe('RruRadioInput', () => {
     });
 
     // change
-    await checkOption(container, 'Orange');
+    await selectOption(container, 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -181,13 +181,13 @@ describe('RruRadioInput', () => {
     const onSubmit = jest.fn();
     const onInputChange = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      color: 'ORANGE',
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -196,7 +196,7 @@ describe('RruRadioInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
     expect(onInputChange.mock.calls[0][0]).toEqual('ORANGE');
 
-    await checkOption(container, 'Blue');
+    await selectOption(container, 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -214,7 +214,7 @@ describe('RruRadioInput', () => {
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruRadioInput name='color' label='Color' options={colorsOptions} />
+        <RruSelectInput name='color' label='Color' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );

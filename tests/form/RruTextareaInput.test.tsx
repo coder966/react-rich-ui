@@ -17,9 +17,9 @@
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import RruForm from '../../form/RruForm/RruForm';
-import RruTextareaInput from '../../form/RruTextareaInput/RruTextareaInput';
-import { useRruForm } from '../../form/hooks/useRruForm';
+import RruForm from '../../src/form/RruForm/RruForm';
+import RruTextareaInput from '../../src/form/RruTextareaInput/RruTextareaInput';
+import { useRruForm } from '../../src/form/hooks/useRruForm';
 import submitForm from '../__utils__/submitForm';
 
 describe('RruTextareaInput', () => {
