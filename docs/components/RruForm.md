@@ -59,6 +59,37 @@ If you want to represent an array of objects, prefix the name with any string.
 <RruTextInput name="owner.item_1.name" label="Owner Name" />
 ```
 
+## Read and write field values programmatically
+
+To read or write a field value programmatically, you need to declare the form context and supply it to the form element.
+
+```js
+const context = useRruForm();
+
+const triggerManualAccess = () => {
+  console.log('trigger manual access');
+  console.log('read all form fields', context.getFieldsValues());
+  console.log('read email', context.getFieldValue('email'));
+  context.setFieldValue('email', 'new@form.test');
+  context.setFieldValue('notes', null);
+};
+
+return (
+  <RruForm context={context} onSubmit={onSubmit}>
+    <RruTextInput name='email' label='Email' />
+    <RruTextareaInput name='notes' label='Notes' />
+
+    <button onClick={triggerManualAccess} className='btn btn-primary mt-4 me-4'>
+      Trigger manual access
+    </button>
+
+    <button type='submit' className='btn btn-primary mt-4'>
+      Submit
+    </button>
+  </RruForm>
+);
+```
+
 ## Input Components
 
 ### Text
