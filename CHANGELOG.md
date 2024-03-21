@@ -2,6 +2,33 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.3.0] - 2024-03-22
+
+### Added
+
+- Added the ability to read and write field values programmatically. see `useRruForm`.
+- `RruDateTimeInput`: Added clear button.
+- `RruFileInput`: Added `chooseFileLabel` prop.
+
+### Changed
+
+- `RruSelectInput` & `RruMultiSelectInput`: Paginate loading options to enhance performance for large datasets.
+- More ARIA compliance.
+
+### Fixed
+
+- `RruForm`: Fix when nested buttons with `type` != `submit` would cause the form to submit.
+- `RruForm`: Fix fatal error when supplying a flat value in the `initialValues` for a parent root object of a field that is nested.
+- `RruDateTimeInput`: Fix text alignment when page direction is RTL.
+- `RruDateTimeInput`: Fix `onChange` was called for each date/time part change.
+
+## Other
+
+- Upgrade Dependencies.
+- Internal enhancements.
+- Added more tests.
+- Updated docs with more details.
+
 ## [2.2.0] - 2022-11-18
 
 ### Added
