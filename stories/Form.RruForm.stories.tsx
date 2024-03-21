@@ -247,6 +247,16 @@ export const NestedFields = (args) => {
       city: yup.string().nullable().required().max(50),
       street: yup.string().nullable().required().max(50),
     }),
+    owner: yup.object().shape({
+      item_12: yup.object().shape({
+        name: yup.string().nullable().required().min(2).max(50),
+        age: yup.number().nullable().required().min(18).max(50),
+      }),
+      item_16: yup.object().shape({
+        name: yup.string().nullable().required().min(2).max(50),
+        age: yup.number().nullable().required().min(18).max(50),
+      }),
+    }),
   });
 
   const context = useRruForm();
@@ -255,7 +265,7 @@ export const NestedFields = (args) => {
     action('submitting the form')(form);
     console.log('submitting the form', form);
     console.log('get preserve default', context.getFieldsValues());
-    console.log('get preserve true', context.getFieldsValues(true));
+    console.log('get preserve true', context.getFieldsValues());
     console.log('get a single nested field', context.getFieldValue('address.city'));
   };
 
@@ -271,12 +281,12 @@ export const NestedFields = (args) => {
       <RruTextInput name='address.street' label='Street' />
 
       <h5>Owner 1</h5>
-      <RruTextInput name='owner.12.name' label='Name' />
-      <RruTextInput name='owner.12.age' label='Age' />
+      <RruTextInput name='owner.item_12.name' label='Name' />
+      <RruTextInput name='owner.item_12.age' label='Age' />
 
       <h5>Owner 2</h5>
-      <RruTextInput name='owner.16.name' label='Name' />
-      <RruTextInput name='owner.16.age' label='Age' />
+      <RruTextInput name='owner.item_16.name' label='Name' />
+      <RruTextInput name='owner.item_16.age' label='Age' />
 
       <button type='submit' className='btn btn-primary mt-4'>
         Submit

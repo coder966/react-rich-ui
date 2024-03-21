@@ -16,12 +16,12 @@
 
 import { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { cloneObjectFixingBadArrays, resolveObjectAttribute } from '../../utils/utils';
+import { resolveObjectAttribute } from '../../utils/utils';
 
 export type UseRruFormReturn = {
   $: (context: UseFormReturn) => void;
-  getFieldsValues: (preserveArrayKeys?: boolean) => Record<string, any>;
-  getFieldValue: (fieldName: string, preserveArrayKeys?: boolean) => any;
+  getFieldsValues: () => Record<string, any>;
+  getFieldValue: (fieldName: string) => any;
   setFieldValue: (fieldName: string, value: any) => void;
 };
 
@@ -33,19 +33,17 @@ export const useRruForm = (): UseRruFormReturn => {
     setFormContext(context);
   };
 
-  const getFieldsValues = (preserveArrayKeys?: boolean) => {
+  const getFieldsValues = () => {
     if (formContext == null) {
       console.error('FormContext has not been set yet. Cannot get values.');
       return {};
     }
 
-    const formValuesObject = formContext.getValues();
-    const fixedFormValuesObject = cloneObjectFixingBadArrays(formValuesObject);
-    return preserveArrayKeys ? formValuesObject : fixedFormValuesObject;
+    return formContext.getValues();
   };
 
-  const getFieldValue = (fieldName: string, preserveArrayKeys?: boolean) => {
-    return resolveObjectAttribute(fieldName, getFieldsValues(preserveArrayKeys));
+  const getFieldValue = (fieldName: string) => {
+    return resolveObjectAttribute(fieldName, getFieldsValues());
   };
 
   const setFieldValue = (fieldName: string, value: any) => {
