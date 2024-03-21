@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useAsyncEffect from 'use-async-effect';
 import ChangeCallback from '../types/ChangeCallback';
-import FetchedPage from '../types/FetchedPage';
 import PageFetcher from '../types/PageFetcher';
 import SortDir from '../types/SortDir';
 
@@ -34,29 +34,30 @@ const useDataSource = (
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState<any[]>([]);
 
-  useEffect(() => {
+  useAsyncEffect(async () => {
     setIsLoading(true);
 
-    pageFetcher(pageSize, pageNumber, sortKey, sortDir, search)
-      .then((body: FetchedPage) => {
-        if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
-          throw 'Something went wrong in your page fetcher';
-        }
-        setError(null);
-        setTotalPages(body.totalPages);
-        setData(body.items);
-      })
-      .catch((err) => {
-        setError(err);
-        setTotalPages(0);
-        setData([]);
-      })
-      .finally(() => {
-        if (onChange) {
-          onChange(pageNumber, sortKey, sortDir);
-        }
-        setIsLoading(false);
-      });
+    try {
+      const body = await pageFetcher(pageSize, pageNumber, sortKey, sortDir, search);
+
+      if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
+        throw Error('Something went wrong in your page fetcher');
+      }
+
+      setError(null);
+      setTotalPages(body.totalPages);
+      setData(body.items);
+    } catch (e: any) {
+      setError(e);
+      setTotalPages(0);
+      setData([]);
+    }
+
+    if (onChange) {
+      onChange(pageNumber, sortKey, sortDir);
+    }
+
+    setIsLoading(false);
   }, [pageSize, pageNumber, sortKey, sortDir, search]);
 
   return {
