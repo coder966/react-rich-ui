@@ -96,7 +96,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
         {props.options.map((option) => {
           if (isOptionsGroup(option)) {
             return (
-              <div key={option.label} className='rru-form-grouped-options-container'>
+              <div key={option.label?.toString()} className='rru-form-grouped-options-container'>
                 <label className='rru-form-grouped-options-label'>{option.label}</label>
                 {option.options.map((opt) => renderRadio(opt))}
               </div>

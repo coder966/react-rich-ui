@@ -17,6 +17,6 @@
 import RruOption from './RruOption';
 
 export default interface RruOptionsGroup {
-  label: string;
+  label: React.ReactNode;
   options: readonly RruOption[];
 }
