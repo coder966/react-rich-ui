@@ -15,13 +15,14 @@
  */
 
 import React, { FC, useEffect, useState } from 'react';
-import Select from 'react-select';
+import { createFilter } from 'react-select';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import { deepEqual } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
 import { useField } from '../hooks/useField';
 import RruOption from '../types/RruOption';
-import { findOptions } from '../utils/options-utils';
+import { findOptions, loadPageOptions } from '../utils/options-utils';
 import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
@@ -79,13 +80,16 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   return (
     <div className='form-group' data-field-name={props.name} data-field-value={value}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
-      <Select
+      <AsyncPaginate
         name={props.name}
         isMulti={true}
         value={selectedOptions}
         onChange={(options) => onSelectChange(options)}
+        // @ts-ignore
+        loadOptions={loadPageOptions(props.options)}
+        additional={{ page: 1 }}
+        filterOption={createFilter({ ignoreAccents: false })}
         onBlur={field.onBlur}
-        options={props.options}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}
       />

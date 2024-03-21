@@ -36,7 +36,8 @@
     "intl-date": "^0.3.0",
     "react-detect-click-outside": "^1.1.7",
     "react-hook-form": "^7.51.0",
-    "react-select": "^5.6.1"
+    "react-select": "^5.6.1",
+    "react-select-async-paginate": "^0.7.3"
   },
   "peerDependencies": {
     "react": ">=16.8.0 || >=17.0.0 || >=18.0.0",

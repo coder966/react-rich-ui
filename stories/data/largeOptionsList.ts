@@ -13,20 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { fireEvent, getByText, waitFor } from '@testing-library/dom';
-import userEvent from '@testing-library/user-event';
 
-const selectOption = async (container: HTMLElement, optionLabel: string) => {
-  // open the menu
-  const inputElement = container.querySelector('input');
-  inputElement && fireEvent.keyDown(inputElement, { key: 'ArrowDown' });
+const largeOptionsList: any[] = [];
 
-  // select
-  await waitFor(() => {
-    expect(getByText(container, optionLabel)).toBeTruthy();
+for (let i = 1; i <= 100_000; i++) {
+  largeOptionsList.push({
+    value: i,
+    label: `Option ${i}`,
   });
-  const optionElement = getByText(container, optionLabel);
-  optionElement && (await userEvent.click(optionElement));
-};
+}
 
-export default selectOption;
+export default largeOptionsList;

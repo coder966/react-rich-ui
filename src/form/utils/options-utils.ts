@@ -19,6 +19,10 @@ import RruOption from '../types/RruOption';
 import RruOptionsGroup from '../types/RruOptionsGroup';
 import RruOptionsPropType from '../types/RruOptionsPropType';
 
+type AdditionalType = {
+  page: number;
+};
+
 const isOptionsGroup = (option: RruOption | RruOptionsGroup): option is RruOptionsGroup => {
   return (option as RruOptionsGroup).options !== undefined;
 };
@@ -49,4 +53,38 @@ const findOption = (optionsProp: RruOptionsPropType, optionValue: string): RruOp
   return searchResult.length === 1 ? searchResult[0] : null;
 };
 
-export { isOptionsGroup, findOptions, findOption };
+/**
+ * custom options loader to be used with react-select-async-paginate
+ * this solves performance issues with large option lists
+ */
+const loadPageOptions = (allOptions: RruOptionsPropType) => {
+  return async (search: string, prevOptions: RruOptionsPropType, additional: AdditionalType) => {
+    const PAGE_SIZE = 30;
+    const page = additional.page;
+
+    console.debug('loading more options', 'search', search, 'page', page);
+
+    // search
+    let filteredOptions: RruOptionsPropType;
+    if (!search) {
+      filteredOptions = allOptions;
+    } else {
+      const searchLower = search.toLowerCase();
+      filteredOptions = allOptions.filter(({ label }) => (label + '').toLowerCase().includes(searchLower));
+    }
+
+    const hasMore = Math.ceil(filteredOptions.length / PAGE_SIZE) > page;
+    const slicedOptions = filteredOptions.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+    return {
+      options: slicedOptions,
+      hasMore,
+
+      additional: {
+        page: page + 1,
+      },
+    };
+  };
+};
+
+export { findOption, findOptions, isOptionsGroup, loadPageOptions };

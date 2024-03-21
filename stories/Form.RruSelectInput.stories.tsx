@@ -21,6 +21,7 @@ import * as yup from 'yup';
 import { RruForm, RruSelectInput } from '../src/index';
 import colorsOptions from './data/colorsOptions';
 import groupedAnimalsAndColorsOptions from './data/groupedAnimalsAndColorsOptions';
+import largeOptionsList from './data/largeOptionsList';
 
 const storyMeta: Meta = {
   title: 'Form: RruSelectInput',
@@ -67,6 +68,29 @@ export const Grouped = (args) => {
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
       <RruSelectInput name='myChoice' label='Choose your favourite' options={groupedAnimalsAndColorsOptions} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const LargeDataset = (args) => {
+  const initialValues = {
+    option: 350,
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    option: yup.string().nullable().required('You must select an option'),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruSelectInput name='option' label='Options' options={largeOptionsList} />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
