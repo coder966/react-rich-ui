@@ -30,7 +30,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
