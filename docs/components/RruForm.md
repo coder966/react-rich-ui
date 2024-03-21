@@ -22,6 +22,43 @@ Click "Open Sandbox" to see the example source code
 | yupValidationSchema | [`yup`](https://www.npmjs.com/package/yup){:target="\_blank"} validation schema                                                | No       |
 | id                  | The form `id`. This can be used if your submit button is outside the form                                                      | No       |
 
+## Nested Fields
+
+You can have nested field names, for example:
+
+```html
+<RruTextInput name="name" label="Name" />
+<RruTextInput name="age" label="Age" />
+<RruTextInput name="address.city" label="City" />
+<RruTextInput name="address.street" label="Street" />
+```
+
+Would result in the following form values object:
+
+```javascript
+{
+  name: 'Khalid',
+  age: 100,
+  address: {
+    city: 'Riyadh',
+    street: 'Olya St.'
+  }
+}
+```
+
+#### Note
+
+Please note that the field names should not start with a digit.
+If you want to represent an array of objects, prefix the name with any string.
+
+```html
+<!-- won't work properly ❌ -->
+<RruTextInput name="owner.1.name" label="Owner Name" />
+
+<!-- good ✅ -->
+<RruTextInput name="owner.item_1.name" label="Owner Name" />
+```
+
 ## Input Components
 
 ### Text
