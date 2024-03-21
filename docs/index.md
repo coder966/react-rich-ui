@@ -15,7 +15,7 @@ $ npm i --save react-rich-ui
 Add the following import to your React app index.js file:
 
 ```js
-import 'react-rich-ui/dist/index.esm.css';
+import 'react-rich-ui/dist/index.css';
 ```
 
 ### Or from a CDN
@@ -23,7 +23,7 @@ import 'react-rich-ui/dist/index.esm.css';
 Add the following tag to your index.html file: (replace `2.2.0` in the URL with the version you are using)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.2.0/dist/index.esm.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.2.0/dist/index.css" />
 ```
 
 ## Import Bootstrap (CSS + JS)
