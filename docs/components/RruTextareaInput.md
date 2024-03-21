@@ -29,3 +29,7 @@ Click "Open Sandbox" to see the example source code
 | cols             | Specifies the visible width of the textarea                                                                                                                                                                                                                                              | No       |
 | wrap             | Specifies how the text is to be wrapped when submitted in a form. More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attr-wrap)                                                                                                              | No       |
 | onChange         | A callback function. This is useful if you need to watch the field value                                                                                                                                                                                                                 | No       |
+
+## Default field value
+
+If you read the value of a field of this type, and the field did not have an initial value nor it was filled/entered by the user; then the default value is `null`.

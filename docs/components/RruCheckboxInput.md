@@ -23,3 +23,7 @@ Click "Open Sandbox" to see the example source code
 | disabled         | Controls whether the input field is disabled or not                      | No       |
 | isSwitch         | Set true to render the checkbox as a switch                              | No       |
 | onChange         | A callback function. This is useful if you need to watch the field value | No       |
+
+## Default field value
+
+If you read the value of a field of this type, and the field did not have an initial value nor it was filled/entered by the user; then the default value is `null`.

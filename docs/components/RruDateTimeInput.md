@@ -33,3 +33,7 @@ Click "Open Sandbox" to see the example source code
 | disabled  | Is the date disabled. | No       |
 | className | Class name.           | No       |
 | style     | Custom style.         | No       |
+
+## Default field value
+
+If you read the value of a field of this type, and the field did not have an initial value nor it was filled/entered by the user; then the default value is `null`.

@@ -28,3 +28,7 @@ Click "Open Sandbox" to see the example source code
 | autoComplete     | Provides guidance to the browser as to the type of information expected in the field, this could allow the browser to provide automated assistance in filling out the form field. More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) | No       |
 | list             | The id of a <datalist> element located in the same document. The <datalist> provides a list of predefined values to suggest to the user for this input. The values provided are suggestions, not requirements: users can select from this predefined list or provide a different value.  | No       |
 | onChange         | A callback function. This is useful if you need to watch the field value                                                                                                                                                                                                                 | No       |
+
+## Default field value
+
+If you read the value of a field of this type, and the field did not have an initial value nor it was filled/entered by the user; then the default value is `null`.
