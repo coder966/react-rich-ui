@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useAsyncEffect from 'use-async-effect';
 import ChangeCallback from '../types/ChangeCallback';
 import PageFetcher from '../types/PageFetcher';
@@ -30,6 +30,7 @@ const useDataSource = (
   onChange?: ChangeCallback
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const requestId = useRef(0);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState<any[]>([]);
@@ -37,8 +38,18 @@ const useDataSource = (
   useAsyncEffect(async () => {
     setIsLoading(true);
 
+    const reqId = new Date().getTime();
+    requestId.current = reqId;
+
     try {
       const body = await pageFetcher(pageSize, pageNumber, sortKey, sortDir, search);
+
+      if (requestId.current !== reqId) {
+        console.debug(
+          `ignoring former response from requestId=${reqId} because the current requestId=${requestId.current}`
+        );
+        return;
+      }
 
       if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
         throw Error('Something went wrong in your page fetcher');
