@@ -2,6 +2,12 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.3.1] - 2024-03-25
+
+### Fixed
+
+- Fix CJS build format
+
 ## [2.3.0] - 2024-03-22
 
 ### Added
