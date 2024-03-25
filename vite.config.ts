@@ -9,15 +9,10 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   plugins: [react(), dts({ include: ['src'] }), excludeDependenciesFromBundle()],
   build: {
-    rollupOptions: {
-      output: {
-        sourcemap: 'inline',
-        entryFileNames: '[name].js',
-      },
-    },
+    sourcemap: 'inline',
     lib: {
       entry: resolve(__dirname, 'src/index.tsx'),
-      formats: ['es'],
+      formats: ['cjs', 'es'],
     },
   },
 });

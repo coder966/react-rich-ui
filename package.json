@@ -24,7 +24,8 @@
   },
   "private": false,
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/react-rich-ui.cjs",
+  "module": "dist/react-rich-ui.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -85,7 +86,7 @@
     "storybook": "^8.0.4",
     "ts-jest": "^29.0.3",
     "typescript": "^5.3.3",
-    "vite": "^5.2.0",
+    "vite": "^5.2.6",
     "vite-plugin-dts": "^3.7.3",
     "yup": "^1.4.0"
   },
