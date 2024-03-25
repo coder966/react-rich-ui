@@ -14,6 +14,7 @@ Pre-release versions will not be mentioned here.
 
 - `RruSelectInput` & `RruMultiSelectInput`: Paginate loading options to enhance performance for large datasets.
 - More ARIA compliance.
+- The css file path has changed from `react-rich-ui/dist/index.esm.css` to `react-rich-ui/dist/style.css`.
 
 ### Fixed
 
@@ -38,6 +39,7 @@ Pre-release versions will not be mentioned here.
 ### Changed
 
 - `RruForm`: eagerly validate a field if it has an error even before losing focus; for a better UX error feedback.
+- The css file path has changed from `react-rich-ui/dist/index.css` to `react-rich-ui/dist/index.esm.css`.
 
 ### Fixed
 
