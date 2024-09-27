@@ -11,7 +11,7 @@ Pre-release versions will not be mentioned here.
 
 ### Changed
 
-- `RruDateTimeInput`: Disable auto complete which does not make since it is unusable.
+- `RruDateTimeInput`: Disable auto complete which does not make sense because it is unusable.
 
 ## [2.3.1] - 2024-03-25
 
