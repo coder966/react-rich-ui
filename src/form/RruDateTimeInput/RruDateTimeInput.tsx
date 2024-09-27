@@ -235,6 +235,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             ref={inputRef}
             dir='ltr'
             type='text'
+            autoComplete='off'
             name={props.name}
             disabled={props.disabled}
             value={value || ''}
