@@ -6,7 +6,11 @@ Pre-release versions will not be mentioned here.
 
 ### Added
 
-- Added `placeholder` to `RruSelectInput` and `RruMultiSelectInput`.
+- `RruSelectInput`: Added `placeholder`.
+- `RruMultiSelectInput`: Added `placeholder`.
+
+### Changed
+
 - `RruDateTimeInput`: Disable auto complete which does not make since it is unusable.
 
 ## [2.3.1] - 2024-03-25
