@@ -83,6 +83,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       <AsyncPaginate
         name={props.name}
         isMulti={true}
+        placeholder={props.placeholder || ''}
         value={selectedOptions}
         onChange={(options) => onSelectChange(options)}
         // @ts-ignore

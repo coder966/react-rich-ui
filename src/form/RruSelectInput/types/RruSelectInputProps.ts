@@ -40,4 +40,6 @@ export default interface RruSelectInputProps {
    * Controls whether the input field is disabled or not
    */
   disabled?: boolean;
+
+  placeholder?: string;
 }

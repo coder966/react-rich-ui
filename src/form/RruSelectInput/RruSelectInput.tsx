@@ -81,6 +81,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         name={props.name}
         isMulti={false}
         isClearable={true}
+        placeholder={props.placeholder || ''}
         value={selectedOption}
         onChange={(option) => onSelectChange(option)}
         // @ts-ignore

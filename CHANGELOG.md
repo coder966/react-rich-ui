@@ -2,6 +2,12 @@
 
 Pre-release versions will not be mentioned here.
 
+## unreleased
+
+### Added
+
+- Added `placeholder` to `RruSelectInput` and `RruMultiSelectInput`.
+
 ## [2.3.1] - 2024-03-25
 
 ### Fixed

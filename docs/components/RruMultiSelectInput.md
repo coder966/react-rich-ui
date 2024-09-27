@@ -15,14 +15,15 @@ Click "Open Sandbox" to see the example source code
 
 ## Props
 
-| Name             | Description                                                                         | Required |
-| ---------------- | ----------------------------------------------------------------------------------- | -------- |
-| name             | Unique form element name                                                            | Yes      |
-| label            | The form element label                                                              | No       |
-| requiredAsterisk | Display an asterisk to indicate the field is required                               | No       |
+| Name             | Description                                                                        | Required |
+|------------------|------------------------------------------------------------------------------------| -------- |
+| name             | Unique form element name                                                           | Yes      |
+| label            | The form element label                                                             | No       |
+| requiredAsterisk | Display an asterisk to indicate the field is required                              | No       |
 | options          | An array of options. [Click here for details](/docs/components/RruOptionsPropType). | Yes      |
-| disabled         | Controls whether the input field is disabled or not                                 | No       |
-| onChange         | A callback function. This is useful if you need to watch the field value            | No       |
+| disabled         | Controls whether the input field is disabled or not                                | No       |
+| onChange         | A callback function. This is useful if you need to watch the field value           | No       |
+| placeholder      | A placeholder                                                                      | No       |
 
 ## Default field value
 
