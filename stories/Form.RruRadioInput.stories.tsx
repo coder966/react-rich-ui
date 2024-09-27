@@ -20,7 +20,6 @@ import * as yup from 'yup';
 import { RruForm, RruRadioInput } from '../src/index';
 import colorsOptions from './data/colorsOptions';
 import groupedAnimalsAndColorsOptions from './data/groupedAnimalsAndColorsOptions';
- React from 'react';
 
 const storyMeta: Meta = {
   title: 'Form: RruRadioInput',
