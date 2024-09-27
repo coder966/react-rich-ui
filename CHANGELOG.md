@@ -2,7 +2,7 @@
 
 Pre-release versions will not be mentioned here.
 
-## unreleased
+## [2.4.0] - 2024-09-27
 
 ### Added
 
