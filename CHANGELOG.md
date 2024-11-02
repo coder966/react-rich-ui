@@ -8,6 +8,7 @@ Pre-release versions will not be mentioned here.
 
 - `RruSelectInput`: Fixed setting value in form context not working.
 - `RruMultiSelectInput`: Fixed setting value in form context not working.
+- `RruDateTimeInput`: Fixed changing calendar type not reflecting.
 
 ## [2.4.0] - 2024-09-27
 
