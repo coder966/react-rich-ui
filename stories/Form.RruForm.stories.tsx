@@ -27,8 +27,8 @@ import {
   RruMultiSelectInput,
   RruRadioInput,
   RruSelectInput,
-  RruTextInput,
   RruTextareaInput,
+  RruTextInput,
   useRruForm,
 } from '../src/index';
 import animalsOptions from './data/animalsOptions';
@@ -530,6 +530,30 @@ export const SetValueProgrammaticallyAllTypes = (args) => {
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
+    </RruForm>
+  );
+};
+
+export const ValidateFieldNames = (args) => {
+  const rruFormContext = useRruForm();
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm
+      context={rruFormContext}
+      onSubmit={onSubmit}>
+
+      <RruTextInput name='email' label='Email' requiredAsterisk />
+      <RruTextInput name='color1' label='Email' requiredAsterisk />
+      <RruTextInput name='animal.1' label='Email' requiredAsterisk />
+
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+
     </RruForm>
   );
 };
