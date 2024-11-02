@@ -2,6 +2,13 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.4.1] - 2024-11-02
+
+### Fixed
+
+- `RruSelectInput`: Fixed setting value in form context not working.
+- `RruMultiSelectInput`: Fixed setting value in form context not working.
+
 ## [2.4.0] - 2024-09-27
 
 ### Added

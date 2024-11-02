@@ -219,9 +219,11 @@ describe('RruMultiSelectInput', () => {
       </RruForm>
     );
 
+    // NOTE: we use .sort() here because the order of the values is not guaranteed
+
     expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE']);
     await act(async () => formContext.current.setFieldValue('color', ['ORANGE', 'BLUE']));
-    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE', 'BLUE']);
+    expect(formContext.current.getFieldValue('color').sort()).toEqual(['ORANGE', 'BLUE'].sort());
     expect(container.querySelector('[data-field-value="ORANGE,BLUE"]')).toBeTruthy();
 
     await submitForm(container);
@@ -229,7 +231,7 @@ describe('RruMultiSelectInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE', 'BLUE'],
+      color: ['ORANGE', 'BLUE'].sort(),
     });
   });
 });
