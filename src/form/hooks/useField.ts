@@ -19,6 +19,7 @@ import { useFormContext, useFormState, useWatch } from 'react-hook-form';
 import { resolveObjectAttribute } from '../../utils/utils';
 
 /**
+ * @param name field name
  * @param onProgrammaticValue Should check if the provided serialized value does not
  * match the current deserialized value before updating the formContext, otherwise you would end up in an infinite re-render
  */
