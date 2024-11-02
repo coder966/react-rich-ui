@@ -29,12 +29,6 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
   const [isTouched, setIsTouched] = useState<boolean>(false);
   const watchResult = useWatch({ name: name });
 
-  if (name && name.split('.').filter((p) => /^\d+$/.test(p)).length > 0) {
-    console.error(
-      `Field name "${name}" cannot include a numeric part. Try to prefix the numeric part with some string.`
-    );
-  }
-
   useEffect(() => {
     if (isRegistered.current && onProgrammaticValue) {
       onProgrammaticValue(watchResult);
@@ -45,6 +39,12 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
     if (isRegistered.current) {
       console.error('Trying to register an already registered field. This will be ignored.', name);
       return;
+    }
+
+    if (name && name.split('.').filter((p) => /^\d+$/.test(p)).length > 0) {
+      console.error(
+        `Field name "${name}" cannot include a numeric part. Try to prefix the numeric part with some string.`
+      );
     }
 
     const initialValue = formContext.formState.defaultValues
