@@ -168,13 +168,16 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             onIntegerInputChange(matches[6], 0, 59, setMinute);
             onIntegerInputChange(matches[7], 0, 59, setSecond);
           }
+        }else{
+          setYear(today.getYear(getCalendarType()));
+          setMonth(today.getMonth(getCalendarType()));
         }
       } catch (e) {}
       setIsInitialized(true);
     });
 
     return () => field.unregister();
-  }, []);
+  }, [props.calendarType]);
 
   useEffect(() => {
     setCalendar(generateSixWeeksCalendar(getCalendarType(), year, month));

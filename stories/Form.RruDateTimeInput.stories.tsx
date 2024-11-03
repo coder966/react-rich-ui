@@ -18,6 +18,9 @@ import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import * as yup from 'yup';
 import { RruDateTimeInput, RruForm } from '../src/index';
+import { RruSelectInput } from '../src';
+import calendarTypeOptions from './data/calendarTypeOptions.ts';
+import { useState } from 'react';
 
 const storyMeta: Meta = {
   title: 'Form: RruDateTimeInput',
@@ -103,6 +106,51 @@ export const DateTime = (args) => {
         mode='datetime'
         name='birthDate'
         label='Birth Date'
+        getDateConfig={getDateConfig}
+        onChange={console.log}
+      />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+
+export const ChangeCalType = (args) => {
+  const [calType, setCalType] = useState<string>('gregorian');
+
+  const initialValues = {
+    birthDate: '2020-07-01',
+  };
+
+  const yupValidationSchema = yup.object().shape({
+    birthDate: yup
+      .date()
+      .nullable()
+      .required('The date is required')
+      .min('2020-01-01', 'The date is too old')
+      .max('2024-01-01', 'The date is too new'),
+  });
+
+  const getDateConfig = (date: string) => {
+    if (date === '2022-07-12') {
+      return { disabled: true };
+    }
+    return null;
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
+      <RruSelectInput name={'calendarType'} label='Calendar Type' options={calendarTypeOptions} onChange={(val) => setCalType(val)} />
+      <RruDateTimeInput
+        mode='date'
+        name='birthDate'
+        label='Birth Date'
+        calendarType={calType}
         getDateConfig={getDateConfig}
         onChange={console.log}
       />

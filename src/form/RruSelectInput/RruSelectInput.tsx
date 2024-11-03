@@ -31,6 +31,13 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
   const field = useField(props.name, (serializedValue) => {
     if (!deepEqual(serializedValue, value)) {
       setValue(serializedValue);
+
+      if (!deepEqual(serializedValue, selectedOption?.value)) {
+        setTimeout(() => {
+          const option = findOption(props.options, serializedValue);
+          onSelectChange(option);
+        }, 0);
+      }
     }
   });
 
