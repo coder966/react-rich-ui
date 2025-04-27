@@ -168,7 +168,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           setYear(today.getYear(getCalendarType()));
           setMonth(today.getMonth(getCalendarType()));
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error('Error while init RruDateTimeInput. Ignoring...', e);
+      }
       setIsInitialized(true);
     });
 

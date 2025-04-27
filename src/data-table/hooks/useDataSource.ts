@@ -59,6 +59,8 @@ const useDataSource = (
       setTotalPages(body.totalPages);
       setData(body.items);
     } catch (e: any) {
+      console.error('Error in useDataSource', e);
+
       setError(e);
       setTotalPages(0);
       setData([]);
