@@ -50,7 +50,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const popupRef = useDetectClickOutside({
     onTriggered: (e) => {
       if (e.target != inputRef.current) {
-        closePopup();
+        setIsPopupShown(false);
       }
     },
   });
@@ -79,11 +79,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     }
   };
 
-  const closePopup = () => {
-    setIsPopupShown(false);
-    field.onBlur();
-  };
-
   const previousMonth = () => {
     if (month === 1) {
       setYear(year - 1);
@@ -107,7 +102,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       return;
     } else {
       setIntlDate(date);
-      closePopup();
+      setIsPopupShown(false);
+      field.onBlur();
     }
   };
 
@@ -168,7 +164,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             onIntegerInputChange(matches[6], 0, 59, setMinute);
             onIntegerInputChange(matches[7], 0, 59, setSecond);
           }
-        }else{
+        } else {
           setYear(today.getYear(getCalendarType()));
           setMonth(today.getMonth(getCalendarType()));
         }
