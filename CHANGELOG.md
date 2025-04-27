@@ -2,6 +2,16 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.4.2] - 2025-04-27
+
+### Fixed
+
+- `RruDateTimeInput`: Fixed validation would trigger even before touching the field.
+
+## Other
+
+- Internal enhancements.
+
 ## [2.4.1] - 2024-11-02
 
 ### Fixed
