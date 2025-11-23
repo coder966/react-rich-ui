@@ -42,6 +42,7 @@ const PaginationView = ({ base, totalPages, currentPage, onChangePage }: Paginat
           return (
             <li
               key={index}
+              data-page-number={p.number}
               onClick={(e) => onClickPage(p)}
               className={`page-item ${p.isActive ? 'active' : ''} ${p.number === undefined ? 'disabled' : ''}`}>
               <button className='page-link'>{p.render}</button>
