@@ -20,6 +20,16 @@ import ChangeCallback from '../types/ChangeCallback';
 import PageFetcher from '../types/PageFetcher';
 import SortDir from '../types/SortDir';
 
+/**
+ *
+ * @param pageFetcher
+ * @param pageSize
+ * @param pageNumber
+ * @param sortKey
+ * @param sortDir
+ * @param search
+ * @param onChange is called on initialization as well
+ */
 const useDataSource = (
   pageFetcher: PageFetcher,
   pageSize: number,

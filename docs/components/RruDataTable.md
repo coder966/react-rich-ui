@@ -28,7 +28,7 @@ Click "Open Sandbox" to see the example source code
 | defaultPageNumber | Set the initial page number                                                                  | No       |
 | defaultSortKey    | Set the initial sort key                                                                     | No       |
 | defaultSortDir    | Set the initial sort direction                                                               | No       |
-| onChange          | A callback for when one of these information gets updated (pageNumber, sortKey, sortDir)     | No       |
+| onChange          | A callback is called on initialization as well for when one of these gets updated (pageNumber, sortKey, sortDir)     | No       |
 
 ### Column
 

@@ -36,7 +36,7 @@ interface StateProps {
   defaultSortDir?: SortDir;
 
   /**
-   * A callback for when one of these information gets updated:
+   * A callback is called on initialization as well for when one of these gets updated:
    * - current page number
    * - current sort key
    * - current sort direction
