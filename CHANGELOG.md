@@ -2,6 +2,12 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.4.3] - 2025-05-25
+
+### Fixed
+
+- `RruDataTable`: Fix `defaultPageNumber` does not work.
+
 ## [2.4.2] - 2025-04-27
 
 ### Fixed

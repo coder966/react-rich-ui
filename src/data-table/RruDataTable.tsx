@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { resolveObjectAttribute } from '../utils/utils';
 import useDataSource from './hooks/useDataSource';
 import PaginationView from './pagination/PaginationView';
@@ -40,10 +40,13 @@ const RruDataTable: FC<RruDataTableProps> = ({
   const [currentPage, setCurrentPage] = useState(defaultPageNumber || 0);
   const [sortKey, setSortKey] = useState(defaultSortKey);
   const [sortDir, setSortDir] = useState<SortDir>(defaultSortDir);
-  const [searchParams, setSearchParams] = useState<any>(search);
+  const hasInit = useRef(false);
 
   useEffect(() => {
-    setSearchParams(search);
+    if(!hasInit.current) {
+      hasInit.current = true;
+      return;
+    }
     setCurrentPage(0);
   }, [search]);
 
@@ -53,7 +56,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
     currentPage,
     sortKey,
     sortDir,
-    searchParams,
+    search,
     onChange
   );
 
