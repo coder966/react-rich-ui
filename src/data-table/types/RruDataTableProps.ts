@@ -47,6 +47,7 @@ interface StateProps {
 interface RruDataTableProps extends StateProps {
   /**
    * A function that fetches a page from where-ever your data might be, usually from an HTTP API.
+   * note that the `pageNumber` is 0-indexed.
    */
   pageFetcher: PageFetcher;
 
