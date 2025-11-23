@@ -92,7 +92,7 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "build": "tsc --p ./tsconfig-build.json && vite build",
+    "build": "tsc && vite build",
     "prepare": "npm run build",
     "test": "jest"
   }
