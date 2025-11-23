@@ -13,7 +13,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.ts', 'tests/**/*.tsx'],
+      files: ['tests/**/*.ts', 'tests/**/*.tsx', 'stories/**/*.ts', 'stories/**/*.tsx'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unused-vars': 'off'
