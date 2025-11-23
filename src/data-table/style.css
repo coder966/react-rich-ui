@@ -45,6 +45,16 @@
   transform: rotate(180deg);
 }
 
+.rru-data-table__no-data-message {
+  text-align: center;
+  color: var(--bs-secondary);
+}
+
+.rru-data-table__error-message {
+  text-align: center;
+  color: var(--bs-danger);
+}
+
 /* loading bar */
 
 .rru-data-table__loading-bar-tr--hidden {

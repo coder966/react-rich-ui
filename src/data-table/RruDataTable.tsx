@@ -24,6 +24,8 @@ import SortDir from './types/SortDir';
 import TableColumn from './types/TableColumn';
 
 const RruDataTable: FC<RruDataTableProps> = ({
+  id,
+
   pageFetcher,
   columns,
   search,
@@ -100,7 +102,7 @@ const RruDataTable: FC<RruDataTableProps> = ({
   };
 
   return (
-    <div>
+    <div className='rru-data-table-container' id={id}>
       <table className='table table-striped rru-data-table'>
         <thead>
           <tr>
@@ -119,15 +121,15 @@ const RruDataTable: FC<RruDataTableProps> = ({
           </tr>
           {error && (
             <tr>
-              <td colSpan={columns.length} className='text-center'>
-                {errorLabel}
+              <td colSpan={columns.length}>
+                <span className='rru-data-table__error-message'>{errorLabel}</span>
               </td>
             </tr>
           )}
           {data.length === 0 && !error && (
             <tr>
-              <td colSpan={columns.length} className='text-center'>
-                {noDataLabel}
+              <td colSpan={columns.length} className='rru-data-table__no-data-message'>
+                <span className='rru-data-table__no-data-message'>{noDataLabel}</span>
               </td>
             </tr>
           )}
