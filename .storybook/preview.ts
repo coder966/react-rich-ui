@@ -2,12 +2,19 @@ const isRTL = false;
 
 import type { Preview } from '@storybook/react-vite';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import(`bootstrap/dist/css/bootstrap${isRTL ? '.rtl' : ''}.css`);
+
+const html = document.getElementsByTagName('html')[0];
 
 if (isRTL) {
-  const html = document.getElementsByTagName('html')[0];
+  // @ts-expect-error no type declarations
+  import('bootstrap/dist/css/bootstrap.rtl.css');
   html.dir = 'rtl';
   html.lang = 'ar';
+}else{
+  // @ts-expect-error no type declarations
+  import('bootstrap/dist/css/bootstrap.css');
+  html.dir = 'ltr';
+  html.lang = 'en';
 }
 
 const preview: Preview = {
