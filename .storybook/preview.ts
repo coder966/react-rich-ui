@@ -1,6 +1,6 @@
 const isRTL = false;
 
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import(`bootstrap/dist/css/bootstrap${isRTL ? '.rtl' : ''}.css`);
 

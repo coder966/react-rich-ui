@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { RruModalButton } from '../src/index';
 
 const storyMeta: Meta = {

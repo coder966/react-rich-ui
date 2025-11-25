@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import { RruStepsWizard, useRruStepsWizardContext } from '../src/index';
 

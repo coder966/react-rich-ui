@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { action } from '@storybook/addon-actions';
-import { Meta } from '@storybook/react';
+import { action } from 'storybook/actions';
+import { Meta } from '@storybook/react-vite';
 import * as yup from 'yup';
 import { RruDateTimeInput, RruForm } from '../src/index';
 import { RruSelectInput } from '../src';

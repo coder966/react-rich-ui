@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { action } from '@storybook/addon-actions';
-import { Meta } from '@storybook/react';
+import { action } from 'storybook/actions';
+import { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import * as yup from 'yup';
 import {
