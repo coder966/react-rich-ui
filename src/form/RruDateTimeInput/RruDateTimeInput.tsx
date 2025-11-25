@@ -16,7 +16,6 @@
 
 import { IntlDate } from 'intl-date';
 import { FC, useEffect, useRef, useState } from 'react';
-import { useDetectClickOutside } from 'react-detect-click-outside';
 import { deepEqual, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
@@ -27,6 +26,7 @@ import RruDateTimeInputDateConfig from './types/RruDateTimeInputDateConfig';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
+import useClickOutside from '../../utils/useClickOutside.ts';
 
 const ISO8601_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
@@ -44,16 +44,6 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   const getCalendarType = (): RruDateTimeInputCalendarType => {
     return props.calendarType || 'gregorian';
   };
-
-  // handle popup click outside to dismiss
-  const inputRef = useRef<HTMLInputElement>(null);
-  const popupRef = useDetectClickOutside({
-    onTriggered: (e) => {
-      if (e.target != inputRef.current) {
-        setIsPopupShown(false);
-      }
-    },
-  });
 
   const today = IntlDate.today();
   const [calendar, setCalendar] = useState<IntlDate[]>(
@@ -222,6 +212,13 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     return className;
   };
 
+  // handle popup click outside to dismiss
+  const inputContainerRef = useRef<HTMLDivElement>(null);
+  const popupContainerRef = useRef<HTMLDivElement>(null);
+  useClickOutside([inputContainerRef, popupContainerRef], () => {
+    setIsPopupShown(false);
+  });
+
   if (!calendar) {
     return null;
   }
@@ -230,10 +227,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     <div className='form-group' data-field-name={props.name} data-field-value={value}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
 
-      <div className='rru-date-input'>
+      <div className='rru-date-input' ref={inputContainerRef}>
         <div className='rru-date-input__input-wrapper'>
           <input
-            ref={inputRef}
             dir='ltr'
             type='text'
             autoComplete='off'
@@ -253,8 +249,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
         </div>
 
         <div
-          ref={popupRef}
-          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}>
+          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`} ref={popupContainerRef}>
           <div className='rru-date-input__container'>
             <div className='rru-date-input__header'>
               <div className='rru-date-input__month-button' onClick={previousMonth}>
