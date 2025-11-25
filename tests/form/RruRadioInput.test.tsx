@@ -17,9 +17,7 @@
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
-import RruForm from '../../src/form/RruForm/RruForm';
-import RruRadioInput from '../../src/form/RruRadioInput/RruRadioInput';
-import { useRruForm } from '../../src/form/hooks/useRruForm';
+import { RruForm, RruRadioInput, useRruForm } from '../../src';
 import checkOption from '../__utils__/checkOption';
 import submitForm from '../__utils__/submitForm';
 

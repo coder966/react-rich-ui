@@ -16,9 +16,7 @@
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
-import RruDateTimeInput from '../../src/form/RruDateTimeInput/RruDateTimeInput';
-import RruForm from '../../src/form/RruForm/RruForm';
-import { useRruForm } from '../../src/form/hooks/useRruForm';
+import { RruDateTimeInput, RruForm, useRruForm } from '../../src';
 import selectDate from '../__utils__/selectDate';
 import submitForm from '../__utils__/submitForm';
 

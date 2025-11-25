@@ -16,7 +16,7 @@
 
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RruDataTable from '../../src/data-table/RruDataTable';
+import { RruDataTable } from '../../src';
 import FetchedPage from '../../src/data-table/types/FetchedPage';
 import PageFetcher from '../../src/data-table/types/PageFetcher';
 import TableColumn from '../../src/data-table/types/TableColumn';

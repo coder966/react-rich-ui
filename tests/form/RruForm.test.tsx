@@ -17,10 +17,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
-import RruCheckboxInput from '../../src/form/RruCheckboxInput/RruCheckboxInput';
-import RruForm from '../../src/form/RruForm/RruForm';
-import RruTextInput from '../../src/form/RruTextInput/RruTextInput';
-import RruTextareaInput from '../../src/form/RruTextareaInput/RruTextareaInput';
+import { RruCheckboxInput, RruForm, RruTextInput, RruTextareaInput } from '../../src';
 import submitForm from '../__utils__/submitForm';
 
 describe('RruForm', () => {

@@ -16,9 +16,7 @@
 
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
-import RruFileInput from '../../src/form/RruFileInput/RruFileInput';
-import RruForm from '../../src/form/RruForm/RruForm';
-import { useRruForm } from '../../src/form/hooks/useRruForm';
+import { RruFileInput, RruForm, useRruForm } from '../../src';
 import selectFile from '../__utils__/selectFile';
 import submitForm from '../__utils__/submitForm';
 

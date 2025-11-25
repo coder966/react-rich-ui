@@ -16,9 +16,7 @@
 
 import { act, render, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RruForm from '../../src/form/RruForm/RruForm';
-import RruTextInput from '../../src/form/RruTextInput/RruTextInput';
-import { useRruForm } from '../../src/form/hooks/useRruForm';
+import { RruForm, RruTextInput, useRruForm } from '../../src';
 import submitForm from '../__utils__/submitForm';
 
 describe('useRruForm', () => {
