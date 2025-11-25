@@ -75,6 +75,16 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
     return result;
   };
 
+  const getStepState = (stepNumber: number): 'current' | 'past' | 'future' => {
+    if (stepNumber === currentStepNumber) {
+      return 'current';
+    } else if (stepNumber < currentStepNumber) {
+      return 'past';
+    } else {
+      return 'future';
+    }
+  };
+
   const header = () => {
     if (props.renderHeader) {
       return props.renderHeader(getSteps());
@@ -83,7 +93,11 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
         <div className='rru-steps-wizard__header'>
           {getSteps().map((step, index) => {
             return (
-              <div key={index} className={getClassName(step.number, 'rru-steps-wizard__step')}>
+              <div
+                key={index}
+                className={getClassName(step.number, 'rru-steps-wizard__step')}
+                data-step-number={step.number}
+                data-step-state={getStepState(step.number)}>
                 <div className={getClassName(step.number, 'rru-steps-wizard__step-number')}>{step.number}</div>
                 <div className={getClassName(step.number, 'rru-steps-wizard__step-label')}>{step.label}</div>
               </div>
@@ -96,7 +110,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
 
   return (
     <RruStepsWizardContextProvider value={RruStepsWizardContextValue}>
-      <div className='rru-steps-wizard'>
+      <div className='rru-steps-wizard' data-current-step={currentStepNumber}>
         {header()}
         <div className='rru-steps-wizard__body'>
           {getSteps().map((step, index) => {
