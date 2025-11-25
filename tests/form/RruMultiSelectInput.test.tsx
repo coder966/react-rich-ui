@@ -232,4 +232,47 @@ describe('RruMultiSelectInput', () => {
       color: ['ORANGE', 'BLUE'].sort(),
     });
   });
+
+  it('should handle grouped options', async () => {
+    // prepare
+    const onSubmit = jest.fn();
+    const groupedOptions = [
+      {
+        label: 'Warm Colors',
+        options: [
+          { label: 'Red', value: 'RED' },
+          { label: 'Orange', value: 'ORANGE' },
+        ],
+      },
+      {
+        label: 'Cool Colors',
+        options: [
+          { label: 'Blue', value: 'BLUE' },
+          { label: 'Green', value: 'GREEN' },
+        ],
+      },
+    ];
+
+    // render
+    const { container } = render(
+      <RruForm onSubmit={onSubmit}>
+        <RruMultiSelectInput name='colors' label='Colors' options={groupedOptions} />
+        <button type='submit'>Submit</button>
+      </RruForm>
+    );
+
+    // select options from different groups
+    await selectOption(container, 'Red');
+    await selectOption(container, 'Blue');
+
+    // submit the form
+    await submitForm(container);
+
+    // validation
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0].colors.sort()).toEqual(['RED', 'BLUE'].sort());
+    });
+  });
+
 });
