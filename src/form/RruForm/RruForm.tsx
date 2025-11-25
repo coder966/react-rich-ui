@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-// @ts-expect-error no declaration file
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC } from 'react';
+import { BaseSyntheticEvent, FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import './style.css';
-import RruFormProps from './types/RruFormProps';
+import RruFormProps, { RruFormFieldValueType } from './types/RruFormProps';
 
 const RruForm: FC<RruFormProps> = (props) => {
   let config: any = {
@@ -39,12 +38,13 @@ const RruForm: FC<RruFormProps> = (props) => {
     props.context.$(form);
   }
 
-  const onSubmit = (formValuesObject: any, event: any) => {
+  const onSubmit = (formValuesObject: Record<string, RruFormFieldValueType>, event?: BaseSyntheticEvent) => {
     // this fixes when buttons with type != submit would cause the form to submit,
     // this appears to be a bug in react-hook-form, remove when fixed
     // another note is that clicking submit buttons in Jest triggers
     // a click event where the submitter is undefined so we cannot really tell
     const isTest = process.env.JEST_WORKER_ID !== undefined;
+    // @ts-expect-error Property submitter does not exist on type object
     const isSubmitButton = isTest || event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit';
 
     if (isSubmitButton) {

@@ -149,7 +149,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     field.register((initialValue) => {
       try {
         if (initialValue) {
-          let matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
+          const matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
           if (matches) {
             const date = IntlDate.of(
               getCalendarType(),
@@ -182,7 +182,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
   }, [year, month]);
 
   useEffect(() => {
-    let newValue = null;
+    let newValue: string | null = null;
     if (intlDate) {
       newValue = intlDate.format(getCalendarType(), 'yyyy-MM-dd');
       if (getMode() === 'datetime') {
@@ -240,8 +240,8 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
             name={props.name}
             disabled={props.disabled}
             value={value || ''}
-            onChange={(e) => {}}
-            onClick={(e) => setIsPopupShown(true)}
+            onChange={() => {}}
+            onClick={() => setIsPopupShown(true)}
             className={`rru-date-input__input form-control ${field.error ? 'is-invalid' : ''}`}
           />
 
@@ -296,7 +296,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                               data-date={date.toString(getCalendarType())}
                               className={getDayClassName(date)}
                               style={getDateConfig(date)?.style}
-                              onClick={(e) => onSelectDate(date)}>
+                              onClick={() => onSelectDate(date)}>
                               {date.getDay(getCalendarType())}
                             </div>
                           </td>

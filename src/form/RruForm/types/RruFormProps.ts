@@ -16,17 +16,21 @@
 
 import { UseRruFormReturn } from '../../hooks/useRruForm';
 
+type RruFormFieldPrimitiveValue = string | string[] | number | boolean | File | null;
+type RruFormFieldObjectValue = Record<string, RruFormFieldPrimitiveValue>;
+export type RruFormFieldValueType = RruFormFieldPrimitiveValue | RruFormFieldObjectValue;
+
 export default interface RruFormProps {
   context?: UseRruFormReturn;
 
   /**  */
-  initialValues?: Record<string, any>;
+  initialValues?: Record<string, RruFormFieldValueType>;
 
   /**  */
   yupValidationSchema?: any;
 
   /**  */
-  onSubmit: (form: Record<string, any>) => void;
+  onSubmit: (form: Record<string, RruFormFieldValueType>) => void;
 
   /**  */
   children: React.ReactNode | React.ReactNode[];

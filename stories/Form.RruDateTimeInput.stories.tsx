@@ -21,6 +21,7 @@ import { RruDateTimeInput, RruForm } from '../src/index';
 import { RruSelectInput } from '../src';
 import calendarTypeOptions from './data/calendarTypeOptions.ts';
 import { useState } from 'react';
+import RruDateTimeInputCalendarType from '../src/form/RruDateTimeInput/types/RruDateTimeInputCalendarType.ts';
 
 const storyMeta: Meta = {
   title: 'Form: RruDateTimeInput',
@@ -117,7 +118,7 @@ export const DateTime = (args) => {
 };
 
 export const ChangeCalType = (args) => {
-  const [calType, setCalType] = useState<string>('gregorian');
+  const [calType, setCalType] = useState<RruDateTimeInputCalendarType>('gregorian');
 
   const initialValues = {
     birthDate: '2020-07-01',
@@ -145,12 +146,12 @@ export const ChangeCalType = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruSelectInput name={'calendarType'} label='Calendar Type' options={calendarTypeOptions} onChange={(val) => setCalType(val)} />
+      <RruSelectInput name={'calendarType'} label='Calendar Type' options={calendarTypeOptions} onChange={(val) => setCalType(val as RruDateTimeInputCalendarType)} />
       <RruDateTimeInput
         mode='date'
         name='birthDate'
         label='Birth Date'
-        calendarType={calType}
+        calendarType={calType!}
         getDateConfig={getDateConfig}
         onChange={console.log}
       />
