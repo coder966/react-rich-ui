@@ -161,3 +161,28 @@ export const ChangeCalType = (args) => {
     </RruForm>
   );
 };
+
+export const Disabled = (args) => {
+  const initialValues = {
+    birthDate: '2020-07-01',
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruDateTimeInput
+        mode='date'
+        name='birthDate'
+        label='Birth Date'
+        disabled={true}
+      />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+

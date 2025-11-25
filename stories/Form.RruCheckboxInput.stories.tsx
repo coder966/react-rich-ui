@@ -70,3 +70,23 @@ export const Switch = (args) => {
     </RruForm>
   );
 };
+
+export const Disabled = (args) => {
+  const initialValues = {
+    agreed: true,
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruCheckboxInput name='agreed' label='Agree' disabled={true} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+

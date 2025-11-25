@@ -93,3 +93,23 @@ export const Grouped = (args) => {
     </RruForm>
   );
 };
+
+export const Disabled = (args) => {
+  const initialValues = {
+    colors: ['BLUE', 'GREEN'],
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruMultiCheckboxInput name='colors' label='Colors' options={colorsOptions} disabled={true} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
+

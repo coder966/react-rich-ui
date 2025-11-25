@@ -47,3 +47,22 @@ export const Basic = (args) => {
     </RruForm>
   );
 };
+
+export const Disabled = (args) => {
+  const initialValues = {
+    address: 'Sample address',
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruTextareaInput name='address' label='Address' disabled={true}/>
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};

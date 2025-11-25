@@ -57,3 +57,24 @@ export const Basic = (args) => {
     </RruForm>
   );
 };
+
+export const Disabled = (args) => {
+  const initialValues = {
+    attachment: {
+      name: 'test-initial.png',
+    },
+  };
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <RruForm initialValues={initialValues} onSubmit={onSubmit}>
+      <RruFileInput name='attachment' label='Attachment' chooseFileLabel='Select' accept='image/*,.pdf' disabled={true} />
+      <button type='submit' className='btn btn-primary mt-4'>
+        Submit
+      </button>
+    </RruForm>
+  );
+};
