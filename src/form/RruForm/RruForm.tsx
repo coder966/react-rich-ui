@@ -39,13 +39,11 @@ const RruForm: FC<RruFormProps> = (props) => {
   }
 
   const onSubmit = (formValuesObject: Record<string, RruFormFieldValueType>, event?: BaseSyntheticEvent) => {
-    // this fixes when buttons with type != submit would cause the form to submit,
-    // this appears to be a bug in react-hook-form, remove when fixed
-    // another note is that clicking submit buttons in Jest triggers
-    // a click event where the submitter is undefined so we cannot really tell
-    const isTest = process.env.JEST_WORKER_ID !== undefined;
     // @ts-expect-error Property submitter does not exist on type object
-    const isSubmitButton = isTest || event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit';
+    const isSubmitButton = event?.nativeEvent?.submitter?.attributes?.type?.value?.toLowerCase() === 'submit';
+
+    // the default behaviour of <button> without "type" attribute set to "submit", is to submit its parent form, if any.
+    // while this is the default on web, it is very strange to me, so I will restrict `type="submit"` only
 
     if (isSubmitButton) {
       props.onSubmit(formValuesObject);

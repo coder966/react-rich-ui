@@ -68,15 +68,17 @@ describe('RruForm', () => {
   it('should prevent submission from non-submit buttons', async () => {
     // prepare
     const onSubmit = jest.fn();
-    const onButtonClick = jest.fn();
+    const onClick1 = jest.fn();
+    const onClick2 = jest.fn();
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
         <RruTextInput name='email' label='Email' />
-        <button type='button' onClick={onButtonClick}>
-          Regular Button
-        </button>
+        <button type='button' onClick={onClick2}>Regular Button with onClick</button>
+        <button onClick={onClick1}>No Type Button with onClick</button>
+        <button type='button' onClick={onClick2}>Regular Button without onClick</button>
+        <button onClick={onClick1}>No Type Button without onClick</button>
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -86,12 +88,33 @@ describe('RruForm', () => {
     emailInput && (await userEvent.click(emailInput));
     await userEvent.keyboard('test@example.com');
 
-    // Click the regular button
-    const regularButton = screen.getByText('Regular Button');
-    await userEvent.click(regularButton);
+    // Click the Regular Button with onClick
+    const regularWithOnClickButton = screen.getByText('Regular Button with onClick');
+    await userEvent.click(regularWithOnClickButton);
 
     // validation - onSubmit should not be called
-    expect(onButtonClick).toHaveBeenCalledTimes(1);
+    expect(onClick2).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+
+    // Click the No Type Button with onClick
+    const noTypeWithOnClickButton = screen.getByText('No Type Button with onClick');
+    await userEvent.click(noTypeWithOnClickButton);
+
+    // validation - onSubmit should not be called
+    expect(onClick1).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+
+    const regularWithoutOnClickButton = screen.getByText('Regular Button without onClick');
+    await userEvent.click(regularWithoutOnClickButton);
+
+    // validation - onSubmit should not be called
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+
+    // Click the Regular Button without onClick
+    const noTypeWithoutOnClickButton = screen.getByText('No Type Button without onClick');
+    await userEvent.click(noTypeWithoutOnClickButton);
+
+    // validation - onSubmit should not be called
     expect(onSubmit).toHaveBeenCalledTimes(0);
 
     // Now click the submit button

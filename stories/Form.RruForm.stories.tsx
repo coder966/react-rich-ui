@@ -232,6 +232,29 @@ export const SubmitButtonOutsideForm = (args) => {
   );
 };
 
+export const SubmitButtonAndNormalButton = (args) => {
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  return (
+    <div>
+      <RruForm onSubmit={onSubmit} >
+        <RruTextInput name='firstName' label='First Name' />
+        <button type='submit' className='btn btn-primary m-4'>
+          submit button
+        </button>
+        <button type='button' className='btn btn-primary m-4'>
+          button-typed button
+        </button>
+        <button className='btn btn-primary m-4'>
+          no type button
+        </button>
+      </RruForm>
+    </div>
+  );
+};
+
 export const NestedFields = (args) => {
   const initialValues = {
     name: 'Khalid',

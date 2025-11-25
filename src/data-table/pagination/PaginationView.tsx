@@ -33,7 +33,7 @@ const PaginationView = ({ base, totalPages, currentPage, onChangePage }: Paginat
         <li
           className={`page-item ${isFirstPage || pages.length == 0 ? 'disabled' : ''}`}
           onClick={() => !isFirstPage && pages.length > 0 && onChangePage(currentPage - 1)}>
-          <button className='page-link' aria-label='Previous'>
+          <button type='button' className='page-link' aria-label='Previous'>
             &laquo;
           </button>
         </li>
@@ -45,7 +45,7 @@ const PaginationView = ({ base, totalPages, currentPage, onChangePage }: Paginat
               data-page-number={p.number}
               onClick={(e) => onClickPage(p)}
               className={`page-item ${p.isActive ? 'active' : ''} ${p.number === undefined ? 'disabled' : ''}`}>
-              <button className='page-link'>{p.render}</button>
+              <button type='button' className='page-link'>{p.render}</button>
             </li>
           );
         })}
@@ -53,7 +53,7 @@ const PaginationView = ({ base, totalPages, currentPage, onChangePage }: Paginat
         <li
           className={`page-item ${isLastPage ? 'disabled' : ''}`}
           onClick={() => !isLastPage && onChangePage(currentPage + 1)}>
-          <button className='page-link' aria-label='Next'>
+          <button type='button' className='page-link' aria-label='Next'>
             &raquo;
           </button>
         </li>
