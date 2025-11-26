@@ -176,7 +176,8 @@ describe('RruDateTimeInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('The date is too old')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="birthDate"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('The date is too old');
     });
 
     // delete the current value in the input element

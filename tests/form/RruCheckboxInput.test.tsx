@@ -166,7 +166,8 @@ describe('RruCheckboxInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must agree')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="agree"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('You must agree');
     });
 
     // make it checked

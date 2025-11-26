@@ -156,7 +156,8 @@ describe('RruSelectInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must select a color')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="color"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('You must select a color');
     });
 
     // change

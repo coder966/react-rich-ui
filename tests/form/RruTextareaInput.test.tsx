@@ -178,7 +178,8 @@ describe('RruTextareaInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
       expect(myTextInput?.getAttribute('class')).toContain('is-invalid');
-      expect(screen.getByText('The text you entered is too short.')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="myText"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('The text you entered is too short.');
     });
 
     // delete the current value in the input element

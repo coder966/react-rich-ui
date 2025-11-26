@@ -180,7 +180,8 @@ describe('RruTextInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
       expect(emailInput?.getAttribute('class')).toContain('is-invalid');
-      expect(screen.getByText('The email address is incorrect')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="email"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('The email address is incorrect');
     });
 
     // delete the current value in the input element

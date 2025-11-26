@@ -59,7 +59,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
   };
 
   return (
-    <div className='form-group' data-field-name={props.name} data-field-value={value}>
+    <div className='form-group' data-field-name={props.name} data-field-value={value} data-field-error={field.error ? field.error.message : ''}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <label style={{ display: 'block' }}>
         <div className={`form-control rru-file-input__file-name-label ${field.error ? 'is-invalid' : ''}`}>

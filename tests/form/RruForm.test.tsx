@@ -286,10 +286,14 @@ describe('RruForm', () => {
     // validation - form should not be submitted
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('Username is required')).toBeTruthy();
-      expect(screen.getByText('Email is required')).toBeTruthy();
-      expect(screen.getByText('Password is required')).toBeTruthy();
-      expect(screen.getByText('You must agree to the terms')).toBeTruthy();
+      const usernameFormGroup = container.querySelector('[data-field-name="username"]');
+      const emailFormGroup = container.querySelector('[data-field-name="email"]');
+      const passwordFormGroup = container.querySelector('[data-field-name="password"]');
+      const agreeFormGroup = container.querySelector('[data-field-name="agree"]');
+      expect(usernameFormGroup?.getAttribute('data-field-error')).toBe('Username is required');
+      expect(emailFormGroup?.getAttribute('data-field-error')).toBe('Email is required');
+      expect(passwordFormGroup?.getAttribute('data-field-error')).toBe('Password is required');
+      expect(agreeFormGroup?.getAttribute('data-field-error')).toBe('You must agree to the terms');
     });
 
     // fill the form with valid data

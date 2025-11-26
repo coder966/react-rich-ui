@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
 import { RruForm, RruMultiSelectInput, useRruForm } from '../../src';
@@ -156,7 +156,8 @@ describe('RruMultiSelectInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('You must select at least one')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="color"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('You must select at least one');
     });
 
     // change

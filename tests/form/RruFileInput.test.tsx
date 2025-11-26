@@ -177,7 +177,8 @@ describe('RruFileInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(screen.getByText('Attachment is required')).toBeTruthy();
+      const formGroup = container.querySelector('[data-field-name="attachment"]');
+      expect(formGroup?.getAttribute('data-field-error')).toBe('Attachment is required');
     });
 
     await selectFile(container, 'cat.png');
