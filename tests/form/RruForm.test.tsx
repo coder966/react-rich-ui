@@ -889,7 +889,7 @@ describe('RruForm', () => {
           <RruTextInput name='email' label='Email' />
           {(formContext.getFieldValue('basket') ?? [])
             .map((_, index) => (
-              <div key={index}>
+              <div className={'item'} key={index}>
                 <RruTextInput name={`basket[${index}].name`} label='Item Name' />
                 <RruTextInput name={`basket[${index}].color`} label='Item Color' />
                 <RruTextInput name={`basket[${index}].quantity`} label='Item Quantity' />
@@ -905,9 +905,15 @@ describe('RruForm', () => {
     // render hook
     const { container } = render(<TestComponent />);
 
+    // make sure there is exactly one item rendered
+    expect(container.querySelectorAll('.item').length).toBe(1);
+
     // add new item
     const addNewItemButton = screen.getByText('Add new item');
     await userEvent.click(addNewItemButton);
+
+    // make sure there are exactly 2 items rendered
+    expect(container.querySelectorAll('.item').length).toBe(2);
 
     // set some data
     const item1Name = container.querySelector('input[name="basket[1].name"]');
@@ -934,6 +940,9 @@ describe('RruForm', () => {
     });
 
     await userEvent.click(addNewItemButton);
+
+    // make sure there are exactly 3 items rendered
+    expect(container.querySelectorAll('.item').length).toBe(3);
 
     // set some invalid data
     const item2Name = container.querySelector('input[name="basket[2].name"]');
@@ -983,6 +992,9 @@ describe('RruForm', () => {
     // remove the middle item (index 1)
     const removeItem1Button = screen.getByText('Remove item #1');
     await userEvent.click(removeItem1Button);
+
+    // make sure there are exactly 2 items rendered
+    expect(container.querySelectorAll('.item').length).toBe(2);
 
     // submit the form
     await submitForm(container);
