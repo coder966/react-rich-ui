@@ -911,13 +911,13 @@ describe('RruForm', () => {
 
     // set some data
     const item1Name = container.querySelector('input[name="basket[1].name"]');
-    await userEvent.click(item1Name);
+    item1Name && await userEvent.click(item1Name);
     await userEvent.keyboard('Pear');
     const item1Color = container.querySelector('input[name="basket[1].color"]');
-    await userEvent.click(item1Color);
+    item1Color && await userEvent.click(item1Color);
     await userEvent.keyboard('Green');
     const item1Quantity = container.querySelector('input[name="basket[1].quantity"]');
-    await userEvent.click(item1Quantity);
+    item1Quantity && await userEvent.click(item1Quantity);
     await userEvent.keyboard('8');
 
     // submit the form
@@ -937,13 +937,13 @@ describe('RruForm', () => {
 
     // set some invalid data
     const item2Name = container.querySelector('input[name="basket[2].name"]');
-    await userEvent.click(item2Name);
+    item2Name && await userEvent.click(item2Name);
     await userEvent.keyboard('{Backspace}');
     const item2Color = container.querySelector('input[name="basket[2].color"]');
-    await userEvent.click(item2Color);
+    item2Color && await userEvent.click(item2Color);
     await userEvent.keyboard('Green');
     const item2Quantity = container.querySelector('input[name="basket[2].quantity"]');
-    await userEvent.click(item2Quantity);
+    item2Quantity && await userEvent.click(item2Quantity);
     await userEvent.keyboard('0');
 
     // submit the form
@@ -959,11 +959,11 @@ describe('RruForm', () => {
     expect(quantityFormGroup?.getAttribute('data-field-error')).toBe('Quantity must be at least 1');
 
     // fix the last item (index 2)
-    await userEvent.tripleClick(item2Name);
+    item2Name && await userEvent.tripleClick(item2Name);
     await userEvent.keyboard('Mango');
-    await userEvent.tripleClick(item2Color);
+    item2Color && await userEvent.tripleClick(item2Color);
     await userEvent.keyboard('Yellow');
-    await userEvent.tripleClick(item2Quantity);
+    item2Quantity && await userEvent.tripleClick(item2Quantity);
     await userEvent.keyboard('3');
 
     // submit the form

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import { RruFileInput, RruForm, useRruForm } from '../../src';
 import selectFile from '../__utils__/selectFile';
