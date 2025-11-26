@@ -23,10 +23,13 @@ export type UseRruFormReturn = {
   getFieldsValues: () => Record<string, any>;
   getFieldValue: (fieldName: string) => any;
   setFieldValue: (fieldName: string, value: any) => void;
+  addItemToFieldArray: (fieldArrayName: string, value?: any, prepend?: boolean) => void;
+  removeItemFromFieldArray: (fieldArrayName: string, index: number) => void;
 };
 
 export const useRruForm = (): UseRruFormReturn => {
   const [formContext, setFormContext] = useState<UseFormReturn | null>(null);
+  const [, setDummyState] = useState<number>(0); // used to force rerender in case needed
 
   const $ = (context: UseFormReturn) => {
     console.debug('setting form context');
@@ -35,7 +38,7 @@ export const useRruForm = (): UseRruFormReturn => {
 
   const getFieldsValues = () => {
     if (formContext == null) {
-      console.error('FormContext has not been set yet. Cannot get values.');
+      console.error('FormContext has not been set yet. Cannot read values, will return empty object.');
       return {};
     }
 
@@ -54,10 +57,52 @@ export const useRruForm = (): UseRruFormReturn => {
     formContext.setValue(fieldName, value);
   };
 
+  const addItemToFieldArray = (fieldArrayName: string, value?: any, prepend?: boolean) => {
+    if (formContext == null) {
+      console.error('FormContext has not been set yet. Cannot call addItemToFieldArray.');
+      return;
+    }
+
+    const currentValue = getFieldValue(fieldArrayName);
+    if(!Array.isArray(currentValue)){
+      console.error(fieldArrayName, 'is not an array of fields, cannot add item.');
+      return;
+    }
+
+    const newValue = prepend ? [value || {}, ...currentValue] : [...currentValue, value || {}];
+    setFieldValue(fieldArrayName, newValue);
+
+    // because the new item is not even rendered yet, the client components need us to re-render so it would read the array
+    // and render fields for each item.
+    setDummyState(s => s + 1);
+  };
+
+  const removeItemFromFieldArray = (fieldArrayName: string, index: number) => {
+    if (formContext == null) {
+      console.error('FormContext has not been set yet. Cannot call removeItemFromFieldArray.');
+      return;
+    }
+
+    const currentValue = getFieldValue(fieldArrayName);
+    if(!Array.isArray(currentValue)){
+      console.error(fieldArrayName, 'is not an array of fields, cannot add item.');
+      return;
+    }
+
+    const newValue = [...currentValue];
+    newValue.splice(index, 1);
+    setFieldValue(fieldArrayName, newValue);
+
+    // see above comment in addItemToFieldArray
+    setDummyState(s => s + 1);
+  };
+
   return {
     $: $,
     getFieldsValues: getFieldsValues,
     getFieldValue: getFieldValue,
     setFieldValue: setFieldValue,
+    addItemToFieldArray: addItemToFieldArray,
+    removeItemFromFieldArray: removeItemFromFieldArray,
   };
 };

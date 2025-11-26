@@ -227,7 +227,7 @@ describe('useRruForm', () => {
 
     // validation - should return empty object and log error
     expect(values).toEqual({});
-    expect(consoleErrorSpy).toHaveBeenCalledWith('FormContext has not been set yet. Cannot get values.');
+    expect(consoleErrorSpy).toHaveBeenCalledWith('FormContext has not been set yet. Cannot read values, will return empty object.');
 
     consoleErrorSpy.mockRestore();
   });

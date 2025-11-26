@@ -42,12 +42,6 @@ export const useField = (name: string, onProgrammaticValue?: (serializedValue: a
       return;
     }
 
-    if (name && name.split('.').filter((p) => /^\d+$/.test(p)).length > 0) {
-      console.error(
-        `Field name "${name}" cannot include a numeric part. Try to prefix the numeric part with some string.`
-      );
-    }
-
     const initialValue = formContext.formState.defaultValues
       ? resolveObjectAttribute(name, formContext.formState.defaultValues)
       : undefined;

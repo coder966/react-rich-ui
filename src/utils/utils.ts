@@ -14,23 +14,6 @@
  * limitations under the License.
  */
 
-const isObject = (val: any): boolean => {
-  return (
-    val != null &&
-    typeof val === 'object' &&
-    !Array.isArray(val) &&
-    !(val instanceof String) &&
-    !(val instanceof Number) &&
-    !(val instanceof Boolean) &&
-    !(val instanceof Date) &&
-    !(val instanceof File)
-  );
-};
-
-const isArray = (val: any): boolean => {
-  return val != null && typeof val === 'object' && Array.isArray(val);
-};
-
 const range = (from: number, to: number) => {
   return rangeOfSize(to - from + 1, from);
 };
@@ -57,18 +40,38 @@ const retainAll = <T1, T2>(firstArray: T1[], secondArray: T2[], comparator: (obj
   });
 };
 
-const isObjKey = <T extends object>(obj: T, key: any): key is keyof T => {
-  if (isObject(obj)) {
-    return key in obj;
-  }
-  return false;
-};
-
+/**
+ * @param path supports dot-notation for object keys and bracket-notation for arrays
+ * @param obj
+ */
 const resolveObjectAttribute = (path: string, obj: object): any => {
-  return path
-    .split('.')
-    .reduce((prev: object | null, curr: string) => (prev && isObjKey(prev, curr) ? prev[curr] : null), obj);
-};
+  if (obj == null) return undefined;
+
+  // Split into tokens: parts between dots or inside brackets
+  const tokens: (string | number)[] = [];
+
+  const re = /([^.\[\]]+)|\[(\d+)\]/g;
+  let m: RegExpExecArray | null;
+
+  while ((m = re.exec(path)) !== null) {
+    if (m[1] !== undefined) {
+      // dot notation key
+      tokens.push(m[1]);
+    } else if (m[2] !== undefined) {
+      // numeric index
+      tokens.push(Number(m[2]));
+    }
+  }
+
+  let cur: any = obj;
+
+  for (const key of tokens) {
+    if (cur == null) return undefined;
+    cur = cur[key as any];
+  }
+
+  return cur;
+}
 
 const deepEqual = (x: any, y: any): boolean => {
   const ok = Object.keys,
@@ -80,4 +83,4 @@ const deepEqual = (x: any, y: any): boolean => {
     : x === y;
 };
 
-export { deepEqual, isArray, isObjKey, isObject, range, rangeOfSize, resolveObjectAttribute, retainAll };
+export { deepEqual, range, rangeOfSize, resolveObjectAttribute, retainAll };

@@ -580,3 +580,56 @@ export const ValidateFieldNames = (args) => {
     </RruForm>
   );
 };
+
+export const ArrayFields = (args) => {
+
+  const initialValues = {
+    email: 'user@example.com',
+    basket: [
+      { name: 'Apple', color: 'Red', quantity: 5 },
+      { name: 'Mango', color: 'Yellow', quantity: 0 },
+    ],
+  };
+
+  const validationSchema = yup.object({
+    email: yup.string().email('Invalid email').required('Email is required'),
+    basket: yup.array().of(
+      yup.object({
+        name: yup.string().required('Item name is required'),
+        color: yup.string().required('Item color is required'),
+        quantity: yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
+      })
+    ),
+  });
+
+  const onSubmit = (form) => {
+    action('submitting the form')(form);
+  };
+
+  const rruFormContext = useRruForm();
+
+  const addItem = () => {
+    rruFormContext.addItemToFieldArray('basket', {name: 'New Item Default Name', color: 'Blue', quantity: 0});
+  }
+
+  const removeItem = (index: number) => {
+    rruFormContext.removeItemFromFieldArray('basket', index);
+  }
+
+  return (
+    <RruForm context={rruFormContext} onSubmit={onSubmit} initialValues={initialValues} yupValidationSchema={validationSchema}>
+      <RruTextInput name='email' label='Email' />
+      {(rruFormContext.getFieldValue('basket') ?? [])
+        .map((_, index) => (
+          <div className={'p-3 m-3 border border-dark'}>
+            <RruTextInput name={`basket[${index}].name`} label='Item Name' />
+            <RruTextInput name={`basket[${index}].color`} label='Item Color' />
+            <RruTextInput name={`basket[${index}].quantity`} label='Item Quantity' />
+            <button type='button' className='btn btn-danger mt-3' onClick={() => removeItem(index)}>Remove</button>
+          </div>
+        ))}
+      <button type='button' className='btn btn-primary mt-4' onClick={addItem}>Add new item</button>
+      <button type='submit' className='btn btn-primary mt-4'>Submit</button>
+    </RruForm>
+  );
+};

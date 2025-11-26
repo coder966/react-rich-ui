@@ -18,7 +18,7 @@ import { UseRruFormReturn } from '../../hooks/useRruForm';
 
 type RruFormFieldPrimitiveValue = string | string[] | number | boolean | File | null;
 type RruFormFieldObjectValue = Record<string, RruFormFieldPrimitiveValue>;
-export type RruFormFieldValueType = RruFormFieldPrimitiveValue | RruFormFieldObjectValue;
+export type RruFormFieldValueType = RruFormFieldPrimitiveValue | RruFormFieldObjectValue | RruFormFieldObjectValue[];
 
 export default interface RruFormProps {
   context?: UseRruFormReturn;
