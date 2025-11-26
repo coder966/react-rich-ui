@@ -31,13 +31,6 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
   const field = useField(props.name, (serializedValue) => {
     if (!deepEqual(serializedValue, value)) {
       setValue(serializedValue);
-
-      if (!deepEqual(serializedValue, selectedOptions.map(o => o.value))) {
-        setTimeout(() => {
-          const options = findOptions(props.options, serializedValue || []);
-          onSelectChange(options);
-        }, 0);
-      }
     }
   });
 
