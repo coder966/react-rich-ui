@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { useRef, useState } from 'react';
-import useAsyncEffect from 'use-async-effect';
+import { useEffect, useRef, useState } from 'react';
 import ChangeCallback from '../types/ChangeCallback';
 import PageFetcher from '../types/PageFetcher';
 import SortDir from '../types/SortDir';
@@ -45,42 +44,48 @@ const useDataSource = (
   const [totalPages, setTotalPages] = useState(0);
   const [data, setData] = useState<any[]>([]);
 
-  useAsyncEffect(async () => {
+  useEffect(() => {
     setIsLoading(true);
 
     const reqId = new Date().getTime();
     requestId.current = reqId;
 
-    try {
-      const body = await pageFetcher(pageSize, pageNumber, sortKey, sortDir, search);
+    pageFetcher(pageSize, pageNumber, sortKey, sortDir, search)
+      .then(body => {
+        if (requestId.current !== reqId) {
+          console.debug(
+            `ignoring former response from requestId=${reqId} because the current requestId=${requestId.current}`
+          );
+          return;
+        }
 
-      if (requestId.current !== reqId) {
-        console.debug(
-          `ignoring former response from requestId=${reqId} because the current requestId=${requestId.current}`
-        );
-        return;
-      }
+        if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
+          throw Error('Something went wrong in your page fetcher');
+        }
 
-      if (isNaN(body.totalPages) || !body.items || !Array.isArray(body.items)) {
-        throw Error('Something went wrong in your page fetcher');
-      }
+        setError(null);
+        setTotalPages(body.totalPages);
+        setData(body.items);
 
-      setError(null);
-      setTotalPages(body.totalPages);
-      setData(body.items);
-    } catch (e: any) {
-      console.error('Error in useDataSource', e);
+        if (onChange) {
+          onChange(pageNumber, sortKey, sortDir);
+        }
 
-      setError(e);
-      setTotalPages(0);
-      setData([]);
-    }
+        setIsLoading(false);
+      })
+      .catch(e => {
+        console.error('Error in useDataSource', e);
 
-    if (onChange) {
-      onChange(pageNumber, sortKey, sortDir);
-    }
+        setError(e);
+        setTotalPages(0);
+        setData([]);
 
-    setIsLoading(false);
+        if (onChange) {
+          onChange(0, sortKey, sortDir);
+        }
+
+        setIsLoading(false);
+      })
   }, [pageSize, pageNumber, sortKey, sortDir, search]);
 
   return {
