@@ -17,18 +17,19 @@ Click "Open Sandbox" to see the example source code
 
 ### RruDataTable
 
-| Name              | Description                                                                                  | Required |
-| ----------------- | -------------------------------------------------------------------------------------------- | -------- |
-| pageFetcher       | A function that fetches a page from where-ever your data might be, usually from an HTTP API. | Yes      |
-| columns           | An array of column objects that determine how to render columns in the table.                | Yes      |
-| search            | The search parameters the will be sent to the endpoint specified                             | No       |
-| pageSize          | The page size. The default value is `10`                                                     | No       |
-| noDataLabel       | Message rendered when there is no data available                                             | No       |
-| errorLabel        | Message rendered when there is an error                                                      | No       |
-| defaultPageNumber | Set the initial page number                                                                  | No       |
-| defaultSortKey    | Set the initial sort key                                                                     | No       |
-| defaultSortDir    | Set the initial sort direction                                                               | No       |
-| onChange          | A callback is called on initialization as well for when one of these gets updated (pageNumber, sortKey, sortDir)     | No       |
+| Name              | Description                                                                                                      | Required |
+|-------------------|------------------------------------------------------------------------------------------------------------------| -------- |
+| pageFetcher       | A function that fetches a page from where-ever your data might be, usually from an HTTP API.                     | Yes      |
+| columns           | An array of column objects that determine how to render columns in the table.                                    | Yes      |
+| search            | The search parameters the will be sent to the endpoint specified                                                 | No       |
+| pageSize          | The page size. The default value is `10`                                                                         | No       |
+| noDataLabel       | Message rendered when there is no data available                                                                 | No       |
+| errorLabel        | Message rendered when there is an error                                                                          | No       |
+| defaultPageNumber | Set the initial page number                                                                                      | No       |
+| defaultSortKey    | Set the initial sort key                                                                                         | No       |
+| defaultSortDir    | Set the initial sort direction                                                                                   | No       |
+| onChange          | A callback is called on initialization as well for when one of these gets updated (pageNumber, sortKey, sortDir) | No       |
+| id                | optional table id                                                                                                | No       |
 
 ### Column
 

@@ -23,42 +23,6 @@ Click "Open Sandbox" to see the example source code
 | id                  | The form `id`. This can be used if your submit button is outside the form                                                                                              | No       |
 | context             | If you want to programmatically access the form fields, you can use `useRruForm()` hook and pass its returned context here. More information further down in the docs. | No       |
 
-## Nested Fields
-
-You can have nested field names, for example:
-
-```html
-<RruTextInput name="name" label="Name" />
-<RruTextInput name="age" label="Age" />
-<RruTextInput name="address.city" label="City" />
-<RruTextInput name="address.street" label="Street" />
-```
-
-Would result in the following form values object:
-
-```javascript
-{
-  name: 'Khalid',
-  age: 100,
-  address: {
-    city: 'Riyadh',
-    street: 'Olya St.'
-  }
-}
-```
-
-#### Note
-
-Please note that the field names should not start with a digit.
-If you want to represent an array of objects, prefix the name with any string.
-
-```html
-<!-- won't work properly ❌ -->
-<RruTextInput name="owner.1.name" label="Owner Name" />
-
-<!-- good ✅ -->
-<RruTextInput name="owner.item_1.name" label="Owner Name" />
-```
 
 ## Read and write field values programmatically
 
@@ -89,6 +53,114 @@ return (
     </button>
   </RruForm>
 );
+```
+
+## Nested Fields
+
+You can have nested field names, for example:
+
+```html
+<RruTextInput name="name" label="Name" />
+<RruTextInput name="age" label="Age" />
+<RruTextInput name="address.city" label="City" />
+<RruTextInput name="address.street" label="Street" />
+```
+
+Would result in the following form values object:
+
+```json
+{
+  "name": "Khalid",
+  "age": 100,
+  "address": {
+    "city": "Riyadh",
+    "street": "Olya St."
+  }
+}
+```
+
+## Array Fields
+
+You can have a dynamic array of fields, for example:
+
+```html
+<RruTextInput name="name" label="Name" />
+<RruTextInput name="age" label="Age" />
+<RruTextInput name="basket[0].name" label="Item Name" />
+<RruTextInput name="basket[0].quantity" label="Item Quantity" />
+<RruTextInput name="basket[1].name" label="Item Name" />
+<RruTextInput name="basket[2].quantity" label="Item Quantity" />
+```
+
+Would result in the following form values object:
+
+```json
+{
+  "name": "Khalid",
+  "age": 100,
+  "basket": [
+    {
+      "name": "Apple", "quantity": 5
+    },
+    {
+      "name": "Mango", "quantity": 2
+    }
+  ]
+}
+```
+
+You can also have a dynamic array size by adding or removing items at runtime like this:
+
+```js
+const TestComponent = () => {
+  const formContext = useRruForm();
+
+  const onSubmit = (form) => {
+    console.log('form', form);
+  }
+
+  const initialValues = {
+    email: 'user@example.com',
+    basket: [{ name: 'Apple', quantity: 5 }],
+  }
+
+  const validationSchema = yup.object({
+    email: yup.string().email('Invalid email').required('Email is required'),
+    basket: yup.array().of(
+      yup.object({
+        name: yup.string().required('Item name is required'),
+        quantity: yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
+      })
+    ),
+  });
+
+  return (
+    <RruForm context={formContext} onSubmit={onSubmit} initialValues={initialValues} yupValidationSchema={validationSchema}>
+
+      <RruTextInput name='email' label='Email' />
+      
+      {(formContext.getFieldValue('basket') ?? []).map((_, index) => (
+        <div>
+
+          <RruTextInput name={`basket[${index}].name`} label={`Item #${index} Name`} />
+          <RruTextInput name={`basket[${index}].quantity`} label={`Item #${index} Quantity`} />
+
+          <button type='button' onClick={() => formContext.removeItemFromFieldArray('basket', index)}>
+            Remove item #{index}
+          </button>
+
+        </div>
+      ))}
+
+      <button type='button' onClick={() => formContext.addItemToFieldArray('basket')}>
+        Add new item
+      </button>
+
+      <button type='submit'>Submit</button>
+
+    </RruForm>
+  );
+};
 ```
 
 ## Input Components
