@@ -1,4 +1,4 @@
-[Docs](/docs) > [Tables](/docs/components/RruDataTable)
+[Components](/docs/components) > [Tables](/docs/components/RruDataTable)
 
 # RruDataTable
 

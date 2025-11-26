@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruOptionsPropType](/docs/components/RruOptionsPropType)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruOptionsPropType](/docs/components/RruOptionsPropType)
 
 # RruOptionsPropType
 

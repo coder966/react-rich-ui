@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruSelectInput](/docs/components/RruSelectInput)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruSelectInput](/docs/components/RruSelectInput)
 
 # RruSelectInput
 

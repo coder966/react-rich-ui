@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruRadioInput](/docs/components/RruRadioInput)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruRadioInput](/docs/components/RruRadioInput)
 
 # RruRadioInput
 

@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm)
+[Components](/docs/components) > [Forms](/docs/components/RruForm)
 
 # RruForm
 

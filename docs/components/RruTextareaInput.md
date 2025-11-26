@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruTextareaInput](/docs/components/RruTextareaInput)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruTextareaInput](/docs/components/RruTextareaInput)
 
 # RruTextareaInput
 

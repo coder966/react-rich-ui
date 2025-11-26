@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruCheckboxInput](/docs/components/RruCheckboxInput)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruCheckboxInput](/docs/components/RruCheckboxInput)
 
 # RruCheckboxInput
 

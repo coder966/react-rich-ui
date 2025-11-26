@@ -1,4 +1,4 @@
-[Docs](/docs) > [Forms](/docs/components/RruForm) > [RruDateTimeInput](/docs/components/RruDateTimeInput)
+[Components](/docs/components) > [Forms](/docs/components/RruForm) > [RruDateTimeInput](/docs/components/RruDateTimeInput)
 
 # RruDateTimeInput
 
