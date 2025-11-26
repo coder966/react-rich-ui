@@ -30,12 +30,12 @@ interface RruModalButtonProps {
   /**
    * The modal title.
    */
-  modalTitle?: React.ReactNode;
+  modalTitle?: ReactNode;
 
   /**
    * The modal body.
    */
-  modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode);
+  modalBody?: ReactNode | ((closeModal: () => void) => ReactNode);
 }
 
 export default RruModalButtonProps;

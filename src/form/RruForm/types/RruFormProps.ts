@@ -15,6 +15,7 @@
  */
 
 import { UseRruFormReturn } from '../../hooks/useRruForm';
+import { ReactNode } from 'react';
 
 type RruFormFieldPrimitiveValue = string | string[] | number | boolean | File | null;
 type RruFormFieldObjectValue = Record<string, RruFormFieldPrimitiveValue>;
@@ -33,7 +34,7 @@ export default interface RruFormProps {
   onSubmit: (form: Record<string, RruFormFieldValueType>) => void;
 
   /**  */
-  children?: React.ReactNode | React.ReactNode[];
+  children?: ReactNode | ReactNode[];
 
   /** */
   id?: string;

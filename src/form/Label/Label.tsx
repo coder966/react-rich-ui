@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import './style.css';
 
 export type LabelProps = {
   /**  */
-  label?: React.ReactNode;
+  label?: ReactNode;
 
   /**  */
   requiredAsterisk?: boolean;
 
   /**  */
-  children?: JSX.Element;
+  children?: ReactNode;
 };
 
 const Label: FC<LabelProps> = (props) => {

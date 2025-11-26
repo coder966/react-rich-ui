@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
+import { ReactNode } from 'react';
+
 export default interface RruOption {
-  label: React.ReactNode;
+  label: ReactNode;
   value: string;
 }

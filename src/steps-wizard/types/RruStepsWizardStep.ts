@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
+import { ReactNode } from 'react';
+
 export default interface RruStepsWizardStep {
   number: number;
-  label?: React.ReactNode;
+  label?: ReactNode;
 }

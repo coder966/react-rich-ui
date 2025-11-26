@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import { RruStepsWizardContextProvider } from './hooks/useRruStepsWizardContext';
 import './style.css';
 import RruStepsWizardContextType from './types/RruStepsWizardContextType';
@@ -30,7 +30,7 @@ const RruStepsWizard: FC<RruStepsWizardProps> = (props) => {
 
   const stepsComponents = Array.isArray(props.children) ? props.children : props.children ? [props.children] : [];
 
-  const getStepLabel = (number: number): React.ReactNode | undefined => {
+  const getStepLabel = (number: number): ReactNode | undefined => {
     return props.getStepLabel && typeof props.getStepLabel === 'function' ? props.getStepLabel(number) : undefined;
   };
 

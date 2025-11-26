@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+import { ReactNode } from 'react';
+
 export default interface RruTextInputProps {
   /**  */
   name: string;
 
   /**  */
-  label?: React.ReactNode;
+  label?: ReactNode;
 
   /**  */
   requiredAsterisk?: boolean;

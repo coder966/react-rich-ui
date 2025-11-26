@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
+import { ReactNode } from 'react';
+
 interface TableColumn {
   /**
    * Table column label
    */
-  label: React.ReactNode;
+  label: ReactNode;
 
   /**
    * The value the should be displayed in each row.
    * This could be either a string representing a property path in the item object
    * or a function which takes the item object and returns a value
    */
-  value: string | ((item: any) => React.ReactNode);
+  value: string | ((item: any) => ReactNode);
 
   /**
    * Property path in the item object.

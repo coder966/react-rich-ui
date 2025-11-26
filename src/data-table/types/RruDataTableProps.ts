@@ -18,6 +18,7 @@ import ChangeCallback from './ChangeCallback';
 import PageFetcher from './PageFetcher';
 import SortDir from './SortDir';
 import TableColumn from './TableColumn';
+import { ReactNode } from 'react';
 
 interface StateProps {
   /**
@@ -69,12 +70,12 @@ interface RruDataTableProps extends StateProps {
   /**
    * Message rendered when there is no data available
    */
-  noDataLabel?: React.ReactNode;
+  noDataLabel?: ReactNode;
 
   /**
    * Message rendered when there is an error
    */
-  errorLabel?: React.ReactNode;
+  errorLabel?: ReactNode;
 }
 
 export default RruDataTableProps;

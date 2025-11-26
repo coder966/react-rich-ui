@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import RruModalButtonProps from './types/RruModalButtonProps';
 
 /**
@@ -31,8 +31,8 @@ const RruModalButton: FC<RruModalButtonProps> = (props) => {
   };
 
   const renderModalBody = (
-    modalBody?: React.ReactNode | ((closeModal: () => void) => React.ReactNode)
-  ): React.ReactNode | undefined => {
+    modalBody?: ReactNode | ((closeModal: () => void) => ReactNode)
+  ): ReactNode | undefined => {
     if (modalBody) {
       if (typeof modalBody === 'function') {
         return modalBody(closeModal);

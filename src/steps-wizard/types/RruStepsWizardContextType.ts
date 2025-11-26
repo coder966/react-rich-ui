@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+import { ReactNode } from 'react';
+
 export default interface RruStepsWizardContextType {
   currentStepNumber: number;
-  currentStepLabel: React.ReactNode | undefined;
+  currentStepLabel: ReactNode | undefined;
   currentStepInputData: any;
   goToStep: (stepNumber: number, data?: any) => void;
   nextStep: (data?: any) => void;

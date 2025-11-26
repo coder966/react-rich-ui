@@ -15,13 +15,14 @@
  */
 
 import RruOptionsPropType from '../../types/RruOptionsPropType';
+import { ReactNode } from 'react';
 
 export default interface RruMultiCheckboxInputProps {
   /**  */
   name: string;
 
   /**  */
-  label?: React.ReactNode;
+  label?: ReactNode;
 
   /**  */
   requiredAsterisk?: boolean;

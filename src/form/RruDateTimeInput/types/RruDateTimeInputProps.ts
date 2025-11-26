@@ -17,13 +17,14 @@
 import RruDateTimeInputCalendarType from './RruDateTimeInputCalendarType';
 import RruDateTimeInputDateConfig from './RruDateTimeInputDateConfig';
 import RruDateTimeInputMode from './RruDateTimeInputMode';
+import { ReactNode } from 'react';
 
 export default interface RruDateTimeInputProps {
   /**  */
   name: string;
 
   /**  */
-  label?: React.ReactNode;
+  label?: ReactNode;
 
   /**  */
   requiredAsterisk?: boolean;
