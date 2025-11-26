@@ -34,12 +34,12 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@hookform/resolvers": "^2.9.11",
-    "intl-date": "^0.3.0",
-    "react-hook-form": "^7.53.0",
-    "react-select": "^5.8.1",
-    "react-select-async-paginate": "^0.7.6",
-    "use-async-effect": "^2.2.7"
+    "@hookform/resolvers": "~2.9.11",
+    "intl-date": "~0.3.0",
+    "react-hook-form": "~7.53.0",
+    "react-select": "~5.8.1",
+    "react-select-async-paginate": "~0.7.6",
+    "use-async-effect": "~2.2.7"
   },
   "peerDependencies": {
     "react": ">=16.8.0 || >=17.0.0 || >=18.0.0",
