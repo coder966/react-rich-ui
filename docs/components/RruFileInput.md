@@ -15,15 +15,16 @@ Click "Open Sandbox" to see the example source code
 
 ## Props
 
-| Name             | Description                                                                                                                                                                                                            | Required |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| name             | Unique form element name                                                                                                                                                                                               | Yes      |
-| label            | The form element label                                                                                                                                                                                                 | No       |
-| chooseFileLabel  | The label that tells the user to select a file to upload. This label will be replaced by the file name after the user selects one.                                                                                     | No       |
-| requiredAsterisk | Display an asterisk to indicate the field is required                                                                                                                                                                  | No       |
-| disabled         | Controls whether the input field is disabled or not                                                                                                                                                                    | No       |
-| accept           | Comma-separated list of one or more file types, or unique file type specifiers, describing which file types to allow. More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) | No       |
-| onChange         | A callback function. This is useful if you need to watch the field value                                                                                                                                               | No       |
+| Name                            | Description                                                                                                                                                                                                            | Required |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| -------- |
+| name                            | Unique form element name                                                                                                                                                                                               | Yes      |
+| label                           | The form element label                                                                                                                                                                                                 | No       |
+| chooseFileLabel                 | The label that tells the user to select a file to upload. This label will be replaced by the file name after the user selects one.                                                                                     | No       |
+| requiredAsterisk                | Display an asterisk to indicate the field is required                                                                                                                                                                  | No       |
+| disabled                        | Controls whether the input field is disabled or not                                                                                                                                                                    | No       |
+| accept                          | Comma-separated list of one or more file types, or unique file type specifiers, describing which file types to allow. More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) | No       |
+| onChange                        | A callback function. This is useful if you need to watch the field value                                                                                                                                               | No       |
+| shouldTriggerOnChangeOnSameFile | Whether you would like `onChange` to trigger on each file choosing event, even when the user chooses the same file again. Default is false.                                                                            | No       |
 
 ## Default field value
 

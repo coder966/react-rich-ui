@@ -46,4 +46,11 @@ export default interface RruFileInputProps {
    * More info at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept)
    */
   accept?: string;
+
+  /**
+   * Whether you would like `onChange` to trigger on each file choosing event,
+   * even when the user chooses the same file again?
+   * Default is false.
+   */
+  shouldTriggerOnChangeOnSameFile?: boolean;
 }

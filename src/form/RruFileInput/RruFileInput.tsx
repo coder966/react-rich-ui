@@ -24,6 +24,7 @@ import RruFileInputProps from './types/RruFileInputProps';
 
 const RruFileInput: FC<RruFileInputProps> = (props) => {
   const [value, setValue] = useState<any>(null);
+  const [key, setKey] = useState<number>(0);
 
   const field = useField(props.name, (serializedValue) => {
     if (!deepEqual(serializedValue, value)) {
@@ -66,11 +67,15 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
           {getLabel()}
         </div>
         <input
+          key={props.shouldTriggerOnChangeOnSameFile ? key : 0}
           aria-label='Upload'
           type='file'
           className={`form-control rru-file-input__actual-input ${field.error ? 'is-invalid' : ''}`}
           name={props.name}
-          onChange={(e) => setNewValue(e.target.files)}
+          onChange={(e) => {
+            setNewValue(e.target.files);
+            setKey(k => k + 1);
+          }}
           onBlur={field.onBlur}
           disabled={props.disabled}
           accept={props.accept}

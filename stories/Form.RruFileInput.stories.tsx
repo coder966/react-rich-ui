@@ -50,7 +50,14 @@ export const Basic = (args) => {
 
   return (
     <RruForm initialValues={initialValues} yupValidationSchema={yupValidationSchema} onSubmit={onSubmit}>
-      <RruFileInput name='attachment' label='Attachment' chooseFileLabel='Select' accept='image/*,.pdf' />
+      <RruFileInput
+        name='attachment'
+        label='Attachment'
+        chooseFileLabel='Select'
+        accept='image/*,.pdf'
+        shouldTriggerOnChangeOnSameFile={true}
+        onChange={(f) => console.log('onChange', f)}
+      />
       <button type='submit' className='btn btn-primary mt-4'>
         Submit
       </button>
