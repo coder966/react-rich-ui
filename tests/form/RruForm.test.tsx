@@ -889,12 +889,12 @@ describe('RruForm', () => {
           <RruTextInput name='email' label='Email' />
           {(formContext.getFieldValue('basket') ?? [])
             .map((_, index) => (
-              <>
+              <div key={index}>
                 <RruTextInput name={`basket[${index}].name`} label='Item Name' />
                 <RruTextInput name={`basket[${index}].color`} label='Item Color' />
                 <RruTextInput name={`basket[${index}].quantity`} label='Item Quantity' />
                 <button type='button' onClick={() => formContext.removeItemFromFieldArray('basket', index)}>Remove item #{index}</button>
-              </>
+              </div>
             ))}
           <button type='button' onClick={() => formContext.addItemToFieldArray('basket')}>Add new item</button>
           <button type='submit'>Submit</button>

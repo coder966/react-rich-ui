@@ -621,7 +621,7 @@ export const ArrayFields = (args) => {
       <RruTextInput name='email' label='Email' />
       {(rruFormContext.getFieldValue('basket') ?? [])
         .map((_, index) => (
-          <div className={'p-3 m-3 border border-dark'}>
+          <div key={index} className={'p-3 m-3 border border-dark'}>
             <RruTextInput name={`basket[${index}].name`} label='Item Name' />
             <RruTextInput name={`basket[${index}].color`} label='Item Color' />
             <RruTextInput name={`basket[${index}].quantity`} label='Item Quantity' />

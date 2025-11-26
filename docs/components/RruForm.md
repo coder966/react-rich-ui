@@ -140,7 +140,7 @@ const TestComponent = () => {
       <RruTextInput name='email' label='Email' />
       
       {(formContext.getFieldValue('basket') ?? []).map((_, index) => (
-        <div>
+        <div key={index}>
 
           <RruTextInput name={`basket[${index}].name`} label={`Item #${index} Name`} />
           <RruTextInput name={`basket[${index}].quantity`} label={`Item #${index} Quantity`} />
