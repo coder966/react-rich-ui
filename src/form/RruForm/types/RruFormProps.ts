@@ -33,7 +33,7 @@ export default interface RruFormProps {
   onSubmit: (form: Record<string, RruFormFieldValueType>) => void;
 
   /**  */
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 
   /** */
   id?: string;
