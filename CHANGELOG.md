@@ -2,6 +2,30 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.5.0] - 2025-11-26
+
+### Added
+
+- `RruForm`: Support arrays of fields (dynamic items).
+- `RruFileInput`: Added new prop `shouldTriggerOnChangeOnSameFile`.
+- Support React 19.
+
+### Changed
+
+- `RruForm`: Allow empty form without children. Not a big change, but this could be helpful to some. 
+Note this is only a typescript type change, meaning it was allowed before and now it won't trigger a TS warning.
+- Minimum supported version of `yup` dependency is now `1.0.0` instead of `0.27.0`. This should be easy as yup did not have huge breaking changes and you probably are on v1 as it was released in 2023. 
+
+### Internal
+
+- Added 41 new tests.
+- Removed `use-async-effect` dependency.
+- Removed `react-detect-click-outside` dependency.
+- Upgraded dependencies.
+- Stricter dependency versions for safety.
+- Internal small enhancements.
+- Docs: restructure and updates.
+
 ## [2.4.3] - 2025-05-25
 
 ### Fixed
