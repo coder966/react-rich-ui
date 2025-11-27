@@ -18,8 +18,7 @@ import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
 import { RruForm, RruSelectInput, useRruForm } from '../../src';
-import selectOption from '../__utils__/selectOption';
-import submitForm from '../__utils__/submitForm';
+import { submitForm, selectOption, expectSelectedOptionIsRendered} from '../__utils__/form-utils.ts';
 
 describe('RruSelectInput', () => {
   it('should render correctly', async () => {
@@ -51,7 +50,7 @@ describe('RruSelectInput', () => {
       </RruForm>
     );
 
-    await selectOption(container, 'Orange');
+    await selectOption(container, 'color', 'Orange');
 
     await submitForm(container);
 
@@ -99,6 +98,9 @@ describe('RruSelectInput', () => {
       </RruForm>
     );
 
+    // make sure the initial value is rendered
+    expectSelectedOptionIsRendered(container, 'color', 'ORANGE');
+
     // submit the form
     await submitForm(container);
 
@@ -124,7 +126,10 @@ describe('RruSelectInput', () => {
       </RruForm>
     );
 
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'color', 'Blue');
+
+    // make the selected value is rendered
+    expectSelectedOptionIsRendered(container, 'color', 'BLUE');
 
     await submitForm(container);
 
@@ -161,7 +166,7 @@ describe('RruSelectInput', () => {
     });
 
     // change
-    await selectOption(container, 'Orange');
+    await selectOption(container, 'color', 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -195,7 +200,7 @@ describe('RruSelectInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
     expect(onInputChange.mock.calls[0][0]).toEqual('ORANGE');
 
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'color', 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -221,7 +226,9 @@ describe('RruSelectInput', () => {
     expect(formContext.current.getFieldValue('color')).toEqual('ORANGE');
     await act(async () => formContext.current.setFieldValue('color', 'BLUE'));
     expect(formContext.current.getFieldValue('color')).toEqual('BLUE');
-    expect(container.querySelector('[data-field-value="BLUE"]')).toBeTruthy();
+
+    // make the updated value is rendered
+    expectSelectedOptionIsRendered(container, 'color', 'BLUE');
 
     await submitForm(container);
 
@@ -261,7 +268,7 @@ describe('RruSelectInput', () => {
     );
 
     // select an option from a group
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'color', 'Blue');
 
     // submit the form
     await submitForm(container);

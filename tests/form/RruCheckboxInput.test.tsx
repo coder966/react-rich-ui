@@ -15,10 +15,13 @@
  */
 
 import { act, render, renderHook, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
 import { RruCheckboxInput, RruForm, useRruForm } from '../../src';
-import submitForm from '../__utils__/submitForm';
+import {
+  expectCheckboxStateIsRendered,
+  setCheckbox,
+  submitForm,
+} from '../__utils__/form-utils';
 
 describe('RruCheckboxInput', () => {
   it('should render correctly', async () => {
@@ -50,9 +53,7 @@ describe('RruCheckboxInput', () => {
       </RruForm>
     );
 
-    // fill the form
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement));
+    await setCheckbox(container, 'agree', true);
 
     // submit the form
     await submitForm(container);
@@ -101,6 +102,8 @@ describe('RruCheckboxInput', () => {
       </RruForm>
     );
 
+    expectCheckboxStateIsRendered(container, 'agree', true);
+
     // submit the form
     await submitForm(container);
 
@@ -126,9 +129,12 @@ describe('RruCheckboxInput', () => {
       </RruForm>
     );
 
+    expectCheckboxStateIsRendered(container, 'agree', true);
+
     // fill the form
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement));
+    await setCheckbox(container, 'agree', true);
+
+    expectCheckboxStateIsRendered(container, 'agree', false);
 
     // submit the form
     await submitForm(container);
@@ -155,10 +161,11 @@ describe('RruCheckboxInput', () => {
       </RruForm>
     );
 
-    // fill the form with bad input
-    const inputElement = container.querySelector('input[name="agree"]');
-    inputElement && (await userEvent.click(inputElement)); // make it checked
-    inputElement && (await userEvent.click(inputElement)); // make it unchecked
+    // check
+    await setCheckbox(container, 'agree', true);
+
+    // uncheck
+    await setCheckbox(container, 'agree', false);
 
     // submit the form
     await submitForm(container);
@@ -170,8 +177,8 @@ describe('RruCheckboxInput', () => {
       expect(formGroup?.getAttribute('data-field-error')).toBe('You must agree');
     });
 
-    // make it checked
-    inputElement && (await userEvent.click(inputElement));
+    // check
+    await setCheckbox(container, 'agree', true);
 
     // submit the form
     await submitForm(container);
@@ -205,10 +212,8 @@ describe('RruCheckboxInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1);
     expect(onInputChange.mock.calls[0][0]).toEqual(true);
 
-    const inputElement = container.querySelector('input[name="agree"]');
-
-    // change value
-    inputElement && (await userEvent.click(inputElement));
+    // check
+    await setCheckbox(container, 'agree', true);
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -234,7 +239,8 @@ describe('RruCheckboxInput', () => {
     expect(formContext.current.getFieldValue('agree')).toEqual(true);
     await act(async () => formContext.current.setFieldValue('agree', false));
     expect(formContext.current.getFieldValue('agree')).toEqual(false);
-    expect(container.querySelector('[data-field-value="false"]')).toBeTruthy();
+
+    expectCheckboxStateIsRendered(container, 'agree', false);
 
     // submit the form
     await submitForm(container);

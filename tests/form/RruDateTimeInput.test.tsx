@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import { RruDateTimeInput, RruForm, useRruForm } from '../../src';
-import selectDate from '../__utils__/selectDate';
-import submitForm from '../__utils__/submitForm';
+import { submitForm, selectDate, expectSelectedDateIsRendered } from '../__utils__/form-utils';
 
 describe('RruDateTimeInput', () => {
   it('should render and submit correctly (mode = date)', async () => {
@@ -33,7 +32,11 @@ describe('RruDateTimeInput', () => {
       </RruForm>
     );
 
+    expectSelectedDateIsRendered(container, 'birthDate', null);
+
     await selectDate(container, 'birthDate', '2020-05-12');
+
+    expectSelectedDateIsRendered(container, 'birthDate', '2020-05-12');
 
     // submit the form
     await submitForm(container);
@@ -57,7 +60,11 @@ describe('RruDateTimeInput', () => {
       </RruForm>
     );
 
+    expectSelectedDateIsRendered(container, 'birthDate', null);
+
     await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
+
+    expectSelectedDateIsRendered(container, 'birthDate', '2020-05-12 15:12:13');
 
     // submit the form
     await submitForm(container);
@@ -107,7 +114,7 @@ describe('RruDateTimeInput', () => {
     );
 
     // validate initial value is rendered inside the input field
-    expect(screen.getByDisplayValue('2020-05-12 15:12:13')).toBeTruthy();
+    expectSelectedDateIsRendered(container, 'birthDate', '2020-05-12 15:12:13');
 
     // submit the form
     await submitForm(container);
@@ -134,8 +141,12 @@ describe('RruDateTimeInput', () => {
       </RruForm>
     );
 
+    expectSelectedDateIsRendered(container, 'birthDate', '2024-01-03 09:07:05');
+
     // fill the form
     await selectDate(container, 'birthDate', '2020-05-12', '15:12:13');
+
+    expectSelectedDateIsRendered(container, 'birthDate', '2020-05-12 15:12:13');
 
     // submit the form
     await submitForm(container);
@@ -243,7 +254,8 @@ describe('RruDateTimeInput', () => {
     expect(formContext.current.getFieldValue('birthDate')).toEqual('2024-01-03 09:07:05');
     await act(async () => formContext.current.setFieldValue('birthDate', '2019-01-10 03:01:18'));
     expect(formContext.current.getFieldValue('birthDate')).toEqual('2019-01-10 03:01:18');
-    expect(container.querySelector('[data-field-value="2019-01-10 03:01:18"]')).toBeTruthy();
+
+    expectSelectedDateIsRendered(container, 'birthDate', '2019-01-10 03:01:18');
 
     // submit the form
     await submitForm(container);

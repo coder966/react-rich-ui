@@ -17,8 +17,7 @@
 import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import { RruFileInput, RruForm, useRruForm } from '../../src';
-import selectFile from '../__utils__/selectFile';
-import submitForm from '../__utils__/submitForm';
+import { submitForm, selectFile, expectSelectedFileIsRendered } from '../__utils__/form-utils';
 
 describe('RruFileInput', () => {
   it('should render correctly', async () => {
@@ -50,7 +49,7 @@ describe('RruFileInput', () => {
       </RruForm>
     );
 
-    await selectFile(container, 'cat.png');
+    await selectFile(container, 'attachment', 'cat.png');
 
     // submit the form
     await submitForm(container);
@@ -100,6 +99,8 @@ describe('RruFileInput', () => {
       </RruForm>
     );
 
+    expectSelectedFileIsRendered(container, 'attachment', 'cat.png');
+
     // submit the form
     await submitForm(container);
 
@@ -136,7 +137,9 @@ describe('RruFileInput', () => {
     expect(onSubmit.mock.calls[0][0].attachment).toBeTruthy();
     expect(onSubmit.mock.calls[0][0].attachment.name).toEqual('cat.png');
 
-    await selectFile(container, 'bee.png');
+    await selectFile(container, 'attachment', 'bee.png');
+
+    expectSelectedFileIsRendered(container, 'attachment', 'bee.png');
 
     // submit the form
     await submitForm(container);
@@ -181,7 +184,7 @@ describe('RruFileInput', () => {
       expect(formGroup?.getAttribute('data-field-error')).toBe('Attachment is required');
     });
 
-    await selectFile(container, 'cat.png');
+    await selectFile(container, 'attachment', 'cat.png');
 
     // submit the form
     await submitForm(container);
@@ -219,7 +222,7 @@ describe('RruFileInput', () => {
     expect(onInputChange.mock.calls[0][0]).toBeTruthy();
     expect(onInputChange.mock.calls[0][0].name).toEqual('cat.png');
 
-    await selectFile(container, 'bee.png');
+    await selectFile(container, 'attachment', 'bee.png');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -249,6 +252,7 @@ describe('RruFileInput', () => {
     expect(formContext.current.getFieldValue('attachment')).toEqual({
       name: 'cat.png',
     });
+
     await act(async () =>
       formContext.current.setFieldValue('attachment', {
         name: 'bee.png',
@@ -257,7 +261,8 @@ describe('RruFileInput', () => {
     expect(formContext.current.getFieldValue('attachment')).toEqual({
       name: 'bee.png',
     });
-    expect(container.querySelector('[data-field-value="[object Object]"]')).toBeTruthy();
+
+    expectSelectedFileIsRendered(container, 'attachment', 'bee.png');
 
     // submit the form
     await submitForm(container);

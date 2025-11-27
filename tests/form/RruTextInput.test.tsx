@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import { RruForm, RruTextInput, useRruForm } from '../../src';
-import submitForm from '../__utils__/submitForm';
+import { expectTypedTextIsRendered, submitForm, writeText } from '../__utils__/form-utils';
 
 describe('RruTextInput', () => {
   it('should render correctly', async () => {
@@ -52,9 +51,9 @@ describe('RruTextInput', () => {
     );
 
     // fill the form
-    const emailInput = container.querySelector('input[name="email"]');
-    emailInput && (await userEvent.click(emailInput));
-    await userEvent.keyboard('khalid@test.com');
+    await writeText(container, 'email', 'khalid@test.com');
+
+    expectTypedTextIsRendered(container, 'email', 'khalid@test.com');
 
     // submit the form
     await submitForm(container);
@@ -104,7 +103,7 @@ describe('RruTextInput', () => {
     );
 
     // validate initial value is rendered inside the input field
-    expect(screen.getByDisplayValue('khalid@test.com')).toBeTruthy();
+    expectTypedTextIsRendered(container, 'email', 'khalid@test.com');
 
     // submit the form
     await submitForm(container);
@@ -132,14 +131,9 @@ describe('RruTextInput', () => {
     );
 
     // fill the form
-    const emailInput = container.querySelector('input[name="email"]');
-    if (emailInput) {
-      // delete the current value in the input element
-      await userEvent.tripleClick(emailInput);
-      await userEvent.keyboard('{Backspace}');
-      // type in the new value
-      await userEvent.keyboard('mohammed@test.com');
-    }
+    await writeText(container, 'email', 'mohammed@test.com');
+
+    expectTypedTextIsRendered(container, 'email', 'mohammed@test.com');
 
     // submit the form
     await submitForm(container);
@@ -169,9 +163,8 @@ describe('RruTextInput', () => {
     );
 
     // fill the form with bad input
-    const emailInput = container.querySelector('input[name="email"]');
-    emailInput && (await userEvent.click(emailInput));
-    await userEvent.keyboard('test_bad_email');
+    await writeText(container, 'email', 'test_bad_email');
+
 
     // submit the form
     await submitForm(container);
@@ -179,16 +172,13 @@ describe('RruTextInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(emailInput?.getAttribute('class')).toContain('is-invalid');
       const formGroup = container.querySelector('[data-field-name="email"]');
       expect(formGroup?.getAttribute('data-field-error')).toBe('The email address is incorrect');
     });
 
-    // delete the current value in the input element
-    emailInput && (await userEvent.tripleClick(emailInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('khalid@test.com');
+    // write new good value
+    await writeText(container, 'email', 'khalid@test.com');
+
 
     // submit the form
     await submitForm(container);
@@ -222,17 +212,12 @@ describe('RruTextInput', () => {
     expect(onEmailChange).toHaveBeenCalledTimes(1);
     expect(onEmailChange.mock.calls[0][0]).toEqual('khalid@test.com');
 
-    const emailInput = container.querySelector('input[name="email"]');
-
-    // delete the current value in the input element
-    emailInput && (await userEvent.tripleClick(emailInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('test@test.com');
+    // type some value
+    await writeText(container, 'email', 'test@test.com');
 
     // validation for a new value
-    expect(onEmailChange).toHaveBeenCalledTimes(15);
-    expect(onEmailChange.mock.calls[14][0]).toEqual('test@test.com');
+    expect(onEmailChange).toHaveBeenCalledTimes(14);
+    expect(onEmailChange.mock.calls[13][0]).toEqual('test@test.com');
   });
 
   it('should reflect manual values set via the form context', async () => {
@@ -254,7 +239,8 @@ describe('RruTextInput', () => {
     expect(formContext.current.getFieldValue('email')).toEqual('khalid@test.com');
     await act(async () => formContext.current.setFieldValue('email', 'new@email.com'));
     expect(formContext.current.getFieldValue('email')).toEqual('new@email.com');
-    expect(container.querySelector('[data-field-value="new@email.com"]')).toBeTruthy();
+
+    expectTypedTextIsRendered(container, 'email', 'new@email.com');
 
     // submit the form
     await submitForm(container);

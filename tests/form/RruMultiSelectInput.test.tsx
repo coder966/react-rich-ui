@@ -18,8 +18,7 @@ import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
 import { RruForm, RruMultiSelectInput, useRruForm } from '../../src';
-import selectOption from '../__utils__/selectOption';
-import submitForm from '../__utils__/submitForm';
+import { submitForm, expectSelectedOptionIsRendered, selectOption } from '../__utils__/form-utils.ts';
 
 describe('RruMultiSelectInput', () => {
   it('should render correctly', async () => {
@@ -29,12 +28,12 @@ describe('RruMultiSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    const inputElement = container.querySelector('input[name="color"]');
+    const inputElement = container.querySelector('input[name="colors"]');
 
     expect(inputElement).toBeTruthy();
   });
@@ -46,19 +45,19 @@ describe('RruMultiSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await selectOption(container, 'Orange');
+    await selectOption(container, 'colors', 'Orange');
 
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     });
   });
 
@@ -69,7 +68,7 @@ describe('RruMultiSelectInput', () => {
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -80,7 +79,7 @@ describe('RruMultiSelectInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: [],
+      colors: [],
     });
   });
 
@@ -88,16 +87,18 @@ describe('RruMultiSelectInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
+
+    expectSelectedOptionIsRendered(container, 'colors', ['ORANGE']);
 
     // submit the form
     await submitForm(container);
@@ -105,7 +106,7 @@ describe('RruMultiSelectInput', () => {
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     });
   });
 
@@ -113,25 +114,27 @@ describe('RruMultiSelectInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'colors', 'Blue');
+
+    expectSelectedOptionIsRendered(container, 'colors', ['ORANGE', 'BLUE']);
 
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE', 'BLUE'],
+      colors: ['ORANGE', 'BLUE'],
     });
   });
 
@@ -139,13 +142,13 @@ describe('RruMultiSelectInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const yupValidationSchema = yup.object().shape({
-      color: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
+      colors: yup.array().min(1, 'You must select at least one').max(3, 'You cannot select more than three'),
     });
 
     // render
     const { container } = render(
       <RruForm onSubmit={onSubmit} yupValidationSchema={yupValidationSchema}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -156,12 +159,12 @@ describe('RruMultiSelectInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      const formGroup = container.querySelector('[data-field-name="color"]');
+      const formGroup = container.querySelector('[data-field-name="colors"]');
       expect(formGroup?.getAttribute('data-field-error')).toBe('You must select at least one');
     });
 
     // change
-    await selectOption(container, 'Orange');
+    await selectOption(container, 'colors', 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -170,7 +173,7 @@ describe('RruMultiSelectInput', () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit.mock.calls[0][0]).toEqual({
-        color: ['ORANGE'],
+        colors: ['ORANGE'],
       });
     });
   });
@@ -180,13 +183,13 @@ describe('RruMultiSelectInput', () => {
     const onSubmit = jest.fn();
     const onInputChange = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     };
 
     // render
     const { container } = render(
       <RruForm initialValues={initialValues} onSubmit={onSubmit}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} onChange={onInputChange} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} onChange={onInputChange} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
@@ -195,7 +198,7 @@ describe('RruMultiSelectInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
     expect(onInputChange.mock.calls[0][0]).toEqual(['ORANGE']);
 
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'colors', 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -206,31 +209,32 @@ describe('RruMultiSelectInput', () => {
     // prepare
     const onSubmit = jest.fn();
     const initialValues = {
-      color: ['ORANGE'],
+      colors: ['ORANGE'],
     };
 
     // render
     const { result: formContext } = renderHook(useRruForm);
     const { container } = render(
       <RruForm context={formContext.current} onSubmit={onSubmit} initialValues={initialValues}>
-        <RruMultiSelectInput name='color' label='Color' options={colorsOptions} />
+        <RruMultiSelectInput name='colors' label='Colors' options={colorsOptions} />
         <button type='submit'>Submit</button>
       </RruForm>
     );
 
     // NOTE: we use .sort() here because the order of the values is not guaranteed
 
-    expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE']);
-    await act(async () => formContext.current.setFieldValue('color', ['ORANGE', 'BLUE']));
-    expect(formContext.current.getFieldValue('color').sort()).toEqual(['ORANGE', 'BLUE'].sort());
-    expect(container.querySelector('[data-field-value="ORANGE,BLUE"]')).toBeTruthy();
+    expect(formContext.current.getFieldValue('colors')).toEqual(['ORANGE']);
+    await act(async () => formContext.current.setFieldValue('colors', ['ORANGE', 'BLUE']));
+    expect(formContext.current.getFieldValue('colors').sort()).toEqual(['ORANGE', 'BLUE'].sort());
+
+    expectSelectedOptionIsRendered(container, 'colors', ['ORANGE', 'BLUE']);
 
     await submitForm(container);
 
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit.mock.calls[0][0]).toEqual({
-      color: ['ORANGE', 'BLUE'].sort(),
+      colors: ['ORANGE', 'BLUE'].sort(),
     });
   });
 
@@ -263,8 +267,8 @@ describe('RruMultiSelectInput', () => {
     );
 
     // select options from different groups
-    await selectOption(container, 'Red');
-    await selectOption(container, 'Blue');
+    await selectOption(container, 'colors', 'Red');
+    await selectOption(container, 'colors', 'Blue');
 
     // submit the form
     await submitForm(container);

@@ -18,8 +18,7 @@ import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
 import { RruForm, RruRadioInput, useRruForm } from '../../src';
-import checkOption from '../__utils__/checkOption';
-import submitForm from '../__utils__/submitForm';
+import { expectSelectedRadioOptionIsRendered, selectRadioOption, submitForm } from '../__utils__/form-utils';
 
 describe('RruRadioInput', () => {
   it('should render correctly', async () => {
@@ -51,7 +50,7 @@ describe('RruRadioInput', () => {
       </RruForm>
     );
 
-    await checkOption(container, 'Orange');
+    await selectRadioOption(container, 'color', 'Orange');
 
     await submitForm(container);
 
@@ -99,6 +98,8 @@ describe('RruRadioInput', () => {
       </RruForm>
     );
 
+    expectSelectedRadioOptionIsRendered(container, 'color', 'ORANGE');
+
     // submit the form
     await submitForm(container);
 
@@ -124,7 +125,9 @@ describe('RruRadioInput', () => {
       </RruForm>
     );
 
-    await checkOption(container, 'Blue');
+    await selectRadioOption(container, 'color', 'Blue');
+
+    expectSelectedRadioOptionIsRendered(container, 'color', 'BLUE');
 
     await submitForm(container);
 
@@ -161,7 +164,7 @@ describe('RruRadioInput', () => {
     });
 
     // change
-    await checkOption(container, 'Orange');
+    await selectRadioOption(container, 'color', 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -195,7 +198,7 @@ describe('RruRadioInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
     expect(onInputChange.mock.calls[0][0]).toEqual('ORANGE');
 
-    await checkOption(container, 'Blue');
+    await selectRadioOption(container, 'color', 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -221,7 +224,9 @@ describe('RruRadioInput', () => {
     expect(formContext.current.getFieldValue('color')).toEqual('ORANGE');
     await act(async () => formContext.current.setFieldValue('color', 'BLUE'));
     expect(formContext.current.getFieldValue('color')).toEqual('BLUE');
-    expect(container.querySelector('[data-field-value="BLUE"]')).toBeTruthy();
+
+
+    expectSelectedRadioOptionIsRendered(container, 'color', 'BLUE');
 
     await submitForm(container);
 

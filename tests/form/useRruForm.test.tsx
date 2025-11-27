@@ -17,7 +17,7 @@
 import { act, render, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { RruForm, RruTextInput, useRruForm } from '../../src';
-import submitForm from '../__utils__/submitForm';
+import { submitForm } from '../__utils__/form-utils';
 
 describe('useRruForm', () => {
   it('should initialize useRruForm hook', () => {

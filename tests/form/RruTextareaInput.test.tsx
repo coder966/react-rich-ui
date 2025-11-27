@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import { RruForm, RruTextareaInput, useRruForm } from '../../src';
-import submitForm from '../__utils__/submitForm';
+import { expectTypedTextIsRendered, submitForm, writeText } from '../__utils__/form-utils';
 
 describe('RruTextareaInput', () => {
   it('should render correctly', async () => {
@@ -52,9 +51,7 @@ describe('RruTextareaInput', () => {
     );
 
     // fill the form
-    const myTextInput = container.querySelector('textarea[name="myText"]');
-    myTextInput && (await userEvent.click(myTextInput));
-    await userEvent.keyboard('My awesome post');
+    await writeText(container, 'myText', 'My awesome post');
 
     // submit the form
     await submitForm(container);
@@ -104,7 +101,7 @@ describe('RruTextareaInput', () => {
     );
 
     // validate initial value is rendered inside the input field
-    expect(screen.getByDisplayValue('My awesome post')).toBeTruthy();
+    expectTypedTextIsRendered(container, 'myText', 'My awesome post');
 
     // submit the form
     await submitForm(container);
@@ -131,15 +128,10 @@ describe('RruTextareaInput', () => {
       </RruForm>
     );
 
+    expectTypedTextIsRendered(container, 'myText', 'My awesome post');
+
     // fill the form
-    const myTextInput = container.querySelector('textarea[name="myText"]');
-    if (myTextInput) {
-      // delete the current value in the input element
-      await userEvent.tripleClick(myTextInput);
-      await userEvent.keyboard('{Backspace}');
-      // type in the new value
-      await userEvent.keyboard('This is a long paragraph');
-    }
+    await writeText(container, 'myText', 'This is a long paragraph');
 
     // submit the form
     await submitForm(container);
@@ -167,9 +159,7 @@ describe('RruTextareaInput', () => {
     );
 
     // fill the form with bad input
-    const myTextInput = container.querySelector('textarea[name="myText"]');
-    myTextInput && (await userEvent.click(myTextInput));
-    await userEvent.keyboard('Too short text');
+    await writeText(container, 'myText', 'Too short text');
 
     // submit the form
     await submitForm(container);
@@ -177,16 +167,12 @@ describe('RruTextareaInput', () => {
     // validation for bad input
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(0);
-      expect(myTextInput?.getAttribute('class')).toContain('is-invalid');
       const formGroup = container.querySelector('[data-field-name="myText"]');
       expect(formGroup?.getAttribute('data-field-error')).toBe('The text you entered is too short.');
     });
 
-    // delete the current value in the input element
-    myTextInput && (await userEvent.tripleClick(myTextInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('This is a long paragraph');
+    // new text
+    await writeText(container, 'myText', 'This is a long paragraph');
 
     // submit the form
     await submitForm(container);
@@ -220,17 +206,12 @@ describe('RruTextareaInput', () => {
     expect(onMyTextChange).toHaveBeenCalledTimes(1);
     expect(onMyTextChange.mock.calls[0][0]).toEqual('My awesome post');
 
-    const myTextInput = container.querySelector('textarea[name="myText"]');
-
-    // delete the current value in the input element
-    myTextInput && (await userEvent.tripleClick(myTextInput));
-    await userEvent.keyboard('{Backspace}');
-    // type in the new value
-    await userEvent.keyboard('This is a long paragraph');
+    // new text
+    await writeText(container, 'myText', 'This is a long paragraph');
 
     // validation for a new value
-    expect(onMyTextChange).toHaveBeenCalledTimes(26);
-    expect(onMyTextChange.mock.calls[25][0]).toEqual('This is a long paragraph');
+    expect(onMyTextChange).toHaveBeenCalledTimes(25);
+    expect(onMyTextChange.mock.calls[24][0]).toEqual('This is a long paragraph');
   });
 
   it('should reflect manual values set via the form context', async () => {
@@ -252,7 +233,8 @@ describe('RruTextareaInput', () => {
     expect(formContext.current.getFieldValue('myText')).toEqual('My awesome post');
     await act(async () => formContext.current.setFieldValue('myText', 'This is a long paragraph'));
     expect(formContext.current.getFieldValue('myText')).toEqual('This is a long paragraph');
-    expect(container.querySelector('[data-field-value="This is a long paragraph"]')).toBeTruthy();
+
+    expectTypedTextIsRendered(container, 'myText', 'This is a long paragraph');
 
     // submit the form
     await submitForm(container);

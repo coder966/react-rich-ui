@@ -18,7 +18,7 @@ import { act, render, renderHook, screen, waitFor } from '@testing-library/react
 import userEvent from '@testing-library/user-event';
 import * as yup from 'yup';
 import { RruCheckboxInput, RruForm, RruTextInput, RruTextareaInput, useRruForm } from '../../src';
-import submitForm from '../__utils__/submitForm';
+import { submitForm } from '../__utils__/form-utils';
 
 describe('RruForm', () => {
   it('should handle form submission with multiple inputs', async () => {

@@ -53,6 +53,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
         <Label label={props.label}>
           <input
             name={props.name}
+            value={value ? 'true' : 'false'}
             checked={value}
             onChange={(e) => setNewValue(e.target.checked)}
             onBlur={field.onBlur}

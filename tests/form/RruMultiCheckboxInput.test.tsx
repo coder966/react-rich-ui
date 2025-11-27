@@ -18,8 +18,7 @@ import { act, render, renderHook, waitFor } from '@testing-library/react';
 import * as yup from 'yup';
 import colorsOptions from '../../src/../stories/data/colorsOptions';
 import { RruForm, RruMultiCheckboxInput, useRruForm } from '../../src';
-import checkOption from '../__utils__/checkOption';
-import submitForm from '../__utils__/submitForm';
+import { expectSelectedMultipleCheckboxOptionsAreRendered, selectMultipleCheckboxOption, submitForm } from '../__utils__/form-utils';
 
 describe('RruMultiCheckboxInput', () => {
   it('should render correctly', async () => {
@@ -51,7 +50,7 @@ describe('RruMultiCheckboxInput', () => {
       </RruForm>
     );
 
-    await checkOption(container, 'Orange');
+    await selectMultipleCheckboxOption(container, 'color', 'Orange');
 
     await submitForm(container);
 
@@ -99,6 +98,8 @@ describe('RruMultiCheckboxInput', () => {
       </RruForm>
     );
 
+    expectSelectedMultipleCheckboxOptionsAreRendered(container, 'color', ['ORANGE']);
+
     // submit the form
     await submitForm(container);
 
@@ -124,7 +125,9 @@ describe('RruMultiCheckboxInput', () => {
       </RruForm>
     );
 
-    await checkOption(container, 'Blue');
+    await selectMultipleCheckboxOption(container, 'color', 'Blue');
+
+    expectSelectedMultipleCheckboxOptionsAreRendered(container, 'color', ['ORANGE', 'BLUE']);
 
     await submitForm(container);
 
@@ -161,7 +164,7 @@ describe('RruMultiCheckboxInput', () => {
     });
 
     // change
-    await checkOption(container, 'Orange');
+    await selectMultipleCheckboxOption(container, 'color', 'Orange');
 
     // submit the form
     await submitForm(container);
@@ -195,7 +198,7 @@ describe('RruMultiCheckboxInput', () => {
     expect(onInputChange).toHaveBeenCalledTimes(1); // because the initial value
     expect(onInputChange.mock.calls[0][0]).toEqual(['ORANGE']);
 
-    await checkOption(container, 'Blue');
+    await selectMultipleCheckboxOption(container, 'color', 'Blue');
 
     // validation for a new value
     expect(onInputChange).toHaveBeenCalledTimes(2);
@@ -221,7 +224,8 @@ describe('RruMultiCheckboxInput', () => {
     expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE']);
     await act(async () => formContext.current.setFieldValue('color', ['ORANGE', 'BLUE']));
     expect(formContext.current.getFieldValue('color')).toEqual(['ORANGE', 'BLUE']);
-    expect(container.querySelector('[data-field-value="ORANGE,BLUE"]')).toBeTruthy();
+
+    expectSelectedMultipleCheckboxOptionsAreRendered(container, 'color', ['ORANGE', 'BLUE']);
 
     await submitForm(container);
 
