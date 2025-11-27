@@ -48,7 +48,12 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
   }, []);
 
   return (
-    <div className='form-group' data-field-name={props.name} data-field-value={value} data-field-error={field.error ? field.error.message : ''}>
+    <div
+      className='form-group'
+      data-field-name={props.name}
+      data-field-value={value}
+      data-field-error={field.error ? field.error.message : ''}
+    >
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <textarea
         name={props.name}
