@@ -88,7 +88,7 @@ export const expectSelectedOptionIsRendered = (container: HTMLElement, fieldName
   expect(fieldContainer).toBeTruthy();
 
   // this is just a data attribute
-  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(isMultiple ? optionValue.join(',') : optionValue);
+  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(isMultiple ? optionValue.toSorted().join(',') : optionValue);
 
   // this is what actually the user sees
   const fieldInputs = fieldContainer!.querySelectorAll(`input[name="${fieldName}"]`);
@@ -128,7 +128,7 @@ export const expectSelectedRadioOptionIsRendered = (container: HTMLElement, fiel
   expect(fieldContainer).toBeTruthy();
 
   // this is just a data attribute
-  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(isMultiple ? optionValue.join(',') : optionValue);
+  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(isMultiple ? optionValue.toSorted().join(',') : optionValue);
 
   // this is what actually the user sees
   const fieldInput = fieldContainer!.querySelector(`input[name="${fieldName}"][type="radio"][value="${optionValue}"]`);
@@ -157,7 +157,7 @@ export const expectSelectedMultipleCheckboxOptionsAreRendered = (container: HTML
   expect(fieldContainer).toBeTruthy();
 
   // this is just a data attribute
-  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(optionValue.join(','));
+  expect(fieldContainer!.getAttribute(`data-field-value`)).toBe(optionValue.toSorted().join(','));
 
   // this is what actually the user sees
   const fieldInputs = fieldContainer!.querySelectorAll(`input[name="${fieldName}"][type="checkbox"]`);

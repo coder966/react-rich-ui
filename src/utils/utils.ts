@@ -73,10 +73,18 @@ const resolveObjectAttribute = (path: string, obj: object): any => {
   return cur;
 }
 
-const deepEqual = (x: any, y: any): boolean => {
-  const ok = Object.keys,
-    tx = typeof x,
-    ty = typeof y;
+const deepEqual = (x: unknown, y: unknown): boolean => {
+  const ok = Object.keys;
+  const tx = typeof x
+  const ty = typeof y;
+
+  if(Array.isArray(x)){
+    x = x.toSorted();
+  }
+
+  if(Array.isArray(y)){
+    y = y.toSorted();
+  }
 
   return x && y && tx === 'object' && tx === ty
     ? ok(x).length === ok(y).length && ok(x).every((key) => deepEqual(x[key], y[key]))

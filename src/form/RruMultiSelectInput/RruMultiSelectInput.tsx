@@ -26,16 +26,15 @@ import { findOptions, loadPageOptions } from '../utils/options-utils';
 import RruMultiSelectInputProps from './types/RruMultiSelectInputProps';
 
 const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const field = useField(props.name, (serializedValue) => {
-    if (!deepEqual(serializedValue, value)) {
-      setValue(serializedValue);
-    }
-  });
-
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOptions, setSelectedOptions] = useState<readonly RruOption[]>([]);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (!deepEqual(serializedValue, selectedOptions.map(o => o.value))) {
+      const options = findOptions(props.options, serializedValue || []);
+      setSelectedOptions(options);
+    }
+  });
 
   const onSelectChange = (options: readonly RruOption[]) => {
     setSelectedOptions(options);
@@ -81,7 +80,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
     <div
       className='form-group'
       data-field-name={props.name}
-      data-field-value={value}
+      data-field-value={selectedOptions.map(o => o.value).toSorted()}
       data-field-error={field.error ? field.error.message : ''}
     >
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>

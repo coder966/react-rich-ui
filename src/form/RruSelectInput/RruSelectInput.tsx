@@ -26,16 +26,15 @@ import { findOption, loadPageOptions } from '../utils/options-utils';
 import RruSelectInputProps from './types/RruSelectInputProps';
 
 const RruSelectInput: FC<RruSelectInputProps> = (props) => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const field = useField(props.name, (serializedValue) => {
-    if (!deepEqual(serializedValue, value)) {
-      setValue(serializedValue);
-    }
-  });
-
   const [hasBeenInitialized, setHasBeenInitialized] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<RruOption | null>(null);
+
+  const field = useField(props.name, (serializedValue) => {
+    if (!deepEqual(serializedValue, selectedOption?.value)) {
+      const option = findOption(props.options, serializedValue);
+      setSelectedOption(option);
+    }
+  });
 
   const onSelectChange = (option: RruOption | null) => {
     setSelectedOption(option);
@@ -78,7 +77,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
     <div
       className='form-group'
       data-field-name={props.name}
-      data-field-value={value}
+      data-field-value={selectedOption?.value}
       data-field-error={field.error ? field.error.message : ''}
     >
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
