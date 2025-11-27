@@ -999,8 +999,6 @@ describe('RruForm', () => {
     // submit the form
     await submitForm(container);
 
-    screen.debug()
-
     // validation
     expect(onSubmit).toHaveBeenCalledTimes(3);
     expect(onSubmit.mock.calls[2][0]).toEqual({
