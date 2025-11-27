@@ -2,6 +2,19 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.5.1] - 2025-11-28
+
+### Fixed
+
+- `RruSelectInput`: Values set programmatically by the form context were not rendering properly.
+- `RruMultiSelectInput`: Values set programmatically by the form context were not rendering properly.
+- `RruMultiCheckboxInput`: Values set programmatically by the form context were not rendering properly.
+- `RruRadioInput`: Values set programmatically by the form context were not rendering properly.
+
+### Internal
+
+- Tests: Greatly enhanced tests with more DOM checks.
+
 ## [2.5.0] - 2025-11-26
 
 ### Added
