@@ -24,6 +24,10 @@ Add the following tag to your index.html file: (replace `2.5.1` in the URL with 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.5.1/dist/style.css" />
 ```
 
+### Saudi DGA Platforms Design CSS
+A ready-made css stylesheet compatible with DGA requirements is available [here](https://github.com/coder966/react-rich-ui/blob/master/.storybook/dga.css).
+
+
 ## Import Bootstrap (CSS + JS)
 
 Please refer to Bootstrap official website on how to setup [Bootstrap >= v5.3.x](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
