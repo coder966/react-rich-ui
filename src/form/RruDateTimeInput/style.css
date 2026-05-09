@@ -65,34 +65,63 @@
   background-color: #ffffff;
   padding: 10px;
   display: flex;
-  border-bottom: solid 1px #dbdbdb;
 }
+
+.rru-date-input__header-stretch {
+  flex-grow: 1;
+}
+
 
 .rru-date-input__date-part-input {
   width: 4rem;
+  padding: 5px 10px;
   margin-inline-start: 0.5rem;
   margin-inline-end: 0.5rem;
   text-align: center;
+  border: solid 1px #cbcbcb;
+  border-radius: 5px;
+}
+
+.rru-date-input__date-part-input:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rru-date-input__date-part-input:focus-visible {
+  outline: solid 1px #cbcbcb;
 }
 
 .rru-date-input__month-button {
-  height: 1.5rem;
-  line-height: 1.5rem;
-  font-size: 1.5rem;
-  margin-inline-start: 0.5rem;
-  margin-inline-end: 0.5rem;
-  font-weight: 700;
-  color: #8c8c8c;
+  height: 36px;
+  width: 40px;
+  background-size: 24px;
+  margin-inline-start: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5px;
 }
 
 .rru-date-input__month-button:hover {
-  color: #000000;
   cursor: pointer;
+  background-color: #e5e7eb;
+}
+
+.rru-date-input__month-button-previous {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20class%3D%22gds-icon%20s-ion-icon%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M21.246%2012.878a.75.75%200%200%200%20.009-1.5l-16.69-.145%203.337-3.295A.75.75%200%200%200%206.848%206.87l-4.625%204.568a.75.75%200%200%200-.007%201.06l4.568%204.625a.75.75%200%201%200%201.067-1.054l-3.295-3.336z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
+}
+
+.rru-date-input__month-button-next {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20class%3D%22gds-icon%20s-ion-icon%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M2.755%2012.878a.75.75%200%200%201-.01-1.5l16.69-.145-3.336-3.295a.75.75%200%201%201%201.053-1.068l4.625%204.568a.75.75%200%200%201%20.007%201.06l-4.568%204.625a.75.75%200%200%201-1.067-1.054l3.295-3.336z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
 }
 
 .rru-date-input__body {
   background-color: #ffffff;
   padding: 5px;
+  display: flex;
+}
+
+.rru-date-input__body>table {
+  flex-grow: 1;
 }
 
 .rru-date-input__body>table>tr>td {
@@ -100,17 +129,22 @@
 }
 
 .rru-date-input__day {
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
+  height: 36px;
+  aspect-ratio: 1;
+  display: flex;
   text-align: center;
-  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  margin: 4px
 }
 
 .rru-date-input__day:hover {
-  color: #ffffff;
-  background-color: var(--bs-primary);
   cursor: pointer;
+}
+
+.rru-date-input__day:not(.rru-date-input__day--selected):hover {
+  background-color: #e5e7eb;
 }
 
 .rru-date-input__day--not-same-month {

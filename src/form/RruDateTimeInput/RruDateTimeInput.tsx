@@ -16,6 +16,7 @@
 
 import { IntlDate } from 'intl-date';
 import { FC, useEffect, useRef, useState } from 'react';
+import useClickOutside from '../../utils/useClickOutside.ts';
 import { deepEqual, rangeOfSize } from '../../utils/utils';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Label from '../Label/Label';
@@ -26,7 +27,6 @@ import RruDateTimeInputDateConfig from './types/RruDateTimeInputDateConfig';
 import RruDateTimeInputMode from './types/RruDateTimeInputMode';
 import RruDateTimeInputProps from './types/RruDateTimeInputProps';
 import generateSixWeeksCalendar from './utils/generateSixWeeksCalendar';
-import useClickOutside from '../../utils/useClickOutside.ts';
 
 const ISO8601_DATE = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
 const ISO8601_DATETIME = /([0-9]{4})-([0-9]{2})-([0-9]{2})(T| {1})([0-9]{2}):([0-9]{2}):([0-9]{2})(.([0-9]+))?/;
@@ -139,7 +139,9 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
     field.register((initialValue) => {
       try {
         if (initialValue) {
-          const matches: string[] | null = initialValue.match(getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE);
+          const matches: string[] | null = initialValue.match(
+            getMode() === 'datetime' ? ISO8601_DATETIME : ISO8601_DATE
+          );
           if (matches) {
             const date = IntlDate.of(
               getCalendarType(),
@@ -228,8 +230,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       className='form-group'
       data-field-name={props.name}
       data-field-value={value}
-      data-field-error={field.error ? field.error.message : ''}
-    >
+      data-field-error={field.error ? field.error.message : ''}>
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
 
       <div className='rru-date-input' ref={inputContainerRef}>
@@ -254,12 +255,10 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
         </div>
 
         <div
-          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`} ref={popupContainerRef}>
+          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}
+          ref={popupContainerRef}>
           <div className='rru-date-input__container'>
             <div className='rru-date-input__header'>
-              <div className='rru-date-input__month-button' onClick={previousMonth}>
-                {'<'}
-              </div>
               <input
                 type='text'
                 className='rru-date-input__date-part-input'
@@ -277,9 +276,12 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                 value={month}
                 onChange={(e) => onIntegerInputChange(e.target.value, 1, 12, setMonth)}
               />
-              <div className='rru-date-input__month-button' onClick={nextMonth}>
-                {'>'}
-              </div>
+              <div className='rru-date-input__header-stretch' />
+              <div
+                className='rru-date-input__month-button rru-date-input__month-button-previous'
+                onClick={previousMonth}
+              />
+              <div className='rru-date-input__month-button rru-date-input__month-button-next' onClick={nextMonth} />
             </div>
 
             <div className='rru-date-input__body'>
