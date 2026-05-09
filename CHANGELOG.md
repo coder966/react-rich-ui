@@ -2,6 +2,12 @@
 
 Pre-release versions will not be mentioned here.
 
+## [2.5.2] - 2026-05-09
+
+### Changed
+
+- Rely more on Bootstrap variables in the default stylesheet. This allows easier customization. If you already have a custom stylesheet, it should continue to work as before; as this release only enhances the default appearance.
+
 ## [2.5.1] - 2025-11-28
 
 ### Fixed
@@ -25,9 +31,9 @@ Pre-release versions will not be mentioned here.
 
 ### Changed
 
-- `RruForm`: Allow empty form without children. Not a big change, but this could be helpful to some. 
-Note this is only a typescript type change, meaning it was allowed before and now it won't trigger a TS warning.
-- Minimum supported version of `yup` dependency is now `1.0.0` instead of `0.27.0`. This should be easy as yup did not have huge breaking changes and you probably are on v1 as it was released in 2023. 
+- `RruForm`: Allow empty form without children. Not a big change, but this could be helpful to some.
+  Note this is only a typescript type change, meaning it was allowed before and now it won't trigger a TS warning.
+- Minimum supported version of `yup` dependency is now `1.0.0` instead of `0.27.0`. This should be easy as yup did not have huge breaking changes and you probably are on v1 as it was released in 2023.
 
 ### Internal
 
@@ -181,7 +187,6 @@ Note this is only a typescript type change, meaning it was allowed before and no
 - `RruForm`: Removed `watch` and `watcher`. Use the new callback `onChange` on the input component.
 
 - `RruFormElement`: Removed this component, each input type has its own dedicated component:
-
   - `type='text'` becomes `RruTextInput`
   - `type='password'` becomes `RruTextInput` with `isPassword={true}`
   - `type='textarea'` becomes `RruTextareaInput`

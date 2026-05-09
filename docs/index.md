@@ -18,10 +18,10 @@ import 'react-rich-ui/dist/style.css';
 
 ### Or from a CDN
 
-Add the following tag to your index.html file: (replace `2.5.1` in the URL with the version you are using)
+Add the following tag to your index.html file: (replace `2.5.2` in the URL with the version you are using)
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.5.1/dist/style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/react-rich-ui@2.5.2/dist/style.css" />
 ```
 
 ### Saudi DGA Platforms Design CSS
