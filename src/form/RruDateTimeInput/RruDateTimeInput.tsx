@@ -248,9 +248,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
           />
 
           {!props.disabled && value !== null && (
-            <button type='button' onClick={() => setIntlDate(null)} className='rru-date-input__clear-button'>
-              ⨯
-            </button>
+            <div role='button' onClick={() => setIntlDate(null)} className='rru-date-input__clear-button' />
           )}
         </div>
 
