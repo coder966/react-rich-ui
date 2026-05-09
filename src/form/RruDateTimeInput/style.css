@@ -57,13 +57,15 @@
   position: relative;
   z-index: 55;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--bs-body-bg);
 }
 
 .rru-date-input__header {
-  background-color: #ffffff;
+  background-color: var(--bs-body-bg);
   padding: 10px;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .rru-date-input__header-stretch {
@@ -77,7 +79,7 @@
   margin-inline-start: 0.5rem;
   margin-inline-end: 0.5rem;
   text-align: center;
-  border: solid 1px #cbcbcb;
+  border: solid 1px var(--bs-border-color);
   border-radius: 5px;
 }
 
@@ -87,7 +89,7 @@
 }
 
 .rru-date-input__date-part-input:focus-visible {
-  outline: solid 1px #cbcbcb;
+  outline: solid 2px var(--bs-gray-900);
 }
 
 .rru-date-input__month-button {
@@ -102,7 +104,7 @@
 
 .rru-date-input__month-button:hover {
   cursor: pointer;
-  background-color: #e5e7eb;
+  background-color: var(--bs-gray-200);
 }
 
 .rru-date-input__month-button-previous {
@@ -114,7 +116,7 @@
 }
 
 .rru-date-input__body {
-  background-color: #ffffff;
+  background-color: var(--bs-body-bg);
   padding: 5px;
   display: flex;
 }
@@ -143,11 +145,11 @@
 }
 
 .rru-date-input__day:not(.rru-date-input__day--selected):hover {
-  background-color: #e5e7eb;
+  background-color: var(--bs-gray-200);
 }
 
 .rru-date-input__day--not-same-month {
-  color: #8c8c8c;
+  color: var(--bs-gray-500);
 }
 
 .rru-date-input__day--today {
@@ -160,22 +162,42 @@
 }
 
 .rru-date-input__day--disabled {
-  color: #cbcbcb;
+  color: var(--bs-gray-500);
 }
 
 .rru-date-input__day--disabled:hover {
-  color: #cbcbcb;
+  color: var(--bs-gray-500);
   background-color: initial;
   cursor: default;
 }
 
 .rru-date-input__footer {
-  text-align: center;
-  border-top: solid 1px #dbdbdb;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: solid 1px var(--bs-border-color);
   padding: 10px;
 }
 
 .rru-date-input__time-part-input {
-  width: 2rem;
+  width: 4rem;
+  padding: 5px 10px;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
   text-align: center;
+  border: solid 1px var(--bs-border-color);
+  border-radius: 5px;
+}
+
+.rru-date-input__time-part-input:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.rru-date-input__time-part-input:focus-visible {
+  outline: solid 2px var(--bs-gray-900);
+}
+
+.rru-date-input__datetime-part-separator {
+  font-weight: 500;
 }

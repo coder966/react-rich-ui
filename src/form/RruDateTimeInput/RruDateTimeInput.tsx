@@ -266,6 +266,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                 onChange={(e) => onIntegerInputChange(e.target.value, 1, 2300, setYear)}
                 onBlur={onYearBlur}
               />
+              <span className='rru-date-input__datetime-part-separator'> - </span>
               <input
                 type='text'
                 className='rru-date-input__date-part-input'
@@ -318,7 +319,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   value={hour.toString().padStart(2, '0')}
                   onChange={(e) => onIntegerInputChange(e.target.value, 0, 23, setHour)}
                 />
-                {' : '}
+                <span className='rru-date-input__datetime-part-separator'> : </span>
                 <input
                   type='text'
                   className='rru-date-input__time-part-input'
@@ -327,7 +328,7 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
                   value={minute.toString().padStart(2, '0')}
                   onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setMinute)}
                 />
-                {' : '}
+                <span className='rru-date-input__datetime-part-separator'> : </span>
                 <input
                   type='text'
                   className='rru-date-input__time-part-input'
