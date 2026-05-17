@@ -1,0 +1,23 @@
+.error-message-container {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    min-height: 20px;
+    height: 20px;
+    color: #b42318;
+}
+
+.error-message-container.empty {
+    visibility: hidden;
+}
+
+.error {
+    color: #b42318;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.error-message-icon {
+    flex-shrink: 0;
+    padding-top: 2px;
+}

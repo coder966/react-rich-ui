@@ -15,13 +15,38 @@
  */
 
 import { FC } from 'react';
+import './style.css';
 
 export interface ErrorMessageProps {
   error: any;
 }
 
 const ErrorMessage: FC<ErrorMessageProps> = (props) => {
-  return props.error ? <div className='invalid-feedback d-block'>{props.error.message}</div> : null;
+  if (!props.error?.message) {
+    return <div className='error-message-container empty' />;
+  }
+
+  return (
+    <div className='error-message-container'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='12'
+        height='12'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='#b42318'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='error-message-icon'>
+        <circle cx='12' cy='12' r='10' />
+        <line x1='12' x2='12' y1='8' y2='12' />
+        <line x1='12' x2='12.01' y1='16' y2='16' />
+      </svg>
+
+      <span className='error'>{props.error.message}</span>
+    </div>
+  );
 };
 
 export default ErrorMessage;
