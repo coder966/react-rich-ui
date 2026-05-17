@@ -49,7 +49,7 @@ const RruCheckboxInput: FC<RruCheckboxInputProps> = (props) => {
 
   return (
     <div
-      className='form-group'
+      className='form-group rru-checkbox-input'
       data-field-name={props.name}
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}

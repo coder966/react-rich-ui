@@ -82,7 +82,7 @@ const RruMultiCheckboxInput: FC<RruMultiCheckboxInputProps> = (props) => {
     return (
       <div
         key={key}
-        className={`form-check ${props.inline ? 'form-check-inline' : ''}`}
+        className={`rru-multi-checkbox-input form-check ${props.inline ? 'form-check-inline' : ''}`}
         role='checkbox'
         aria-checked={isChecked(option)}>
         <Label label={option.label}>

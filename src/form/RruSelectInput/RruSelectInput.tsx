@@ -75,14 +75,15 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
 
   return (
     <div
-      className='form-group'
+      className='form-group rru-select-input'
       data-field-name={props.name}
       data-field-value={selectedOption?.value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
       <AsyncPaginate
         name={props.name}
+        classNamePrefix={'react-select'}
         isMulti={false}
         isClearable={true}
         placeholder={props.placeholder || ''}

@@ -70,7 +70,7 @@ const RruRadioInput: FC<RruRadioInputProps> = (props) => {
     return (
       <div
         key={key}
-        className={`form-check ${props.inline ? 'form-check-inline' : ''}`}
+        className={`rru-radio-input  form-check ${props.inline ? 'form-check-inline' : ''}`}
         role='radio'
         aria-checked={isChecked(option)}>
         <Label label={option.label}>
