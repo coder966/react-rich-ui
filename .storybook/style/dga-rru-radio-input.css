@@ -1,0 +1,34 @@
+:root {
+    --colors-gray-neutral-500: #6c737f;
+
+}
+
+.rru-radio-input{
+    padding: 3px;
+    padding-inline-start: 0;
+}
+
+.rru-radio-input input {
+    cursor:  pointer;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #6c737f;
+    border-radius: 50%;
+    box-shadow: none !important;
+}
+
+.rru-radio-input  input:checked {
+    background-color: unset !important;
+    border-color: #1e8153;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-origin: content-box;
+    padding: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse fill='%231e8153' cx='12' cy='12' rx='8.875' ry='8.875'/%3E%3C/svg%3E");
+}
+
+/* selected border */
+.rru-radio-input .form-check-input[type='radio']:checked {
+    border-color: #1b8354;
+}
+

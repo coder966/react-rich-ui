@@ -1,0 +1,61 @@
+.rruTextareaInputWrapper {
+    width: 100%;
+}
+
+.rru-textarea-input .form-control {
+    box-sizing: border-box;
+    width: 414px;
+    height: 104px;
+    max-width: 100%;
+    padding: 12px;
+    margin-block: 3px 2px;
+    color: var(--rru-input-color) !important;
+    border: 1px solid #a4abb4;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+    /* animated bottom line */
+    background-image: linear-gradient(#000, #000);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 0 0.125rem;
+    transition: border-color 0.3s ease, background-size 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* hover */
+.rru-textarea-input .form-control:hover{
+    border-color: var(--rru-input-hover-border-color);
+    /*box-shadow: none;*/
+}
+
+
+.rru-textarea-input .form-control:focus {
+    background-size: 100% 0.125rem;
+    border-color: #000;
+    /*box-shadow: 0 0.25rem 0.5rem -0.25rem rgba(0, 0, 0, 0.25) !important;*/
+}
+
+/* active / hold click */
+.rru-textarea-input .form-control:active {
+    background-size: 40% 0.125rem;
+}
+
+/* disabled */
+.rru-textarea-input .form-control:disabled {
+    cursor: default;
+    color: #9da4ae !important;
+    background-color: #f5f5f5 !important;
+    border-color: #d9d9d9;
+    background-image: none;
+    box-shadow: none !important;
+    opacity: 1;
+}
+
+
+/* error */
+.rru-textarea-input:has(.form-control.is-invalid) .rru-textarea-input .form-control {
+    padding-inline: 10px !important;
+    border-color: var(--rru-input-error-border-color);
+    background-image: linear-gradient(var(--rru-input-error-border-color), var(--rru-input-error-border-color));
+}

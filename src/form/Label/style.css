@@ -2,3 +2,7 @@ label.rru-form-label--required-asterisk:after {
   content: ' *';
   color: #dc3545;
 }
+
+.form-label {
+  cursor: pointer;
+}
