@@ -78,7 +78,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
 
   return (
     <div
-      className='form-group'
+      className='form-group rru-multi-select-input'
       data-field-name={props.name}
       data-field-value={selectedOptions.map(o => o.value).toSorted()}
       data-field-error={field.error ? field.error.message : ''}
@@ -86,6 +86,7 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
       <AsyncPaginate
         name={props.name}
+        classNamePrefix={'react-select'}
         isMulti={true}
         placeholder={props.placeholder || ''}
         value={selectedOptions}
