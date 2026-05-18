@@ -95,6 +95,7 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
         onBlur={field.onBlur}
         isDisabled={props.disabled}
         styles={{ control: getReactSelectControlStyle }}
+        classNamePrefix={'react-select'}
       />
       <ErrorMessage error={field.error} />
     </div>
