@@ -231,11 +231,12 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       data-field-name={props.name}
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}>
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
 
       <div className='rru-date-input' ref={inputContainerRef}>
         <div className='rru-date-input__input-wrapper'>
           <input
+            id={props.name}
             dir='ltr'
             type='text'
             autoComplete='off'

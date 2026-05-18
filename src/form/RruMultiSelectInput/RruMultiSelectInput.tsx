@@ -83,8 +83,9 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       data-field-value={selectedOptions.map(o => o.value).toSorted()}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
       <AsyncPaginate
+        inputId={props.name}
         name={props.name}
         isMulti={true}
         placeholder={props.placeholder || ''}

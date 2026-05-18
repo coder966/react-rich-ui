@@ -54,8 +54,9 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
       <input
+        id={props.name}
         name={props.name}
         value={value || ''}
         onChange={(e) => setNewValue(e.target.value)}

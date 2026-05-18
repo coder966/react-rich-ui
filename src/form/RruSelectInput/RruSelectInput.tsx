@@ -80,8 +80,9 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       data-field-value={selectedOption?.value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
       <AsyncPaginate
+        inputId={props.name}
         name={props.name}
         isMulti={false}
         isClearable={true}
