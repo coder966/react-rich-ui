@@ -231,118 +231,117 @@ const RruDateTimeInput: FC<RruDateTimeInputProps> = (props) => {
       data-field-name={props.name}
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}>
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
+        <div className='rru-date-input' ref={inputContainerRef}>
+          <div className='rru-date-input__input-wrapper'>
+            <input
+              dir='ltr'
+              type='text'
+              autoComplete='off'
+              name={props.name}
+              disabled={props.disabled}
+              value={value || ''}
+              onChange={() => {}}
+              onClick={() => setIsPopupShown(true)}
+              className={`rru-date-input__input form-control ${field.error ? 'is-invalid' : ''}`}
+            />
 
-      <div className='rru-date-input' ref={inputContainerRef}>
-        <div className='rru-date-input__input-wrapper'>
-          <input
-            id={props.name}
-            dir='ltr'
-            type='text'
-            autoComplete='off'
-            name={props.name}
-            disabled={props.disabled}
-            value={value || ''}
-            onChange={() => {}}
-            onClick={() => setIsPopupShown(true)}
-            className={`rru-date-input__input form-control ${field.error ? 'is-invalid' : ''}`}
-          />
-
-          {!props.disabled && value !== null && (
-            <div role='button' onClick={() => setIntlDate(null)} className='rru-date-input__clear-button' />
-          )}
-        </div>
-
-        <div
-          className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}
-          ref={popupContainerRef}>
-          <div className='rru-date-input__container'>
-            <div className='rru-date-input__header'>
-              <input
-                type='text'
-                className='rru-date-input__date-part-input'
-                onClick={selectAllTextInInput}
-                onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
-                value={year}
-                onChange={(e) => onIntegerInputChange(e.target.value, 1, 2300, setYear)}
-                onBlur={onYearBlur}
-              />
-              <span className='rru-date-input__datetime-part-separator'> - </span>
-              <input
-                type='text'
-                className='rru-date-input__date-part-input'
-                onClick={selectAllTextInInput}
-                onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
-                value={month}
-                onChange={(e) => onIntegerInputChange(e.target.value, 1, 12, setMonth)}
-              />
-              <div className='rru-date-input__header-stretch' />
-              <div
-                className='rru-date-input__month-button rru-date-input__month-button-previous'
-                onClick={previousMonth}
-              />
-              <div className='rru-date-input__month-button rru-date-input__month-button-next' onClick={nextMonth} />
-            </div>
-
-            <div className='rru-date-input__body'>
-              <table>
-                <tbody>
-                  {rangeOfSize(6).map((i) => (
-                    <tr key={`r${i}`}>
-                      {rangeOfSize(7).map((j) => {
-                        const index = i * 7 + j;
-                        const date = calendar[index];
-                        return (
-                          <td key={`d${date.toString(getCalendarType())}`}>
-                            <div
-                              data-date={date.toString(getCalendarType())}
-                              className={getDayClassName(date)}
-                              style={getDateConfig(date)?.style}
-                              onClick={() => onSelectDate(date)}>
-                              {date.getDay(getCalendarType())}
-                            </div>
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {getMode() === 'datetime' && (
-              <div className='rru-date-input__footer'>
-                <input
-                  type='text'
-                  className='rru-date-input__time-part-input'
-                  onClick={selectAllTextInInput}
-                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
-                  value={hour.toString().padStart(2, '0')}
-                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 23, setHour)}
-                />
-                <span className='rru-date-input__datetime-part-separator'> : </span>
-                <input
-                  type='text'
-                  className='rru-date-input__time-part-input'
-                  onClick={selectAllTextInInput}
-                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
-                  value={minute.toString().padStart(2, '0')}
-                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setMinute)}
-                />
-                <span className='rru-date-input__datetime-part-separator'> : </span>
-                <input
-                  type='text'
-                  className='rru-date-input__time-part-input'
-                  onClick={selectAllTextInInput}
-                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
-                  value={second.toString().padStart(2, '0')}
-                  onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setSecond)}
-                />
-              </div>
+            {!props.disabled && value !== null && (
+              <div role='button' onClick={() => setIntlDate(null)} className='rru-date-input__clear-button' />
             )}
           </div>
+
+          <div
+            className={`rru-date-input__popup rru-date-input__popup--${isPopupShown ? 'visible' : 'hidden'}`}
+            ref={popupContainerRef}>
+            <div className='rru-date-input__container'>
+              <div className='rru-date-input__header'>
+                <input
+                  type='text'
+                  className='rru-date-input__date-part-input'
+                  onClick={selectAllTextInInput}
+                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
+                  value={year}
+                  onChange={(e) => onIntegerInputChange(e.target.value, 1, 2300, setYear)}
+                  onBlur={onYearBlur}
+                />
+                <span className='rru-date-input__datetime-part-separator'> - </span>
+                <input
+                  type='text'
+                  className='rru-date-input__date-part-input'
+                  onClick={selectAllTextInInput}
+                  onKeyDown={(e) => onIntegerInputKeyDown(e, 'date')}
+                  value={month}
+                  onChange={(e) => onIntegerInputChange(e.target.value, 1, 12, setMonth)}
+                />
+                <div className='rru-date-input__header-stretch' />
+                <div
+                  className='rru-date-input__month-button rru-date-input__month-button-previous'
+                  onClick={previousMonth}
+                />
+                <div className='rru-date-input__month-button rru-date-input__month-button-next' onClick={nextMonth} />
+              </div>
+
+              <div className='rru-date-input__body'>
+                <table>
+                  <tbody>
+                    {rangeOfSize(6).map((i) => (
+                      <tr key={`r${i}`}>
+                        {rangeOfSize(7).map((j) => {
+                          const index = i * 7 + j;
+                          const date = calendar[index];
+                          return (
+                            <td key={`d${date.toString(getCalendarType())}`}>
+                              <div
+                                data-date={date.toString(getCalendarType())}
+                                className={getDayClassName(date)}
+                                style={getDateConfig(date)?.style}
+                                onClick={() => onSelectDate(date)}>
+                                {date.getDay(getCalendarType())}
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {getMode() === 'datetime' && (
+                <div className='rru-date-input__footer'>
+                  <input
+                    type='text'
+                    className='rru-date-input__time-part-input'
+                    onClick={selectAllTextInInput}
+                    onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
+                    value={hour.toString().padStart(2, '0')}
+                    onChange={(e) => onIntegerInputChange(e.target.value, 0, 23, setHour)}
+                  />
+                  <span className='rru-date-input__datetime-part-separator'> : </span>
+                  <input
+                    type='text'
+                    className='rru-date-input__time-part-input'
+                    onClick={selectAllTextInInput}
+                    onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
+                    value={minute.toString().padStart(2, '0')}
+                    onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setMinute)}
+                  />
+                  <span className='rru-date-input__datetime-part-separator'> : </span>
+                  <input
+                    type='text'
+                    className='rru-date-input__time-part-input'
+                    onClick={selectAllTextInInput}
+                    onKeyDown={(e) => onIntegerInputKeyDown(e, 'time')}
+                    value={second.toString().padStart(2, '0')}
+                    onChange={(e) => onIntegerInputChange(e.target.value, 0, 59, setSecond)}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );

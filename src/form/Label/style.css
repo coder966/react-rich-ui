@@ -1,17 +1,5 @@
-label.rru-form-label--required-asterisk::after {
-  content: '*';
+.rru-form-label--required-asterisk::after {
+  content: ' *';
   color: #dc3545;
-}
-
-label.rru-form-label--required-asterisk {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.form-label {
-  color: #161616;
-  font-size: 16px;
-  cursor: pointer;
-  margin-block: 2px 4px;
+  display: inline;
 }

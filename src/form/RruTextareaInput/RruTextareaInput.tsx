@@ -54,23 +54,23 @@ const RruTextareaInput: FC<RruTextareaInputProps> = (props) => {
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
-      <textarea
-        id={props.name}
-        name={props.name}
-        value={value || ''}
-        onChange={(e) => setNewValue(e.target.value)}
-        onBlur={field.onBlur}
-        className={`form-control ${field.error ? 'is-invalid' : ''}`}
-        disabled={props.disabled}
-        dir={props.dir || 'auto'}
-        placeholder={props.placeholder}
-        maxLength={props.maxLength}
-        autoComplete={props.autoComplete}
-        rows={props.rows}
-        cols={props.cols}
-        wrap={props.wrap}
-      />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
+        <textarea
+          name={props.name}
+          value={value || ''}
+          onChange={(e) => setNewValue(e.target.value)}
+          onBlur={field.onBlur}
+          className={`form-control ${field.error ? 'is-invalid' : ''}`}
+          disabled={props.disabled}
+          dir={props.dir || 'auto'}
+          placeholder={props.placeholder}
+          maxLength={props.maxLength}
+          autoComplete={props.autoComplete}
+          rows={props.rows}
+          cols={props.cols}
+          wrap={props.wrap}
+        />
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );

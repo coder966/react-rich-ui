@@ -26,14 +26,13 @@ export type LabelProps = {
 
   /**  */
   children?: ReactNode;
-  htmlFor?:string
 };
 
-const Label: FC<LabelProps> = (props:LabelProps) => {
-  const { label, requiredAsterisk, children , htmlFor} = props;
+const Label: FC<LabelProps> = (props: LabelProps) => {
+  const { label, requiredAsterisk, children } = props;
 
   return label ? (
-    <label htmlFor={htmlFor} className={`form-label ${requiredAsterisk ? 'rru-form-label--required-asterisk' : ''}`}>
+    <label className={`form-label ${requiredAsterisk ? 'rru-form-label--required-asterisk' : ''}`}>
       {label}
       {children}
     </label>

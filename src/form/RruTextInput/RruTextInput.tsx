@@ -54,22 +54,22 @@ const RruTextInput: FC<RruTextInputProps> = (props) => {
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk} htmlFor={props.name}></Label>
-      <input
-        id={props.name}
-        name={props.name}
-        value={value || ''}
-        onChange={(e) => setNewValue(e.target.value)}
-        onBlur={field.onBlur}
-        type={props.isPassword ? 'password' : 'text'}
-        className={`form-control ${field.error ? 'is-invalid' : ''}`}
-        disabled={props.disabled}
-        dir={props.dir || 'auto'}
-        placeholder={props.placeholder}
-        maxLength={props.maxLength}
-        autoComplete={props.autoComplete}
-        list={props.list}
-      />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
+        <input
+          name={props.name}
+          value={value || ''}
+          onChange={(e) => setNewValue(e.target.value)}
+          onBlur={field.onBlur}
+          type={props.isPassword ? 'password' : 'text'}
+          className={`form-control ${field.error ? 'is-invalid' : ''}`}
+          disabled={props.disabled}
+          dir={props.dir || 'auto'}
+          placeholder={props.placeholder}
+          maxLength={props.maxLength}
+          autoComplete={props.autoComplete}
+          list={props.list}
+        />
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );
