@@ -83,21 +83,22 @@ const RruMultiSelectInput: FC<RruMultiSelectInputProps> = (props) => {
       data-field-value={selectedOptions.map(o => o.value).toSorted()}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
-      <AsyncPaginate
-        name={props.name}
-        isMulti={true}
-        placeholder={props.placeholder || ''}
-        value={selectedOptions}
-        onChange={(options) => onSelectChange(options)}
-        // @ts-ignore
-        loadOptions={loadPageOptions(props.options)}
-        additional={{ page: 1 }}
-        filterOption={createFilter({ ignoreAccents: false })}
-        onBlur={field.onBlur}
-        isDisabled={props.disabled}
-        styles={{ control: getReactSelectControlStyle }}
-      />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
+        <AsyncPaginate
+          name={props.name}
+          isMulti={true}
+          placeholder={props.placeholder || ''}
+          value={selectedOptions}
+          onChange={(options) => onSelectChange(options)}
+          // @ts-ignore
+          loadOptions={loadPageOptions(props.options)}
+          additional={{ page: 1 }}
+          filterOption={createFilter({ ignoreAccents: false })}
+          onBlur={field.onBlur}
+          isDisabled={props.disabled}
+          styles={{ control: getReactSelectControlStyle }}
+        />
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );

@@ -1,4 +1,5 @@
-label.rru-form-label--required-asterisk:after {
+.rru-form-label--required-asterisk::after {
   content: ' *';
   color: #dc3545;
+  display: inline;
 }

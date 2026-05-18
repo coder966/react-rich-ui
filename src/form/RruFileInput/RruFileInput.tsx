@@ -66,12 +66,12 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
       data-field-value={value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
-      <label style={{ display: 'block' }}>
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
         <div className={`form-control rru-file-input__file-name-label ${field.error ? 'is-invalid' : ''}`}>
           {getLabel()}
         </div>
         <input
+          id={props.name}
           key={props.shouldTriggerOnChangeOnSameFile ? key : 0}
           aria-label='Upload'
           type='file'
@@ -85,7 +85,7 @@ const RruFileInput: FC<RruFileInputProps> = (props) => {
           disabled={props.disabled}
           accept={props.accept}
         />
-      </label>
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );

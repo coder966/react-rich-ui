@@ -80,22 +80,23 @@ const RruSelectInput: FC<RruSelectInputProps> = (props) => {
       data-field-value={selectedOption?.value}
       data-field-error={field.error ? field.error.message : ''}
     >
-      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}></Label>
-      <AsyncPaginate
-        name={props.name}
-        isMulti={false}
-        isClearable={true}
-        placeholder={props.placeholder || ''}
-        value={selectedOption}
-        onChange={(option) => onSelectChange(option)}
-        // @ts-ignore
-        loadOptions={loadPageOptions(props.options)}
-        additional={{ page: 1 }}
-        filterOption={createFilter({ ignoreAccents: false })}
-        onBlur={field.onBlur}
-        isDisabled={props.disabled}
-        styles={{ control: getReactSelectControlStyle }}
-      />
+      <Label label={props.label} requiredAsterisk={props.requiredAsterisk}>
+        <AsyncPaginate
+          name={props.name}
+          isMulti={false}
+          isClearable={true}
+          placeholder={props.placeholder || ''}
+          value={selectedOption}
+          onChange={(option) => onSelectChange(option)}
+          // @ts-ignore
+          loadOptions={loadPageOptions(props.options)}
+          additional={{ page: 1 }}
+          filterOption={createFilter({ ignoreAccents: false })}
+          onBlur={field.onBlur}
+          isDisabled={props.disabled}
+          styles={{ control: getReactSelectControlStyle }}
+        />
+      </Label>
       <ErrorMessage error={field.error} />
     </div>
   );
