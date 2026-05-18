@@ -15,13 +15,23 @@
  */
 
 import { FC } from 'react';
+import './style.css';
 
 export interface ErrorMessageProps {
   error: any;
 }
 
 const ErrorMessage: FC<ErrorMessageProps> = (props) => {
-  return props.error ? <div className='invalid-feedback d-block'>{props.error.message}</div> : null;
+  if (!props?.error?.message) {
+    return <div className='error-message error-message--empty' />;
+  }
+
+  return (
+    <div className='error-message'>
+      <span className='error-message__icon' />
+      <span className='error-message__text'>{props?.error.message}</span>
+    </div>
+  );
 };
 
 export default ErrorMessage;
