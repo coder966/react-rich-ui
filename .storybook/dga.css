@@ -1,106 +1,328 @@
-/* 
-    Accroding to Saudi DGA design guidelines    
+/*
+    According to Saudi DGA design guidelines
     https://design.dga.gov.sa/guidelines/
 */
 
-/* all */
-
-.form-group .form-check input,
-.form-group .form-control {
-    filter: none !important;
-    box-shadow: none !important;
+:root {
+    --rru-primary: #1c8353;
+    --rru-text-dark: #384250;
+    --rru-border: #a4abb4;
+    --rru-border-light: #d2d6db;
+    --rru-danger: #b82d23;
+    --rru-disabled: #f5f5f5;
+    --rru-radius: 0.25rem;
 }
 
+/* =========================================
+   COMMON INPUTS
+========================================= */
 
-/* checkbox and radio */
+.form-group .form-control,
+.form-group .react-select__control {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: 2.5rem;
+    padding-inline: 0.625rem;
+    color: var(--rru-text-dark);
+    background-color: #ffffff !important;
+    border: 0.0625rem solid var(--rru-border);
+    border-radius: var(--rru-radius);
+    outline: none !important;
+    box-shadow: none !important;
+    background-image: linear-gradient(#000000, #000000);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 0 0.125rem;
+    transition:
+            border-color 0.3s ease,
+            background-size 0.3s ease,
+            box-shadow 0.3s ease;
+}
+
+.form-group .form-control:hover,
+.form-group .react-select__control:hover {
+    border-color: var(--rru-text-dark) !important;
+}
+
+.form-group .form-control:focus,
+.form-group .react-select__control:focus {
+    border-color: var(--rru-text-dark) !important;
+    background-size: 100% 0.125rem;
+    box-shadow: 0 0.25rem 0.5rem -0.25rem rgba(0, 0, 0, 0.25) !important;
+}
+
+.form-group .form-control:active,
+.form-group .react-select__control:active {
+    background-size: 40% 0.125rem;
+}
+
+.form-group .form-control:disabled,
+.form-group .react-select__control:disabled {
+    cursor: default;
+    color: #9da4ae !important;
+    background-color: var(--rru-disabled) !important;
+    border-color: #d9d9d9 !important;
+    background-image: none;
+    box-shadow: none !important;
+    opacity: 1;
+}
+
+.form-group .form-control.is-invalid,
+.form-group .react-select__control.is-invalid {
+    padding-inline: 0.625rem !important;
+    border-color: var(--rru-danger);
+}
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.form-group textarea.form-control {
+    min-width: 25.875rem;
+    min-height: 6.5rem !important;
+    padding: 0.75rem;
+}
+
+/* =========================================
+   DROPDOWN
+========================================= */
+
+.form-group .react-select__menu {
+    padding: 0.875rem;
+    border: 0.0625rem solid #dbdee3;
+    border-radius: 0.1875rem !important;
+    box-shadow:
+            0 1.25rem 1.5rem -0.25rem rgba(16, 24, 40, 0.08),
+            0 0.5rem 0.5rem -0.25rem rgba(16, 24, 40, 0.03);
+}
+
+.form-group .react-select__option--is-focused {
+    background-color: #ffffff;
+}
+
+.form-group .react-select__option:hover,
+.form-group .react-select__option--is-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #101828;
+}
+
+.form-group .react-select__option:hover {
+    cursor: pointer;
+    background-color: #f3f4f6;
+    border-radius: var(--rru-radius) !important;
+}
+
+.form-group .react-select__option--is-selected {
+    background-color: transparent;
+}
+
+.form-group .react-select__option--is-selected::after {
+    content: '';
+    width: 1.125rem;
+    height: 1.125rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23101828' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   DATE PICKER
+========================================= */
+
+.rru-date-input__day--selected {
+    border: 0.125rem solid var(--rru-primary) !important;
+    background-color: transparent !important;
+    color: var(--rru-primary) !important;
+}
+
+/* =========================================
+   COMMON SELECTION INPUTS [ RADIO - CHECKBOX - SWITCH ]
+========================================= */
+
+.form-group:not(:has(.form-switch)) .form-check[role='radio'] input,
+.form-group:not(:has(.form-switch)) .form-check[role='checkbox'] input {
+    width: 1.125rem;
+    height: 1.125rem;
+    box-shadow: none !important;
+    border: 0.0625rem solid #6c727e;
+}
 
 .form-group .form-check label:hover,
 .form-group .form-check input:hover {
     cursor: pointer !important;
 }
 
-/* checkbox */
+/* =========================================
+   RADIO
+========================================= */
 
-.form-group:not(:has(.form-switch)) .form-check[role="checkbox"] input {
-    width: 18px;
-    height: 18px;
-    border: 1px solid #6c737f;
-    border-radius: 2px;
+.form-group:not(:has(.form-switch)) .form-check[role='radio'] input {
+    border-radius: 50%;
 }
 
-.form-group:not(:has(.form-switch)) .form-check[role="checkbox"] input:checked {
-    background-color: #1e8153;
-    border-color: #1e8153;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-origin: content-box;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgPgogIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0gMTEuNTI2IDE2Ljc5MiBDIDE0LjI0NyAxMy44OCAxNi44NzQgMTEuOTA1IDIwLjE3NCA5LjEwOCBDIDIxLjE2MiA4LjI3IDIxLjMxNSA2LjgwMyAyMC41NCA1Ljc2MyBDIDE5LjcxNiA0LjY1OCAxOC4xNTEgNC40MzcgMTcuMDkzIDUuMzE1IEMgMTQuMDcgNy44MjIgMTEuNzE4IDEwLjIzOCA5LjQ4NyAxMi44MTcgQyA5LjM3IDEyLjk1MiA5LjMxMSAxMy4wMiA5LjI1MSAxMy4wNTggQyA5LjA5OCAxMy4xNTYgOC45MDMgMTMuMTU3IDguNzQ5IDEzLjA2MSBDIDguNjg4IDEzLjAyNCA4LjYyOSAxMi45NTcgOC41MTIgMTIuODI0IEwgNy4zMjMgMTEuNDc5IEMgNi4yNDIgMTAuMjUgNC4yODggMTAuMzg2IDMuMzg3IDExLjc1MyBDIDIuNzUzIDEyLjcxMSAyLjg0NyAxMy45NzYgMy42MTYgMTQuODI5IEwgNS40OCAxNi44OTggQyA2Ljg3MyAxOC40NDQgNy41NzEgMTkuMjE4IDguNDA4IDE5LjIyNSBDIDkuMjQ0IDE5LjIzMiAxMC4wMDUgMTguNDE5IDExLjUyNiAxNi43OTIiIC8+Cjwvc3ZnPg==");
-}
-
-/* radio */
-
-.form-group:not(:has(.form-switch)) .form-check[role="radio"] input {
-    width: 18px;
-    height: 18px;
-    border: 1px solid #6c737f;
-    border-radius: 9999px;
-}
-
-.form-group:not(:has(.form-switch)) .form-check[role="radio"] input:checked {
+.form-group:not(:has(.form-switch)) .form-check[role='radio'] input:checked {
+    padding: 0;
+    border-color: var(--rru-primary);
     background-color: unset !important;
-    border-color: #1e8153;
     background-repeat: no-repeat;
     background-size: contain;
     background-origin: content-box;
-    padding: 1px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse fill='%231e8153' cx='12' cy='12' rx='8.875' ry='8.875'/%3E%3C/svg%3E");
 }
-
-
-/* switch */
-
-.form-group:has(.form-switch) .form-check[role="checkbox"] input {
-    transform: scale(1.2);
-    border-color: #6c737f;
-
+.form-group:not(:has(.form-switch)) .form-check[role='radio'] input:disabled {
+    cursor: default;
+    opacity: 0.55;
+    background-color: transparent !important;
 }
 
-.form-group:has(.form-switch) .form-check[role="checkbox"] input:checked {
-    background-color: #1e8153;
-    border-color: #1e8153;
+/* =========================================
+   CHECKBOX
+========================================= */
+
+.form-group:not(:has(.form-switch)) .form-check[role='checkbox'] input {
+    border-radius: var(--rru-radius);
 }
 
-.form-group:has(.form-switch) .form-check[role="checkbox"] input:not(:checked):focus {
-    --bs-form-switch-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse fill='%236c737f' cx='12' cy='12' rx='8.875' ry='8.875'/%3E%3C/svg%3E");
+.form-group:not(:has(.form-switch)) .form-check[role='checkbox'] input:checked {
+    border: none;
+    background-color: var(--rru-primary);
+    background-size: 0.85rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M18.293 6.293a1 1 0 1 1 1.414 1.414l-10 10a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 15.586z'/%3E%3C/svg%3E");
 }
 
-/* text inputs */
-
-.form-group .form-control {
-    background-color: #ffffff !important;
-    border-color: #a1a2a7;
-    border-radius: 4px;
+.form-group:not(:has(.form-switch)) .form-check[role='checkbox'] input:disabled {
+    cursor: default;
+    border: 0.0625rem solid #9da4ae!important;
+    opacity: 0.55;
+    filter: brightness(0.90)
 }
 
-.form-group .form-control:hover,
-.form-group .form-control:focus {
-    border-color: #384250;
+/* =========================================
+   SWITCH
+========================================= */
+
+.form-group:has(.form-switch) .form-check[role='checkbox'] .form-check-input {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 0.0625rem solid #0d121c;
+    box-shadow: none;
+    transition: all 0.45s ease;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%230d121c'/%3e%3c/svg%3e");
 }
 
-
-.form-group .form-control:focus-visible {
-    box-shadow: inset 0 -2px 0 0 #384250 !important;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+.form-group:has(.form-switch) .form-check[role='checkbox'] .form-check-input:checked {
+    background-color: var(--rru-primary);
+    border-color: var(--rru-primary);
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e");
 }
 
-/* date time picker */
-.rru-date-input {
-    --bs-primary: #1c8353 !important;
+.form-group:has(.form-switch) .form-check[role='checkbox'] .form-check-input:hover {
+    box-shadow: 0 0 0 0.1875rem rgba(13, 18, 28, 0.12);
 }
 
-/* wizards */
+.form-group:has(.form-switch) .form-check[role='checkbox'] .form-check-input:focus {
+    border-color: #0d121c;
+    box-shadow: 0 0 0 0.1875rem rgba(13, 18, 28, 0.18);
+}
+
+.form-group:has(.form-switch) .form-check[role='checkbox'] .form-check-input:disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+
+/* =========================================
+   STEPS WIZARD
+========================================= */
 
 .rru-steps-wizard {
-    --bs-primary: #1c8353 !important;
+    --bs-primary: var(--rru-primary) !important;
+}
+
+.rru-steps-wizard__header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.rru-steps-wizard__header > * {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.rru-steps-wizard__step,
+.rru-steps-wizard__step-number--current {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+}
+
+.rru-steps-wizard__step:not(:last-child)::after {
+    top: 1rem;
+    left: 0 !important;
+    height: 0.125rem !important;
+    background-color: var(--rru-border-light) !important;
+    transform-origin: left center;
+}
+
+.rru-steps-wizard__step:not(:last-child):has(.rru-steps-wizard__step-label--done)::after {
+    background-color: var(--rru-primary) !important;
+    animation: rruStepLineFill 800ms ease forwards;
+}
+
+@keyframes rruStepLineFill {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.rru-steps-wizard__step-number {
+    width: 2.1875rem !important;
+    height: 2.1875rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--rru-border-light) !important;
+    border-color: var(--rru-border-light) !important;
+    transition: all 400ms ease;
+}
+
+.rru-steps-wizard__step-number--current {
+    border: 0.125rem solid var(--rru-primary) !important;
+    color: var(--rru-primary) !important;
+}
+
+.rru-steps-wizard__step-number--done {
+    padding: 0.5rem !important;
+    overflow: hidden !important;
+    color: transparent !important;
+    border: 0.125rem solid #ffffff !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M18.293 6.293a1 1 0 1 1 1.414 1.414l-10 10a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L9 15.586z'/%3E%3C/svg%3E") !important;
+}
+
+.rru-steps-wizard__step-label {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #1f2a37 !important;
+}
+
+.rru-steps-wizard__step-label--current {
+    font-weight: 500 !important;
+    color: #1f2a37 !important;
 }
