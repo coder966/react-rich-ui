@@ -1,0 +1,27 @@
+.error-message {
+    font-size: 0.75rem;
+    min-height: 1lh;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.error-message--empty {
+    visibility: hidden;
+}
+
+.error-message__icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b42318' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' x2='12' y1='8' y2='12'/%3E%3Cline x1='12' x2='12.01' y1='16' y2='16'/%3E%3C/svg%3E");
+}
+
+.error-message__text {
+    font-weight: 400;
+    color: #b42318;
+}
